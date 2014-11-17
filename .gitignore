@@ -5,3 +5,5 @@
 */cache/!index.html
 */cache/!.htaccess
 *.swp
+/assets
+/user_guide
