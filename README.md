@@ -18,7 +18,7 @@ If you want to see the example codes, the original files is here: `/buydo/assets
 
 ###To create new template:
 1. create new `<file_name>.php` file at `/buydo/application/views/sample_view/`
-2. preview changes at `http://localhost/buydo/index.php/vc/show/<file_name>`
+2. preview changes at `http://localhost/buydo/index.php/vc/show/<file_name>`, i.e. `http://localhost/buydo/index.php/vc/show/sample` (comes from /views/content/sample.php)
 
 ###Notes:
 When referring codes from the template sample, please replace `../..` with `<?php echo base_url(); ?>`
