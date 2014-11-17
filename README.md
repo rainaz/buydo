@@ -11,14 +11,14 @@ After that, the contents inside /htdocs can be accessed from [http://localhost/]
 
 ##For template creator(s):
 
-###View the template at
-http://localhost/buydo/assets/frontend/
+View the template at
+`http://localhost/buydo/assets/frontend/`
 
-If you want to see the example codes, the original files is here: /buydo/assets/frontend/
+If you want to see the example codes, the original files is here: `/buydo/assets/frontend/`
 
 ###To create new template:
-1. create new <file_name>.php file at /buydo/application/views/sample_view/
-2. preview changes at http://localhost/buydo/index.php/vc/show/<file_name>
+1. create new `<file_name>.php` file at `/buydo/application/views/sample_view/`
+2. preview changes at `http://localhost/buydo/index.php/vc/show/<file_name>`
 
 ###Notes:
-When referring codes from the template sample, please replace '../.. with '<?php echo base_url(); ?>'
+When referring codes from the template sample, please replace `../..` with `<?php echo base_url(); ?>`
