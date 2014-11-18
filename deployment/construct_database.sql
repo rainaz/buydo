@@ -237,6 +237,54 @@ ALTER TABLE `sale_items`
 ALTER TABLE `sellers`
   ADD CONSTRAINT `sellers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
+ALTER TABLE `items`
+  ADD CONSTRAINT `item_owner` FOREIGN KEY (`owner_id`) REFERENCES `users` (`user_id`);
+
+ALTER TABLE `sale_items`
+  ADD CONSTRAINT `sale_item_info` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
+
+ALTER TABLE `bid_items`
+  ADD CONSTRAINT `bid_item_info` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
+
+ALTER TABLE `bid_items`
+  ADD CONSTRAINT `winner_info` FOREIGN KEY (`current_winner_id`) REFERENCES `buyers` (`user_id`);
+
+ALTER TABLE `complain`
+  ADD CONSTRAINT `complainant` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+ALTER TABLE `feedbacks`
+  ADD CONSTRAINT `feedback_transaction` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`transaction_id`);
+
+ALTER TABLE `feedbacks`
+  ADD CONSTRAINT `feedback_from_person` FOREIGN KEY (`feedback_from`) REFERENCES `users` (`user_id`);
+
+ALTER TABLE `feedbacks`
+  ADD CONSTRAINT `feedback_to_person` FOREIGN KEY (`feedback_to`) REFERENCES `users` (`user_id`);
+
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `buyer` FOREIGN KEY (`buyer_id`) REFERENCES `buyers` (`user_id`);
+
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `seller` FOREIGN KEY (`seller_id`) REFERENCES `sellers` (`user_id`);
+
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `item` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
+
+
+ALTER TABLE `buy`
+  ADD CONSTRAINT `item_bought` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
+
+ALTER TABLE `buy`
+  ADD CONSTRAINT `buyer_buy_item` FOREIGN KEY (`buyer_id`) REFERENCES `buyers` (`user_id`);
+
+ALTER TABLE `bid`
+  ADD CONSTRAINT `item_bidded` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
+
+ALTER TABLE `bid`
+  ADD CONSTRAINT `buyer_bid_item` FOREIGN KEY (`buyer_id`) REFERENCES `buyers` (`user_id`);
+
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
