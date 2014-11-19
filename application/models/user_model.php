@@ -194,7 +194,6 @@ class User_Model extends CI_Model {
 	public function setPenaltyCount($penaltyCount){
 		$this->_penaltyCount = $penaltyCount;
 	}
->>>>>>> database_mew
 
 }
 ?>
