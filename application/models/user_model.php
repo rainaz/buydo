@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Person extends CI_Controller {
+class User_Model extends CI_Model {
 
 	function __construct(){
 		parrent::__construct();
@@ -33,7 +33,7 @@ class Person extends CI_Controller {
 	public function commit(){
 		$data = array(
 			'userID' => $this->_userID;
-			'name' => $this->_surname;
+			'name' => $this->_name;
 			'surname' => $this->_surname;
 			'creditcard' => $this->_creditcard;
 			'birthday' => $this->_birthday;
@@ -51,13 +51,13 @@ class Person extends CI_Controller {
 			);
 
 		if($this->_userID > 0){	//user already exists, just update user info
-			if ($this->db->update("user", $data, array("userID" => $this->_userID))) {
+			if ($this->db->update("User", $data, array("userID" => $this->_userID))) {
 				return true;
 			}
 
 		}
 		else {	//user doesn't exist, create new user
-			if ($this->db->insert("user", $data)) {
+			if ($this->db->insert("User", $data)) {
 				//Now we can get the ID and update the newly created object
 				$this->_userID = $this->db->insert_id();
 				return true;
@@ -72,6 +72,14 @@ class Person extends CI_Controller {
 		, $bannedby, $startBanned, $bannedDuration, $bannedReason, $penaltyCount){
 
 
+	}
+
+	public function getUserID(){
+		return $this->_userID;
+	}
+
+	public function setUserID($userid){
+		$this->_userID = $userid;
 	}
 
 	public function getName(){
