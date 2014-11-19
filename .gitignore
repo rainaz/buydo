@@ -5,5 +5,7 @@
 */cache/!index.html
 */cache/!.htaccess
 *.swp
-/assets
+/assets/admin/
+/assets/frontend/
+/assets/global/
 /user_guide

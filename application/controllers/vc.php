@@ -7,12 +7,12 @@ class VC extends CI_Controller {
 		$this->load->view('sample_view/main.html');
 	}
 
-	// Access this function from http://localhost/buydo/index.php/vc/show/<$page>
-	// i.e. http://localhost/buydo/index.php/vc/show/sample
-	public function show($page)
+	// Access this function from http://localhost/buydo/index.php/vc/show/<$folder>/<$page>
+	// i.e. http://localhost/buydo/index.php/vc/show/content/sample
+	public function show($folder, $page)
 	{
 		$this->load->view('header/header');
-		$this->load->view('content/'.$page);
+		$this->load->view($folder.'/'.$page);
 
 		$this->load->view('footer/footer');
 
