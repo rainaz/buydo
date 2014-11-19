@@ -1,11 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Item_Model extends CI_Model {
 
-	function __construct(){
-		parrent::__construct();
-	}
-	function add_user($name, $surname, )
-=======
 	private $_itemID;
 	private $_itemName;
 	private $_postedDate;
