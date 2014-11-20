@@ -8,6 +8,7 @@ class Transaction_Model extends CI_Model {
 	}
 
 	public function addTransaction($buyerid, $sellerid, $itemid, $placementdate, $quantity, $transactionstatus){
+		
 		$lastrow = $this->db->insert_id();
 		$insvalue = "('".$lastrow."', '".
 			$buyerid."', '".
