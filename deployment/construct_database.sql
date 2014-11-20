@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `sent_address` varchar(150) NOT NULL,
   `address` varchar(150) NOT NULL,
   `username` varchar(16) NOT NULL,
-  `password` varchar(8) NOT NULL,
+  `password` varchar(22) NOT NULL,
   `phone_no` varchar(11) NOT NULL,
   `banned_no` int(11) NOT NULL,
   `banned_duration` int(11) NOT NULL,
