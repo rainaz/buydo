@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `complain` (
   `complaint_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `accused` varchar(50) NOT NULL,
-  `date` date NOT NULL,
+  `date` timestamp NOT NULL,
   `topic` varchar(50) NOT NULL,
   `category` varchar(50) NOT NULL,
   `detail` text NOT NULL,
