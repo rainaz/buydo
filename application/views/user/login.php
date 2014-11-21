@@ -46,7 +46,7 @@
                     <p>Register now to be the <strong>buydoers.</strong></p>
                     <br>
 
-                    <button type="button" class="btn btn-primary">Register</button>
+                    <a href="register.php"><button type="button" class="btn btn-primary">Register</button></a>
                   </div>
                 </div>
               </div>
