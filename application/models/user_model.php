@@ -3,8 +3,8 @@ class User_Model extends CI_Model {
 
 	private $personal="userID, name, surname, email, creditcard, birthday, country,sentAddress,address";
 	private $account = "username, password, phoneNo";
-	private $ban = "bannedby, startBanned, bannedDuration, bannedReason, penaltyCount"
-	private $attributes = $personal.$account.$ban;
+	private $ban = "bannedby, startBanned, bannedDuration, bannedReason, penaltyCount";
+	private $attributes = $personal.",".$account.",".$ban;
 
 
 	function __construct(){
