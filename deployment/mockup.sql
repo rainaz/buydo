@@ -1,3 +1,5 @@
+DELETE FROM `users` WHERE 1;
+ALTER TABLE `users` AUTO_INCREMENT=1;
 INSERT INTO `users`(`name`, `surname`, `email`, `creditcard`, `birthday`, `country`, `sent_address`, `address`, `username`, `password`, `phone_no`, `start_banned`, `banned_duration`, `banned_reason`, `penalty_count`) VALUES 
 ("Schmitt","Carine","schmitt.carine@buydo.com","7652742759043510","1993-12-6","Thailand","54, rue Royale","54, rue Royale","schmitt","5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","+66818615957","1993-4-12","-1","none","0"),
 ("King","Jean","king.jean@buydo.com","5615905535727840","1989-12-21","Thailand","8489 Strong St.","8489 Strong St.","king","5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","+66845348227","1993-4-12","-1","none","0"),
