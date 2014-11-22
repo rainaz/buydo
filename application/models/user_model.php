@@ -44,8 +44,8 @@ class User_model extends CI_Model {
 		if(/* no email */)
 		$query = $this->db->query($sql);
 
-		if($query->num_rows() > 0){
-			return $query->row();
+		if($query > 0){
+			return true;
 		}
 		return false;
 
@@ -54,7 +54,7 @@ class User_model extends CI_Model {
 	public function verifyUserExistByEmail($email){
 		$sql = "SELECT email FROM users WHERE email = "."'".$email."'";		
 		$query = $this->db->query($sql);
-		if($query->num_rows() > 0){
+		if($query > 0){
 			return true;
 		}
 		return false;
@@ -67,7 +67,7 @@ class User_model extends CI_Model {
 	public function getUserIDByEmail($email){
 		$query = $this->db->query("SELECT user_id FROM users WHERE email = '".$email."'");
 		if($query->num_rows() > 0){
-			return $query->row()->email;
+			return $query->row()->user_id;
 		}
 		return false;
 	}
@@ -83,11 +83,15 @@ class User_model extends CI_Model {
 	public function setNameByUserID($id, $nname){
 		$sql = "UPDATE users SET name = "."'".$nname."'"."WHERE user_id = "."'".$id."'";
 		$query = $this->db->query($sql);		
+		if($query > 0) return true;
+		return false;
 	}
 
 	public function setSurnameByUserID($id, $nsurname){
 		$sql = "UPDATE users SET surname = "."'".$nsurname."'"."WHERE user_id = "."'".$id."'";
 		$query = $this->db->query($sql);	
+		if($query > 0) return true;
+		return false;
 	}
 
 
@@ -104,65 +108,10 @@ class User_model extends CI_Model {
 				phone_no = "."'".$phoneNo."',
 				creditcard = "."'".$creditcard."',
 				password = "."'".$password.".' 
-				WHERE userID = "."'".$id."'"
+				WHERE userID = "."'".$id."'";
+
+		$query = $this->db->query($sql);
 	}
-
-
-	// private $_userID;
-	// private $_name;
-	// private $_surname;
-	// private $_creditcard;
-	// private $_birthday;
-	// private $_country;
-	// private $_sentAddress;
-	// private $_address;
-	// private $_username;
-	// private $_password;
-	// private $_phoneNo;
-	// private $_bannedby;
-	// private $_startBanned;
-	// private $_bannedDuration;
-	// private $_bannedReason;
-	// private $_penaltyCount;
-
-		//commit the object in php to a tuple in database
-
-	// public function commit(){
-	// 	$data = array(
-	// 		'userID' => $this->_userID;
-	// 		'name' => $this->_name;
-	// 		'surname' => $this->_surname;
-	// 		'creditcard' => $this->_creditcard;
-	// 		'birthday' => $this->_birthday;
-	// 		'country' => $this->_country;
-	// 		'sentAddress' => $this->_sentAddress;
-	// 		'address' => $this->_address;
-	// 		'username' => $this->_username;
-	// 		'password' => $this->_password;
-	// 		'phoneNo' => $this->_phoneNo;
-	// 		'bannedby' => $this->_bannedby;
-	// 		'startBanned' => $this->_startBanned;
-	// 		'bannedDuration' => $this->_bannedDuration;
-	// 		'bannedReason' => $this->_bannedReason;
-	// 		'penaltyCount' => $this->_penaltyCount;
-	// 		);
-
-	// 	if($this->_userID > 0){	//user already exists, just update user info
-	// 		if ($this->db->update("User", $data, array("userID" => $this->_userID))) {
-	// 			return true;
-	// 		}
-
-	// 	}
-	// 	else {	//user doesn't exist, create new user
-	// 		if ($this->db->insert("User", $data)) {
-	// 			//Now we can get the ID and update the newly created object
-	// 			$this->_userID = $this->db->insert_id();
-	// 			return true;
-	// 		}
-
-	// 	}
-	// }
-
 
 
 }

@@ -80,44 +80,6 @@ class Transaction_model extends CI_Model {
 		$query = $this->db->query($sql);	
 	}
 
-	// private $_transactionID;
-	// private $_buyerID;
-	// private $_sellerID;
-	// private $_itemID;
-	// private $_placementDate;
-	// private $_quantity;
-	// private $_transactionStatus;
-
-
-	//commit the object in php to a tuple in database
-
-	// public function commit(){
-	// 	$data = array(
-	// 		'transactionID' => $this->_transactionID;
-	// 		'buyerID' => $this->_buyerID;
-	// 		'sellerID' => $this->_sellerID;
-	// 		'itemID' => $this->_itemID;			
-	// 		'placementDate' => $this->_placementDate;
-	// 		'quantity' => $this->_quantity;
-	// 		'transactionStatus' => $this->_transactionStatus;
-	// 		);
-
-	// 	if($this->_transactionID > 0){	//user already exists, just update user info
-	// 		if ($this->db->update("Transaction", $data, array("transactionID" => $this->_itemID))) {
-	// 			return true;
-	// 		}
-
-	// 	}
-	// 	else {	//user doesn't exist, create new user
-	// 		if ($this->db->insert("Transaction", $data)) {
-	// 			//Now we can get the ID and update the newly created object
-	// 			$this->_transactionID = $this->db->insert_id();
-	// 			return true;
-	// 		}
-
-	// 	}
-	// }	
-
 
 }
 ?>

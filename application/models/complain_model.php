@@ -13,7 +13,7 @@ class Complain_model extends CI_Model {
 	private $table_name;
 	private $attributes = "user_id, accused, topic, category, detail";
 
-public function addComplain($userID,$accused, $topic, $category, $detail){
+	public function addComplain($userID,$accused, $topic, $category, $detail){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".

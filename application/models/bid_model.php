@@ -13,7 +13,7 @@ class Bid_model extends CI_Model {
 	private $table_name;
 	private $attributes = "bid_id, item_id, buyer_id, current_bid, max_bid, bid_date";
 
-public function addBid($itemID, $buyerID, $currentBid, $maxBid,$bidDate){
+	public function addBid($itemID, $buyerID, $currentBid, $maxBid,$bidDate){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
@@ -47,3 +47,5 @@ public function addBid($itemID, $buyerID, $currentBid, $maxBid,$bidDate){
 		return $this->db->query("SELECT * FROM bid WHERE item_id = ".$id);
 	}
 
+}
+?>
