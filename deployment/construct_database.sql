@@ -60,7 +60,6 @@ CREATE TABLE IF NOT EXISTS `bid_items` (
   `current_price` double NOT NULL,
   `current_max_bid` double NOT NULL,
   `end_date` double NOT NULL,
-  `seller_id` int(11) NOT NULL,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
