@@ -11,14 +11,34 @@ class Complain_Model extends CI_Model {
 	private $_detail;*/ 
 
 	private $table_name;
+	private $attributes = "user_id, accused, topic, category, detail";
 
+public function addComplain($userID,$accused, $topic, $category, $detail){
+		$lastrow = $this->db->insert_id();	
+
+		$insvalue = "('".$lastrow."', '".
+			$userID."', '".
+			$accused."', '".
+			$topic."', '".
+			$category."', '".
+			$detail."')";
+		$sql = "INSERT INTO complain ($attributes) values ".$insvalue;
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0){
+			return $query->row();
+		}
+		return false;
+	}
 	function __construct(){
-		parrent::__construct();
-		$this->table_name = complains;
+		parent::__construct();
+		$this->table_name = complain;
 	}
 
+	function test(){
+		return $this->-db->query("SELECT * from complain");
+	}
 	function get_complain_by_id($id){
-		return $this->db->query("select * from complain where `id`=".$id.";");
+		return $this->db->query("SELECT * from complain where `id`=".$id);
 	}
 
 	function sent_complain($user_id, $accused, $topic, $category, $detail){

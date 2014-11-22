@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Transaction_Model extends CI_Model {
 
-	private $attributes = "transactionID, buyerID, sellerID, itemID, placementDate, quantity, transactionStatus";
+	private $attributes = "transaction_id, buyer_id, seller_id, item_id, placement_date, quantity, transaction_status";
 	
 	function __construct(){
 		parent::__construct();
@@ -18,7 +18,7 @@ class Transaction_Model extends CI_Model {
 			$quantity."', '".
 			$transactionstatus."')";
 
-		$sql = "INSERT INTO transaction ($attributes) values $insvalue";
+		$sql = "INSERT INTO transaction ($attributes) VALUES $insvalue";
 
 		$query = $this->db->query($sql);
 
@@ -30,53 +30,53 @@ class Transaction_Model extends CI_Model {
 	}
 
 	public function getBuyerIDFromTransactionID($transid){
-		$query = $this->db->query("SELECT buyerID FROM transaction WHERE transactionID = '".$transid."'");
+		$query = $this->db->query("SELECT buyer_id FROM transactions WHERE transaction_id = '".$transid."'");
 		
 		if($query->num_rows() > 0){
-			return $query->row()->buyerID;
+			return $query->row()->buyer_id;
 		}
 		return false;
 	}
 
 	public function getSellerIDFromTransactionID($transid){
-		$query = $this->db->query("SELECT sellerID FROM transaction WHERE transactionID = '".$transid."'");
+		$query = $this->db->query("SELECT seller_id FROM transactions WHERE transaction_id = '".$transid."'");
 		
 		if($query->num_rows() > 0){
-			return $query->row()->sellerID;
+			return $query->row()->seller_id;
 		}
 		return false;
 	}	
 
 	public function getItemIDFromTransactionID($transid){
-		$query = $this->db->query("SELECT itemID FROM transaction WHERE transactionID = '".$transid."'");
+		$query = $this->db->query("SELECT item_id FROM transactions WHERE transaction_id = '".$transid."'");
 		
 		if($query->num_rows() > 0){
-			return $query->row()->itemID;
+			return $query->row()->item_id;
 		}
 		return false;
 	}	
 
 	public function getTransactionStatusFromTransactionID($transid){
-		$query = $this->db->query("SELECT transactionStatus FROM transaction WHERE transactionID = '".$transid."'");
+		$query = $this->db->query("SELECT transaction_status FROM transactions WHERE transaction_id = '".$transid."'");
 		
 		if($query->num_rows() > 0){
-			return $query->row()->transactionStatus;
+			return $query->row()->transaction_status;
 		}
 		return false;
 	}		
 
 	public function getPlacementDateFromTransactionID($transid){
-		$query = $this->db->query("SELECT placementDate FROM transaction WHERE transactionID = '".$transid."'");
+		$query = $this->db->query("SELECT placement_date FROM transactions WHERE transaction_id = '".$transid."'");
 		
 		if($query->num_rows() > 0){
-			return $query->row()->placementDate;
+			return $query->row()->placement_id;
 		}
 		return false;
 	}		
 
 
 	public function setTransactionStatusFromTransactionID($transid, $nstatus){
-		$sql = "UPDATE transaction SET transactionStatus = "."'".$nstatus."'"."WHERE userID = "."'".$transid."'";
+		$sql = "UPDATE transactions SET transaction_status = "."'".$nstatus."'"."WHERE transaction_id = "."'".$transid."'";
 		$query = $this->db->query($sql);	
 	}
 
