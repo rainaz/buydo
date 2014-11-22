@@ -36,7 +36,7 @@
                         <div class="col-lg-5">
                         	<input type="date" class="form-control" id="enddate">
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 padding-left-0">
                         	<input type="time" class="form-control" id="endtime">
                         </div>
                       </div>
