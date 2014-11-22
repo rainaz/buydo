@@ -1,24 +1,33 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Complain_Model extends CI_Model {
 
-	private $_complainID;
+	/* private $_complainID;
 	private $_userID;
 	private $_complainant;
 	private $_accused;
 	private $_date;
 	private $_topic;
 	private $_category;
-	private $_detail;
+	private $_detail;*/ 
 
+	private $table_name;
 
 	function __construct(){
 		parrent::__construct();
+		$this->table_name = complains;
 	}
 
+	function get_complain_by_id($id){
+		return $this->db->query("select * from complain where `id`=".$id.";");
+	}
+
+	function sent_complain($user_id, $accused, $topic, $category, $detail){
+		return $this->db->query("INSERT INTO `buydo`.`complain` (`complaint_id` ,`user_id` ,`accused` ,`date` ,`topic` ,`category` ,`detail`)VALUES (NULL , '".$user_id."', '".$accused."',CURRENT_TIMESTAMP , '".$topic."', '".$category."', '".$detail."')");
+	}
 
 	//commit the object in php to a tuple in database
 
-	public function commit(){
+	/*public function commit(){
 		$data = array(
 			'complainID' => $this->_complainID;
 			'userID' => $this->_userID;			
@@ -104,5 +113,5 @@ class Complain_Model extends CI_Model {
 		$this->_detail = $detail;
 	}
 
-}
+}*/
 ?>
