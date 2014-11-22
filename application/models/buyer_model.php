@@ -13,12 +13,11 @@ class Buyer_model extends CI_Model {
 	private $table_name;
 	private $attributes = "buyer_id";
 
-	public function addBuyer(){
-		$lastrow = $this->db->insert_id();	
+	public function addBuyer($userID){
 
-		$insvalue = "('".$lastrow."', '"."')";
+		$insvalue = "('".$userID."', '"."')";
 
-		$sql = "INSERT INTO buyers ($attributes) VALUES ".$insvalue;
+		$sql = "INSERT INTO buyers ($this->attributes) VALUES ".$insvalue;
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0){
 			return $query->row();
