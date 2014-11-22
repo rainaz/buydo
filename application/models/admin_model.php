@@ -38,11 +38,12 @@ class Admin_model extends CI_Model {
 		return $this->db->query("SELECT * FROM admins");
 	}
 
-	public verifyAdminByUserID($id){
+	public function verifyAdminByUserID($id){
 		$sql = "SELECT * FROM admins WHERE user_id = ".$id;
 		$query = $this->db->query($sql);
-		if($query->num_rows() > 0)
+		if($query->num_rows() > 0){
 			return true;
+		}
 		return false;
 	}
 
