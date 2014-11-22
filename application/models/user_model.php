@@ -12,7 +12,7 @@ class User_Model extends CI_Model {
 	}
 
 	public function test(){
-		$query = $this->db->query("SELECT * FROM person");
+		$query = $this->db->query("SELECT * FROM users");
 		return $query->result();
 	}
 
@@ -39,7 +39,7 @@ class User_Model extends CI_Model {
 			$bannedDuration."', '".
 			$bannedReason."', '".
 			$penaltyCount."')";
-		$sql = "INSERT INTO user ($attributes) values ".$insvalue;
+		$sql = "INSERT INTO users ($attributes) values ".$insvalue;
 
 		if(/* no email */)
 		$query = $this->db->query($sql);
@@ -52,7 +52,7 @@ class User_Model extends CI_Model {
 	}
 
 	public function verifyUserExistByEmail($email){
-		$sql = "SELECT email FROM user WHERE email = "."'".$email."'";		
+		$sql = "SELECT email FROM users WHERE email = "."'".$email."'";		
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0){
 			return true;
@@ -65,7 +65,7 @@ class User_Model extends CI_Model {
 	}
 
 	public function getUserIDByEmail($email){
-		$query = $this->db->query("SELECT user_id FROM user WHERE email = '".$email."'");
+		$query = $this->db->query("SELECT user_id FROM users WHERE email = '".$email."'");
 		if($query->num_rows() > 0){
 			return $query->row()->email;
 		}
@@ -73,7 +73,7 @@ class User_Model extends CI_Model {
 	}
 
 	public function getUserByUserID($id){
-		$query = $this->db->query("SELECT $this->attributes FROM user WHERE userID = '".$id."'");
+		$query = $this->db->query("SELECT $this->attributes FROM users WHERE user_id = '".$id."'");
 		if($query->num_rows() > 0){
 			return $query->row();
 		}
@@ -81,20 +81,20 @@ class User_Model extends CI_Model {
 	}
 
 	public function setNameByUserID($id, $nname){
-		$sql = "UPDATE user SET name = "."'".$nname."'"."WHERE userID = "."'".$id."'";
+		$sql = "UPDATE users SET name = "."'".$nname."'"."WHERE user_id = "."'".$id."'";
 		$query = $this->db->query($sql);		
 	}
 
 	public function setSurnameByUserID($id, $nsurname){
-		$sql = "UPDATE user SET surname = "."'".$nsurname."'"."WHERE userID = "."'".$id."'";
+		$sql = "UPDATE users SET surname = "."'".$nsurname."'"."WHERE user_id = "."'".$id."'";
 		$query = $this->db->query($sql);	
 	}
 
 
 	public function manageProfileByUserID($id,$name,&surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
 
-
-		$sql = "UPDATE user 
+		//null concern if null -> don't update or update using old data 
+		$sql = "UPDATE users 
 				SET name = "."'".$name."', 
 				surname = "."'".$surname."',
 				sent_address = "."'".$sentAddress."',
