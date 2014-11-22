@@ -1,3 +1,71 @@
+<script type="text/javascript">
+	jQuery.validator.setDefaults({
+ 	  debug: true,
+ 	  success: "valid"
+	});
+
+	$(document).ready(function () {
+
+    $('#resgistration').validate({ // initialize the plugin
+        rules: {
+            username: {
+                required: true,
+                rangelength: [1, 16]
+            },
+            email: {
+                required: true,
+                email: true,
+                rangelength: [1, 50]
+            },
+            password: {
+            	required: true,
+            	rangelength: [1, 41]
+            },
+            confirm_password: {
+            	required: function(element) {
+       				return $("#password").val() == $("#confirm_password").val();
+      			}
+            },
+            user_type: {
+            	required: true
+            },
+            name: {
+            	required: true,
+            	rangelength: [1, 20]
+            },
+            surname: {
+            	required: true,
+            	rangelength: [1, 20]
+            },
+            birthday: {
+            	required: true
+            },
+            address:{
+            	required: true
+            },
+            sent_address: {
+            	required: false
+            },
+            country: {
+            	required: true
+            },
+            creditcard: {
+            	required: false,
+            	rangelength: [16, 16],
+            	number: true
+            },
+            phone_no: {
+            	required: true,
+            	rangelength: [1, 11]
+            }
+        }
+    });
+
+});
+
+
+</script>
+
     <div class="main">
       <div class="container">
         <!-- BEGIN CONTENT -->
@@ -10,37 +78,37 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form">
+                  <form class="form-horizontal" role="form" id="resgistration">
                     <fieldset>
                       <legend>Account details</legend>
                       <div class="form-group">
                         <label for="username" class="col-lg-4 control-label">Username <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="username">
+                          <input type="text" class="form-control" id="username" name="username">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="email" class="form-control" id="email">
+                          <input type="email" class="form-control" id="email" name="email">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="password" class="form-control" id="password">
+                          <input type="password" class="form-control" id="password" = name="password">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="confirm_password" class="col-lg-4 control-label">Confirm password <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="password" class="form-control" id="confirm_password">
+                          <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         </div>
                       </div>
                       <div class="form-group">
                       <label for="user_type" class="col-lg-4 control-label">User type <span class="require">*</span></label>
                       <div class="col-lg-8">
-	                      <select class="form-control input-sm" id="user_type">
+	                      <select class="form-control input-sm" id="user_type" name="user_type">
 	                        <option>Choose your user type</option>
 	                        <option value="buyer">Buyer</option>
 	                        <option value="seller">Seller</option>
@@ -53,37 +121,37 @@
                       <div class="form-group">
                         <label for="firstname" class="col-lg-4 control-label">Firstname <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="firstname">
+                          <input type="text" class="form-control" id="name" name="name">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="surname" class="col-lg-4 control-label">Surname <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="surname">
+                          <input type="text" class="form-control" id="surname" name="surname">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="barthdate" class="col-lg-4 control-label">Birthdate <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="date" class="form-control" id="birthdate">
+                          <input type="date" class="form-control" id="birthday" name="birthday">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="address" class="col-lg-4 control-label">Address <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="address">
+                          <input type="text" class="form-control" id="address" name="address">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="sent_address" class="col-lg-4 control-label">Billing address </label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="sent_address">
+                          <input type="text" class="form-control" id="sent_address" = name="sent_address">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="country" class="col-lg-4 control-label">Country <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <select class="form-control input-sm" id="country">
+                          <select class="form-control input-sm" id="country" name="country">
                           		<option>Choose your country</option>
                           		<option value="THA">Thailand</option>
 								<option value="AFG">Afghanistan</option>
@@ -341,13 +409,13 @@
                       <div class="form-group">
                         <label for="creditcard" class="col-lg-4 control-label">Credit card </label>
                         <div class="col-lg-8">
-                          <input type="text" maxlength="16" class="form-control" id="creditcard">
+                          <input type="text" maxlength="16" class="form-control" id="creditcard" name="creditcard">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="phone_number" class="col-lg-4 control-label">Phone number <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="number" class="form-control" id="phone_number">
+                          <input type="text" class="form-control" id="phone_no" name="phone_no">
                         </div>
                       </div>
                     </fieldset>
