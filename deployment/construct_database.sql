@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `bid_items` (
   `initial_price` double NOT NULL,
   `current_price` double NOT NULL,
   `current_max_bid` double NOT NULL,
-  `end_date` double NOT NULL,
+  `end_date` datetime NOT NULL,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
