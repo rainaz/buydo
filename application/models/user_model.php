@@ -42,8 +42,8 @@ class User_model extends CI_Model {
 			$penaltyCount."')";
 		$sql = "INSERT INTO users ($this->attributes) values ".$insvalue;
 
-		if(/* no email */)
-		$query = $this->db->query($sql);
+		if(verifyUserExistByEmail($email))
+			$query = $this->db->query($sql);
 
 		if($query > 0){
 			return true;
@@ -61,13 +61,15 @@ class User_model extends CI_Model {
 	}
 
 	public function verifyUserExistByEmail($email){
-		$sql = "SELECT email FROM users WHERE email = "."'".$email."'";		
+		$sql = "SELECT user_id FROM users WHERE email = "."'".$email."'";		
 		$query = $this->db->query($sql);
 		if($query > 0){
 			return true;
 		}
 		return false;
 	}
+
+
 
 	public function getLastRow(){
 		return $this->db->insert_id();
