@@ -6,7 +6,7 @@
 -- Generation Time: Nov 18, 2014 at 10:21 AM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
-USE `buydo`
+USE `buydo`;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -191,10 +191,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(20) NOT NULL,
   `surname` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `creditcard` varchar(20) NOT NULL,
+  `creditcard` varchar(20) NULL,
   `birthday` date NOT NULL,
   `country` varchar(50) NOT NULL,
-  `sent_address` varchar(150) NOT NULL,
+  `sent_address` varchar(150) NULL,
   `address` varchar(150) NOT NULL,
   `username` varchar(16) NOT NULL,
   `password` varchar(41) NOT NULL,

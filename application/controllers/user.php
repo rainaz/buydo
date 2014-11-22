@@ -1,5 +1,5 @@
 <?php
-class Blog extends CI_Controller {
+class User_Controller extends CI_Controller {
 
 	public function index()
 	{

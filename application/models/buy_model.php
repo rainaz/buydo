@@ -13,7 +13,7 @@ class buy_model extends CI_Model {
 	private $table_name;
 	private $attributes = "buy_id, item_id, buyer_id, buy_date, quantity";
 
-public function addBuy($itemID,$buyerID, $buyDate, $quantity){
+	public function addBuy($itemID,$buyerID, $buyDate, $quantity){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
@@ -44,3 +44,6 @@ public function addBuy($itemID,$buyerID, $buyDate, $quantity){
 		return $this->db->query("SELECT * FROM buy WHERE buyer_id = ".$id);
 	}
 
+
+}
+?>

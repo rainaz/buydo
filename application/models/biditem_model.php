@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class SaleItem_model extends CI_Model {
+class BidItem_model extends CI_Model {
 
 	/* private $_complainID;
 	private $_userID;
@@ -13,7 +13,7 @@ class SaleItem_model extends CI_Model {
 	private $table_name;
 	private $attributes = "item_id, current_winner_id, initial_price, current_price, current_max_bid, end_date, seller_id";
 
-public function addBidItem($currentWinner,$initialPrice, $currentPrice, $currentMaxBid, $endDate, $sellerID){
+	public function addBidItem($currentWinner,$initialPrice, $currentPrice, $currentMaxBid, $endDate, $sellerID){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
@@ -31,6 +31,7 @@ public function addBidItem($currentWinner,$initialPrice, $currentPrice, $current
 		}
 		return false;
 	}
+	
 	function __construct(){
 		parent::__construct();
 		$this->table_name = bid_items;

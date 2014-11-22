@@ -30,76 +30,76 @@
                       <div class="form-group">
                         <label for="item_name" class="col-lg-4 control-label">Item name <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" maxlength=40 id="item_name" value=<?php echo $item_name; ?>>
+                          <input type="text" class="form-control" maxlength=40 id="item_name" name="item_name" value=<?php echo $item_name; ?>>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="image_source" class="col-lg-4 control-label">Image link <span class="require">*</span></label>
+                        <label for="picture" class="col-lg-4 control-label">Image link <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <img src=<?php echo $image_url; ?> >
-                          <input type="url" class="form-control" id="image_source">
+                          <input type="url" class="form-control" id="picture" name="picture">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="price" class="col-lg-4 control-label">Price <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="number" min=0 class="form-control" id="price" value=<?php echo $price; ?>>
+                          <input type="number" min=0 class="form-control" id="price" name="price" value=<?php echo $price; ?>>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="quantity" class="col-lg-4 control-label">Quantity in stock <span class="require">*</span></label>
+                        <label for="quantity_in_stock" class="col-lg-4 control-label">Quantity in stock <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="number" min=0 class="form-control" id="quantity" value=<?php echo $quantity ?>>
+                          <input type="number" min=0 class="form-control" id="quantity_in_stock" name="quantity_in_stock" value=<?php echo $quantity ?>>
                         </div>
                       </div>
                       <div class="form-group">
                       <label for="brand" class="col-lg-4 control-label">Brand </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="brand" value=<?php echo $brand?> >
+	                      <input type="text" class="form-control" id="brand" name="brand" value=<?php echo $brand?> >
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="model" class="col-lg-4 control-label">Model </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="model" value=<?php echo $model; ?> >
+	                      <input type="text" class="form-control" id="model" name="model" value=<?php echo $model; ?> >
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="capacity" class="col-lg-4 control-label">Capacity </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="capacity" value=<?php echo $capacity; ?>>
+	                      <input type="text" class="form-control" id="capacity" name="capacity" value=<?php echo $capacity; ?>>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="spec" class="col-lg-4 control-label">Properties </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="spec" value=<?php echo $spec; ?>>
+	                      <input type="text" class="form-control" id="spec" name="spec" value=<?php echo $spec; ?>>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="size" class="col-lg-4 control-label">Size </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="size" value=<?php echo $size; ?> >
+	                      <input type="text" class="form-control" id="size" name="size" value=<?php echo $size; ?> >
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="payment_method" class="col-lg-4 control-label">Payment method <span class="require">*</span></label>
                       <div class="col-lg-8">
-	                      <select class="form-control" id="payment_method">
+	                      <select class="form-control" id="payment_method" name="payment_method">
 	                        <option <?php if($payment_method == "creditcard") echo "selected"; ?> value="creditcard">Creditcard</option>
 	                      </select>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="return_policy" class="col-lg-4 control-label">Returning policy </label>
+                      <label for="agreement" class="col-lg-4 control-label">Agreement </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="return_policy" value=<?php echo $return_policy; ?>>
+	                      <input type="text" class="form-control" id="agreement" name="agreement" value=<?php echo $return_policy; ?>>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="packaging" class="col-lg-4 control-label">Packaging </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="packaging" value=<?php echo $packaging; ?> >
+	                      <input type="text" class="form-control" id="packaging" name="packaging" value=<?php echo $packaging; ?> >
                       </div>
                     </div>
                     </fieldset>
