@@ -1,19 +1,31 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class User_model extends CI_Model {
 
-	private $personal="user_id, name, surname, email, creditcard, birthday, country,sent_address,address";
-	private $account = "username, password, phone_no";
-	private $ban = "start_banned, banned_duration, banned_reason, penalty_count";
-	private $attributes = $personal.",".$account.",".$ban;
+	/*var $personal="user_id, name, surname, email, creditcard, birthday, country,sent_address,address";
+	var $account = "username, password, phone_no";
+	var $ban = "start_banned, banned_duration, banned_reason, penalty_count";
+	var $attributes;*/
 
 
 	function __construct(){
 		parent::__construct();
+		// $attributes = $personal.",".$account.",".$ban;
 	}
 
 	public function test(){
 		$query = $this->db->query("SELECT * FROM users");
 		return $query->result();
+	}
+
+	public function a(){
+		return "0";
+	}
+	public function authen($username, $password){
+		$query = $this->db->query("SELECT `user_id` FROM `users` WHERE `username`='".$username."' AND `password`='".sha1($password)."';");
+		if($query->num_rows() != 1)
+			return "false";
+		return $query->first_row();
+		//return $username;
 	}
 
 	// this function is to be moved to FACTORY	
@@ -41,7 +53,7 @@ class User_model extends CI_Model {
 			$penaltyCount."')";
 		$sql = "INSERT INTO users ($attributes) values ".$insvalue;
 
-		if(/* no email */)
+		if(1/* no email */)
 		$query = $this->db->query($sql);
 
 		if($query->num_rows() > 0){
@@ -91,7 +103,7 @@ class User_model extends CI_Model {
 	}
 
 
-	public function manageProfileByUserID($id,$name,&surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
+	public function manageProfileByUserID($id,$name,$surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
 
 		//null concern if null -> don't update or update using old data 
 		$sql = "UPDATE users 
@@ -104,7 +116,7 @@ class User_model extends CI_Model {
 				phone_no = "."'".$phoneNo."',
 				creditcard = "."'".$creditcard."',
 				password = "."'".$password.".' 
-				WHERE userID = "."'".$id."'"
+				WHERE userID = "."'".$id."'";
 	}
 
 
