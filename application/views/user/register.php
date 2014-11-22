@@ -41,7 +41,7 @@
                       <label for="user_type" class="col-lg-4 control-label">User type <span class="require">*</span></label>
                       <div class="col-lg-8">
 	                      <select class="form-control input-sm" id="user_type">
-	                        <option>Chooser your user type</option>
+	                        <option>Choose your user type</option>
 	                        <option value="buyer">Buyer</option>
 	                        <option value="seller">Seller</option>
 	                      </select>
