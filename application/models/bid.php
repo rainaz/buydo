@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script accesss allowed');
 class Bid_model extends CI_Model {
 
 	/* private $_complainID;
@@ -13,15 +13,17 @@ class Bid_model extends CI_Model {
 	private $table_name;
 	private $attributes = "bid_id, item_id, buyer_id, current_bid, max_bid, bid_date";
 
-public function addBid($item_id, $buyer_id, $current_bid, $max_bid){
+public function addBid($itemID, $buyerID, $currentBid, $maxBid,$bidDate){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
-			$feedbackFrom."', '".
-			$feedbackTo."', '".			$score."', '".
-			$comment."')";
+			$itemID."', '".
+			$buyerID."', '".		
+			$currentBid."', '".		
+			$maxBid."', '".
+			$bidDate."')";
 
-		$sql = "INSERT INTO feedbacks ($attributes) VALUES ".$insvalue;
+		$sql = "INSERT INTO bid ($attributes) VALUES ".$insvalue;
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0){
 			return $query->row();
@@ -30,16 +32,18 @@ public function addBid($item_id, $buyer_id, $current_bid, $max_bid){
 	}
 	function __construct(){
 		parent::__construct();
-		$this->table_name = feedbacks;
+		$this->table_name = bid;
 	}
-
 	function test(){
-		return $this->-db->query("SELECT * FROM feedbacks");
+		return $this->-db->query("SELECT * FROM bid");
 	}
-	function getFeedbackByFeedbackID($id){
-		return $this->db->query("SELECT * FROM feedbacks WHERE feedback_id = ".$id);
+	function getBidByBidID($id){
+		return $this->db->query("SELECT * FROM bid WHERE bid_id = ".$id);
 	}
-	function getFeedbackByUserID($id){
-		return $this->db->query("SELECT * FROM feedbacks WHERE feedbackFrom = ".$id." OR feedbackTo = ".$id);
+	function getBidByBuyerID($id){
+		return $this->db->query("SELECT * FROM bid WHERE buyer_id = ".$id);
+	}
+	function getBidByItemID($id){
+		return $this->db->query("SELECT * FROM bid WHERE item_id = ".$id);
 	}
 

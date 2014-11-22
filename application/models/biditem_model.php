@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class SaleItem_model extends CI_Model {
+class BidItem_model extends CI_Model {
 
 	/* private $_complainID;
 	private $_userID;
