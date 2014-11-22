@@ -102,8 +102,8 @@
             },
             creditcard: {
                 required: false,
-                rangelength: [16, 16],
-                number: true
+                rangelength: "Length must be exactly 16",
+                number: ""
             },
             phone_no: {
                 required: "Phone number is required",

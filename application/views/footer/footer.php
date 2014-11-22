@@ -56,11 +56,16 @@
     </script>
     <!-- END PAGE LEVEL JAVASCRIPTS -->
 
-    <!-- Register Validator (will need to move this thing later) -->
+    <!-- Validator prerequisites(will need to move this thing later) -->
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
     <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+
+    <!-- Register Validator (will need to move this thing later) -->
     <script src="/buydo/assets/buydo/js/register_validator.js" type="text/javascript"></script>
+    
+    <!-- Login Validator (will need to move this thing later) -->
+    <script src="/buydo/assets/buydo/js/login_validator.js" type="text/javascript"></script>
 
 
 </body>
