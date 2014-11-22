@@ -333,9 +333,9 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="creditcard" class="col-lg-4 control-label">Credit card </label>
+                        <label for="creditcard" class="col-lg-4 control-label">Creditcard </label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="creditcard">
+                          <input type="text" maxlength="16" class="form-control" id="creditcard">
                         </div>
                       </div>
                       <div class="form-group">
