@@ -55,10 +55,10 @@ CREATE TABLE IF NOT EXISTS `bid` (
 
 CREATE TABLE IF NOT EXISTS `bid_items` (
   `item_id` int(11) NOT NULL,
-  `current_winner_id` int(11) NOT NULL,
+  `current_winner_id` int(11) NULL,
   `initial_price` double NOT NULL,
   `current_price` double NOT NULL,
-  `current_max_bid` double NOT NULL,
+  `current_max_bid` double NULL,
   `end_date` datetime NOT NULL,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
