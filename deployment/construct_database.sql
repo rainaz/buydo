@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `bid_items` (
   `initial_price` double NOT NULL,
   `current_price` double NOT NULL,
   `current_max_bid` double NOT NULL,
-  `end_date` double NOT NULL,
+  `end_date` datetime NOT NULL,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -244,9 +244,6 @@ ALTER TABLE `sale_items`
 
 ALTER TABLE `bid_items`
   ADD CONSTRAINT `bid_item_info` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
-
-ALTER TABLE `bid_items`
-  ADD CONSTRAINT `winner_info` FOREIGN KEY (`current_winner_id`) REFERENCES `buyers` (`user_id`);
 
 ALTER TABLE `complain`
   ADD CONSTRAINT `complainant` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
