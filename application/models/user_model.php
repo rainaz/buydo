@@ -4,11 +4,12 @@ class User_model extends CI_Model {
 	private $personal="user_id, name, surname, email, creditcard, birthday, country,sent_address,address";
 	private $account = "username, password, phone_no";
 	private $ban = "start_banned, banned_duration, banned_reason, penalty_count";
-	private $attributes = $personal.",".$account.",".$ban;
+	private $attributes; 
 
 
 	function __construct(){
 		parent::__construct();
+		$this->attributes = $this->personal.",".$this->account.",".$this->ban;
 	}
 
 	public function test(){
@@ -39,26 +40,36 @@ class User_model extends CI_Model {
 			$bannedDuration."', '".
 			$bannedReason."', '".
 			$penaltyCount."')";
-		$sql = "INSERT INTO users ($attributes) values ".$insvalue;
+		$sql = "INSERT INTO users ($this->attributes) values ".$insvalue;
 
-		if(/* no email */)
-		$query = $this->db->query($sql);
+		if(verifyUserExistByEmail($email))
+			$query = $this->db->query($sql);
 
-		if($query->num_rows() > 0){
-			return $query->row();
+		if($query > 0){
+			return true;
 		}
 		return false;
 
 	}
+	
+	public function isAuthenValid($username, $password){
+		$query = $this->db->query("SELECT `user_id` FROM `users` WHERE `username`='".$username."' AND `password`='".sha1($password)."';");
+		if($query->num_rows() !=1 )
+			return false;
+		else 
+			return $query->first_row()->user_id;
+	}
 
 	public function verifyUserExistByEmail($email){
-		$sql = "SELECT email FROM users WHERE email = "."'".$email."'";		
+		$sql = "SELECT user_id FROM users WHERE email = "."'".$email."'";		
 		$query = $this->db->query($sql);
-		if($query->num_rows() > 0){
+		if($query > 0){
 			return true;
 		}
 		return false;
 	}
+
+
 
 	public function getLastRow(){
 		return $this->db->insert_id();
@@ -67,7 +78,7 @@ class User_model extends CI_Model {
 	public function getUserIDByEmail($email){
 		$query = $this->db->query("SELECT user_id FROM users WHERE email = '".$email."'");
 		if($query->num_rows() > 0){
-			return $query->row()->email;
+			return $query->row()->user_id;
 		}
 		return false;
 	}
@@ -83,15 +94,19 @@ class User_model extends CI_Model {
 	public function setNameByUserID($id, $nname){
 		$sql = "UPDATE users SET name = "."'".$nname."'"."WHERE user_id = "."'".$id."'";
 		$query = $this->db->query($sql);		
+		if($query > 0) return true;
+		return false;
 	}
 
 	public function setSurnameByUserID($id, $nsurname){
 		$sql = "UPDATE users SET surname = "."'".$nsurname."'"."WHERE user_id = "."'".$id."'";
 		$query = $this->db->query($sql);	
+		if($query > 0) return true;
+		return false;
 	}
 
 
-	public function manageProfileByUserID($id,$name,&surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
+	public function manageProfileByUserID($id,$name,$surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
 
 		//null concern if null -> don't update or update using old data 
 		$sql = "UPDATE users 
@@ -104,65 +119,10 @@ class User_model extends CI_Model {
 				phone_no = "."'".$phoneNo."',
 				creditcard = "."'".$creditcard."',
 				password = "."'".$password.".' 
-				WHERE userID = "."'".$id."'"
+				WHERE user_id = "."'".$id."'";
+
+		$query = $this->db->query($sql);
 	}
-
-
-	// private $_userID;
-	// private $_name;
-	// private $_surname;
-	// private $_creditcard;
-	// private $_birthday;
-	// private $_country;
-	// private $_sentAddress;
-	// private $_address;
-	// private $_username;
-	// private $_password;
-	// private $_phoneNo;
-	// private $_bannedby;
-	// private $_startBanned;
-	// private $_bannedDuration;
-	// private $_bannedReason;
-	// private $_penaltyCount;
-
-		//commit the object in php to a tuple in database
-
-	// public function commit(){
-	// 	$data = array(
-	// 		'userID' => $this->_userID;
-	// 		'name' => $this->_name;
-	// 		'surname' => $this->_surname;
-	// 		'creditcard' => $this->_creditcard;
-	// 		'birthday' => $this->_birthday;
-	// 		'country' => $this->_country;
-	// 		'sentAddress' => $this->_sentAddress;
-	// 		'address' => $this->_address;
-	// 		'username' => $this->_username;
-	// 		'password' => $this->_password;
-	// 		'phoneNo' => $this->_phoneNo;
-	// 		'bannedby' => $this->_bannedby;
-	// 		'startBanned' => $this->_startBanned;
-	// 		'bannedDuration' => $this->_bannedDuration;
-	// 		'bannedReason' => $this->_bannedReason;
-	// 		'penaltyCount' => $this->_penaltyCount;
-	// 		);
-
-	// 	if($this->_userID > 0){	//user already exists, just update user info
-	// 		if ($this->db->update("User", $data, array("userID" => $this->_userID))) {
-	// 			return true;
-	// 		}
-
-	// 	}
-	// 	else {	//user doesn't exist, create new user
-	// 		if ($this->db->insert("User", $data)) {
-	// 			//Now we can get the ID and update the newly created object
-	// 			$this->_userID = $this->db->insert_id();
-	// 			return true;
-	// 		}
-
-	// 	}
-	// }
-
 
 
 }

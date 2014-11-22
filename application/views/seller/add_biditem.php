@@ -15,80 +15,80 @@
                       <div class="form-group">
                         <label for="item_name" class="col-lg-4 control-label">Item name <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" maxlength=40 id="item_name">
+                          <input type="text" class="form-control" maxlength=40 id="item_name" name="item_name">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="image_source" class="col-lg-4 control-label">Image link <span class="require">*</span></label>
+                        <label for="picture" class="col-lg-4 control-label">Image link <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="url" class="form-control" id="image_source">
+                          <input type="url" class="form-control" id="picture" name="picture">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="price" class="col-lg-4 control-label">Price <span class="require">*</span></label>
+                        <label for="initial_price" class="col-lg-4 control-label">Initial price <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="number" min=0 class="form-control" id="price">
+                          <input type="number" min=0 class="form-control" id="initial_price" name="initial_price">
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label for="enddate" class="col-lg-4 control-label">End Date <span class="require">*</span></label>
                         <div class="col-lg-5">
-                        	<input type="date" class="form-control" id="enddate">
+                        	<input type="date" class="form-control" id="enddate" name="enddate">
                         </div>
                         <div class="col-lg-3 padding-left-0">
-                        	<input type="time" class="form-control" id="endtime">
+                        	<input type="time" class="form-control" id="endtime" name="endtime">
                         </div>
                       </div>
 
                       <div class="form-group">
                       <label for="brand" class="col-lg-4 control-label">Brand </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="brand" >
+	                      <input type="text" class="form-control" id="brand" name="brand">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="model" class="col-lg-4 control-label">Model </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="model" >
+	                      <input type="text" class="form-control" id="model" name="model">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="capacity" class="col-lg-4 control-label">Capacity </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="capacity" >
+	                      <input type="text" class="form-control" id="capacity" name="capacity">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="spec" class="col-lg-4 control-label">Properties </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="spec" >
+	                      <input type="text" class="form-control" id="spec" name="spec">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="size" class="col-lg-4 control-label">Size </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="size" >
+	                      <input type="text" class="form-control" id="size" name="size">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="payment_method" class="col-lg-4 control-label">Payment method <span class="require">*</span></label>
                       <div class="col-lg-8">
-	                      <select class="form-control" id="payment_method" >
+	                      <select class="form-control" id="payment_method" name="payment_method">
 	                        <option value="creditcard">Creditcard</option>
 	                      </select>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="return_policy" class="col-lg-4 control-label">Returning policy </label>
+                      <label for="agreement" class="col-lg-4 control-label">Agreement </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="return_policy" >
+	                      <input type="text" class="form-control" id="agreement" name="agreement">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="packaging" class="col-lg-4 control-label">Packaging </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="packaging" >
+	                      <input type="text" class="form-control" id="packaging" name="packaging">
                       </div>
                     </div>
                     </fieldset>

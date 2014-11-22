@@ -13,7 +13,7 @@ class buy_model extends CI_Model {
 	private $table_name;
 	private $attributes = "buy_id, item_id, buyer_id, buy_date, quantity";
 
-public function addBuy($itemID,$buyerID, $buyDate, $quantity){
+	public function addBuy($itemID,$buyerID, $buyDate, $quantity){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
@@ -22,20 +22,20 @@ public function addBuy($itemID,$buyerID, $buyDate, $quantity){
 			$buyDate."', '".
 			$quantity."')";
 
-		$sql = "INSERT INTO buy ($attributes) VALUES ".$insvalue;
+		$sql = "INSERT INTO buy ($this->attributes) VALUES ".$insvalue;
 		$query = $this->db->query($sql);
-		if($query->num_rows() > 0){
-			return $query->row();
+		if($query > 0){
+			return true;
 		}
 		return false;
 	}
 	function __construct(){
 		parent::__construct();
-		$this->table_name = buy;
+		$this->table_name = "buy";
 	}
 
 	function test(){
-		return $this->-db->query("SELECT * FROM buy");
+		return $this->db->query("SELECT * FROM buy");
 	}
 	function getBuyByBuyID($id){
 		return $this->db->query("SELECT * FROM buy WHERE buy_id = ".$id);
@@ -43,4 +43,6 @@ public function addBuy($itemID,$buyerID, $buyDate, $quantity){
 	function getBuyByBuyerID($id){
 		return $this->db->query("SELECT * FROM buy WHERE buyer_id = ".$id);
 	}
-
+	
+}
+?>
