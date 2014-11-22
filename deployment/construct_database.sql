@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
 
 CREATE TABLE IF NOT EXISTS `items` (
   `item_id` int(11) NOT NULL AUTO_INCREMENT,
-  `item_name` varchar(20) NOT NULL,
+  `item_name` varchar(40) NOT NULL,
   `posted_date` date NOT NULL,
   `agreement` text NOT NULL,
   `status` varchar(50) NOT NULL,

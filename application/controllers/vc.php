@@ -13,7 +13,6 @@ class VC extends CI_Controller {
 	{
 		$this->load->view('header/header');
 		$this->load->view($folder.'/'.$page);
-
 		$this->load->view('footer/footer');
 
       // $data['page_title'] = $page;
