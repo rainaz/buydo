@@ -106,7 +106,7 @@ class User_model extends CI_Model {
 	}
 
 
-	public function manageProfileByUserID($id,$name,&surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
+	public function manageProfileByUserID($id,$name,$surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
 
 		//null concern if null -> don't update or update using old data 
 		$sql = "UPDATE users 
