@@ -11,7 +11,7 @@ class Seller_model extends CI_Model {
 	private $_detail;*/ 
 
 	private $table_name;
-	private $attributes = "seller_id";
+	private $attributes = "user_id";
 
 	public function addSeller($userID){
 

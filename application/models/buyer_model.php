@@ -11,7 +11,7 @@ class Buyer_model extends CI_Model {
 	private $_detail;*/ 
 
 	private $table_name;
-	private $attributes = "buyer_id";
+	private $attributes = "user_id";
 
 	public function addBuyer($userID){
 
