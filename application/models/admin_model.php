@@ -13,10 +13,10 @@ class Admin_model extends CI_Model {
 	private $table_name;
 	private $attributes = "admin_id";
 
-public function addAdmin(){
+	public function addAdmin(){
 		$lastrow = $this->db->insert_id();	
 
-		$insvalue = "('".$lastrow."', '"."')";
+		$insvalue = "('".$lastrow."'");
 
 		$sql = "INSERT INTO admins ($attributes) VALUES ".$insvalue;
 		$query = $this->db->query($sql);
@@ -34,6 +34,8 @@ public function addAdmin(){
 		return $this->-db->query("SELECT * FROM admins");
 	}
 	function getAdminByUserID($id){
-		return $this->db->query("SELECT * FROM admins WHERE admon_id = ".$id);
+		return $this->db->query("SELECT * FROM admins WHERE admin_id = ".$id);
 	}
 
+}
+?>

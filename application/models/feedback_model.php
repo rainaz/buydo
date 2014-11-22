@@ -13,7 +13,7 @@ class Feedback_model extends CI_Model {
 	private $table_name;
 	private $attributes = "user_id, accused, topic, category, detail";
 
-public function addFeedback($transactionID,$feedbackFrom, $feedbackTo, $score, $comment){
+	public function addFeedback($transactionID,$feedbackFrom, $feedbackTo, $score, $comment){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
@@ -45,3 +45,6 @@ public function addFeedback($transactionID,$feedbackFrom, $feedbackTo, $score, $
 		return $this->db->query("SELECT * FROM feedbacks WHERE feedbackFrom = ".$id." OR feedbackTo = ".$id);
 	}
 
+
+}
+?>
