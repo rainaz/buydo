@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class User_Model extends CI_Model {
 
-	private $personal="userID, name, surname, email, creditcard, birthday, country,sentAddress,address";
-	private $account = "username, password, phoneNo";
-	private $ban = "bannedby, startBanned, bannedDuration, bannedReason, penaltyCount";
+	private $personal="user_id, name, surname, email, creditcard, birthday, country,sent_address,address";
+	private $account = "username, password, phone_no";
+	private $ban = "start_banned, banned_duration, banned_reason, penalty_count";
 	private $attributes = $personal.",".$account.",".$ban;
 
 
@@ -11,8 +11,15 @@ class User_Model extends CI_Model {
 		parent::__construct();
 	}
 
+	public function test(){
+		$query = $this->db->query("SELECT * FROM person");
+		return $query->result();
+	}
+
 	// this function is to be moved to FACTORY	
-	public function addUser($name, $surname, $email, $creditcard=NULL, $birthday, $country
+
+	//creditcard and sentAddress can be null
+	public function addUser($name, $surname, $email, $creditcard, $birthday, $country
 		, $sentAddress, $address, $username, $password, $phoneNo
 		, $bannedby, $startBanned, $bannedDuration, $bannedReason, $penaltyCount){
 		$lastrow = $this->db->insert_id();		
@@ -58,7 +65,7 @@ class User_Model extends CI_Model {
 	}
 
 	public function getUserIDByEmail($email){
-		$query = $this->db->query("SELECT userID FROM user WHERE email = '".$email."'");
+		$query = $this->db->query("SELECT user_id FROM user WHERE email = '".$email."'");
 		if($query->num_rows() > 0){
 			return $query->row()->email;
 		}
@@ -81,6 +88,24 @@ class User_Model extends CI_Model {
 	public function setSurnameByUserID($id, $nsurname){
 		$sql = "UPDATE user SET surname = "."'".$nsurname."'"."WHERE userID = "."'".$id."'";
 		$query = $this->db->query($sql);	
+	}
+
+UPDATE Customers
+SET ContactName='Alfred Schmidt', City='Hamburg'
+WHERE CustomerName='Alfreds Futterkiste';
+
+	public function manageProfileByUserID($id,$name,&surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
+		$sql = "UPDATE user".
+				"SET name = "."'".$name."', ".
+				"surname = "."'".$surname."', ".
+				"sent_Address = "."'".$surname."', ".
+				"address = "."'".$surname."', ".
+				"country = "."'".$surname."', ".
+				"email = "."'".$surname."', ".
+				"phoneNo = "."'".$surname."', ".
+				"creditcard = "."'".$creditcard."', ".
+				"password = "."'".$password.".' ".
+				"WHERE userID = "."'".$id."'";
 	}
 
 
