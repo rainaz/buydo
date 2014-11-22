@@ -6,10 +6,10 @@
 	$brand = "HandMaDe";
 	$model = "Pladook";
 	$capacity = "NULL";
-	$properties = "";
+	$spec = "";
 	$size = "";
 	$payment_method = "creditcard";
-	$returning_policy = "";
+	$return_policy = "";
 	$packaging = "";
 ?>
 
@@ -43,70 +43,70 @@
                       <div class="form-group">
                         <label for="price" class="col-lg-4 control-label">Price <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="number" min=0 class="form-control" id="price" <?php echo $price; ?>>
+                          <input type="number" min=0 class="form-control" id="price" value=<?php echo $price; ?>>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="quantity" class="col-lg-4 control-label">Quantity in stock <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="number" min=0 class="form-control" id="quantity">
+                          <input type="number" min=0 class="form-control" id="quantity" value=<?php echo $quantity ?>>
                         </div>
                       </div>
                       <div class="form-group">
                       <label for="brand" class="col-lg-4 control-label">Brand </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="brand" >
+	                      <input type="text" class="form-control" id="brand" value=<?php echo $brand?> >
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="model" class="col-lg-4 control-label">Model </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="model" >
+	                      <input type="text" class="form-control" id="model" value=<?php echo $model; ?> >
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="capacity" class="col-lg-4 control-label">Capacity </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="capacity" >
+	                      <input type="text" class="form-control" id="capacity" value=<?php echo $capacity; ?>>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="spec" class="col-lg-4 control-label">Properties </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="spec" >
+	                      <input type="text" class="form-control" id="spec" value=<?php echo $spec; ?>>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="size" class="col-lg-4 control-label">Size </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="size" >
+	                      <input type="text" class="form-control" id="size" value=<?php echo $size; ?> >
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="payment_method" class="col-lg-4 control-label">Payment method <span class="require">*</span></label>
                       <div class="col-lg-8">
-	                      <select class="form-control" id="payment_method" >
-	                        <option value="creditcard">Creditcard</option>
+	                      <select class="form-control" id="payment_method">
+	                        <option <?php if($payment_method == "creditcard") echo "selected"; ?> value="creditcard">Creditcard</option>
 	                      </select>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="return_policy" class="col-lg-4 control-label">Returning policy </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="return_policy" >
+	                      <input type="text" class="form-control" id="return_policy" value=<?php echo $return_policy; ?>>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="packaging" class="col-lg-4 control-label">Packaging </label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="packaging" >
+	                      <input type="text" class="form-control" id="packaging" value=<?php echo $packaging; ?> >
                       </div>
                     </div>
                     </fieldset>
                     
                     <div class="row">
                       <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                        <button type="submit" class="btn btn-primary">Create a sale item</button>
+                        <button type="submit" class="btn btn-primary">Confirm changes</button>
                         <button type="button" class="btn btn-default">Cancel</button>
                       </div>
                     </div>
