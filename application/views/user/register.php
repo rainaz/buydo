@@ -69,9 +69,15 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="billing_address" class="col-lg-4 control-label">Billing address <span class="require">*</span></label>
+                        <label for="address" class="col-lg-4 control-label">Address <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="billing_address">
+                          <input type="text" class="form-control" id="address">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="sent_address" class="col-lg-4 control-label">Billing address </label>
+                        <div class="col-lg-8">
+                          <input type="text" class="form-control" id="sent_address">
                         </div>
                       </div>
                       <div class="form-group">
