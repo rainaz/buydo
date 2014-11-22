@@ -11,7 +11,9 @@ class VC extends CI_Controller {
 	// i.e. http://localhost/buydo/index.php/vc/show/content/sample
 	public function show($folder, $page)
 	{
-		$this->load->view('header/header');
+		if($folder=='user'||$folder=='seller') $data['template_type'] = "corperate";
+		else $data['template_type'] = "ecommerce";
+		$this->load->view('header/header', $data);
 		$this->load->view($folder.'/'.$page);
 		$this->load->view('footer/footer');
 

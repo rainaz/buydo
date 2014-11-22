@@ -6,7 +6,7 @@
 -- Generation Time: Nov 18, 2014 at 10:21 AM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
-
+USE `buydo`
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `bid` (
   `buyer_id` int(11) NOT NULL,
   `current_bid` double NOT NULL,
   `max_bid` double NOT NULL,
-  `bid_date` date NOT NULL,
+  `bid_date` timestamp NOT NULL,
   PRIMARY KEY (`bid_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `buy` (
   `buy_id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `buyer_id` int(11) NOT NULL,
-  `buy_date` date NOT NULL,
+  `buy_date` timestamp NOT NULL,
   `quantity` int(11) NOT NULL,
   PRIMARY KEY (`buy_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -173,7 +173,6 @@ CREATE TABLE IF NOT EXISTS `sellers` (
 CREATE TABLE IF NOT EXISTS `transactions` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `buyer_id` int(11) NOT NULL,
-  `seller_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `placement_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `quantity` int(11) NOT NULL,
@@ -261,11 +260,7 @@ ALTER TABLE `transactions`
   ADD CONSTRAINT `buyer` FOREIGN KEY (`buyer_id`) REFERENCES `buyers` (`user_id`);
 
 ALTER TABLE `transactions`
-  ADD CONSTRAINT `seller` FOREIGN KEY (`seller_id`) REFERENCES `sellers` (`user_id`);
-
-ALTER TABLE `transactions`
   ADD CONSTRAINT `item` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
-
 
 ALTER TABLE `buy`
   ADD CONSTRAINT `item_bought` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
