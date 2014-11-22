@@ -13,7 +13,7 @@ class Seller_model extends CI_Model {
 	private $table_name;
 	private $attributes = "seller_id";
 
-public function addSeller(){
+	public function addSeller(){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '"."')";
@@ -37,3 +37,6 @@ public function addSeller(){
 		return $this->db->query("SELECT * FROM sellers WHERE seller_id = ".$id);
 	}
 
+
+}
+?>

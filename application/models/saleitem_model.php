@@ -13,7 +13,7 @@ class SaleItem_model extends CI_Model {
 	private $table_name;
 	private $attributes = "item_id, price, quantity_in_stock";
 
-public function addBidItem($price, $quantityInStock){
+	public function addBidItem($price, $quantityInStock){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
@@ -27,6 +27,7 @@ public function addBidItem($price, $quantityInStock){
 		}
 		return false;
 	}
+	
 	function __construct(){
 		parent::__construct();
 		$this->table_name = sale_items;
@@ -42,3 +43,6 @@ public function addBidItem($price, $quantityInStock){
 		return $this->db->query("SELECT * FROM sale_items WHERE seller_id = ".$id);
 	}
 
+
+}
+?>
