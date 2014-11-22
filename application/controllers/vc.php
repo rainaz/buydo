@@ -45,9 +45,9 @@ class VC extends CI_Controller {
 		$this->email->to('nontawat.mk@gmail.com');// change it to yours
 		$this->email->subject('There is one secret in this world');
 		$this->email->message($message);
-		if($this->email->send(){
+		if($this->email->send()){
 			echo 'Email sent.';
-		 }
+		}
 		else{
 			show_error($this->email->print_debugger());
     
