@@ -245,9 +245,6 @@ ALTER TABLE `sale_items`
 ALTER TABLE `bid_items`
   ADD CONSTRAINT `bid_item_info` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
 
-ALTER TABLE `bid_items`
-  ADD CONSTRAINT `winner_info` FOREIGN KEY (`current_winner_id`) REFERENCES `buyers` (`user_id`);
-
 ALTER TABLE `complain`
   ADD CONSTRAINT `complainant` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
