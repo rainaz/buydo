@@ -1,3 +1,6 @@
+DELETE FROM `sellers` WHERE 1 ;
+DELETE FROM `admins` WHERE 1 ;
+DELETE FROM `buyers` WHERE 1 ;
 DELETE FROM `users` WHERE 1;
 ALTER TABLE `users` AUTO_INCREMENT=1;
 INSERT INTO `users`(`name`, `surname`, `email`, `creditcard`, `birthday`, `country`, `sent_address`, `address`, `username`, `password`, `phone_no`, `start_banned`, `banned_duration`, `banned_reason`, `penalty_count`) VALUES 
@@ -109,3 +112,12 @@ INSERT INTO `users`(`name`, `surname`, `email`, `creditcard`, `birthday`, `count
 ("Salazar","Rosa","salazar.rosa@buydo.com","2603264330631060","1986-10-11","Thailand","11328 Douglas Av.","11328 Douglas Av.","salazar","5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","+66886610839","1993-4-12","-1","none","0"),
 ("Smith","Thomas","smith.thomas@buydo.com","4674398102763410","1992-5-25","Thailand","120 Hanover Sq.","120 Hanover Sq.","smith","5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","+66837196277","1993-4-12","-1","none","0"),
 ("Snowden","Tony","snowden.tony@buydo.com","5786277171710990","1991-10-2","Thailand","Arenales 1938 3'A'","Arenales 1938 3'A'","snowden","5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","+66851332845","1993-4-12","-1","none","0");
+
+INSERT INTO `buyers` (`user_id`) VALUES
+(101),(102),(103),(104),(105),(106),(107),(108),(1),(2),(3),(4),(5),(11),(12),(13),(14),(15),(21),(22),(23),(24),(25),(31),(32),(33),(34),(35),(41),(42),(43),(44),(45),(51),(52),(53),(54),(55),(61),(62),(63),(64),(65),(71),(72),(73),(74),(75),(81),(82),(83),(84),(85),(91),(92),(93),(94),(95);
+
+INSERT INTO `sellers` (`user_id`) VALUES
+(6),(7),(8),(9),(16),(17),(18),(19),(26),(27),(28),(29),(36),(37),(38),(39),(46),(47),(48),(49),(56),(57),(58),(59),(66),(67),(68),(69),(76),(77),(78),(79),(86),(87),(88),(89),(96),(97),(98),(99);
+
+INSERT INTO `admins` (`user_id`) VALUES
+(10),(20),(30),(40),(50),(60),(70),(80),(90),(100);
