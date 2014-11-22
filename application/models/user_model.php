@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class User_Model extends CI_Model {
+class User_model extends CI_Model {
 
 	private $personal="user_id, name, surname, email, creditcard, birthday, country,sent_address,address";
 	private $account = "username, password, phone_no";

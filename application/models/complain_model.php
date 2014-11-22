@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Complain_Model extends CI_Model {
+class Complain_model extends CI_Model {
 
 	/* private $_complainID;
 	private $_userID;

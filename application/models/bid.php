@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Feedback_model extends CI_Model {
+class Bid_model extends CI_Model {
 
 	/* private $_complainID;
 	private $_userID;
@@ -11,16 +11,14 @@ class Feedback_model extends CI_Model {
 	private $_detail;*/ 
 
 	private $table_name;
-	private $attributes = "user_id, accused, topic, category, detail";
+	private $attributes = "bid_id, item_id, buyer_id, current_bid, max_bid, bid_date";
 
-public function addFeedback($transactionID,$feedbackFrom, $feedbackTo, $score, $comment){
+public function addBid($item_id, $buyer_id, $current_bid, $max_bid){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
-			$transactionID."', '".
 			$feedbackFrom."', '".
-			$feedbackTo."', '".
-			$score."', '".
+			$feedbackTo."', '".			$score."', '".
 			$comment."')";
 
 		$sql = "INSERT INTO feedbacks ($attributes) VALUES ".$insvalue;
