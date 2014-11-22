@@ -44,8 +44,8 @@ class User_model extends CI_Model {
 		if(/* no email */)
 		$query = $this->db->query($sql);
 
-		if($query->num_rows() > 0){
-			return $query->row();
+		if($query > 0){
+			return true;
 		}
 		return false;
 
@@ -54,7 +54,7 @@ class User_model extends CI_Model {
 	public function verifyUserExistByEmail($email){
 		$sql = "SELECT email FROM users WHERE email = "."'".$email."'";		
 		$query = $this->db->query($sql);
-		if($query->num_rows() > 0){
+		if($query > 0){
 			return true;
 		}
 		return false;
@@ -67,7 +67,7 @@ class User_model extends CI_Model {
 	public function getUserIDByEmail($email){
 		$query = $this->db->query("SELECT user_id FROM users WHERE email = '".$email."'");
 		if($query->num_rows() > 0){
-			return $query->row()->email;
+			return $query->row()->user_id;
 		}
 		return false;
 	}
@@ -83,11 +83,15 @@ class User_model extends CI_Model {
 	public function setNameByUserID($id, $nname){
 		$sql = "UPDATE users SET name = "."'".$nname."'"."WHERE user_id = "."'".$id."'";
 		$query = $this->db->query($sql);		
+		if($query > 0) return true;
+		return false;
 	}
 
 	public function setSurnameByUserID($id, $nsurname){
 		$sql = "UPDATE users SET surname = "."'".$nsurname."'"."WHERE user_id = "."'".$id."'";
 		$query = $this->db->query($sql);	
+		if($query > 0) return true;
+		return false;
 	}
 
 
