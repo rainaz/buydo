@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Transaction_Model extends CI_Model {
+class Transaction_model extends CI_Model {
 
 	private $attributes = "transaction_id, buyer_id, seller_id, item_id, placement_date, quantity, transaction_status";
 	
