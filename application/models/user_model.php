@@ -90,22 +90,21 @@ class User_Model extends CI_Model {
 		$query = $this->db->query($sql);	
 	}
 
-UPDATE Customers
-SET ContactName='Alfred Schmidt', City='Hamburg'
-WHERE CustomerName='Alfreds Futterkiste';
 
 	public function manageProfileByUserID($id,$name,&surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
-		$sql = "UPDATE user".
-				"SET name = "."'".$name."', ".
-				"surname = "."'".$surname."', ".
-				"sent_Address = "."'".$surname."', ".
-				"address = "."'".$surname."', ".
-				"country = "."'".$surname."', ".
-				"email = "."'".$surname."', ".
-				"phoneNo = "."'".$surname."', ".
-				"creditcard = "."'".$creditcard."', ".
-				"password = "."'".$password.".' ".
-				"WHERE userID = "."'".$id."'";
+
+
+		$sql = "UPDATE user 
+				SET name = "."'".$name."', 
+				surname = "."'".$surname."',
+				sent_address = "."'".$sentAddress."',
+				address = "."'".$address."',
+				country = "."'".$country."',
+				email = "."'".$email."',
+				phone_no = "."'".$phoneNo."',
+				creditcard = "."'".$creditcard."',
+				password = "."'".$password.".' 
+				WHERE userID = "."'".$id."'"
 	}
 
 
