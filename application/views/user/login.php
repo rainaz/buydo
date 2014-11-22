@@ -10,17 +10,17 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal form-without-legend" role="form">
+                  <form class="form-horizontal form-without-legend" role="form" action="">
                     <div class="form-group">
                       <label for="username" class="col-lg-4 control-label">Username <span class="require">*</span></label>
                       <div class="col-lg-8">
-                        <input type="text" class="form-control" id="username">
+                        <input type="text" name="username" class="form-control" id="username">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
                       <div class="col-lg-8">
-                        <input type="password" class="form-control" id="password">
+                        <input type="password" name="password" class="form-control" id="password">
                       </div>
                     </div>
                     <div class="row">
