@@ -4,11 +4,12 @@ class User_model extends CI_Model {
 	private $personal="user_id, name, surname, email, creditcard, birthday, country,sent_address,address";
 	private $account = "username, password, phone_no";
 	private $ban = "start_banned, banned_duration, banned_reason, penalty_count";
-	private $attributes = $personal.",".$account.",".$ban;
+	private $attributes; 
 
 
 	function __construct(){
 		parent::__construct();
+		$this->attributes = $this->personal.",".$this->account.",".$this->ban;
 	}
 
 	public function test(){
@@ -39,7 +40,7 @@ class User_model extends CI_Model {
 			$bannedDuration."', '".
 			$bannedReason."', '".
 			$penaltyCount."')";
-		$sql = "INSERT INTO users ($attributes) values ".$insvalue;
+		$sql = "INSERT INTO users ($this->attributes) values ".$insvalue;
 
 		if(/* no email */)
 		$query = $this->db->query($sql);
@@ -49,6 +50,14 @@ class User_model extends CI_Model {
 		}
 		return false;
 
+	}
+	
+	public function isAuthenValid($username, $password){
+		$query = $this->db->query("SELECT `user_id` FROM `users` WHERE `username`='".$username."' AND `password`='".sha1($password)."';");
+		if($query->row_nums() !=1 )
+			return false;
+		else 
+			return $query->first_row()->user_id;
 	}
 
 	public function verifyUserExistByEmail($email){
