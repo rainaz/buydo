@@ -54,7 +54,7 @@ class User_model extends CI_Model {
 	
 	public function isAuthenValid($username, $password){
 		$query = $this->db->query("SELECT `user_id` FROM `users` WHERE `username`='".$username."' AND `password`='".sha1($password)."';");
-		if($query->row_nums() !=1 )
+		if($query->num_rows() !=1 )
 			return false;
 		else 
 			return $query->first_row()->user_id;
@@ -119,7 +119,7 @@ class User_model extends CI_Model {
 				phone_no = "."'".$phoneNo."',
 				creditcard = "."'".$creditcard."',
 				password = "."'".$password.".' 
-				WHERE userID = "."'".$id."'";
+				WHERE user_id = "."'".$id."'";
 
 		$query = $this->db->query($sql);
 	}
