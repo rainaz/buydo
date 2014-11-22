@@ -12,19 +12,19 @@ class Admin_model extends CI_Model {
 	private $_category;
 	private $_detail;*/ 
 
-	//private $table_name;
+	private $table_name;
 	private $attributes = "user_id";
 
 	function __construct(){
 		parent::__construct();
-		//$this->table_name = admins;
+		$this->table_name = "admins";
 	}
 
 	public function addAdmin($userid){		
 		$insvalue = "('".$userid."')";
 
 		$sql = "INSERT INTO admins ($this->attributes) VALUES ".$insvalue;
-		echo "\n$sql";
+		
 		$query = $this->db->query($sql);
 		if($query>0) {
 			return true;
@@ -38,8 +38,20 @@ class Admin_model extends CI_Model {
 		return $this->db->query("SELECT * FROM admins");
 	}
 
+	public verifyAdminByUserID($id){
+		$sql = "SELECT * FROM admins WHERE user_id = ".$id;
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0)
+			return true;
+		return false;
+	}
+
+	function removeAdminByUserID($id){
+		$query = $this->db->query("DELETE FROM admins WHERE user_id = $id");		
+	}
+
 	function getAdminByUserID($id){
-		return $this->db->query("SELECT * FROM admins WHERE admin_id = ".$id);
+		return $this->db->query("SELECT * FROM admins WHERE user_id = ".$id);
 	}
 
 }

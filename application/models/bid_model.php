@@ -23,19 +23,19 @@ class Bid_model extends CI_Model {
 			$maxBid."', '".
 			$bidDate."')";
 
-		$sql = "INSERT INTO bid ($attributes) VALUES ".$insvalue;
+		$sql = "INSERT INTO bid ($this->attributes) VALUES ".$insvalue;
 		$query = $this->db->query($sql);
-		if($query->num_rows() > 0){
-			return $query->row();
+		if($query > 0){
+			return true;
 		}
 		return false;
 	}
 	function __construct(){
 		parent::__construct();
-		$this->table_name = bid;
+		$this->table_name = "bid";
 	}
 	function test(){
-		return $this->-db->query("SELECT * FROM bid");
+		return $this->db->query("SELECT * FROM bid");
 	}
 	function getBidByBidID($id){
 		return $this->db->query("SELECT * FROM bid WHERE bid_id = ".$id);
@@ -46,6 +46,15 @@ class Bid_model extends CI_Model {
 	function getBidByItemID($id){
 		return $this->db->query("SELECT * FROM bid WHERE item_id = ".$id);
 	}
+	function setCurrentBid($itemid, $ncurrentbid){
+		$sql = "UPDATE bid SET current_bid = $ncurrentbid WHERE item_id = $itemid";
+		$query = $this->db->query($sql);
+	}
+	function setMaxbid($item, $nmaxbid){
+		$sql = "UPDATE bid SET max_bid = $nmaxbid WHERE item_id = $itemid";
+		$query = $this->db->query($sql);
+	}
+
 
 }
 ?>
