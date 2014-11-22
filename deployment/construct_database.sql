@@ -6,7 +6,7 @@
 -- Generation Time: Nov 18, 2014 at 10:21 AM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
-USE `buydo`
+USE `buydo`;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
