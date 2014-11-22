@@ -57,7 +57,8 @@ License: You must have a valid license purchased only from themeforest (the abov
   </head>
   <!-- Head END -->
   <!-- Body BEGIN -->
-  <body class="ecommerce">
+  <body class="<?php echo $template_type; ?>">
+
     <!-- BEGIN TOP BAR -->
     <div class="pre-header">
       <div class="container">

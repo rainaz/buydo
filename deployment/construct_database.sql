@@ -6,7 +6,7 @@
 -- Generation Time: Nov 18, 2014 at 10:21 AM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
-
+USE `buydo`;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `bid` (
   `buyer_id` int(11) NOT NULL,
   `current_bid` double NOT NULL,
   `max_bid` double NOT NULL,
-  `bid_date` date NOT NULL,
+  `bid_date` timestamp NOT NULL,
   PRIMARY KEY (`bid_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -59,8 +59,7 @@ CREATE TABLE IF NOT EXISTS `bid_items` (
   `initial_price` double NOT NULL,
   `current_price` double NOT NULL,
   `current_max_bid` double NOT NULL,
-  `end_date` double NOT NULL,
-  `seller_id` int(11) NOT NULL,
+  `end_date` datetime NOT NULL,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -74,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `buy` (
   `buy_id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `buyer_id` int(11) NOT NULL,
-  `buy_date` date NOT NULL,
+  `buy_date` timestamp NOT NULL,
   `quantity` int(11) NOT NULL,
   PRIMARY KEY (`buy_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -100,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `complain` (
   `complaint_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `accused` varchar(50) NOT NULL,
-  `date` date NOT NULL,
+  `date` timestamp NOT NULL,
   `topic` varchar(50) NOT NULL,
   `category` varchar(50) NOT NULL,
   `detail` text NOT NULL,
@@ -131,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
 
 CREATE TABLE IF NOT EXISTS `items` (
   `item_id` int(11) NOT NULL AUTO_INCREMENT,
-  `item_name` varchar(20) NOT NULL,
+  `item_name` varchar(40) NOT NULL,
   `posted_date` date NOT NULL,
   `agreement` text NOT NULL,
   `status` varchar(50) NOT NULL,
@@ -174,7 +173,6 @@ CREATE TABLE IF NOT EXISTS `sellers` (
 CREATE TABLE IF NOT EXISTS `transactions` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `buyer_id` int(11) NOT NULL,
-  `seller_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `placement_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `quantity` int(11) NOT NULL,
@@ -199,9 +197,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `sent_address` varchar(150) NOT NULL,
   `address` varchar(150) NOT NULL,
   `username` varchar(16) NOT NULL,
-  `password` varchar(22) NOT NULL,
+  `password` varchar(41) NOT NULL,
   `phone_no` varchar(11) NOT NULL,
-  `banned_no` int(11) NOT NULL,
+  `start_banned` date NOT NULL,
   `banned_duration` int(11) NOT NULL,
   `banned_reason` varchar(50) NOT NULL,
   `penalty_count` int(11) NOT NULL,
@@ -246,9 +244,6 @@ ALTER TABLE `sale_items`
 ALTER TABLE `bid_items`
   ADD CONSTRAINT `bid_item_info` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
 
-ALTER TABLE `bid_items`
-  ADD CONSTRAINT `winner_info` FOREIGN KEY (`current_winner_id`) REFERENCES `buyers` (`user_id`);
-
 ALTER TABLE `complain`
   ADD CONSTRAINT `complainant` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
@@ -265,11 +260,7 @@ ALTER TABLE `transactions`
   ADD CONSTRAINT `buyer` FOREIGN KEY (`buyer_id`) REFERENCES `buyers` (`user_id`);
 
 ALTER TABLE `transactions`
-  ADD CONSTRAINT `seller` FOREIGN KEY (`seller_id`) REFERENCES `sellers` (`user_id`);
-
-ALTER TABLE `transactions`
   ADD CONSTRAINT `item` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
-
 
 ALTER TABLE `buy`
   ADD CONSTRAINT `item_bought` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
