@@ -5,18 +5,16 @@ class SaleItem_model extends CI_Model {
 	private $table_name;
 	private $attributes = "item_id, price, quantity_in_stock";
 
-	public function addSaleItemm($price, $quantityInStock){
+	public function addSaleItemm($itemid, $price, $quantityInStock){		
 
-		$lastrow = $this->db->insert_id();	
-
-		$insvalue = "('".$lastrow."', '".
+		$insvalue = "('".$itemid."', '".
 			$price."', '".
 			$quantityInStock."')";
 
-		$sql = "INSERT INTO sale_items ($attributes) VALUES ".$insvalue;
+		$sql = "INSERT INTO sale_items ($this->attributes) VALUES ".$insvalue;
 		$query = $this->db->query($sql);
-		if($query->num_rows() > 0){
-			return $query->row();
+		if($query > 0){
+			return true;
 		}
 		return false;
 	}
@@ -27,8 +25,9 @@ class SaleItem_model extends CI_Model {
 	}
 
 	function test(){
-		return $this->-db->query("SELECT * FROM sale_items");
+		return $this->db->query("SELECT * FROM sale_items");
 	}
+
 	function getSaleItemByItemID($id){
 
 		return $this->db->query("SELECT * FROM sale_items WHERE item_id = ".$id);
