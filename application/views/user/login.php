@@ -1,3 +1,6 @@
+<?php echo validation_errors('<p class="error">'); ?>
+ <?php echo form_open("user/login"); ?>
+
     <div class="main">
       <div class="container">
         <!-- BEGIN CONTENT -->
@@ -30,7 +33,7 @@
                     </div>
                     <div class="row">
                       <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary greenButton">Login</button>
                       </div>
                     </div>
                     <div class="row">
@@ -39,6 +42,7 @@
                       </div>
                     </div>
                   </form>
+                      <?php echo form_close(); ?>
                 </div>
                 <div class="col-md-4 col-sm-4 pull-right">
                   <div class="form-info">
@@ -57,3 +61,5 @@
         <!-- END SIDEBAR & CONTENT -->
       </div>
     </div>
+
+   

@@ -66,6 +66,7 @@ License: You must have a valid license purchased only from themeforest (the abov
           <!-- BEGIN TOP BAR LEFT PART -->
           <div class="col-md-6 col-sm-6 additional-shop-info">
             <ul class="list-unstyled list-inline">
+              <li> Hi <?php echo $this->session->userdata('user_name'); ?>! Welcome to <strong>Buydo.com</strong> </li>
               <!--                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
               <li><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></li>
             -->                    </ul>
