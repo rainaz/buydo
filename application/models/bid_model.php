@@ -39,15 +39,15 @@ class Bid_model extends CI_Model {
 	}
 	function getBidByBidID($id){
 		$query = $this->db->query("SELECT * FROM bid WHERE bid_id = ".$id);
-		return $query->row();
+		return $query->row_array();
 	}
 	function getBidByBuyerID($id){
 		$query = $this->db->query("SELECT * FROM bid WHERE buyer_id = ".$id);
-		return $query->row();
+		return $query->row_array();
 	}
 	function getBidByItemID($id){
 		$query = $this->db->query("SELECT * FROM bid WHERE item_id = ".$id);
-		return $query->row();
+		return $query->row_array();
 	}
 	function setCurrentBid($itemid, $ncurrentbid){
 		$sql = "UPDATE bid SET current_bid = $ncurrentbid WHERE item_id = $itemid";

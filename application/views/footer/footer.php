@@ -56,36 +56,36 @@
     </script>
     <!-- END PAGE LEVEL JAVASCRIPTS -->
 
-    <!-- Validator prerequisites(will need to move this thing later) -->
+<!--     // Validator prerequisites(will need to move this thing later) 
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
     <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 
-    <!-- Register Validator (will need to move this thing later) -->
+    // Register Validator (will need to move this thing later) 
     <script src="/buydo/assets/buydo/js/register_validator.js" type="text/javascript"></script>
 
-    <!-- Login Validator (will need to move this thing later) -->
+    // Login Validator (will need to move this thing later) 
     <script src="/buydo/assets/buydo/js/login_validator.js" type="text/javascript"></script>
 
 
-    <!-- Add Saleitem Validator (will need to move this thing later) --> 
+    // Add Saleitem Validator (will need to move this thing later)  
     <script src="/buydo/assets/buydo/js/add_saleitem_validator.js" type="text/javascript"></script>
 
-    <!-- Edit Saleitem Validator (will need to move this thing later) --> 
+    // Edit Saleitem Validator (will need to move this thing later)  
     <script src="/buydo/assets/buydo/js/edit_saleitem_validator.js" type="text/javascript"></script>
 
-    <!-- Add biditem Validator (will need to move this thing later) -->
+    // Add biditem Validator (will need to move this thing later) 
     <script src="/buydo/assets/buydo/js/addbid_validator.js" type="text/javascript"></script>
 
-    <!-- Edit biditem Validator (will need to move this thing later) -->
+    // Edit biditem Validator (will need to move this thing later) 
     <script src="/buydo/assets/buydo/js/editbid_validator.js" type="text/javascript"></script>
 
-     <!-- Password Recovery Validator (will need to move this thing later) -->
+     // Password Recovery Validator (will need to move this thing later) 
     <script src="/buydo/assets/buydo/js/recovery_password_validator.js" type="text/javascript"></script>
 
-     <!-- New Password Form Validator (will need to move this thing later) -->
+     // New Password Form Validator (will need to move this thing later) 
     <script src="/buydo/assets/buydo/js/new_password_form_validator.js" type="text/javascript"></script>
-
+ -->
 
 </body>
 <!-- END BODY -->

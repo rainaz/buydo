@@ -34,22 +34,22 @@
                 <button class="btn btn-primary" type="submit">Add to cart</button>
               </div>
               <div style="padding-top:20px">
-              <ul id="myTab" class="nav nav-tabs">
-                <li class="active"><a href="#Description" data-toggle="tab">Information</a></li>
-              </ul>
-              <div id="myTabContent" class="tab-content">
-                <div class="tab-pane fade in active" id="Information">
-                      <table class="datasheet" style="width:80%">
-                        <tr>
-                          <th colspan="2">Agreement</th>
-                        </tr>
-                        <tr>
-                          <td><?php echo $agreement ?></td>
-                        </tr>
-                      </table>
+                <ul id="myTab" class="nav nav-tabs">
+                  <li class="active"><a href="#Description" data-toggle="tab">Information</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                  <div class="tab-pane fade in active" id="Information">
+                    <table class="datasheet" style="width:80%">
+                      <tr>
+                        <th colspan="2">Agreement</th>
+                      </tr>
+                      <tr>
+                        <td><?php echo $agreement ?></td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
             <div class="sticker sticker-new"></div>
           </div>
