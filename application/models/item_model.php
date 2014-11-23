@@ -54,7 +54,20 @@ public function addItem()
   $insertid = $this->db->insert_id();
   return $insertid;
  }
-
+public function editItem()
+  {
+    $this->load->helper('url');
+    
+ $data=array( 
+   'item_name'=>$this->input->post('item_name'),   
+    'agreement'=>$this->input->post('agreement'),  
+    'status' => "in_stock",
+    'spec'=>$this->input->post('spec'),   
+    'picture'=>$this->input->post('picture'), 
+  );
+      $this->db->where('item_id', $this->input->post('item_id'));
+      return $this->db->update('items', $data);
+  }
 
 	public function searchItem($search){
 		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`end_date` > DATE '".((new DateTime())->format("Y-m-d H:i:s"))."' UNION SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`quantity_in_stock` > 0;");

@@ -1,4 +1,34 @@
-<div id="content">
+<div class="reg_form">
+<div class="form_title">Confirm buying and Create Transaction</div>
+<div class="form_sub_title">Add new transaction</div>
+ <?php echo validation_errors('<p class="error">'); ?>
+ <?php echo form_open("transaction/createTransaction"); ?>
+
+<p>
+<label for=buyer_id>Buyer ID:</label>
+  <input type="text" id="buyer_id" name="buyer_id" value="<?php echo set_value('buyer_id'); ?>" />
+</p>
+<p>
+<label for=seller_id>Seller ID:</label>
+  <input type="text" id="seller_id" name="seller_id" value="<?php echo set_value('seller_id'); ?>" />
+</p>
+<p>
+<label for=item_id>Item ID:</label>
+  <input type="text" id="item_id" name="item_id" value="<?php echo set_value('item_id'); ?>" />
+</p>
+<p>
+<label for=quantity>Quantity:</label>
+  <input type="text" id="quantity" name="quantity" value="<?php echo set_value('quantity'); ?>" />
+</p>
+
+
+  <p>
+  <input type="submit" class="greenButton" value="Submit" />
+  </p>
+ <?php echo form_close(); ?>
+</div><!--<div class="reg_form">-->
+</div><!--<div id="content">-->
+
 
 
 <div class="feedback_form">
@@ -33,5 +63,6 @@
   </p>
  <?php echo form_close(); ?>
  
-</div><!--<div class="saleitem_form">-->
+</div><!--<div class="feedback_form">-->
 </div><!--<div id="content">-->
+

@@ -63,9 +63,28 @@
 
     <!-- Register Validator (will need to move this thing later) -->
     <script src="/buydo/assets/buydo/js/register_validator.js" type="text/javascript"></script>
-    
+
     <!-- Login Validator (will need to move this thing later) -->
     <script src="/buydo/assets/buydo/js/login_validator.js" type="text/javascript"></script>
+
+
+    <!-- Add Saleitem Validator (will need to move this thing later) --> 
+    <script src="/buydo/assets/buydo/js/add_saleitem_validator.js" type="text/javascript"></script>
+
+    <!-- Edit Saleitem Validator (will need to move this thing later) --> 
+    <script src="/buydo/assets/buydo/js/edit_saleitem_validator.js" type="text/javascript"></script>
+
+    <!-- Add biditem Validator (will need to move this thing later) -->
+    <script src="/buydo/assets/buydo/js/addbid_validator.js" type="text/javascript"></script>
+
+    <!-- Edit biditem Validator (will need to move this thing later) -->
+    <script src="/buydo/assets/buydo/js/editbid_validator.js" type="text/javascript"></script>
+
+     <!-- Password Recovery Validator (will need to move this thing later) -->
+    <script src="/buydo/assets/buydo/js/recovery_password_validator.js" type="text/javascript"></script>
+
+     <!-- New Password Form Validator (will need to move this thing later) -->
+    <script src="/buydo/assets/buydo/js/new_password_form_validator.js" type="text/javascript"></script>
 
 
 </body>

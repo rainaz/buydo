@@ -1,24 +1,26 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Transaction_model extends CI_Model {
 
-	private $attributes = "buyer_id, seller_id, item_id, placement_date, quantity, transaction_status";
+	private $table_name;
+	private $attributes = "transaction_id, buyer_id, item_id, placement_date, quantity, transaction_status";
 	
 	function __construct(){
 		parent::__construct();
+		$this->table_name = "transactions";
 	}
 
-	public function addTransaction($buyerid, $sellerid, $itemid, $placementdate, $quantity, $transactionstatus){
-		
+	public function addTransaction($buyerid, $itemid, $quantity, $transactionstatus){
+		$transaction_id = $this->db->count_all($this->table_name) + 1;
 		//$lastrow = $this->db->insert_id();
 		$insvalue = "('".
-			$buyerid."', '".
-			$sellerid."', '".
+			$transaction_id."', '".
+			$buyerid."', '".			
 			$itemid."', '".
-			$placementdate."', '".
+			date('Y-m-d')."', '".
 			$quantity."', '".
 			$transactionstatus."')";
 
-		$sql = "INSERT INTO transaction ($attributes) VALUES $insvalue";
+		$sql = "INSERT INTO transactions ($this->attributes) VALUES $insvalue";
 
 		$query = $this->db->query($sql);
 
@@ -43,7 +45,7 @@ class Transaction_model extends CI_Model {
 			return $query->result();
 		}
 		return false;
-	}	
+	}
 
 	public function getTransactionByBuyerIDAndStatus($buyerid, $status){
 		$query = $this->db->query("SELECT * FROM transactions WHERE buyer_id = "."'".$buyerid."' AND status = "."'".$status."'");
@@ -108,7 +110,8 @@ class Transaction_model extends CI_Model {
 
 
 	public function setTransactionStatusFromTransactionID($transid, $nstatus){
-		$sql = "UPDATE transactions SET transaction_status = "."'".$nstatus."'"."WHERE transaction_id = "."'".$transid."'";
+		$sql = "UPDATE transactions SET transaction_status = "."'".$nstatus."'"." WHERE transaction_id = "."'".$transid."'";
+		echo "$sql\n";
 		$query = $this->db->query($sql);	
 	}
 
