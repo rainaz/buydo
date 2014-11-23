@@ -33,7 +33,7 @@ class Item_model extends CI_Model {
 	public function getItemByID($id){
 		$query = $this->db->query("SELECT * FROM items WHERE item_id = '".$id."'");
 		if($query->num_rows() > 0){
-			return $query->row();
+			return $query->row_array();
 		}
 		return false;
 	}
