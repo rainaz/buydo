@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Item extends CI_Controller {
   public function __construct() {
   parent::__construct();
@@ -76,5 +77,14 @@ class Item extends CI_Controller {
   }
 
  }
+
+  public function showBidItem($id){
+    $this->load->model('bid_model');
+    $data = $this->bid_model->getBidItemInfo($id);
+    $data['template_type'] = "ecommerce";
+    $this->load->view('header/header',$data);
+    $this->load->view('item/bid_item_info', $data);
+    $this->load->view('footer/footer',$data);   
+  }
 
 } ?>

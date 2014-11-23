@@ -118,6 +118,27 @@ class User_model extends CI_Model {
     $query = $this->db->query($sql);
   }
 
+  public function manageProfile()
+  {
+    $this->load->helper('url');
+    
+ $data=array(
+  
+    'name'=>$this->input->post('name'),   
+    'surname'=>$this->input->post('surname'),   
+    'email'=>$this->input->post('email'),   
+    'creditcard'=>$this->input->post('creditcard'),   
+    'birthday'=>$this->input->post('birthday'),
+    'country'=>$this->input->post('country'),
+    'sent_address'=>$this->input->post('sent_address'),
+    'address'=>$this->input->post('address'),
+    'password'=>sha1($this->input->post('password')),
+     'phone_no'=>$this->input->post('phone_no'),
+  );
+      $this->db->where('user_id', $this->session->userdata('user_id'));
+      return $this->db->update('users', $data);
+  }
+
 
  function login($username,$password)
  {
@@ -156,7 +177,7 @@ class User_model extends CI_Model {
     'sent_address'=>$this->input->post('sent_address'),
     'address'=>$this->input->post('address'),
     'username'=>$this->input->post('username'),
-    'password'=>md5($this->input->post('password')),
+    'password'=>sha1($this->input->post('password')),
      'phone_no'=>$this->input->post('phone_no'),
      'start_banned'=>$this->input->post('start_banned'),
      'banned_duration'=>$this->input->post('banned_duration'),
