@@ -20,6 +20,7 @@ class Item extends CI_Controller{
 		$this->load->view('thank_view.php', $data);
 		$this->load->view('footer_view',$data);
 	}
+  
 	public function showItem($id){
 		$this->load->model('bid_model');
 		$data = $this->item_model->getItemInfo($id);
