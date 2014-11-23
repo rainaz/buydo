@@ -89,15 +89,14 @@ class Item_model extends CI_Model {
 		return $this->db->update('items', $data);
 	}
 
-	public function searchItem($search, $page) {
-
+	public function searchItem($search, $page, $per_page) {
 		$totalRow = $this->db->query("SELECT count(*) AS count FROM (SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*" . $search . ".*') AND `b`.`end_date` >  '" . ((new DateTime())->format("Y-m-d H:i:s")) . "' UNION SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*" . $search . ".*') AND `b`.`quantity_in_stock` > 0 ) AS `r`;");
 		if(!$totalRow)
 			return false;
-		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*" . $search . ".*') AND `b`.`end_date` > '" . ((new DateTime())->format("Y-m-d H:i:s")) . "' UNION SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*" . $search . ".*') AND `b`.`quantity_in_stock` > 0 LIMIT " . (($page - 1) * 12) . "," . ($page * 12) . ";");
+		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*" . $search . ".*') AND `b`.`end_date` > '" . ((new DateTime())->format("Y-m-d H:i:s")) . "' UNION SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*" . $search . ".*') AND `b`.`quantity_in_stock` > 0 LIMIT " . (($page - 1) * $per_page) . "," . ($page * $per_page) . ";");
 		
 
-		return array("total" => $totalRow, "data" => $query);
+		return array("total" => $totalRow->first_row()->count, "data" => $query);
 	}
 	public function searchBidItem($search) {
 		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*" . $search . ".*') AND `b`.`end_date` > DATE '" . ((new DateTime())->format("Y-m-d H:i:s")) . "';");

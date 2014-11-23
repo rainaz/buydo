@@ -218,6 +218,8 @@ class Item extends CI_Controller {
 	public function searchItem() {
 		$search = "";
 		$page = 1;
+		$per_page = 1000000000000;
+
 		if ($this->input->get('search_string')) {
 
 			$search = $this->input->get('search_string');
@@ -229,7 +231,7 @@ class Item extends CI_Controller {
 		}
 
 		
-		$list = $this->item_model->searchItem($search, $page);
+		$list = $this->item_model->searchItem($search, $page, $per_page);
 		if (!$list) {
 			$data['isFound'] = FALSE;
 		} else {
@@ -243,7 +245,11 @@ class Item extends CI_Controller {
 		//
 		$data['data'] = $list['data'];
 		$data['search'] = $search;
+		$data['page'] = $page;
+		$data['total'] = $list['total'];
+		$data['total_page'] = ceil($list['total'];
 		$data['template_type'] = "ecommerce";
+		$data['search_string'] = $search;
 		$this->load->view('header/header', $data);
 		$this->load->view('item/search_result', $data);
 		$this->load->view('footer/footer', $data);

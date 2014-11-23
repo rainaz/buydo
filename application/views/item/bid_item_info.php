@@ -9,7 +9,7 @@
 						<div class="col-md-6 col-sm-6">
 							<div class="product-main-image">
 								<img src="<?php echo "/buydo/upload/img/items/".$picURL ;?>" class="img-responsive"
-								data-BigImgsrc="/buydo/assets/images/pladook.png">
+								data-BigImgsrc="<?php echo "/buydo/upload/img/items/".$picURL ;?>">
 							</div>
 						</div>
 						<div class="col-md-6 col-sm-6">
