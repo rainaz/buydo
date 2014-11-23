@@ -14,24 +14,6 @@ class Item extends CI_Controller{
 		$this->load->view('footer_view',$data);
 	}
 
-	public function loadAddSaleItemView() {
-		$this->load->view('header_view', $data);
-		$this->load->view('seller/add_saleitem', $data);
-		$this->load->view('footer_view', $data);	
-	}
-
-	public function submitSaleItem_() {
-		$data['item_name'] = $this->input->post('item_name');
-		$data['picture'] = $this->input->post('picture');
-		$data['price'] = $this->input->post('price');
-		$data['quantity'] = $this->input->post('quantity');
-		$data['spec'] = $this->input->post('spec');
-		$data['payment_method'] = $this->input->post('payment_method');
-		$data['agreement'] = $this->input->post('agreement');
-		$this->load->view('header/header', $data);
-		$this->load->view('seller/edit_saleitem', $data);
-		$this->load->view('footer/footer', $data);
-	}
 
 	public function thank(){
 		$data['title']= 'Thank';
@@ -167,7 +149,11 @@ class Item extends CI_Controller{
 			$data['isFound'] = FALSE;
 		else 
 			$data['isFound'] = TRUE;
-		$data['data'] = $list;
+		/*
+		 *In $list there are two value total and data where total contain num of all search item and data contain all item in page
+		 *
+		 */
+		$data['data'] = $list['data'];
 		$data['search'] = $search;
 		$data['template_type'] = "ecommerce";
 		$this->load->view('header/header',$data);
