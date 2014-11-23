@@ -37,17 +37,10 @@
      'penalty_count'=>$this->input->post('penalty_count'), -->
 
  <p>
-  <label for="name">Firstname:</label>
-  <input type="text" id="name" name="name" value="<?php echo set_value('name'); ?>" />
-  </p>
-   <p>
   <label for="surname">Surname:</label>
   <input type="text" id="surname" name="surname" value="<?php echo set_value('surname'); ?>" />
   </p>
    <p>
-  <label for="email_address">Email Address:</label>
-  <input type="text" id="email" name="email" value="<?php echo set_value('email'); ?>" />
-  </p>
    <p>
   <label for="creditcard">Creditcard:</label>
   <input type="text" id="creditcard" name="creditcard" value="<?php echo set_value('creditcard'); ?>" />
@@ -76,17 +69,7 @@
    <p>
   <label for="username">Username:</label>
   <input type="text" id="username" name="username" value="<?php echo set_value('username'); ?>" />
-  </p>
-
-  <p>
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" value="<?php echo set_value('password'); ?>" />
-  </p>
-  <p>
-  <label for="con_password">Confirm Password:</label>
-  <input type="password" id="con_password" name="con_password" value="<?php echo set_value('con_password'); ?>" />
-  </p>
-  <p>
+  </p>=
   <input type="submit" class="greenButton" value="Submit" />
   </p>
  <?php echo form_close(); ?>

@@ -51,9 +51,9 @@ class Transaction extends CI_Controller{
 		$query = $this->trans->getTransactionByBuyerIDAndStatus($buyerid, 'received');
 	}
 
-	public function notify_delivery() {
+	public function notify_delivery($transid) {
 		//go to change status in database		
-		$transid = 111;
+		//$transid = 111;
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('transid', 'transid', 'trim|required|min_length[1]|xss_clean');
