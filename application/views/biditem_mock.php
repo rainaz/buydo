@@ -1,5 +1,5 @@
 <div id="content">
-	<?php echo $itemName; ?>
+	<?php echo $itemName.$initial_price; ?>
 	hello world
 
 <h1>BIDATA!</h1>
@@ -32,7 +32,7 @@
 
 
   <input type="hidden" id="itemName" name="itemName" value="<?php echo  $itemName; ?>" />
-  
+
   <p>
   <input type="submit" class="greenButton" value="nextbid" />
   </p>

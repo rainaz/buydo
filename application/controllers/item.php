@@ -10,7 +10,7 @@ class Item extends CI_Controller{
 		$data['title']= 'Home';
 		$this->load->view('header_view',$data);
 	//	$this->load->view("saleitem_add_view.php", $data);
-		$this->load->view("biditem_add_view.php", $data);
+		$this->load->view("bidItem_mock.php", $data);
 		$this->load->view('footer_view',$data);
 	}
 
@@ -164,18 +164,19 @@ class Item extends CI_Controller{
 		//  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
 		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
 		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
-
-		if($this->form_validation->run() == FALSE) {		}
 		//	$this->index();
 
 			$item_id = $this->input->post('item_id');
 			$itemInfo = $this->item_model->getItemInfo($item_id);
+			$bidItemInfo = $this->biditem_model->getBidItemByItemID($item_id);
+			$data =  array_merge($itemInfo, $bidItemInfo);
+
 			//find itemID
 			//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
 
 
 		$this->load->view('header_view');
-		$this->load->view('biditem_mock.php', $itemInfo);
+		$this->load->view('biditem_mock.php', $data);
 		$this->load->view('footer_view');
 	}
 	public function calculateBid() {
