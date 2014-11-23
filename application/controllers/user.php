@@ -34,7 +34,11 @@ class User extends CI_Controller{
 		if($result)
 			$this->index();
 		else      
-			echo "ERROR: No username or password";
+			$data['message']="ERROR: No username or password";
+	        $this->load->view('header/header');
+	        $this->load->view('content/simple_message',$data);
+	        $this->load->view('footer/footer');
+
 	}
 	//
 
@@ -55,8 +59,11 @@ class User extends CI_Controller{
 			$subject = "Registration confirmation: Buydo :)";
 			$message = "Thank you for registration, ".$this->input->post('name').'. Your username is '.$this->input->post('username').'.';
 			$this->email_library->sendEmail($destinationAddress,$subject,$message);
-			echo "Thank you for registration";
-			echo '<br />COMPLETE';
+			$data['type']="success";
+			$data['message']="Registration success";
+	        $this->load->view('header/header');
+	        $this->load->view('content/simple_message',$data);
+	        $this->load->view('footer/footer');
 		//}
 	}
 
