@@ -39,12 +39,15 @@ class Item extends CI_Controller{
 			$this->thank();
 		}
 	}
-	public function showBidItem($id){
+	public function showItem($id){
 		$this->load->model('bid_model');
-		$data = $this->bid_model->getBidItemInfo($id);
+		$data = $this->item_model->getItemInfo($id);
 		$data['template_type'] = "ecommerce";
 		$this->load->view('header/header',$data);
-		$this->load->view('item/bid_item_info', $data);
+		if($data['type'] == "Sales")
+			$this->load->view('item/buy_item_info', $data);
+		else
+			$this->load->view('item/bid_item_info', $data);
 		$this->load->view('footer/footer',$data);
 
 
