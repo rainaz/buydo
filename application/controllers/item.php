@@ -9,14 +9,14 @@ class Item extends CI_Controller{
 	public function index(){
 		$data['title']= 'Home';
 		$this->load->view('header_view',$data);
-	$this->load->view("saleitem_add_view.php", $data);
+		$this->load->view("saleitem_add_view.php", $data);
 	//	$this->load->view("biditem_add_view.php", $data);
 		$this->load->view('footer_view',$data);
 	}
 
 
 	public function verifyIsLoggedIn(){
-		if($this->session->userdata('logged_in')==FALSE){
+		if(!$this->session->userdata('logged_in')){
 			$this->index();
 		}
 	}
@@ -35,7 +35,19 @@ class Item extends CI_Controller{
 		$this->load->view('footer/footer');
 	}
 
-	
+	public function loadEditBidItemView() {
+		$data['title']= 'Edit BidItem';
+		$this->load->view('header/header');
+		$this->load->view('seller/edit_biditem');
+		$this->load->view('footer/footer');
+	}
+
+	public function loadEditSaleItemView() {
+		$data['title']= 'Edit SaleItem';
+		$this->load->view('header/header');
+		$this->load->view('seller/edit_saleitem');
+		$this->load->view('footer/footer');
+	}	
 
 
 	public function thank(){
@@ -146,7 +158,7 @@ class Item extends CI_Controller{
 
 
 	public function submitBidItem() {
-		$this->verifyIsLoggedIn();
+		//$this->verifyIsLoggedIn();
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
 		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
@@ -169,7 +181,7 @@ class Item extends CI_Controller{
 
 			$row = $this->item_model->addItem_($data['item_name'],$data['agreement'],
 				$data['status'],$data['spec'], $data['owner_id'],$data['picture']);
-			echo "$row\n";
+			//echo "$row\n";
 			$initial_price = $this->input->post('initial_price');
 			$current_price = $this->input->post('initial_price');
 			$current_max_bid = $this->input->post('initial_price');
@@ -182,10 +194,11 @@ class Item extends CI_Controller{
 			//$this->thank();  
 			if($query > 0 ){
 				//echo "completed\n";
-				$this->index();	
+				//$this->index();	
+				$this->loadAddBidItemView();
 			}
 			
-			//$this->loadAddBidItemView();
+			
 		}
 
 	}

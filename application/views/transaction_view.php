@@ -31,7 +31,7 @@
 
 
 
-<div class="feedback_form">
+<div class="reg_form">
 <div class="form_title">Give Feedback</div>
 <div class="form_sub_title">Come on!!!</div>
  <?php echo validation_errors('<p class="error">'); ?>
@@ -56,7 +56,27 @@
 </p>
 <p>
 <label for=comment>Comment:</label>
-  <input type="text" id="initcomment" name="initcomment" value="<?php echo set_value('initcomment'); ?>" />
+  <input type="text" id="comment" name="comment" value="<?php echo set_value('comment'); ?>" />
+</p>
+<p>
+  <input type="submit" class="greenButton" value="Submit" />
+  </p>
+ <?php echo form_close(); ?>
+ 
+</div><!--<div class="feedback_form">-->
+</div><!--<div id="content">-->
+
+
+<div class="reg_form">
+<div class="form_title">Notify Delivery</div>
+<div class="form_sub_title">I got the item!!</div>
+ <?php echo validation_errors('<p class="error">'); ?>
+ <?php echo form_open("transaction/notify_delivery"); ?>
+
+
+<p>
+<label for=transid>Transaction ID:</label>
+  <input type="text" id="transid" name="transid" value="<?php echo set_value('transid'); ?>" />
 </p>
 <p>
   <input type="submit" class="greenButton" value="Submit" />

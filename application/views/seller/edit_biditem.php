@@ -1,12 +1,12 @@
 <?php
-	$item_name = "pladook";
-	$image_url = "00.jpg";
-	$price = 100;
-	$date = '2012-03-06';
-	$time = '17:33';
-	$spec = "hand2";
+	$item_name = "";
+	$image_url = "";
+	$price = "";
+	$date = "yyyy-mm-dd";
+	$time = 'hh:mm';
+	$spec = "";
 	$payment_method = "creditcard";
-	$return_policy = "";
+	$agreement = "";
 	$packaging = "";
 ?>
     <div class="main">
@@ -21,8 +21,14 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form" id=form_edit_bit>
+                  <form class="form-horizontal" role="form" id="form_edit_bit" action=<?php echo site_url('item/editBidItem'); ?> method="post">
                     <fieldset>
+                      <div class="form-group">
+                        <label for="item_id" class="col-lg-4 control-label">Item ID <span class="require">*</span></label>
+                        <div class="col-lg-8">
+                          <input type="text" class="form-control" maxlength=40 id="item_id" name="item_id">
+                        </div>
+                      </div>
                       <div class="form-group">
                         <label for="item_name" class="col-lg-4 control-label">Item name <span class="require">*</span></label>
                         <div class="col-lg-8">
@@ -58,6 +64,7 @@
 	                      <input type="text" class="form-control" id="spec" name="spec" value=<?php echo $spec;?>>
                       </div>
                     </div>
+                     <div class="form-group">
                       <label for="payment_method" class="col-lg-4 control-label">Payment method <span class="require">*</span></label>
                       <div class="col-lg-8">
 	                      <select class="form-control" id="payment_method" name="payment_method">
@@ -68,7 +75,7 @@
                     <div class="form-group">
                       <label for="agreement" class="col-lg-4 control-label">Agreement  <span class="require">*</label>
                       <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="agreement" name="agreement" value=<?php echo $return_policy;?> >
+	                      <input type="text" class="form-control" id="agreement" name="agreement" value=<?php echo $agreement;?> >
                       </div>
                     </div>
                     </fieldset>
