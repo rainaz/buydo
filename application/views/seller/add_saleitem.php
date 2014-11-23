@@ -1,3 +1,6 @@
+ <?php echo validation_errors('<p class="error">'); ?>
+ <?php echo form_open("item/submitSaleItem"); ?>
+
     <div class="main">
       <div class="container">
         <!-- BEGIN CONTENT -->
@@ -10,7 +13,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form">
+                  <form class="form-horizontal" role="form" id="add_saleitem_form">
                     <fieldset>
                       <div class="form-group">
                         <label for="item_name" class="col-lg-4 control-label">Item name <span class="require">*</span></label>
@@ -36,34 +39,10 @@
                           <input type="number" min=0 class="form-control" id="quantity_in_stock" name="quantity_in_stock">
                         </div>
                       </div>
-                      <div class="form-group">
-                      <label for="brand" class="col-lg-4 control-label">Brand </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="brand" name="brand">
-                      </div>
-                    </div>
                     <div class="form-group">
-                      <label for="model" class="col-lg-4 control-label">Model </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="model" name="model">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="capacity" class="col-lg-4 control-label">Capacity </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="capacity" name="capacity">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="spec" class="col-lg-4 control-label">Properties </label>
+                      <label for="spec" class="col-lg-4 control-label">Properties <span class="require">*</span></label>
                       <div class="col-lg-8">
 	                      <input type="text" class="form-control" id="spec" name="spec">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="size" class="col-lg-4 control-label">Size </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="size" name="size">
                       </div>
                     </div>
                     <div class="form-group">
@@ -75,22 +54,16 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="agreement" class="col-lg-4 control-label">Agreement </label>
+                      <label for="agreement" class="col-lg-4 control-label">Agreement <span class="require">*</span></label>
                       <div class="col-lg-8">
 	                      <input type="text" class="form-control" id="agreement" name="agreement">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="packaging" class="col-lg-4 control-label">Packaging </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="packaging" name="packaging">
                       </div>
                     </div>
                     </fieldset>
                     
                     <div class="row">
                       <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                        <button type="submit" class="btn btn-primary">Create a sale item</button>
+                        <button type="submit" class="btn btn-primary greenButton">Create a sale item</button>
                         <button type="button" class="btn btn-default">Cancel</button>
                       </div>
                     </div>
@@ -104,3 +77,4 @@
         <!-- END SIDEBAR & CONTENT -->
       </div>
     </div>
+     <?php echo form_close(); ?>

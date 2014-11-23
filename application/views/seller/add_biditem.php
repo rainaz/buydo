@@ -10,7 +10,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form">
+                  <form class="form-horizontal" role="form" id="form_add_bid">
                     <fieldset>
                       <div class="form-group">
                         <label for="item_name" class="col-lg-4 control-label">Item name <span class="require">*</span></label>
@@ -40,35 +40,10 @@
                         	<input type="time" class="form-control" id="endtime" name="endtime">
                         </div>
                       </div>
-
-                      <div class="form-group">
-                      <label for="brand" class="col-lg-4 control-label">Brand </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="brand" name="brand">
-                      </div>
-                    </div>
                     <div class="form-group">
-                      <label for="model" class="col-lg-4 control-label">Model </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="model" name="model">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="capacity" class="col-lg-4 control-label">Capacity </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="capacity" name="capacity">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="spec" class="col-lg-4 control-label">Properties </label>
+                      <label for="spec" class="col-lg-4 control-label">Property </label>
                       <div class="col-lg-8">
 	                      <input type="text" class="form-control" id="spec" name="spec">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="size" class="col-lg-4 control-label">Size </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="size" name="size">
                       </div>
                     </div>
                     <div class="form-group">
@@ -80,15 +55,9 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="agreement" class="col-lg-4 control-label">Agreement </label>
+                      <label for="agreement" class="col-lg-4 control-label">Agreement <span class="require">*</span></label>
                       <div class="col-lg-8">
 	                      <input type="text" class="form-control" id="agreement" name="agreement">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="packaging" class="col-lg-4 control-label">Packaging </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="packaging" name="packaging">
                       </div>
                     </div>
                     </fieldset>

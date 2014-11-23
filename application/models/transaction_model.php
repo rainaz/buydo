@@ -1,33 +1,68 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Transaction_model extends CI_Model {
 
-	private $attributes = "transaction_id, buyer_id, seller_id, item_id, placement_date, quantity, transaction_status";
+	private $table_name;
+	private $attributes = "buyer_id, seller_id, item_id, placement_date, quantity, transaction_status";
 	
 	function __construct(){
 		parent::__construct();
+		$this->table_name = "transactions";
 	}
 
-	public function addTransaction($buyerid, $sellerid, $itemid, $placementdate, $quantity, $transactionstatus){
-		
-		$lastrow = $this->db->insert_id();
-		$insvalue = "('".$lastrow."', '".
+	public function addTransaction($transaction_id, $buyerid, $sellerid, $itemid, $placementdate, $quantity, $transactionstatus){
+		$transaction_id = $this->db->count_all($this->table_name) + 1;
+		//$lastrow = $this->db->insert_id();
+		$insvalue = "('".
+			$transaction_id."', '".
 			$buyerid."', '".
 			$sellerid."', '".
 			$itemid."', '".
-			$placementdate."', '".
+			date('Y-m-d')."', '".
 			$quantity."', '".
 			$transactionstatus."')";
 
-		$sql = "INSERT INTO transaction ($attributes) VALUES $insvalue";
+		$sql = "INSERT INTO transaction ($this->attributes) VALUES $insvalue";
 
 		$query = $this->db->query($sql);
 
-		if($query->num_rows() > 0){
-			return $query->row();
+		if($query > 0){
+			return true;
 		}
 		return false;
 
 	}
+
+	public function getTransactionByBuyerID($buyerid){
+		$query = $this->db->query("SELECT * FROM transactions WHERE buyer_id = "."'".$buyerid."'");
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		return false;
+	}
+
+	public function getTransactionBySellerID($sellerid){
+		$query = $this->db->query("SELECT * FROM transactions WHERE seller_id = "."'".$sellerid."'");
+		if($query->num_rows() > 0) {
+			return $query->result();
+		}
+		return false;
+	}	
+
+	public function getTransactionByBuyerIDAndStatus($buyerid, $status){
+		$query = $this->db->query("SELECT * FROM transactions WHERE buyer_id = "."'".$buyerid."' AND status = "."'".$status."'");
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		return false;
+	}
+
+	public function getTransactionBySellerIDAndStatus($sellerid, $status){
+		$query = $this->db->query("SELECT * FROM transactions WHERE seller_id = "."'".$sellerid."' AND status = "."'".$status."'");
+		if($query->num_rows() > 0) {
+			return $query->result();
+		}
+		return false;
+	}		
 
 	public function getBuyerIDFromTransactionID($transid){
 		$query = $this->db->query("SELECT buyer_id FROM transactions WHERE transaction_id = '".$transid."'");
@@ -76,7 +111,8 @@ class Transaction_model extends CI_Model {
 
 
 	public function setTransactionStatusFromTransactionID($transid, $nstatus){
-		$sql = "UPDATE transactions SET transaction_status = "."'".$nstatus."'"."WHERE transaction_id = "."'".$transid."'";
+		$sql = "UPDATE transactions SET transaction_status = "."'".$nstatus."'"." WHERE transaction_id = "."'".$transid."'";
+		echo "$sql\n";
 		$query = $this->db->query($sql);	
 	}
 

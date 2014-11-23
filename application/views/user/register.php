@@ -12,7 +12,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form" id="resgistration">
+                  <form class="form-horizontal" role="form" id="resgistration" method="post">
                     <fieldset>
                       <legend>Account details</legend>
                       <div class="form-group">
@@ -43,7 +43,7 @@
                       <label for="user_type" class="col-lg-4 control-label">User type <span class="require">*</span></label>
                       <div class="col-lg-8">
 	                      <select class="form-control input-sm" id="user_type" name="user_type">
-	                        <option>Choose your user type</option>
+	                        <option value="">Choose your user type</option>
 	                        <option value="buyer">Buyer</option>
 	                        <option value="seller">Seller</option>
 	                      </select>
@@ -86,7 +86,7 @@
                         <label for="country" class="col-lg-4 control-label">Country <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <select class="form-control input-sm" id="country" name="country">
-                          		<option>Choose your country</option>
+                          		<option value="">Choose your country</option>
                           		<option value="THA">Thailand</option>
 								<option value="AFG">Afghanistan</option>
 								<option value="ALA">Åland Islands</option>

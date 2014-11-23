@@ -1,0 +1,20 @@
+<div id="content">
+<?php $this->load->helper('form'); ?>
+<?php echo form_open("home/insert_message"); ?>
+    <p>
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" value="" size="30" />
+    </p>
+    <p>
+        <label for="email">E-mail: </label>
+        <input type="text" name="email" id="email" value="" size="30" />
+    </p>
+    <p>
+        <label for="message">Message: </label>
+        <textarea name="message" id="message" value="" cols="50" rows="4"></textarea>
+    </p>
+    <p>
+    <input type="submit" value="Submit" />
+    </p>
+<?php echo form_close(); ?>
+</div><!--<div id="content">-->

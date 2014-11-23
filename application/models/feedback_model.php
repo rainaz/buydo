@@ -11,32 +11,35 @@ class Feedback_model extends CI_Model {
 	private $_detail;*/ 
 
 	private $table_name;
-	private $attributes = "user_id, accused, topic, category, detail";
+	private $attributes = "feedback_id, transaction_id, feedback_from, feedback_to, score, comment";
 
 	public function addFeedback($transactionID,$feedbackFrom, $feedbackTo, $score, $comment){
-		$lastrow = $this->db->insert_id();	
-
-		$insvalue = "('".$lastrow."', '".
+		$feedback_id = $this->db->count_all($this->table_name) + 1;
+		//echo "$feedback_id\n";
+		$insvalue = "('".
+			$feedback_id."', '".
 			$transactionID."', '".
 			$feedbackFrom."', '".
 			$feedbackTo."', '".
 			$score."', '".
 			$comment."')";
 
-		$sql = "INSERT INTO feedbacks ($attributes) VALUES ".$insvalue;
+		$sql = "INSERT INTO feedbacks ($this->attributes) VALUES ".$insvalue;
+		//echo "$sql\n";
 		$query = $this->db->query($sql);
-		if($query->num_rows() > 0){
-			return $query->row();
+		if($query > 0){
+			return true;
 		}
 		return false;
 	}
+
 	function __construct(){
 		parent::__construct();
-		$this->table_name = feedbacks;
+		$this->table_name = "feedbacks";
 	}
 
 	function test(){
-		return $this->-db->query("SELECT * FROM feedbacks");
+		return $this->db->query("SELECT * FROM feedbacks");
 	}
 	function getFeedbackByFeedbackID($id){
 		return $this->db->query("SELECT * FROM feedbacks WHERE feedback_id = ".$id);
