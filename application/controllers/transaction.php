@@ -51,20 +51,21 @@ class Transaction extends CI_Controller{
 		$query = $this->trans->getTransactionByBuyerIDAndStatus($buyerid, 'received');
 	}
 
-	public function notify_delivery($transid) {
+	public function notify_delivery() {
 		//go to change status in database		
 		//$transid = 111;
-
+		//echo "Pass method head\n";
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('transid', 'transid', 'trim|required|min_length[1]|xss_clean');
 		
-		if($this->form_validation->run()==FALSE){
+		if($this->form_validation->run()==TRUE){
 			$this->index();
 		}
 		else {
-			//$transid = $this->input->post('transid');
+			echo "Pass here\n";
+			$transid = $this->input->post('transid');
 			$transtatus = "received";
-			$this->trans->setTransactionStatusFromTransactionID($transid, $transtatus);		
+			$this->transaction->setTransactionStatusFromTransactionID($transid, $transtatus);		
 			$this->index();	
 		}
 
@@ -84,6 +85,7 @@ class Transaction extends CI_Controller{
 			$score = $this->input->post('score');
 			$comment = $this->input->post('comment');
 			$this->feedback->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
+			//echo "comment = $comment\n";
 			echo "Feedback received\n";
 			$this->index();
 		}
