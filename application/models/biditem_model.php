@@ -15,7 +15,7 @@ class BidItem_model extends CI_Model {
 
 	public function addBidItem($item_id, $initialPrice, $endDate){
 			$insvalue = "('".$item_id."', '".			
-			"1"."', '".		
+			""."', '".		
 			$initialPrice."', '".									
 			$initialPrice."', '".		
 			$initialPrice."', '".		

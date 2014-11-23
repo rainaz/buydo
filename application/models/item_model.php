@@ -7,14 +7,16 @@ class Item_model extends CI_Model {
 
 	function __construct(){
 		parent::__construct();
+		$this->table_name = "items";
 	}
 
-	public function addItemm($itemName,$postedDate,$agreement,$status,$spec,$ownerID,$picture){		
-		$lastrow = $this->db->insert_id();	
-
+	public function addItem_($itemName,$agreement,$status,$spec,$ownerID,$picture){		
+		$lastrow = $this->db->count_all($this->table_name) + 1;
+		if($ownerID==NULL) $ownerID = "1";
+		//$ownerID = "5";
 		$insvalue = "('".$lastrow."', '".
 			$itemName."', '".		
-			$postedDate."', '".		
+			date('Y-m-d')."', '".		
 			$agreement."', '".
 			$status."', '".
 			$spec."', '".
@@ -22,9 +24,10 @@ class Item_model extends CI_Model {
 			$picture."')";
 
 		$sql = "INSERT INTO items ($this->attributes) VALUES ".$insvalue;
-		echo "\n$sql";
+		//echo "\n$sql";
 		$query = $this->db->query($sql);
 		if($query>0) {
+			//echo $query;
 			return $lastrow;
 		}
 		return false;
@@ -48,9 +51,11 @@ public function addItem()
     'status' => "in_stock",
     'spec'=>$this->input->post('spec'),   
     'picture'=>$this->input->post('picture'), 
-     'owner_id'=>$this->input->post('owner_id')
+    'owner_id'=>$this->input->post('owner_id')
   );
-  $this->db->insert('items',$data);
+  echo $data['item_name']." ".$data['picture']."\n";
+  $query = $this->db->insert('items', $data);
+  echo "query = $query\n";
   $insertid = $this->db->insert_id();
   return $insertid;
  }
@@ -83,12 +88,14 @@ public function editItem()
 			return false;
 		return $query;
 	}
+
 	public function searchSaleItem($search){
 		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`quantity_in_stock` > 0;");
 		if($query->num_rows() <= 0)
 			return false;
 		return $query;
 	}
+
 
 	public function getItemInfo($id){
 		$isBid = $this->db->query("SELECT * FROM `bid_items` WHERE `bid_items`.`item_id`=".$id.";")->num_rows();

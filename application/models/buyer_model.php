@@ -13,24 +13,24 @@ class Buyer_model extends CI_Model {
 	private $table_name;
 	private $attributes = "user_id";
 
-	public function addBuyer($userID){
+	// public function addBuyer($userID){
 
-		$insvalue = "('".$userID."', '"."')";
+	// 	$insvalue = "('".$userID."', '"."')";
 
-		$sql = "INSERT INTO buyers ($this->attributes) VALUES ".$insvalue;
-		$query = $this->db->query($sql);
-		if($query->num_rows() > 0){
-			return $query->row();
-		}
-		return false;
-	}
+	// 	$sql = "INSERT INTO buyers ($this->attributes) VALUES ".$insvalue;
+	// 	$query = $this->db->query($sql);
+	// 	if($query->num_rows() > 0){
+	// 		return $query->row();
+	// 	}
+	// 	return false;
+	// }
 	function __construct(){
 		parent::__construct();
 		$this->table_name = "buyers";
 	}
 
 	function test(){
-		return $this->-db->query("SELECT * FROM buyers");
+		return $this->db->query("SELECT * FROM buyers");
 	}
 	function getBuyerByUserID($id){
 		return $this->db->query("SELECT * FROM buyers WHERE buyer_id = ".$id);
@@ -41,6 +41,17 @@ class Buyer_model extends CI_Model {
 		if($query->num_rows() > 0) return true;
 		else return false;
 	}
+ 
+	public function addBuyer($userid){		
 
+		$insvalue = "('".$userid."')";
+
+		$sql = "INSERT INTO buyers ($this->attributes) VALUES ".$insvalue;
+		$query = $this->db->query($sql);
+		if($query > 0){
+			return true;
+		}
+		return false;
+	}
 }
 ?>

@@ -9,8 +9,12 @@ class User_model extends CI_Model {
  public function __construct()
  {
   parent::__construct();
+      $this->load->model('buyer_model');
+    $this->load->model('seller_model');
+
  }
   public function test(){
+
     $query = $this->db->query("SELECT * FROM users");
     return $query->result();
   }
@@ -166,24 +170,34 @@ class User_model extends CI_Model {
 
  public function add_user()
  {
+  $user_type = $this->input->post('user_type');
   $data=array(
-    'name'=>$this->input->post('name'),   
-    'surname'=>$this->input->post('surname'),   
-    'email'=>$this->input->post('email'),   
-    'creditcard'=>$this->input->post('creditcard'),   
-    'birthday'=>$this->input->post('birthday'),
-    'country'=>$this->input->post('country'),
-    'sent_address'=>$this->input->post('sent_address'),
+    'name'=>$this->input->post('name'),   //
+    'surname'=>$this->input->post('surname'),   //
+    'email'=>$this->input->post('email'),   //
+    'creditcard'=>$this->input->post('creditcard'),  // 
+    'birthday'=>$this->input->post('birthday'),//
+    'country'=>$this->input->post('country'),//
+    'sent_address'=>$this->input->post('sent_address'),//
     'address'=>$this->input->post('address'),
-    'username'=>$this->input->post('username'),
-    'password'=>sha1($this->input->post('password')),
-     'phone_no'=>$this->input->post('phone_no'),
-     'start_banned'=>$this->input->post('start_banned'),
-     'banned_duration'=>$this->input->post('banned_duration'),
-     'banned_reason'=>$this->input->post('banned_reason'),
-     'penalty_count'=>$this->input->post('penalty_count'),
+    'username'=>$this->input->post('username'),//
+    'password'=>sha1($this->input->post('password')),//
+     'phone_no'=>$this->input->post('phone_no'),//
+     'start_banned'=>"1993-04-12",
+     'banned_duration'=>-1,
+     'banned_reason'=>"none",
+     'penalty_count'=>0,
   );
+  
   $this->db->insert('users',$data);
+  $insertid = $this->db->insert_id();
+  if($user_type=='buyer'){
+      $this->buyer_model->addBuyer( $insertid);
+  }
+  else if($user_type=='seller'){
+      $this->seller_model->addSeller( $insertid);
+  }
+
  }
 }
 ?>
