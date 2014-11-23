@@ -12,7 +12,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form" id="resgistration" method="post">
+                  <form class="form-horizontal" role="form" id="resgistration" method="post" action="<?php echo site_url('user/submit_register'); ?>"> 
                     <fieldset>
                       <legend>Account details</legend>
                       <div class="form-group">
@@ -77,7 +77,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="sent_address" class="col-lg-4 control-label">Billing address </label>
+                        <label for="sent_address" class="col-lg-4 control-label">Shipping address </label>
                         <div class="col-lg-8">
                           <input type="text" class="form-control" id="sent_address" = name="sent_address">
                         </div>
@@ -366,7 +366,7 @@
                     <h2> <strong> Already have an account? </strong></h2>
                     <br>
 
-                    <a href="login.php"><button type="button" class="btn btn-primary">Login</button></a>
+                    <a href="<?php echo site_url('user/login'); ?>"><button type="button" class="btn btn-primary">Login</button></a>
                   </div>
                 </div>
               </div>

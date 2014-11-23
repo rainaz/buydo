@@ -7,14 +7,15 @@ class Item_model extends CI_Model {
 
 	function __construct(){
 		parent::__construct();
+		$this->table_name = "items";
 	}
 
-	public function addItemm($itemName,$postedDate,$agreement,$status,$spec,$ownerID,$picture){		
-		$lastrow = $this->db->insert_id();	
-
+	public function addItem_($itemName,$agreement,$status,$spec,$ownerID,$picture){		
+		$lastrow = $this->db->count_all($this->table_name) + 1;
+		$ownerID = "5";
 		$insvalue = "('".$lastrow."', '".
 			$itemName."', '".		
-			$postedDate."', '".		
+			date('Y-m-d')."', '".		
 			$agreement."', '".
 			$status."', '".
 			$spec."', '".
@@ -25,6 +26,7 @@ class Item_model extends CI_Model {
 		echo "\n$sql";
 		$query = $this->db->query($sql);
 		if($query>0) {
+			echo $query;
 			return $lastrow;
 		}
 		return false;
@@ -33,7 +35,7 @@ class Item_model extends CI_Model {
 	public function getItemByID($id){
 		$query = $this->db->query("SELECT * FROM items WHERE item_id = '".$id."'");
 		if($query->num_rows() > 0){
-			return $query->row_array();
+			return $query->row();
 		}
 		return false;
 	}
@@ -48,9 +50,11 @@ public function addItem()
     'status' => "in_stock",
     'spec'=>$this->input->post('spec'),   
     'picture'=>$this->input->post('picture'), 
-     'owner_id'=>$this->input->post('owner_id')
+    'owner_id'=>$this->input->post('owner_id')
   );
-  $this->db->insert('items',$data);
+  echo $data['item_name']." ".$data['picture']."\n";
+  $query = $this->db->insert('items', $data);
+  echo "query = $query\n";
   $insertid = $this->db->insert_id();
   return $insertid;
  }
@@ -69,23 +73,25 @@ public function editItem()
       return $this->db->update('items', $data);
   }
 
-	public function searchItem($search){
-		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`end_date` > DATE '".((new DateTime())->format("Y-m-d H:i:s"))."' UNION SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`quantity_in_stock` > 0;");
+	public function searchItem($search, $page){
+		
+		$totalRow = $this->db->query("SELECT count(*) AS count FROM (SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`end_date` > DATE '".((new DateTime())->format("Y-m-d H:i:s"))."' UNION SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`quantity_in_stock` > 0 ) AS `r`;")->first_row()->count;
+		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`end_date` > DATE '".((new DateTime())->format("Y-m-d H:i:s"))."' UNION SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`quantity_in_stock` > 0 LIMIT ".(($page - 1) * 12).",".($page * 12).";");
 		if($query->num_rows() <= 0)
 			return false;
-		return $query->num_rows();
+		return array("total" => $totalRow, "data" => $query);
 	}
 	public function searchBidItem($search){
 		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`end_date` > DATE '".((new DateTime())->format("Y-m-d H:i:s"))."';");
 		if($query->num_rows() <= 0)
 			return false;
-		return $query->num_rows();
+		return $query;
 	}
 	public function searchSaleItem($search){
 		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`quantity_in_stock` > 0;");
 		if($query->num_rows() <= 0)
 			return false;
-		return $query->num_rows();
+		return $query;
 	}
 
 	public function getItemInfo($id){
