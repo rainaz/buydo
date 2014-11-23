@@ -69,6 +69,21 @@ class User extends CI_Controller{
 			$this->thank();
 		}
 	}
+		public function addComplainUser(){
+		$this->load->library('form_validation');
+		// field name, error message, validation rules
+		$this->form_validation->set_rules('detail', 'Detail', 'required');
+		//  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
+		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
+		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
+		if($this->form_validation->run() == FALSE){
+			$this->index();
+		}
+		else{
+			$this->complain_model->add_complain_user();
+			$this->thank();
+		}
+	}
 	public function manageprofile(){
 		$this->load->library('form_validation');
 		// field name, error message, validation rules

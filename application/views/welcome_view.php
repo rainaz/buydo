@@ -92,3 +92,38 @@
  <?php echo form_close(); ?>
 </div><!--<div class="reg_form">-->
 </div><!--<div id="content">-->
+
+<div class="reg_form">
+<div class="form_title">Complain to the User</div>
+<div class="form_sub_title">HUEHUEHUEHUEHUE</div>
+ <?php echo validation_errors('<p class="error">'); ?>
+ <?php echo form_open("user/addComplainUser"); ?>
+
+<p>
+<label for=date>accused</label>
+  <input type="text" id="accused" name="accused" value="<?php echo set_value('accused'); ?>" />
+</p>
+
+<p>
+<label for=date>date</label>
+  <input type="text" id="date" name="date" value="<?php echo set_value('date'); ?>" />
+</p>
+<p>
+<label for=topic>topic</label>
+  <input type="text" id="topic" name="topic" value="<?php echo set_value('topic'); ?>" />
+</p>
+<p>
+<label for=category>category</label>
+  <input type="text" id="category" name="category" value="<?php echo set_value('category'); ?>" />
+</p>
+<p>
+<label for=detail>detail</label>
+  <input type="text" id="detail" name="detail" value="<?php echo set_value('detail'); ?>" />
+</p>
+
+  <p>
+  <input type="submit" class="greenButton" value="Submit" />
+  </p>
+ <?php echo form_close(); ?>
+</div><!--<div class="reg_form">-->
+</div><!--<div id="content">-->
