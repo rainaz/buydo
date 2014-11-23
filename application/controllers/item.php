@@ -142,5 +142,18 @@ class Item extends CI_Controller{
 		}
 
 	}
+	public function searchItem($search){
+		$this->load->model("item_model");
+		$list = $this->item_model->searchItem($search);
+		if(!$list)
+			$data['isFound'] = FALSE;
+		else 
+			$data['isFound'] = TRUE;
+		$data['data'] = $list;
+		$data['template_type'] = "ecommerce";
+		$this->load->view('header/header',$data);
+		$this->load->view('item/search_result', $data);
+		$this->load->view('footer/footer',$data);
+	}
 
 } ?>
