@@ -1,66 +1,64 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Item extends CI_Controller{
-	public function __construct(){
+<?php if (!defined('BASEPATH')) {
+	exit('No direct script access allowed');
+}
+
+class Item extends CI_Controller {
+	public function __construct() {
 		parent::__construct();
 		$this->load->model('item_model');
 		$this->load->model('saleitem_model');
 		$this->load->model('biditem_model');
 	}
-	public function index(){
-		$data['title']= 'Home';
-		$this->load->view('header_view',$data);
-	$this->load->view("saleitem_add_view.php", $data);
-	//	$this->load->view("biditem_add_view.php", $data);
-		$this->load->view('footer_view',$data);
+	public function index() {
+		$data['title'] = 'Home';
+		$this->load->view('header_view', $data);
+		$this->load->view("saleitem_add_view.php", $data);
+		//	$this->load->view("biditem_add_view.php", $data);
+		$this->load->view('footer_view', $data);
 	}
 
-
-	public function verifyIsLoggedIn(){
-		if($this->session->userdata('logged_in')==FALSE){
+	public function verifyIsLoggedIn() {
+		if ($this->session->userdata('logged_in') == FALSE) {
 			$this->index();
 		}
 	}
 
 	public function loadAddSaleItemView() {
-		$data['title']= 'Add SaleItem';
+		$data['title'] = 'Add SaleItem';
 		$this->load->view('header_view');
 		$this->load->view('seller/add_saleitem');
-		$this->load->view('footer_view');	
+		$this->load->view('footer_view');
+
 	}
 
 	public function loadAddBidItemView() {
-		$data['title']= 'Add BidItem';
+		$data['title'] = 'Add BidItem';
 		$this->load->view('header/header');
 		$this->load->view('seller/add_biditem');
 		$this->load->view('footer/footer');
 	}
 
-	
-
-
-	public function thank(){
-		$data['title']= 'Thank';
-		$this->load->view('header_view',$data);
+	public function thank() {
+		$data['title'] = 'Thank';
+		$this->load->view('header_view', $data);
 		$this->load->view('thank_view.php', $data);
-		$this->load->view('footer_view',$data);
+		$this->load->view('footer_view', $data);
 	}
-  
-	public function showItem($id){
+
+	public function showItem($id) {
 		$this->load->model('item_model');
 		$data = $this->item_model->getItemInfo($id);
 		$data['template_type'] = "ecommerce";
-		$this->load->view('header/header',$data);
-		if($data['type'] == "Sales")
+		$this->load->view('header/header', $data);
+		if ($data['type'] == "Sales") {
 			$this->load->view('item/buy_item_info', $data);
-		else
+		} else {
 			$this->load->view('item/bid_item_info', $data);
-		$this->load->view('footer/footer',$data);
+		}
 
+		$this->load->view('footer/footer', $data);
 
-		
 	}
-
-
 
 	// public function submitSaleItem() {
 	// 	$this->load->library('form_validation');
@@ -82,7 +80,7 @@ class Item extends CI_Controller{
 	// 		//find itemID
 	// 		//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
 
-	// 		$this->thank();  
+	// 		$this->thank();
 	// 	}
 
 	// }
@@ -100,11 +98,11 @@ class Item extends CI_Controller{
 		$data['status'] = "in_stock";
 		$data['owner_id'] = $this->session->userdata('user_id');
 
-		$row = $this->item_model->addItem_($data['item_name'],$data['agreement'],
-				$data['status'],$data['spec'], $data['owner_id'],$data['picture']);
+		$row = $this->item_model->addItem_($data['item_name'], $data['agreement'],
+			$data['status'], $data['spec'], $data['owner_id'], $data['picture']);
 		$success = $this->saleitem_model->addSaleItemm($row, $this->input->post('price'), $this->input->post('quantity'));
 
-		if ( $success ) {
+		if ($success) {
 			$this->load->view('header_view', $data);
 			// TODO: replace this echo with the page
 			echo "Success!";
@@ -117,7 +115,7 @@ class Item extends CI_Controller{
 		}
 	}
 
-		public function editSaleItem() {
+	public function editSaleItem() {
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
 		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
@@ -125,10 +123,9 @@ class Item extends CI_Controller{
 		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
 		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
 
-		if($this->form_validation->run() == FALSE) {
+		if ($this->form_validation->run() == FALSE) {
 			$this->index();
-		}
-		else {
+		} else {
 			$row = $this->item_model->editItem();
 			$item_id = $this->input->post('item_id');
 			$price = $this->input->post('price');
@@ -138,12 +135,11 @@ class Item extends CI_Controller{
 			//find itemID
 			//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
 
-			$this->thank();  
+			$this->thank();
+
 		}
 
 	}
-
-
 
 	public function submitBidItem() {
 		$this->verifyIsLoggedIn();
@@ -154,21 +150,24 @@ class Item extends CI_Controller{
 		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
 		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
 
-		if($this->form_validation->run() == FALSE) {
+		if ($this->form_validation->run() == FALSE) {
 			$this->index();
-		}
-		else {
- 			$data=array(
-    		'item_name'=>$this->input->post('item_name'),   
-    		'agreement'=>$this->input->post('agreement'),  
-    		'status' => "in_stock",
-    		'spec'=>$this->input->post('spec'),   
-    		'picture'=>$this->input->post('picture'), 
-   		 	'owner_id'=>$this->session->userdata('user_id')
-  			);
+		} else {
+			$data = array(
+				'item_name' => $this->input->post('item_name'),
 
-			$row = $this->item_model->addItem_($data['item_name'],$data['agreement'],
-				$data['status'],$data['spec'], $data['owner_id'],$data['picture']);
+				'agreement' => $this->input->post('agreement'),
+
+				'status' => "in_stock",
+				'spec' => $this->input->post('spec'),
+
+				'picture' => $this->input->post('picture'),
+
+				'owner_id' => $this->session->userdata('user_id'),
+			);
+
+			$row = $this->item_model->addItem_($data['item_name'], $data['agreement'],
+				$data['status'], $data['spec'], $data['owner_id'], $data['picture']);
 			echo "$row\n";
 			$initial_price = $this->input->post('initial_price');
 			$current_price = $this->input->post('initial_price');
@@ -179,12 +178,13 @@ class Item extends CI_Controller{
 			//find itemID
 			//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
 
-			//$this->thank();  
-			if($query > 0 ){
+			//$this->thank();
+			if ($query > 0) {
 				//echo "completed\n";
-				$this->index();	
+				$this->index();
+
 			}
-			
+
 			//$this->loadAddBidItemView();
 		}
 
@@ -198,40 +198,55 @@ class Item extends CI_Controller{
 		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
 		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
 
-		if($this->form_validation->run() == FALSE) {
+		if ($this->form_validation->run() == FALSE) {
 			$this->index();
-		}
-		else {
+		} else {
 			$row = $this->item_model->editItem();
 			$item_id = $this->input->post('item_id');
 			$initial_price = $this->input->post('initprice');
 			$end_date = $this->input->post('end_date');
-			$this->biditem_model->editBidItem($item_id,$initial_price, $end_date);
+			$this->biditem_model->editBidItem($item_id, $initial_price, $end_date);
 
 			//find itemID
 			//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
 
-			$this->thank();  
+			$this->thank();
+
 		}
 
 	}
-	public function searchItem($search, $page){
-		$this->load->model("item_model");
+	public function searchItem() {
+		$search = "";
+		$page = 1;
+		if ($this->input->get('search_string')) {
+
+			$search = $this->input->get('search_string');
+		}
+
+		if ($this->input->get('page')) {
+
+			$search = $this->input->get('page');
+		}
+
+		
 		$list = $this->item_model->searchItem($search, $page);
-		if(!$list)
+		if (!$list) {
 			$data['isFound'] = FALSE;
-		else 
+		} else {
+
 			$data['isFound'] = TRUE;
-		/*
-		 *In $list there are two value total and data where total contain num of all search item and data contain all item in page
-		 *
-		 */
+		}
+
+		//
+		//In $list there are two value total and data where total contain num of all search item and data contain all item in page
+		//
+		//
 		$data['data'] = $list['data'];
 		$data['search'] = $search;
 		$data['template_type'] = "ecommerce";
-		$this->load->view('header/header',$data);
+		$this->load->view('header/header', $data);
 		$this->load->view('item/search_result', $data);
-		$this->load->view('footer/footer',$data);
+		$this->load->view('footer/footer', $data);
 	}
 
-} ?>
+}?>
