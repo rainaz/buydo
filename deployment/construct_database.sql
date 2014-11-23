@@ -200,7 +200,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(41) NOT NULL,
   `phone_no` varchar(11) NOT NULL,
   `start_banned` date NOT NULL,
-  `banned_since` date NOT NULL,
   `banned_duration` int(11) NOT NULL,
   `banned_reason` varchar(50) NOT NULL,
   `penalty_count` int(11) NOT NULL,
