@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Transaction_model extends CI_Model {
 
-	private $attributes = "transaction_id, buyer_id, seller_id, item_id, placement_date, quantity, transaction_status";
+	private $attributes = "buyer_id, seller_id, item_id, placement_date, quantity, transaction_status";
 	
 	function __construct(){
 		parent::__construct();
@@ -9,8 +9,8 @@ class Transaction_model extends CI_Model {
 
 	public function addTransaction($buyerid, $sellerid, $itemid, $placementdate, $quantity, $transactionstatus){
 		
-		$lastrow = $this->db->insert_id();
-		$insvalue = "('".$lastrow."', '".
+		//$lastrow = $this->db->insert_id();
+		$insvalue = "('".
 			$buyerid."', '".
 			$sellerid."', '".
 			$itemid."', '".
@@ -22,12 +22,44 @@ class Transaction_model extends CI_Model {
 
 		$query = $this->db->query($sql);
 
-		if($query->num_rows() > 0){
-			return $query->row();
+		if($query > 0){
+			return true;
 		}
 		return false;
 
 	}
+
+	public function getTransactionByBuyerID($buyerid){
+		$query = $this->db->query("SELECT * FROM transactions WHERE buyer_id = "."'".$buyerid."'");
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		return false;
+	}
+
+	public function getTransactionBySellerID($sellerid){
+		$query = $this->db->query("SELECT * FROM transactions WHERE seller_id = "."'".$sellerid."'");
+		if($query->num_rows() > 0) {
+			return $query->result();
+		}
+		return false;
+	}	
+
+	public function getTransactionByBuyerIDAndStatus($buyerid, $status){
+		$query = $this->db->query("SELECT * FROM transactions WHERE buyer_id = "."'".$buyerid."' AND status = "."'".$status."'");
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		return false;
+	}
+
+	public function getTransactionBySellerIDAndStatus($sellerid, $status){
+		$query = $this->db->query("SELECT * FROM transactions WHERE seller_id = "."'".$sellerid."' AND status = "."'".$status."'");
+		if($query->num_rows() > 0) {
+			return $query->result();
+		}
+		return false;
+	}		
 
 	public function getBuyerIDFromTransactionID($transid){
 		$query = $this->db->query("SELECT buyer_id FROM transactions WHERE transaction_id = '".$transid."'");
