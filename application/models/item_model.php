@@ -82,6 +82,14 @@ public function editItem()
 		return $query->num_rows();
 	}
 
+	public function searchSaleItem($search){
+		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`quantity_in_stock` > 0;");
+		if($query->num_rows() <= 0)
+			return false;
+		return $query->num_rows();
+	}
+
+
 	public function getItemInfo($id){
 		$isBid = $this->db->query("SELECT * FROM `bid_items` WHERE `bid_items`.`item_id`=".$id.";")->num_rows();
 		if($isBid > 0){

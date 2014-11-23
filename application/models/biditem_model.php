@@ -46,21 +46,67 @@ class BidItem_model extends CI_Model {
 		$this->table_name = "bid_items";
 	}
 
+
+	function setCurrentMaxBid($item_id, $ncmb){
+		$sql = "UPDATE bid_items SET current_max_bid = $ncmb WHERE item_id = $item_id";
+		$this->db->query($sql);
+	}
+
+	function setCurrentWinnerID($item_id, $user_id){
+		$sql = "UPDATE bid_items SET current_winner_id = $user_id WHERE item_id = $item_id";
+		$this->db->query($sql);
+	}
+
+	function setCurrentPrice($item_id, $nprice){
+		$sql = "UPDATE bid_items SET current_price = $nprice WHERE item_id = $item_id";
+		$this->db->query($sql);
+	}
+
+	function getCurrentMaxBid($item_id){
+		$sql = "SELECT current_max_bid FROM bid_items WHERE item_id = '$item_id'";
+		$query = $this->db->query($sql);
+		return $query->first_row()->current_max_bid;
+	}
+
+	function getCurrentWinnerID($item_id){
+		$sql = "SELECT current_winner_id FROM bid_items WHERE item_id = '$item_id'";
+		$query = $this->db->query($sql);	
+		return $query->first_row()->current_winner_id;
+	}
+
+	function getCurrentPrice($item_id){
+		$sql = "SELECT current_price FROM bid_items WHERE item_id = '$item_id'";
+		$query = $this->db->query($sql);	
+		return $query->first_row()->current_price;
+	}
+
+	function getInitialPrice($item_id){
+		$sql = "SELECT initial_price FROM bid_items WHERE item_id = '$item_id'";
+		$query = $this->db->query($sql);	
+		return $query->first_row()->initial_price;
+	}	
+
 	function test(){
 		return $this->db->query("SELECT * FROM bid_items");
 	}
 	function getBidItemByItemID($id){
-		return $this->db->query("SELECT * FROM bid_items WHERE item_id = "."'".$id."'");
+		$query = $this->db->query("SELECT * FROM bid_items WHERE item_id = "."'".$id."'");
+		return $query->row();
 	}
+
+
 	function getBidItemBySellerID($id){
-		return $this->db->query("SELECT * FROM bid_items WHERE seller_id = '".$id."'");
-	}
+		$query = $this->db->query("SELECT * FROM bid_items WHERE seller_id = '".$id."'");
+		return $query->row();
+	}	
+
 
 	function verifyBidItemByID($id){
 		$query = $this->db->query("SELECT * FROM bid_items WHERE item_id = '$id'");
 		if($query->num_rows() > 0) return true;
 		return false;
 	}
+
 
 //	public function manageBidItemByItemID($itemid,$current_winner_id,&initial_price,$current_price,$current_max_bid,$end_date,$seller_id){
 

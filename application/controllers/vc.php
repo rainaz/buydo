@@ -11,7 +11,7 @@ class VC extends CI_Controller {
 	
 
 	public function show($folder, $page){
-		if($folder=='user'||$folder=='seller') $data['template_type'] = "corperate";
+		if($folder=='user'||$folder=='seller'||$folder=='checkout') $data['template_type'] = "corperate";
 		else $data['template_type'] = "ecommerce";
 		$this->load->view('header/header', $data);
 		$this->load->view($folder.'/'.$page);
