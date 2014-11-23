@@ -33,5 +33,5 @@
   </p>
  <?php echo form_close(); ?>
  
-</div><!--<div class="saleitem_form">-->
+</div><!--<div class="feedback_form">-->
 </div><!--<div id="content">-->

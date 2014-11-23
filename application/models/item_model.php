@@ -54,8 +54,60 @@ public function addItem()
   $insertid = $this->db->insert_id();
   return $insertid;
  }
+public function editItem()
+  {
+    $this->load->helper('url');
+    
+ $data=array(
+ 	 'item_id'=>$this->input->post('item_id'),  
+   'item_name'=>$this->input->post('item_name'),   
+    'agreement'=>$this->input->post('agreement'),  
+    'status' => "in_stock",
+    'spec'=>$this->input->post('spec'),   
+    'picture'=>$this->input->post('picture'), 
+  );
+      $this->db->where('item_id', $this->input->post('item_id'));
+      return $this->db->update('items', $data);
+  }
 
-	
+	function getItemInfo($id){
+		$isBid = $this->db->query("SELECT * FROM `bid_items` WHERE `bid_items`.`item_id`=".$id.";")->num_rows();
+		if($isBid > 0){
+			$query = $this->db->query("SELECT `a`.`item_name`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=".$id.";" )->first_row();
+			$timeLeft = (new DateTime($query->end_date))->diff(new DateTime());
+			$data = array(
+				"type" => "Auction",
+				"itemName" => $query->item_name,
+				"initialPrice" => $query->initial_price,
+				"currentPrice" => $query->current_price,
+				"timeLeft" => $timeLeft->format("%Y-%m-%d %H:%i:%s"),
+				"isClose" => $timeLeft->format("%R") == "+",
+				"status" => $query->status,
+				"spec" => $query->spec,
+				"agreement" => $query->agreement,
+				"nextBid" => $query->current_price + $query->initial_price*0.05,
+				"picURL" => $query->picture
+			);
+			return $data;
+		}
+		else{
+
+			$query = $this->db->query("SELECT `a`.`item_name`, `a`.`agreement`, `a`.`status`,`a`.`spec`, `b`.`price`, `b`.`quantity_in_stock`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id` WHERE `a`.`item_id`=".$id.";");
+			if($query->num_rows() != 1) return false;
+			$query = $query->first_row();
+			$data = array(
+				"type" => "Sales",
+				"itemName" => $query->item_name,
+				"price" => $query->price,
+				"quantity" => $query->quantity_in_stock ,
+				"status" => $query->status,
+				"spec" => $query->spec,
+				"agreement" => $query->agreement,
+				"picURL" => $query->picture
+			);
+			return $data;
+		}
+	}	
 
 }
 ?>

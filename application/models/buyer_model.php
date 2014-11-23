@@ -26,7 +26,7 @@ class Buyer_model extends CI_Model {
 	}
 	function __construct(){
 		parent::__construct();
-		$this->table_name = buyers;
+		$this->table_name = "buyers";
 	}
 
 	function test(){
@@ -34,6 +34,12 @@ class Buyer_model extends CI_Model {
 	}
 	function getBuyerByUserID($id){
 		return $this->db->query("SELECT * FROM buyers WHERE buyer_id = ".$id);
+	}
+
+	function verifyBuyerByUserID($id){
+		$query = getBuyerByUserID($id);
+		if($query->num_rows() > 0) return true;
+		else return false;
 	}
 
 }
