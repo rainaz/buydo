@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `surname` varchar(20) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL UNIQUE,
   `creditcard` varchar(20) NULL,
   `birthday` date NOT NULL,
   `country` varchar(50) NOT NULL,
