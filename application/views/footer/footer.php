@@ -63,10 +63,15 @@
 
     <!-- Register Validator (will need to move this thing later) -->
     <script src="/buydo/assets/buydo/js/register_validator.js" type="text/javascript"></script>
-    
+
     <!-- Login Validator (will need to move this thing later) -->
     <script src="/buydo/assets/buydo/js/login_validator.js" type="text/javascript"></script>
 
+    <!-- Add Saleitem Validator (will need to move this thing later) --> 
+    <script src="/buydo/assets/buydo/js/add_saleitem_validator.js" type="text/javascript"></script>
+
+    <!-- Edit Saleitem Validator (will need to move this thing later) --> 
+    <script src="/buydo/assets/buydo/js/edit_saleitem_validator.js" type="text/javascript"></script>
 
 </body>
 <!-- END BODY -->
