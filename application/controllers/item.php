@@ -23,7 +23,7 @@ class Item extends CI_Controller{
 	}
   
 	public function showItem($id){
-		$this->load->model('bid_model');
+		$this->load->model('item_model');
 		$data = $this->item_model->getItemInfo($id);
 		$data['template_type'] = "ecommerce";
 		$this->load->view('header/header',$data);
