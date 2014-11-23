@@ -1,5 +1,6 @@
- <?php echo validation_errors('<p class="error">'); ?>
+ <!-- <?php echo validation_errors('<p class="error">'); ?>
  <?php echo form_open("item/submitSaleItem"); ?>
+-->
 
     <div class="main">
       <div class="container">
@@ -13,7 +14,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form" id="add_saleitem_form">
+                  <form class="form-horizontal" role="form" id="add_saleitem_form" action="item/submitSaleItem" method="post">
                     <fieldset>
                       <div class="form-group">
                         <label for="item_name" class="col-lg-4 control-label">Item name <span class="require">*</span></label>
@@ -77,4 +78,4 @@
         <!-- END SIDEBAR & CONTENT -->
       </div>
     </div>
-     <?php echo form_close(); ?>
+<!--     <?php echo form_close(); ?>  -->
