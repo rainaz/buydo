@@ -38,10 +38,16 @@ class BidItem_model extends CI_Model {
 		return $this->db->query("SELECT * FROM bid_items");
 	}
 	function getBidItemByItemID($id){
-		return $this->db->query("SELECT * FROM bid_items WHERE item_id = ".$id);
+		return $this->db->query("SELECT * FROM bid_items WHERE item_id = "."'".$id."'");
 	}
 	function getBidItemBySellerID($id){
-		return $this->db->query("SELECT * FROM bid_items WHERE seller_id = ".$id);
+		return $this->db->query("SELECT * FROM bid_items WHERE seller_id = '".$id."'");
+	}
+
+	function verifyBidItemByID($id){
+		$query = $this->db->query("SELECT * FROM bid_items WHERE item_id = '$id'");
+		if($query->num_rows() > 0) return true;
+		return false;
 	}
 
 //	public function manageBidItemByItemID($itemid,$current_winner_id,&initial_price,$current_price,$current_max_bid,$end_date,$seller_id){

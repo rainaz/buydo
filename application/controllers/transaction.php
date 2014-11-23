@@ -17,6 +17,24 @@ class Transaction extends CI_Controller{
    		$this->load->view('footer_view',$data);
 	}	
 
+	public function createTransaction(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('itemid', 'transid', 'trim|required|min_length[1]|xss_clean');
+
+		if($this->form_validation->run()==FALSE){
+			$this->index();
+		}
+		else {
+			$buyerid  = $this->input->post('buyer_id');
+			$sellerid = $this->input->post('seller_id');
+			$itemid = $this->input->post('item_id');
+			$quantity = $this->input->post('quantity');
+			$transactionstatus = "wait";
+			$this->feedback->addFeedback($buyerid, $sellerid, $itemid, $quantity, $transactionstatus);
+			//echo "Pass here\n";
+		}
+	}
+
 	public function listAllTransaction($buyerid){
 		$this->trans->getTransactionByBuyerID($buyerid);
 

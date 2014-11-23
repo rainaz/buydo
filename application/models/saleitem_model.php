@@ -36,6 +36,12 @@ class SaleItem_model extends CI_Model {
 		return $this->db->query("SELECT * FROM sale_items WHERE seller_id = ".$id);
 	}
 
+	function verifySaleItemByID($id){
+		$query = $this->db->query("SELECT * FROM sale_items WHERE item_id = '$id'");
+		if($query->num_rows() > 0) return true;
+		return false;
+	}
+
  public function addSaleItem()
  {
   $data=array(
