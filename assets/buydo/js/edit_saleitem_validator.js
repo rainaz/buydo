@@ -5,7 +5,7 @@
     });
 
     $(document).ready(function () {
-    $('##edit_saleitem_form').validate({ // initialize the plugin
+    $('#edit_saleitem_form').validate({ // initialize the plugin
         
         rules: {
             item_name: {
