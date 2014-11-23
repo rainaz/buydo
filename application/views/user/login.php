@@ -1,5 +1,5 @@
-<?php echo validation_errors('<p class="error">'); ?>
- <?php echo form_open("user/login"); ?>
+<!--?php echo validation_errors('<p class="error">'); ?>
+ <?php echo form_open("user/login"); ?>-->
 
     <div class="main">
       <div class="container">
@@ -13,7 +13,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal form-without-legend" role="form" method="post" id="login_form">
+                  <form class="form-horizontal form-without-legend" role="form" method="post" id="login_form" action="<?php echo site_url('user/submit_login'); ?>">
                     <div class="form-group">
                       <label for="username" class="col-lg-4 control-label">Username <span class="require">*</span></label>
                       <div class="col-lg-8">
@@ -42,7 +42,6 @@
                       </div>
                     </div>
                   </form>
-                      <?php echo form_close(); ?>
                 </div>
                 <div class="col-md-4 col-sm-4 pull-right">
                   <div class="form-info">
@@ -50,7 +49,7 @@
                     <p>Register now to be the <strong>buydoers.</strong></p>
                     <br>
 
-                    <a href="register.php"><button type="button" class="btn btn-primary">Register</button></a>
+                    <a href="<?php echo site_url('user/register'); ?>"><button type="button" class="btn btn-primary">Register</button></a>
                   </div>
                 </div>
               </div>

@@ -13,24 +13,24 @@ class Seller_model extends CI_Model {
 	private $table_name;
 	private $attributes = "user_id";
 
-	public function addSeller($userID){
+	// public function addSeller($userID){
 
-		$insvalue = "('".$userID."')";
+	// 	$insvalue = "('".$userID."')";
 
-		$sql = "INSERT INTO sellers ($this->attributes) VALUES ".$insvalue;
-		$query = $this->db->query($sql);
-		if($query->num_rows() > 0){
-			return $query->row();
-		}
-		return false;
-	}
+	// 	$sql = "INSERT INTO sellers ($this->attributes) VALUES ".$insvalue;
+	// 	$query = $this->db->query($sql);
+	// 	if($query->num_rows() > 0){
+	// 		return $query->row();
+	// 	}
+	// 	return false;
+	// }
 	function __construct(){
 		parent::__construct();
 		$this->table_name = "sellers";
 	}
 
 	function test(){
-		return $this->-db->query("SELECT * FROM sellers");
+		return $this->db->query("SELECT * FROM sellers");
 	}
 	function getSellerByUserID($id){
 		return $this->db->query("SELECT * FROM sellers WHERE seller_id = ".$id);
@@ -41,7 +41,17 @@ class Seller_model extends CI_Model {
 		if($query->num_rows() > 0) return true;
 		else return false;
 	}
+	public function addSeller($userid){		
 
+		$insvalue = "('".$userid."')";
+
+		$sql = "INSERT INTO sellers ($this->attributes) VALUES ".$insvalue;
+		$query = $this->db->query($sql);
+		if($query > 0){
+			return true;
+		}
+		return false;
+	}
 
 }
 ?>

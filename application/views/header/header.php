@@ -57,6 +57,14 @@ License: You must have a valid license purchased only from themeforest (the abov
 
   </head>
   <!-- Head END -->
+
+  <?php 
+    $is_login = FALSE;
+    if($this->session->userdata('user_id')!=''){
+      $is_login = TRUE;
+    }
+  ?>
+
   <!-- Body BEGIN -->
   <body class="<?php echo $template_type; ?>">
 
@@ -67,17 +75,28 @@ License: You must have a valid license purchased only from themeforest (the abov
           <!-- BEGIN TOP BAR LEFT PART -->
           <div class="col-md-6 col-sm-6 additional-shop-info">
             <ul class="list-unstyled list-inline">
-              <li> Hi <?php echo $this->session->userdata('user_name'); ?>! Welcome to <strong>Buydo.com</strong> </li>
+              <li> 
+                <?php 
+                  if($is_login) echo "Hi ".$this->session->userdata('user_name')."! ";
+                ?>
+                Welcome to <strong>Buydo.com</strong> 
+              </li>
+              
               <!--                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
               <li><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></li>
-            -->                    </ul>
+            -->                    
+            </ul>
           </div>
           <!-- END TOP BAR LEFT PART -->
           <!-- BEGIN TOP BAR MENU -->
           <div class="col-md-6 col-sm-6 additional-nav">
             <ul class="list-unstyled list-inline pull-right">
-              <li><a href="page-login.html">Log In</a></li>
-              <li><a href="page-reg-page.html">Registration</a></li>
+              <?php if($is_login==FALSE){ ?>
+              <li><a href="<?php echo site_url('user/login'); ?>">Log In</a></li>
+              <li><a href="<?php echo site_url('user/register'); ?>">Registration</a></li>
+              <?php }else{ ?>
+              <li><a href="<?php echo site_url('user/logout'); ?>">Log Out</a></li>
+              <?php } ?>
             </ul>
           </div>
           <!-- END TOP BAR MENU -->
