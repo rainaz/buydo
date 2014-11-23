@@ -2,26 +2,25 @@
 class Transaction_model extends CI_Model {
 
 	private $table_name;
-	private $attributes = "buyer_id, seller_id, item_id, placement_date, quantity, transaction_status";
+	private $attributes = "transaction_id, buyer_id, item_id, placement_date, quantity, transaction_status";
 	
 	function __construct(){
 		parent::__construct();
 		$this->table_name = "transactions";
 	}
 
-	public function addTransaction($transaction_id, $buyerid, $sellerid, $itemid, $placementdate, $quantity, $transactionstatus){
+	public function addTransaction($buyerid, $itemid, $quantity, $transactionstatus){
 		$transaction_id = $this->db->count_all($this->table_name) + 1;
 		//$lastrow = $this->db->insert_id();
 		$insvalue = "('".
 			$transaction_id."', '".
-			$buyerid."', '".
-			$sellerid."', '".
+			$buyerid."', '".			
 			$itemid."', '".
 			date('Y-m-d')."', '".
 			$quantity."', '".
 			$transactionstatus."')";
 
-		$sql = "INSERT INTO transaction ($this->attributes) VALUES $insvalue";
+		$sql = "INSERT INTO transactions ($this->attributes) VALUES $insvalue";
 
 		$query = $this->db->query($sql);
 
@@ -46,7 +45,7 @@ class Transaction_model extends CI_Model {
 			return $query->result();
 		}
 		return false;
-	}	
+	}
 
 	public function getTransactionByBuyerIDAndStatus($buyerid, $status){
 		$query = $this->db->query("SELECT * FROM transactions WHERE buyer_id = "."'".$buyerid."' AND status = "."'".$status."'");

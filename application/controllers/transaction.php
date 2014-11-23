@@ -5,7 +5,7 @@ class Transaction extends CI_Controller{
   		$this->load->model('item_model','item');
   		$this->load->model('saleitem_model','saleitem');
   		$this->load->model('biditem_model','biditem');
-  		$this->load->model('transaction_model',"trans");
+  		$this->load->model('transaction_model',"transaction");
   		$this->load->model('feedback_model',"feedback");
  	}
 
@@ -19,19 +19,19 @@ class Transaction extends CI_Controller{
 
 	public function createTransaction(){
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('itemid', 'transid', 'trim|required|min_length[1]|xss_clean');
+		$this->form_validation->set_rules('item_id', 'item_id', 'trim|required|min_length[1]|xss_clean');
 
 		if($this->form_validation->run()==FALSE){
 			$this->index();
 		}
 		else {
-			$buyerid  = $this->input->post('buyer_id');
-			$sellerid = $this->input->post('seller_id');
+			$buyerid  = $this->input->post('buyer_id');			
 			$itemid = $this->input->post('item_id');
 			$quantity = $this->input->post('quantity');
 			$transactionstatus = "wait";
-			$this->feedback->addFeedback($buyerid, $sellerid, $itemid, $quantity, $transactionstatus);
-			//echo "Pass here\n";
+			$this->transaction->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
+			echo "Transaction created\n";
+			$this->index();
 		}
 	}
 
@@ -53,17 +53,19 @@ class Transaction extends CI_Controller{
 
 	public function notify_delivery() {
 		//go to change status in database		
+		$transid = 111;
 
-		$this->load->('form_validation');
+		$this->load->library('form_validation');
 		$this->form_validation->set_rules('transid', 'transid', 'trim|required|min_length[1]|xss_clean');
 		
 		if($this->form_validation->run()==FALSE){
 			$this->index();
 		}
 		else {
-			$transid = $this->input->post('transid');
+			//$transid = $this->input->post('transid');
 			$transtatus = "received";
-			$this->trans->setTransactionStatusFromTransactionID($transid, $transtatus);			
+			$this->trans->setTransactionStatusFromTransactionID($transid, $transtatus);		
+			$this->index();	
 		}
 
 	}
@@ -82,7 +84,8 @@ class Transaction extends CI_Controller{
 			$score = $this->input->post('score');
 			$comment = $this->input->post('comment');
 			$this->feedback->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
-			//echo "Pass here\n";
+			echo "Feedback received\n";
+			$this->index();
 		}
 	}
 

@@ -13,7 +13,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal form-without-legend" role="form" mathod="post" id="login_form">
+                  <form class="form-horizontal form-without-legend" role="form" method="post" id="login_form">
                     <div class="form-group">
                       <label for="username" class="col-lg-4 control-label">Username <span class="require">*</span></label>
                       <div class="col-lg-8">
