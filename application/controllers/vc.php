@@ -18,7 +18,7 @@ class VC extends CI_Controller {
 		$this->load->view('footer/footer');
 		$this->load->model('admin_model');
 		echo "hello world";
-	//	$this->sendEmail();
+		$this->sendEmail();
 		//$this->admin_model->addAdmin(5);
       // $data['page_title'] = $page;
       // $this->load->view('header');
@@ -42,7 +42,7 @@ class VC extends CI_Controller {
         $this->load->library('email', $config);
 		$this->email->set_newline("\r\n");
 		$this->email->from('pladookspiral@gmail.com'); // change it to yours
-		$this->email->to('nontawat.mk@gmail.com');// change it to yours
+		$this->email->to('nawapat_earth@gmail.com');// change it to yours
 		$this->email->subject('There is one secret in this world');
 		$this->email->message($message);
 		if($this->email->send()){
