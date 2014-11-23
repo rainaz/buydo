@@ -15,7 +15,7 @@ class BidItem_model extends CI_Model {
 
 	public function addBidItem($item_id, $initialPrice, $endDate){
 			$insvalue = "('".$item_id."', '".			
-			""."', '".			
+			"1"."', '".		
 			$initialPrice."', '".									
 			$initialPrice."', '".		
 			$initialPrice."', '".		
@@ -28,6 +28,18 @@ class BidItem_model extends CI_Model {
 		}
 		return false;
 	}
+
+	public function editBidItem($item_id, $initialPrice, $endDate)
+  {
+    $this->load->helper('url');
+    
+ $data=array(  
+    'initial_price'=>$initialPrice,
+    'end_date'=>$endDate,
+  );
+      $this->db->where('item_id', $item_id);
+      return $this->db->update('bid_items', $data);
+  }
 	
 	function __construct(){
 		parent::__construct();

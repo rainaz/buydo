@@ -58,8 +58,7 @@ public function editItem()
   {
     $this->load->helper('url');
     
- $data=array(
- 	 'item_id'=>$this->input->post('item_id'),  
+ $data=array( 
    'item_name'=>$this->input->post('item_name'),   
     'agreement'=>$this->input->post('agreement'),  
     'status' => "in_stock",
