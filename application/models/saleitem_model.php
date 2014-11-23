@@ -1,19 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class SaleItem_model extends CI_Model {
 
-	/* private $_complainID;
-	private $_userID;
-	private $_complainant;
-	private $_accused;
-	private $_date;
-	private $_topic;
-	private $_category;
-	private $_detail;*/ 
 
 	private $table_name;
 	private $attributes = "item_id, price, quantity_in_stock";
 
-	public function addBidItem($price, $quantityInStock){
+	public function addSaleItemm($price, $quantityInStock){
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
@@ -30,12 +22,9 @@ class SaleItem_model extends CI_Model {
 	
 	function __construct(){
 		parent::__construct();
-		$this->table_name = sale_items;
+		$this->table_name = "sale_items";
 	}
 
-	function test(){
-		return $this->-db->query("SELECT * FROM sale_items");
-	}
 	function getSaleItemsByItemID($id){
 		return $this->db->query("SELECT * FROM sale_items WHERE item_id = ".$id);
 	}
@@ -43,6 +32,18 @@ class SaleItem_model extends CI_Model {
 		return $this->db->query("SELECT * FROM sale_items WHERE seller_id = ".$id);
 	}
 
+ public function addSaleItem()
+ {
+  $data=array(
+    'item_id'=>$this->input->post('item_id'),   
+    'price'=>$this->input->post('price'),
+    'quantity_in_stock'=>$this->input->post('quantity_in_stock'),
+  );
+  $this->db->insert('sale_items',$data);
+
+
+
+ }
 
 }
 ?>

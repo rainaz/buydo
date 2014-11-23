@@ -33,7 +33,7 @@ class BidItem_model extends CI_Model {
 	}
 
 	function test(){
-		return $this->-db->query("SELECT * FROM bid_items");
+		return $this->db->query("SELECT * FROM bid_items");
 	}
 	function getBidItemsByItemID($id){
 		return $this->db->query("SELECT * FROM bid_items WHERE item_id = ".$id);
@@ -42,20 +42,19 @@ class BidItem_model extends CI_Model {
 		return $this->db->query("SELECT * FROM bid_items WHERE seller_id = ".$id);
 	}
 
-		public function manageBidItemByItemID($itemid,$current_winner_id,&initial_price,
-			$current_price,$current_max_bid,$end_date,$seller_id){
+//	public function manageBidItemByItemID($itemid,$current_winner_id,&initial_price,$current_price,$current_max_bid,$end_date,$seller_id){
 
 		//null concern if null -> don't update or update using old data 
-		$sql = "UPDATE bid_items 
-				SET current_winner_id = "."'".$current_winner_id."', 
-				initial_price = "."'".$initial_price."',
-				current_price = "."'".$current_price."',
-				current_max_bid = "."'".$current_max_bid."',
-				end_date = "."'".$end_date."',
-				seller_id = "."'".$seller_id."'".				 
-				" WHERE item_id = "."'".$itemid."'";
-
-		$query = $this->db->query($sql);
-	}
+//		$sql = "UPDATE bid_items 
+//				SET current_winner_id = "."'".$current_winner_id."', 
+//				initial_price = "."'".$initial_price."',
+//				current_price = "."'".$current_price."',
+//				current_max_bid = "."'".$current_max_bid."',
+//				end_date = "."'".$end_date."',
+	//			seller_id = "."'".$seller_id."'".				 
+	//			" WHERE item_id = "."'".$itemid."'";
+//
+//		$query = $this->db->query($sql);
+//	}
 
 } ?>
