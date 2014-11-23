@@ -4,6 +4,7 @@ class User extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('user_model');
+		$this->load->model('complain_model');
 	}
 	public function index(){
 		if(($this->session->userdata('username')!="")){
@@ -53,7 +54,22 @@ class User extends CI_Controller{
 			$this->thank();
 		}
 	}
-	public function manageprofle(){
+	public function addComplain(){
+		$this->load->library('form_validation');
+		// field name, error message, validation rules
+		$this->form_validation->set_rules('detail', 'Detail', 'required');
+		//  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
+		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
+		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
+		if($this->form_validation->run() == FALSE){
+			$this->index();
+		}
+		else{
+			$this->complain_model->add_complain();
+			$this->thank();
+		}
+	}
+	public function manageprofile(){
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
 		$this->form_validation->set_rules('user_name', 'User Name');
@@ -68,6 +84,7 @@ class User extends CI_Controller{
 			$this->thank();
 		}
 	}
+
 
 
 

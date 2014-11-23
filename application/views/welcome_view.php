@@ -8,7 +8,7 @@
 <div class="form_title">Manage your profile</div>
 <div class="form_sub_title">It's free and anyone can be a buydoer</div>
  <?php echo validation_errors('<p class="error">'); ?>
- <?php echo form_open("user/manageprofle"); ?>
+ <?php echo form_open("user/manageprofile"); ?>
 
  <p>
   <label for="name">Firstname:</label>
@@ -56,6 +56,36 @@
   <label for="con_password">Confirm Password:</label>
   <input type="password" id="con_password" name="con_password" value="<?php echo set_value('con_password'); ?>" />
   </p>
+  <p>
+  <input type="submit" class="greenButton" value="Submit" />
+  </p>
+ <?php echo form_close(); ?>
+</div><!--<div class="reg_form">-->
+
+<div class="reg_form">
+<div class="form_title">Complain to the system</div>
+<div class="form_sub_title">complain GOGOGO</div>
+ <?php echo validation_errors('<p class="error">'); ?>
+ <?php echo form_open("user/addComplain"); ?>
+
+
+<p>
+<label for=date>date</label>
+  <input type="text" id="date" name="date" value="<?php echo set_value('date'); ?>" />
+</p>
+<p>
+<label for=topic>topic</label>
+  <input type="text" id="topic" name="topic" value="<?php echo set_value('topic'); ?>" />
+</p>
+<p>
+<label for=category>category</label>
+  <input type="text" id="category" name="category" value="<?php echo set_value('category'); ?>" />
+</p>
+<p>
+<label for=detail>detail</label>
+  <input type="text" id="detail" name="detail" value="<?php echo set_value('detail'); ?>" />
+</p>
+
   <p>
   <input type="submit" class="greenButton" value="Submit" />
   </p>
