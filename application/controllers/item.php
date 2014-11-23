@@ -9,8 +9,8 @@ class Item extends CI_Controller{
 	public function index(){
 		$data['title']= 'Home';
 		$this->load->view('header_view',$data);
-	//	$this->load->view("saleitem_add_view.php", $data);
-		$this->load->view("bidItem_mock.php", $data);
+		$this->load->view("saleitem_add_view.php", $data);
+	//	$this->load->view("bidItem_mock.php", $data);
 		$this->load->view('footer_view',$data);
 	}
 
@@ -191,9 +191,56 @@ class Item extends CI_Controller{
 		//find itemID
 		//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
 		$data = array(
+				"item_id"=>$this->input->post('item_id'),
 				"value" => $this->input->post('value'),
-				"itemName" => $this->input->post('itemName')
+				"itemName" => $this->input->post('itemName'),
+				"initial_price" => $this->input->post('initial_price'),
+				"current_winner_id" => $this->input->post('current_winner_id'),
+				"current_price" => $this->input->post('current_price')		,
+				"current_max_bid" => $this->input->post('current_max_bid'),
+				"end_date" => $this->input->post('end_date')
 			);
+
+		$user_id = $this->session->userdata('user_id');
+		$item_id = $data['item_id'];
+		if($data['value']){
+			$nmaxbidprice = $data['value'];
+			echo $nmaxbidprice;
+		}
+		else{
+		  if(strlen($data['current_max_bid'])==0){
+		   	$nmaxbidprice = $data['initial_price'];
+	 	   	echo 'maxbidnull';
+		   }
+		   else{
+		   	$nmaxbidprice = $data['current_price']+$data['initial_price']*0.05;
+		   	echo 'maxbidnotnull';
+		   }
+		   echo $nmaxbidprice;
+		}
+
+		$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
+		$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);
+		$currentPrice = $this->biditem_model->getCurrentPrice($item_id);
+		$initialPrice = $this->biditem_model->getInitialPrice($item_id);
+
+		if(strlen($data['current_max_bid'])==0){
+			$this->biditem_model->setCurrentPrice($item_id, $initialPrice);
+			$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
+			$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
+		}
+		else if($nmaxbidprice > $currentMaxBid){
+			$this->biditem_model->setCurrentPrice($item_id, $currentMaxBid + $initialPrice*0.05);
+			$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
+			$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
+		}
+		else {
+			$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
+			$nmaxbidprice = $minPrice;
+		}
+
+		$this->bid->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id));
+
 		$this->load->view('header_view');
 		$this->load->view('test_view.php', $data);
 		$this->load->view('footer_view');
