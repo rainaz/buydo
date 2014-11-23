@@ -9,7 +9,7 @@
   <input type="password" id="password" name="password" value="" />
   <input type="submit" class="" value="Sign in" />
 
- <?php echo form_close(); ?>
+<?php echo form_close(); ?>
 </div><!--<div class="signin_form">-->
 </div><!--<div class="signup_wrap">-->
 <div class="reg_form">

@@ -1,3 +1,6 @@
+ <?php echo validation_errors('<p class="error">'); ?>
+ <?php echo form_open("item/submitSaleItem"); ?>
+
     <div class="main">
       <div class="container">
         <!-- BEGIN CONTENT -->
@@ -65,7 +68,7 @@
                     
                     <div class="row">
                       <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                        <button type="submit" class="btn btn-primary">Create a sale item</button>
+                        <button type="submit" class="btn btn-primary greenButton">Create a sale item</button>
                         <button type="button" class="btn btn-default">Cancel</button>
                       </div>
                     </div>
@@ -79,3 +82,4 @@
         <!-- END SIDEBAR & CONTENT -->
       </div>
     </div>
+     <?php echo form_close(); ?>

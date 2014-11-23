@@ -17,8 +17,8 @@ class VC extends CI_Controller {
 		$this->load->view($folder.'/'.$page);
 		$this->load->view('footer/footer');
 		$this->load->model('admin_model');
-		echo "hello world";
-	//	$this->sendEmail();
+
+		//echo "hello world";
 		//$this->admin_model->addAdmin(5);
       // $data['page_title'] = $page;
       // $this->load->view('header');
