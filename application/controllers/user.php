@@ -5,7 +5,7 @@ class User extends CI_Controller{
 		$this->load->model('user_model');
 	}
 	public function index(){
-		if(($this->session->userdata('user_name')!="")){
+		if(($this->session->userdata('username')!="")){
 			$this->welcome();
 		}
 		else{
