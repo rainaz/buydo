@@ -63,6 +63,10 @@ License: You must have a valid license purchased only from themeforest (the abov
     if($this->session->userdata('user_id')!=''){
       $is_login = TRUE;
     }
+    if (empty($template_type)) {
+      $template_type = "ecommerce";
+    }
+
   ?>
 
   <!-- Body BEGIN -->
