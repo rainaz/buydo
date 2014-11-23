@@ -12,7 +12,8 @@ class Item_model extends CI_Model {
 
 	public function addItem_($itemName,$agreement,$status,$spec,$ownerID,$picture){		
 		$lastrow = $this->db->count_all($this->table_name) + 1;
-		$ownerID = "5";
+		if($ownerID==NULL) $ownerID = "1";
+		//$ownerID = "5";
 		$insvalue = "('".$lastrow."', '".
 			$itemName."', '".		
 			date('Y-m-d')."', '".		
@@ -23,10 +24,10 @@ class Item_model extends CI_Model {
 			$picture."')";
 
 		$sql = "INSERT INTO items ($this->attributes) VALUES ".$insvalue;
-		echo "\n$sql";
+		//echo "\n$sql";
 		$query = $this->db->query($sql);
 		if($query>0) {
-			echo $query;
+			//echo $query;
 			return $lastrow;
 		}
 		return false;
