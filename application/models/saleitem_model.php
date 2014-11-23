@@ -18,6 +18,8 @@ class SaleItem_model extends CI_Model {
 		}
 		return false;
 	}
+
+
 	
 	function __construct(){
 		parent::__construct();
@@ -44,10 +46,20 @@ class SaleItem_model extends CI_Model {
     'quantity_in_stock'=>$this->input->post('quantity_in_stock'),
   );
   $this->db->insert('sale_items',$data);
-
-
-
  }
+
+ public function editSaleItem()
+  {
+    $this->load->helper('url');
+    
+ $data=array(
+ 	  'item_id'=>$this->input->post('item_id'),   
+    'price'=>$this->input->post('price'),
+    'quantity_in_stock'=>$this->input->post('quantity_in_stock'),
+  );
+      $this->db->where('item_id', $this->input->post('item_id'));
+      return $this->db->update('sale_items', $data);
+  }
 
 }
 ?>
