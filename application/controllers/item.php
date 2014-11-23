@@ -18,16 +18,18 @@ class Item extends CI_Controller{
 	public function verifyIsLoggedIn(){
 		if($this->session->userdata('logged_in')==FALSE){
 			$this->index();
-		}			
+		}
 	}
 
 	public function loadAddSaleItemView() {
+		$data['title']= 'Add SaleItem';
 		$this->load->view('header_view');
 		$this->load->view('seller/add_saleitem');
 		$this->load->view('footer_view');	
 	}
 
 	public function loadAddBidItemView() {
+		$data['title']= 'Add BidItem';
 		$this->load->view('header/header');
 		$this->load->view('seller/add_biditem');
 		$this->load->view('footer/footer');
@@ -144,6 +146,7 @@ class Item extends CI_Controller{
 
 
 	public function submitBidItem() {
+		$this->verifyIsLoggedIn();
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
 		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
@@ -178,7 +181,7 @@ class Item extends CI_Controller{
 
 			//$this->thank();  
 			if($query > 0 ){
-				echo "completed\n";
+				//echo "completed\n";
 				$this->index();	
 			}
 			
