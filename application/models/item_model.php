@@ -69,7 +69,26 @@ public function editItem()
       return $this->db->update('items', $data);
   }
 
-	function getItemInfo($id){
+	public function searchItem($search){
+		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`end_date` > DATE '".((new DateTime())->format("Y-m-d H:i:s"))."' UNION SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`quantity_in_stock` > 0;");
+		if($query->num_rows() <= 0)
+			return false;
+		return $query->num_rows();
+	}
+	public function searchBidItem($search){
+		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`current_price` AS `price`, 'bid' AS `item_type` FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`end_date` > DATE '".((new DateTime())->format("Y-m-d H:i:s"))."';");
+		if($query->num_rows() <= 0)
+			return false;
+		return $query->num_rows();
+	}
+	public function searchItem($search){
+		$query = $this->db->query("SELECT `a`.`item_id`, `a`.`item_name`, `a`.`picture`, `b`.`price` AS `price`, 'sale' AS `item_type` FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id`WHERE (`a`.`item_name` REGEXP '.*".$search.".*') AND `b`.`quantity_in_stock` > 0;");
+		if($query->num_rows() <= 0)
+			return false;
+		return $query->num_rows();
+	}
+
+	public function getItemInfo($id){
 		$isBid = $this->db->query("SELECT * FROM `bid_items` WHERE `bid_items`.`item_id`=".$id.";")->num_rows();
 		if($isBid > 0){
 			$query = $this->db->query("SELECT `a`.`item_name`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=".$id.";" )->first_row();
