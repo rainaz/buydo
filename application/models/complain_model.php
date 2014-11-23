@@ -29,13 +29,23 @@ class Complain_model extends CI_Model {
 		}
 		return false;
 	}
+	public function add_complain(){
+		 $data=array(
+'user_id' =>$this->session->userdata('user_id'),
+'date'=>$this->input->post('date'),
+'topic'=>$this->input->post('topic'),
+'category'=>$this->input->post('category'),
+'detail'=>$this->input->post('detail'),
+		  );
+		  $this->db->insert('complain',$data);
+	}	
 	function __construct(){
 		parent::__construct();
-		$this->table_name = complain;
+		$this->table_name = "complain";
 	}
 
 	function test(){
-		return $this->-db->query("SELECT * from complain");
+		return $this->db->query("SELECT * from complain");
 	}
 	function get_complain_by_id($id){
 		return $this->db->query("SELECT * from complain where `id`=".$id);
@@ -134,4 +144,5 @@ class Complain_model extends CI_Model {
 	}
 
 }*/
+}
 ?>

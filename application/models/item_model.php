@@ -9,7 +9,7 @@ class Item_model extends CI_Model {
 		parent::__construct();
 	}
 
-	public function addItem($itemName,$postedDate,$agreement,$status,$spec,$ownerID,$picture){		
+	public function addItemm($itemName,$postedDate,$agreement,$status,$spec,$ownerID,$picture){		
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
@@ -25,7 +25,7 @@ class Item_model extends CI_Model {
 		echo "\n$sql";
 		$query = $this->db->query($sql);
 		if($query>0) {
-			return true;
+			return $lastrow;
 		}
 		return false;
 	}
@@ -37,8 +37,23 @@ class Item_model extends CI_Model {
 		}
 		return false;
 	}
-	//commit the object in php to a tuple in database
-
+//commit the object in php to a tuple in database
+public function addItem()
+ {
+ 	$today = date('Y-m-d');
+  $data=array(
+    'item_name'=>$this->input->post('item_name'),   
+    'agreement'=>$this->input->post('agreement'),  
+    'posted_date' => $today,
+    'status' => "in_stock",
+    'spec'=>$this->input->post('spec'),   
+    'picture'=>$this->input->post('picture'), 
+     'owner_id'=>$this->input->post('owner_id')
+  );
+  $this->db->insert('items',$data);
+  $insertid = $this->db->insert_id();
+  return $insertid;
+ }
 
 	
 
