@@ -13,7 +13,7 @@
 							</div>
 						</div>
 						<div class="col-md-6 col-sm-6">
-							<h1>Cool PLADOOK</h1>
+						<h1><?php echo $itemName ?></h1>
 							<div class="price-availability-block clearfix">
 								<div class="price">
 									<!-- strong><span>Start Bid: THB</span>47.00</strong-->
@@ -32,11 +32,11 @@
 								</strong>
 								</div>
 							</div>
-							<div class="description">
+							<!--div class="description">
 								<p>
-								<?php echo $spec;?>
+
 								</p>
-							</div>
+							</div-->
 <?php if(!$isClose) :?>
 							<div class="product-page-options">
 								<div class="row">
@@ -85,17 +85,14 @@
                           <th colspan="2">Description</th>
                         </tr>
                         <tr>
-                          <td class="datasheet-features-type">Value 1</td>
-                          <td>21 cm</td>
-                        </tr>
-                        <tr>
-                          <td class="datasheet-features-type">Value 2</td>
-                          <td>700 gr.</td>
+                          <td>
+							<?php echo $spec;?>
+                          </td>
                         </tr>
                       </table>
                       <br />
                       <br />
-                      <table class="datasheet" style="width:80%">
+                      <!--table class="datasheet" style="width:80%">
                         <tr>
                           <th colspan="2">Shipping</th>
                         </tr>
@@ -107,7 +104,7 @@
                           <td class="datasheet-features-type">Value 2</td>
                           <td>700 gr.</td>
                         </tr>
-                      </table>
+                      </table-->
                     </div>
                     <div class="col-md-6 col-sm-6">
                       

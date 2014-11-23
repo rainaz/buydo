@@ -123,7 +123,6 @@ class User_model extends CI_Model {
     $this->load->helper('url');
     
  $data=array(
-  
     'name'=>$this->input->post('name'),   
     'surname'=>$this->input->post('surname'),   
     'email'=>$this->input->post('email'),   

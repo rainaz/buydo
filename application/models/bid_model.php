@@ -55,24 +55,6 @@ class Bid_model extends CI_Model {
 		$query = $this->db->query($sql);
 	}
 
-	function getBidItemInfo($id){
-		$query = $this->db->query("SELECT `a`.`item_name`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=".$id.";" )->first_row();
-		$timeLeft = (new DateTime($query->end_date))->diff(new DateTime());
-		$data = array(
-			"itemName" => $query->item_name,
-			"initialPrice" => $query->initial_price,
-			"currentPrice" => $query->current_price,
-			"timeLeft" => $timeLeft->format("%Y-%m-%d %H:%i:%s"),
-			"isClose" => $timeLeft->format("%R") == "+",
-			"status" => $query->status,
-			"spec" => $query->spec,
-			"agreement" => $query->agreement,
-			"nextBid" => $query->current_price + $query->initial_price*0.05,
-			"picURL" => $query->picture
-		);
-		return $data;
-	}
-
 
 }
 ?>
