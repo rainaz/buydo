@@ -86,7 +86,7 @@ class Item extends CI_Controller{
 	// }
 
 	public function submitSaleItem() {
-		//verifyIsLoggedIn();
+		$this->verifyIsLoggedIn();
 
 		$data['item_name'] = $this->input->post('item_name');
 		$data['picture'] = $this->input->post('picture');
@@ -130,7 +130,7 @@ class Item extends CI_Controller{
 			$row = $this->item_model->editItem();
 			$item_id = $this->input->post('item_id');
 			$price = $this->input->post('price');
-			$qis = $this->input->post('quantity_in_stock');
+			$qis = $this->input->post('quantity');
 			$this->saleitem_model->editSaleItem($price, $qis);
 
 			//find itemID
