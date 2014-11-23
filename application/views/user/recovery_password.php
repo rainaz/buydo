@@ -1,4 +1,3 @@
-
     <div class="main">
       <div class="container">
         <!-- BEGIN CONTENT -->
@@ -11,7 +10,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal form-without-legend" role="form" mathod="post" id="login_form">
+                  <form class="form-horizontal form-without-legend" role="form" method="post" id="recovery_password_form">
                     <div class="row"><p>Please enter your email below. We will send our confirmation link to your email. </p></div>
 
                     <div class="form-group">
@@ -23,7 +22,7 @@
                     
                     <div class="row">
                       <div class="col-lg-8 col-md-offset-9 padding-left-0 padding-top-20">
-                        <button type="submit" class="btn btn-primary greenButton">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
                     </div>
                     <div class="row">

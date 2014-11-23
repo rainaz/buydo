@@ -80,6 +80,12 @@
     <!-- Edit biditem Validator (will need to move this thing later) -->
     <script src="/buydo/assets/buydo/js/editbid_validator.js" type="text/javascript"></script>
 
+     <!-- Password Recovery Validator (will need to move this thing later) -->
+    <script src="/buydo/assets/buydo/js/recovery_password_validator.js" type="text/javascript"></script>
+
+     <!-- New Password Form Validator (will need to move this thing later) -->
+    <script src="/buydo/assets/buydo/js/new_password_form_validator.js" type="text/javascript"></script>
+
 
 </body>
 <!-- END BODY -->
