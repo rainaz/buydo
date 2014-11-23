@@ -124,11 +124,12 @@
   <p>
   <input type="submit" class="greenButton" value="Submit" />
   </p>
- <?php echo form_close(); ?>
+
+<?php echo form_close(); ?>
 </div><!--<div class="reg_form">-->
 
 <?php echo validation_errors('<p class="error">'); ?>
- <?php echo form_open("item/viewBidItem"); ?>
+ <?php echo form_open("item/viewBidItemByID"); ?>
 
 <div class="reg_form">
 <div class="form_title">BID ITEM VIEW</div>
