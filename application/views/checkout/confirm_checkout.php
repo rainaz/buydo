@@ -15,10 +15,8 @@
 							<form class="form-horizontal" role="form" id="form_confirm_credit">
 								<fieldset>
 									<div class="form-group">
-										<label for="creditcard" class="col-lg-4 control-label">Creditcard <span class="require">*</span></label>
-										<div class="col-lg-8">
-											<input type="number" class="form-control" maxlength=16 id="creditcard" name="creditcard">
-										</div>
+										<label for="creditcard" class="col-lg-4 control-label">Creditcard </label>
+										<label for="creditcard" class="col-lg-4 control-label">1234567890123456 </label>
 									</div>	
 								</fieldset>
 								<div class="row">
