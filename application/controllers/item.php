@@ -39,5 +39,16 @@ class Item extends CI_Controller{
 			$this->thank();
 		}
 	}
+	public function showBidItem($id){
+		$this->load->model('bid_model');
+		$data = $this->bid_model->getBidItemInfo($id);
+		$data['template_type'] = "ecommerce";
+		$this->load->view('header/header',$data);
+		$this->load->view('item/bid_item_info', $data);
+		$this->load->view('footer/footer',$data);
+
+
+		
+	}
 }
 ?>
