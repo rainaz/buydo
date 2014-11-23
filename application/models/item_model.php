@@ -7,14 +7,15 @@ class Item_model extends CI_Model {
 
 	function __construct(){
 		parent::__construct();
+		$this->table_name = "items";
 	}
 
-	public function addItemm($itemName,$postedDate,$agreement,$status,$spec,$ownerID,$picture){		
-		$lastrow = $this->db->insert_id();	
-
+	public function addItem_($itemName,$agreement,$status,$spec,$ownerID,$picture){		
+		$lastrow = $this->db->count_all($this->table_name) + 1;
+		$ownerID = "5";
 		$insvalue = "('".$lastrow."', '".
 			$itemName."', '".		
-			$postedDate."', '".		
+			date('Y-m-d')."', '".		
 			$agreement."', '".
 			$status."', '".
 			$spec."', '".
@@ -25,6 +26,7 @@ class Item_model extends CI_Model {
 		echo "\n$sql";
 		$query = $this->db->query($sql);
 		if($query>0) {
+			echo $query;
 			return $lastrow;
 		}
 		return false;
@@ -48,9 +50,11 @@ public function addItem()
     'status' => "in_stock",
     'spec'=>$this->input->post('spec'),   
     'picture'=>$this->input->post('picture'), 
-     'owner_id'=>$this->input->post('owner_id')
+    'owner_id'=>$this->input->post('owner_id')
   );
-  $this->db->insert('items',$data);
+  echo $data['item_name']." ".$data['picture']."\n";
+  $query = $this->db->insert('items', $data);
+  echo "query = $query\n";
   $insertid = $this->db->insert_id();
   return $insertid;
  }
