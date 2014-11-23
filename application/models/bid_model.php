@@ -38,13 +38,16 @@ class Bid_model extends CI_Model {
 		return $this->db->query("SELECT * FROM bid");
 	}
 	function getBidByBidID($id){
-		return $this->db->query("SELECT * FROM bid WHERE bid_id = ".$id);
+		$query = $this->db->query("SELECT * FROM bid WHERE bid_id = ".$id);
+		return $query->row();
 	}
 	function getBidByBuyerID($id){
-		return $this->db->query("SELECT * FROM bid WHERE buyer_id = ".$id);
+		$query = $this->db->query("SELECT * FROM bid WHERE buyer_id = ".$id);
+		return $query->row();
 	}
 	function getBidByItemID($id){
-		return $this->db->query("SELECT * FROM bid WHERE item_id = ".$id);
+		$query = $this->db->query("SELECT * FROM bid WHERE item_id = ".$id);
+		return $query->row();
 	}
 	function setCurrentBid($itemid, $ncurrentbid){
 		$sql = "UPDATE bid SET current_bid = $ncurrentbid WHERE item_id = $itemid";
@@ -55,6 +58,12 @@ class Bid_model extends CI_Model {
 		$query = $this->db->query($sql);
 	}
 
+	function Bid($item_id, $price, $user_id){
+		$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
+		$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);
+		$currentPrice = $this->biditem_model->getCurrentPrice($item_id);
+		$initialPrice = $this->
 
+	}
 }
 ?>
