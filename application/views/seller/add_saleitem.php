@@ -14,7 +14,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form" id="add_saleitem_form" action=<?php echo site_url('item/submitSaleItem_'); ?> method="post">
+                  <form class="form-horizontal" role="form" id="add_saleitem_form" action=<?php echo site_url('item/submitSaleItem'); ?> method="post">
                     <fieldset>
                       <div class="form-group">
                         <label for="item_name" class="col-lg-4 control-label">Item name <span class="require">*</span></label>
