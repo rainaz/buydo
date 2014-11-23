@@ -18,16 +18,18 @@ class Item extends CI_Controller{
 	public function verifyIsLoggedIn(){
 		if($this->session->userdata('logged_in')==FALSE){
 			$this->index();
-		}			
+		}
 	}
 
 	public function loadAddSaleItemView() {
+		$data['title']= 'Add SaleItem';
 		$this->load->view('header_view');
 		$this->load->view('seller/add_saleitem');
 		$this->load->view('footer_view');	
 	}
 
 	public function loadAddBidItemView() {
+		$data['title']= 'Add BidItem';
 		$this->load->view('header/header');
 		$this->load->view('seller/add_biditem');
 		$this->load->view('footer/footer');
@@ -86,20 +88,21 @@ class Item extends CI_Controller{
 	// }
 
 	public function submitSaleItem() {
-		// $data['item_name'] = $this->input->post('item_name');
-		// $data['picture'] = $this->input->post('picture');
-		// $data['price'] = $this->input->post('price');
-		// $data['quantity'] = $this->input->post('quantity');
-		// $data['spec'] = $this->input->post('spec');
-		// $data['payment_method'] = $this->input->post('payment_method');
-		// $data['agreement'] = $this->input->post('agreement');
+		$this->verifyIsLoggedIn();
 
-	// 	foreach ($data as $item) {
- //    echo $item;
-	// }
-	// echo "<br />";
-		$row = $this->item_model->addItem();
-		$success = $this->saleitem_model->addSaleItemm($row, $this->input->post('price'), $data['quantity'] = $this->input->post('quantity'));
+		$data['item_name'] = $this->input->post('item_name');
+		$data['picture'] = $this->input->post('picture');
+		$data['price'] = $this->input->post('price');
+		$data['quantity'] = $this->input->post('quantity');
+		$data['spec'] = $this->input->post('spec');
+		$data['payment_method'] = $this->input->post('payment_method');
+		$data['agreement'] = $this->input->post('agreement');
+		$data['status'] = "in_stock";
+		$data['owner_id'] = $this->session->userdata('user_id');
+
+		$row = $this->item_model->addItem_($data['item_name'],$data['agreement'],
+				$data['status'],$data['spec'], $data['owner_id'],$data['picture']);
+		$success = $this->saleitem_model->addSaleItemm($row, $this->input->post('price'), $this->input->post('quantity'));
 
 		if ( $success ) {
 			$this->load->view('header_view', $data);
@@ -129,7 +132,7 @@ class Item extends CI_Controller{
 			$row = $this->item_model->editItem();
 			$item_id = $this->input->post('item_id');
 			$price = $this->input->post('price');
-			$qis = $this->input->post('quantity_in_stock');
+			$qis = $this->input->post('quantity');
 			$this->saleitem_model->editSaleItem($price, $qis);
 
 			//find itemID
@@ -143,6 +146,7 @@ class Item extends CI_Controller{
 
 
 	public function submitBidItem() {
+		$this->verifyIsLoggedIn();
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
 		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
@@ -177,7 +181,7 @@ class Item extends CI_Controller{
 
 			//$this->thank();  
 			if($query > 0 ){
-				echo "completed\n";
+				//echo "completed\n";
 				$this->index();	
 			}
 			
