@@ -53,6 +53,7 @@ License: You must have a valid license purchased only from themeforest (the abov
   <!-- Theme styles END -->
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/buydo/buydo-style.css" rel="stylesheet">
 
   </head>
   <!-- Head END -->

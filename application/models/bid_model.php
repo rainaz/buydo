@@ -13,15 +13,15 @@ class Bid_model extends CI_Model {
 	private $table_name;
 	private $attributes = "bid_id, item_id, buyer_id, current_bid, max_bid, bid_date";
 
-	public function addBid($itemID, $buyerID, $currentBid, $maxBid,$bidDate){
-		$lastrow = $this->db->insert_id();	
+	public function addBid($itemID, $buyerID, $currentBid, $maxBid){
+		$bidID = $this->db->count_all($this->table_name) + 1;
 
-		$insvalue = "('".$lastrow."', '".
+		$insvalue = "('".$bidID."', '".
 			$itemID."', '".
 			$buyerID."', '".		
 			$currentBid."', '".		
 			$maxBid."', '".
-			$bidDate."')";
+			date('Y-m-d')."')";
 
 		$sql = "INSERT INTO bid ($this->attributes) VALUES ".$insvalue;
 		$query = $this->db->query($sql);
@@ -38,13 +38,16 @@ class Bid_model extends CI_Model {
 		return $this->db->query("SELECT * FROM bid");
 	}
 	function getBidByBidID($id){
-		return $this->db->query("SELECT * FROM bid WHERE bid_id = ".$id);
+		$query = $this->db->query("SELECT * FROM bid WHERE bid_id = ".$id);
+		return $query->row();
 	}
 	function getBidByBuyerID($id){
-		return $this->db->query("SELECT * FROM bid WHERE buyer_id = ".$id);
+		$query = $this->db->query("SELECT * FROM bid WHERE buyer_id = ".$id);
+		return $query->row();
 	}
 	function getBidByItemID($id){
-		return $this->db->query("SELECT * FROM bid WHERE item_id = ".$id);
+		$query = $this->db->query("SELECT * FROM bid WHERE item_id = ".$id);
+		return $query->row();
 	}
 	function setCurrentBid($itemid, $ncurrentbid){
 		$sql = "UPDATE bid SET current_bid = $ncurrentbid WHERE item_id = $itemid";
@@ -55,6 +58,27 @@ class Bid_model extends CI_Model {
 		$query = $this->db->query($sql);
 	}
 
+	function Bid($item_id, $nmaxbidprice, $user_id){
+		$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
+		$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);
+		$currentPrice = $this->biditem_model->getCurrentPrice($item_id);
+		$initialPrice = $this->biditem_model->getInitialPrice($item_id);
 
+		if($bidprice > $currentMaxBid){
+			$this->biditem_model->setCurrentPrice($item_id, $currentMaxBid + $initialPrice*0.05);
+			$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
+			$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
+		}
+		else {
+			$minPrice = $currentMaxBid;
+			$xx = $nmaxbidprice + $initialPrice*0.05;
+			if($xx < $minPrice) $minPrice = $xx;
+			$this->biditem_model->setCurrentPrice($item_id, $minPrice);
+			$nmaxbidprice = $minPrice;
+		}
+
+		$this->bid->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id), $bidDate);
+
+	}
 }
 ?>
