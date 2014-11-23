@@ -18,6 +18,8 @@ class SaleItem_model extends CI_Model {
 		}
 		return false;
 	}
+
+
 	
 	function __construct(){
 		parent::__construct();
@@ -50,10 +52,9 @@ class SaleItem_model extends CI_Model {
     'quantity_in_stock'=>$this->input->post('quantity_in_stock'),
   );
   $this->db->insert('sale_items',$data);
-
-
-
  }
+
+
 
 }
 ?>

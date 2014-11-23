@@ -21,7 +21,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form">
+                  <form class="form-horizontal" role="form" id="edit_saleitem_form">
                     <fieldset>
                       <div class="form-group">
                         <label for="item_name" class="col-lg-4 control-label">Item name <span class="require">*</span></label>
@@ -49,7 +49,7 @@
                         </div>
                       </div>
                     <div class="form-group">
-                      <label for="spec" class="col-lg-4 control-label">Properties </label>
+                      <label for="spec" class="col-lg-4 control-label">Properties <span class="require">*</span></label>
                       <div class="col-lg-8">
 	                      <input type="text" class="form-control" id="spec" name="spec" value=<?php echo $spec; ?>>
                       </div>
@@ -63,15 +63,9 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="agreement" class="col-lg-4 control-label">Agreement </label>
+                      <label for="agreement" class="col-lg-4 control-label">Agreement <span class="require">*</span></label>
                       <div class="col-lg-8">
 	                      <input type="text" class="form-control" id="agreement" name="agreement" value=<?php echo $return_policy; ?>>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="packaging" class="col-lg-4 control-label">Packaging </label>
-                      <div class="col-lg-8">
-	                      <input type="text" class="form-control" id="packaging" name="packaging" value=<?php echo $packaging; ?> >
                       </div>
                     </div>
                     </fieldset>

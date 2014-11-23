@@ -54,7 +54,20 @@ public function addItem()
   $insertid = $this->db->insert_id();
   return $insertid;
  }
-
+public function editItem()
+  {
+    $this->load->helper('url');
+    
+ $data=array( 
+   'item_name'=>$this->input->post('item_name'),   
+    'agreement'=>$this->input->post('agreement'),  
+    'status' => "in_stock",
+    'spec'=>$this->input->post('spec'),   
+    'picture'=>$this->input->post('picture'), 
+  );
+      $this->db->where('item_id', $this->input->post('item_id'));
+      return $this->db->update('items', $data);
+  }
 
 	function getItemInfo($id){
 		$isBid = $this->db->query("SELECT * FROM `bid_items` WHERE `bid_items`.`item_id`=".$id.";")->num_rows();

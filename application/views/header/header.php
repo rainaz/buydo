@@ -89,10 +89,11 @@ License: You must have a valid license purchased only from themeforest (the abov
       <div class="container">
         <a class="site-logo" href="/buydo/"><img src="/buydo/assets/images/logo.jpg" alt="Buydo"></a>
             <div class="input-group" style="padding:20px; padding-right:0px;">
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
-              <button class="btn blue" type="button">Search</button>
-              </span>
+                  <a href="#" class="btn btn-icon-only blue">
+                              <i class="fa fa-search"></i>
+                              </a>              </span>
             </div>
             <!-- /input-group -->
         <!-- END NAVIGATION -->
