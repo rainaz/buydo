@@ -9,8 +9,8 @@ class Item extends CI_Controller{
 	public function index(){
 		$data['title']= 'Home';
 		$this->load->view('header_view',$data);
-	//	$this->load->view("saleitem_add_view.php", $data);
-		$this->load->view("biditem_add_view.php", $data);
+	$this->load->view("saleitem_add_view.php", $data);
+	//	$this->load->view("biditem_add_view.php", $data);
 		$this->load->view('footer_view',$data);
 	}
 
@@ -20,18 +20,7 @@ class Item extends CI_Controller{
 		$this->load->view('footer_view', $data);	
 	}
 
-	public function submitSaleItem_() {
-		$data['item_name'] = $this->input->post('item_name');
-		$data['picture'] = $this->input->post('picture');
-		$data['price'] = $this->input->post('price');
-		$data['quantity'] = $this->input->post('quantity');
-		$data['spec'] = $this->input->post('spec');
-		$data['payment_method'] = $this->input->post('payment_method');
-		$data['agreement'] = $this->input->post('agreement');
-		$this->load->view('header/header', $data);
-		$this->load->view('seller/edit_saleitem', $data);
-		$this->load->view('footer/footer', $data);
-	}
+	
 
 	public function thank(){
 		$data['title']= 'Thank';
@@ -57,29 +46,58 @@ class Item extends CI_Controller{
 
 
 
+	// public function submitSaleItem() {
+	// 	$this->load->library('form_validation');
+	// 	// field name, error message, validation rules
+	// 	$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
+	// 	//  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
+	// 	//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
+	// 	//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
+
+	// 	if($this->form_validation->run() == FALSE) {
+	// 		$this->index();
+	// 	}
+	// 	else {
+	// 		$row = $this->item_model->addItem();
+	// 		$price = $this->input->post('price');
+	// 		$qis = $this->input->post('quantity_in_stock');
+	// 		$this->saleitem_model->addSaleItemm($row, $price, $qis);
+
+	// 		//find itemID
+	// 		//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
+
+	// 		$this->thank();  
+	// 	}
+
+	// }
+
 	public function submitSaleItem() {
-		$this->load->library('form_validation');
-		// field name, error message, validation rules
-		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
-		//  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
-		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
-		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
+		// $data['item_name'] = $this->input->post('item_name');
+		// $data['picture'] = $this->input->post('picture');
+		// $data['price'] = $this->input->post('price');
+		// $data['quantity'] = $this->input->post('quantity');
+		// $data['spec'] = $this->input->post('spec');
+		// $data['payment_method'] = $this->input->post('payment_method');
+		// $data['agreement'] = $this->input->post('agreement');
 
-		if($this->form_validation->run() == FALSE) {
-			$this->index();
+	// 	foreach ($data as $item) {
+ //    echo $item;
+	// }
+	// echo "<br />";
+		$row = $this->item_model->addItem();
+		$success = $this->saleitem_model->addSaleItemm($row, $this->input->post('price'), $data['quantity'] = $this->input->post('quantity'));
+
+		if ( $success ) {
+			$this->load->view('header_view', $data);
+			// TODO: replace this echo with the page
+			echo "Success!";
+			$this->load->view('footer_view', $data);
+		} else {
+			$this->load->view('header_view', $data);
+			// TODO: error message for add sale item
+			echo "There are some error here. Don't worry, it's not your fault. We'll try to fix it asap. Please try again later...";
+			$this->load->view('footer_view', $data);
 		}
-		else {
-			$row = $this->item_model->addItem();
-			$price = $this->input->post('price');
-			$qis = $this->input->post('quantity_in_stock');
-			$this->saleitem_model->addSaleItemm($row, $price, $qis);
-
-			//find itemID
-			//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
-
-			$this->thank();  
-		}
-
 	}
 
 		public function editSaleItem() {
