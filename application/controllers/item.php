@@ -86,20 +86,21 @@ class Item extends CI_Controller{
 	// }
 
 	public function submitSaleItem() {
-		// $data['item_name'] = $this->input->post('item_name');
-		// $data['picture'] = $this->input->post('picture');
-		// $data['price'] = $this->input->post('price');
-		// $data['quantity'] = $this->input->post('quantity');
-		// $data['spec'] = $this->input->post('spec');
-		// $data['payment_method'] = $this->input->post('payment_method');
-		// $data['agreement'] = $this->input->post('agreement');
+		//verifyIsLoggedIn();
 
-	// 	foreach ($data as $item) {
- //    echo $item;
-	// }
-	// echo "<br />";
-		$row = $this->item_model->addItem();
-		$success = $this->saleitem_model->addSaleItemm($row, $this->input->post('price'), $data['quantity'] = $this->input->post('quantity'));
+		$data['item_name'] = $this->input->post('item_name');
+		$data['picture'] = $this->input->post('picture');
+		$data['price'] = $this->input->post('price');
+		$data['quantity'] = $this->input->post('quantity');
+		$data['spec'] = $this->input->post('spec');
+		$data['payment_method'] = $this->input->post('payment_method');
+		$data['agreement'] = $this->input->post('agreement');
+		$data['status'] = "in_stock";
+		$data['owner_id'] = $this->session->userdata('user_id');
+
+		$row = $this->item_model->addItem_($data['item_name'],$data['agreement'],
+				$data['status'],$data['spec'], $data['owner_id'],$data['picture']);
+		$success = $this->saleitem_model->addSaleItemm($row, $this->input->post('price'), $this->input->post('quantity'));
 
 		if ( $success ) {
 			$this->load->view('header_view', $data);
