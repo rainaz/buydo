@@ -6,6 +6,7 @@ class SaleItem_model extends CI_Model {
 	private $attributes = "item_id, price, quantity_in_stock";
 
 	public function addSaleItemm($price, $quantityInStock){
+
 		$lastrow = $this->db->insert_id();	
 
 		$insvalue = "('".$lastrow."', '".
@@ -25,7 +26,11 @@ class SaleItem_model extends CI_Model {
 		$this->table_name = "sale_items";
 	}
 
-	function getSaleItemsByItemID($id){
+	function test(){
+		return $this->-db->query("SELECT * FROM sale_items");
+	}
+	function getSaleItemByItemID($id){
+
 		return $this->db->query("SELECT * FROM sale_items WHERE item_id = ".$id);
 	}
 	function getSaleItemBySellerID($id){

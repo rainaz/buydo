@@ -35,7 +35,7 @@ class BidItem_model extends CI_Model {
 	function test(){
 		return $this->db->query("SELECT * FROM bid_items");
 	}
-	function getBidItemsByItemID($id){
+	function getBidItemByItemID($id){
 		return $this->db->query("SELECT * FROM bid_items WHERE item_id = ".$id);
 	}
 	function getBidItemBySellerID($id){
