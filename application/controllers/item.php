@@ -14,6 +14,7 @@ class Item extends CI_Controller{
 		$this->load->view('footer_view',$data);
 	}
 
+
 	public function verifyIsLoggedIn(){
 		if($this->session->userdata('logged_in')==FALSE){
 			$this->index();
@@ -44,6 +45,7 @@ class Item extends CI_Controller{
 		$this->load->view('seller/edit_saleitem', $data);
 		$this->load->view('footer/footer', $data);
 	}
+
 
 	public function thank(){
 		$data['title']= 'Thank';
@@ -191,14 +193,19 @@ class Item extends CI_Controller{
 		}
 
 	}
-	public function searchItem($search){
+	public function searchItem($search, $page){
 		$this->load->model("item_model");
-		$list = $this->item_model->searchItem($search);
+		$list = $this->item_model->searchItem($search, $page);
 		if(!$list)
 			$data['isFound'] = FALSE;
 		else 
 			$data['isFound'] = TRUE;
-		$data['data'] = $list;
+		/*
+		 *In $list there are two value total and data where total contain num of all search item and data contain all item in page
+		 *
+		 */
+		$data['data'] = $list['data'];
+		$data['search'] = $search;
 		$data['template_type'] = "ecommerce";
 		$this->load->view('header/header',$data);
 		$this->load->view('item/search_result', $data);
