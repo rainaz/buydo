@@ -17,24 +17,24 @@
                 url: true
             },
             initial_price: {
-                required: required: function(element) {
+                required: function(element) {
                     return $("#initial_price").val() > 0;
-                }
+                },
                 number: true
             },
-            enddate {
+            enddate: {
                 required: true
             },
-            endtime {
+            endtime: {
                 required: true
             },
-            spec {
+            spec: {
                 required: true
             },
-            payment_method {
+            payment_method: {
                 required: true
             },
-            agreement {
+            agreement: {
                 required: true
             }
         },
@@ -48,19 +48,19 @@
                 url: "Invalid URL"
             },
             initial_price: {
-                required: "Invalid Initial price"
+                required: "Invalid Initial price",
                 number: "Invalid Initial price"
             },
-            enddate {
+            enddate: {
                 required: "End Date is required"
             },
-            endtime {
+            endtime: {
                 required: "End time is required"
             },
-            spec {
+            spec: {
                 required: "Property is required"
-            }
-            agreement {
+            },
+            agreement: {
                 required: "Agreement is required"
             }
 

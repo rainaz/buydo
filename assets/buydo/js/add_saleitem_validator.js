@@ -51,11 +51,11 @@
                 rangelength: "Maximun length is 50"
             },
             price: {
-                required: "Invalid price"
+                required: "Invalid price",
                 number: "Invalid price"
             },
             quantity_in_stock: {
-                required: "Invalid quantity"
+                required: "Invalid quantity",
                 rangelength: "Invalid quantity",
                 number : "Invalid quantity"
             },
