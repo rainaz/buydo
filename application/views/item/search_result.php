@@ -1,6 +1,9 @@
 <div class="main">
   <div class="container">
-    <h2>Search result: "<?php echo $search_string;?>"</h2>
+    <?php
+      if(strlen($search_string)==0) echo '<h1>Buydo</h1>';
+      else echo '<h2>Search result: "'.$search_string.'"</h2>';
+    ?>
     <!-- BEGIN SIDEBAR & CONTENT -->
     <div class="row margin-bottom-40">
       <!-- BEGIN CONTENT -->

@@ -10,10 +10,8 @@ class User extends CI_Controller{
 		$this->load->model('saleitem_model');
 	}
 	public function index(){
-        $data['template_type'] = "ecommerce";
-        $this->load->view('header/header', $data);
-        $this->load->view('page/home');
-        $this->load->view('footer/footer');
+			$this->load->helper('url');
+     		redirect('/item', 'refresh');
 	}
 
 	public function login(){
@@ -96,8 +94,9 @@ class User extends CI_Controller{
 		$username=$this->input->post('username');
 		$password=sha1($this->input->post('password'));
 		$result=$this->user_model->login($username,$password);
-		if($result)
+		if($result){
 			$this->index();
+     	}
 		else{
 			$data['message']="ERROR: No username or password";
 	        $this->load->view('header/header');
