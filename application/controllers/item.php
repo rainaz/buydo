@@ -67,6 +67,10 @@ class Item extends CI_Controller {
 	public function showItem($id) {
 		$this->load->model('item_model');
 		$data = $this->item_model->getItemInfo($id);
+
+
+
+
 		$data['template_type'] = "ecommerce";
 		$this->load->view('header/header', $data);
 		if ($data['type'] == "Sales") {
@@ -415,5 +419,37 @@ class Item extends CI_Controller {
 	}
 
 
+	function confirmBuy() {
+		$data = array(
+				"itemID" => $this->input->post('itemID'),
+				"itemName"=>$this->input->post('itemName'),
+				"price" => $this->input->post('price'),
+				"quantity" => $this->input->post('quantity')
+			);
+
+		$this->load->view('header/header');
+		$this->load->view('checkout/enter_checkout',$data);
+		$this->load->view('footer/footer');
+	}
+
+	function confirmCheckout1() {
+	$data = array(
+				"itemID" => $this->input->post('itemID'),
+				"itemName"=>$this->input->post('itemName'),
+				"price" => $this->input->post('price'),
+				"quantity" => $this->input->post('quantity'),
+				"creditcard" => $this->input->post('creditcard')
+			);
+
+		$this->load->view('header/header');
+		$this->load->view('checkout/confirm_checkout',$data);
+		$this->load->view('footer/footer');
+	}
+
+	function confirmCheckout2() {
+		$this->load->view('header/header');
+		$this->load->view('checkout/buy_complete',$data);
+		$this->load->view('footer/footer');
+	}
 
 } ?>

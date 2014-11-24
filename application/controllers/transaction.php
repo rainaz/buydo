@@ -25,8 +25,8 @@ class Transaction extends CI_Controller{
 			$this->index();
 		}
 		else {
-			$buyerid  = $this->input->post('buyer_id');			
-			$itemid = $this->input->post('item_id');
+			$buyerid  = $this->session->userdata('user_id');			
+			$itemid = $this->input->post('itemID');
 			$quantity = $this->input->post('quantity');
 			$transactionstatus = "wait";
 			$this->transaction_model->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);

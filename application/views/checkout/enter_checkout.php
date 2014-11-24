@@ -11,7 +11,7 @@
 				<div class="content-form-page">
 					<div class="row">
 						<div class="col-md-7 col-sm-7">
-							<form class="form-horizontal" role="form" id="form_confirm_credit">
+							<form class="form-horizontal" role="form" id="form_confirm_credit" method="post" action="<?php echo site_url('item/confirmCheckout1'); ?>">
 								<fieldset>
 									<div class="form-group">
 										<label for="creditcard" class="col-lg-4 control-label">Creditcard <span class="require">*</span></label>
@@ -20,7 +20,10 @@
 										</div>
 									</div>
 								</fieldset>
-
+								<input type="hidden" name="itemID" value="<?php echo $itemID; ?>" />
+								<input type="hidden" name="itemName" value="<?php echo $itemName; ?>" />
+                      			<input type="hidden" name="price" value="<?php echo $price; ?>" />
+                      			<input type="hidden" name="quantity" value="<?php echo $quantity; ?>" />
 								<div class="row">
 									<div class="col-lg-8 col-md-offset-7 padding-left-0 padding-top-20">                        
 										<button type="submit" class="btn btn-primary">Confirm</button>
