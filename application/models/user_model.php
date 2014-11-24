@@ -174,10 +174,14 @@ class User_model extends CI_Model {
     $actualpassword = $this->getPasswordByID($this->session->userdata('user_id'));
     $oldpassword = sha1($this->input->post('old_password'));
 
-    if($actualpassword != $oldpassword) return false;
-    if($this->input->post('password') != $this->input->post('password_confirm')) return false;
+    if($actualpassword != $oldpassword) {
+      return false;
+    }
+    if($this->input->post('password') != $this->input->post('confirm_password')){
+       return false;
+    }
 
-    if(strlen($password)==0){
+    if(strlen($this->input->post('password') )==0){
       $password = $actualpassword;
     }
     else $password = sha1($this->input->post('password') );
