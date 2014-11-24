@@ -79,6 +79,39 @@ class Item extends CI_Controller {
 
 	}
 
+
+
+	public function announceBidWinner($item_id){
+
+	$interestItem = $this->item_model->getItemInfo($item_id);
+		$this->item_model->changeItemStatus($item_id,"bidding_closed");
+	
+		$winnerEmail = $this->biditem_model->getWinnerEmail($item_id);
+		$loserEmail = $this->biditem_model->getLoserEmail($item_id);
+
+
+		$this->load->library("email_library");
+		$this->email_library->sendEmail($winnerEmail, "You are the winner [".$interestItem['itemName']."]","Congratulation! You won the ".$interestItem['itemName'].". please confirm your payment at the website");
+	
+		foreach ($loserEmail as $item) {
+			$this->email_library->sendEmail($item, "You lose [".$interestItem['itemName']."]","You lost the ".$interestItem['itemName'].". Thank you for your participation.");
+	
+		}
+		//send email to winner id query winner email, send win email to him
+		//send email to loser	id query all bidder except winner id
+		//done
+	}
+
+	public function payTimeOut($item_id){
+
+		$interestItem = $this->item_model->getItemInfo($item_id);
+		$isPay = $this->item_model->verifyWinnerAlreadyPaid($item_id);
+		if(!$isPay){
+			$this->user_model->penalize($interestItem['current_winner_id']);
+		}
+	}
+
+
 	// public function submitSaleItem() {
 	// 	$this->load->library('form_validation');
 	// 	// field name, error message, validation rules
@@ -275,6 +308,9 @@ class Item extends CI_Controller {
 		$this->load->view('item/search_result', $data);
 		$this->load->view('footer/footer', $data);
 	}
+
+
+
 
 
 		public function viewBidItemByID() {

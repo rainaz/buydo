@@ -100,6 +100,7 @@ License: You must have a valid license purchased only from themeforest (the abov
               <li><a href="<?php echo site_url('user/login'); ?>">Log In</a></li>
               <li><a href="<?php echo site_url('user/register'); ?>">Registration</a></li>
               <?php }else{ ?>
+              <li><a href="<?php echo site_url('user/my_account'); ?>">My Account</a></li>
               <li><a href="<?php echo site_url('user/systemComplain'); ?>">Complain</a></li>
               <li><a href="<?php echo site_url('user/logout'); ?>">Log Out</a></li>
               <?php } ?>

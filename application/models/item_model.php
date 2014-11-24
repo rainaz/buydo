@@ -143,6 +143,7 @@ class Item_model extends CI_Model {
 				"timeLeft" => $timeLeft->format("%Y-%m-%d %H:%i:%s"),
 				"isClose" => $timeLeft->format("%R") == "+",
 				"status" => $query->status,
+				"winnerID"=>$query->current_winner_id,
 				"spec" => $query->spec,
 				"agreement" => $query->agreement,
 				"nextBid" => $query->current_price + $query->initial_price * 0.05,
