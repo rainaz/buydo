@@ -30,6 +30,7 @@ class Complain_model extends CI_Model {
 		return false;
 	}
 	public function add_complain(){
+
 		 $data=array(
 			'user_id' =>$this->session->userdata('user_id'),
 			'date'=>date('Y-m-d'),
