@@ -176,16 +176,11 @@ class User extends CI_Controller{
 				'status' => $status
 				);
 			$arrayElement2 = array($anArrayElement);
-			var_dump($anArrayElement);
-			echo "<br />";
+
 			$theArrayToPass = array_merge ( $theArrayToPass , $arrayElement2 );
 
 		}
-		var_dump($theArrayToPass);
-		echo "<br />";
 		$data = array ( 'theArrayToPass' => $theArrayToPass );
-		var_dump($data);
-		echo "<br />";
 		$data2 = array(
 			'template_type' =>"corporate"
 		);
