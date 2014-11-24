@@ -176,4 +176,4 @@ INSERT INTO `transactions`(`buyer_id`, `item_id`, `placement_date`, `quantity`, 
 (1,8,"1993-7-6 01:05:00",3,"complete"),
 (1,9,"1993-7-6 01:05:00",1,"wait"),
 (1,10,"1993-7-6 01:05:00",1,"complete"),
-(14,4,"1993-7-6 01:04:00",1,"received");
+(14,4,"1993-7-6 01:04:00",1,"notpay");
