@@ -211,6 +211,7 @@ class User extends CI_Controller{
 				'price' => $price,
 				'placement_date' => $placement_date,
 				'status' => $status,
+				'seller_id' => $anItem->owner_id,
 				'item_id' => $aTransaction['item_id']
 
 				);
@@ -227,6 +228,7 @@ class User extends CI_Controller{
 	    $this->load->view('item/transaction_history',$data);
 	    $this->load->view('footer/footer');
 	}
+
 
 	public function manageprofile(){
 /*		$this->load->library('form_validation');

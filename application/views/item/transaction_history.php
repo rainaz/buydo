@@ -70,9 +70,8 @@ $transaction = $theArrayToPass;
 
                       <?php
                       if ( $aTransaction['status'] == "received" ) {
-                        echo '<form id="give_feedback_form" method="post" action="'.site_url('user/userComplain').'">
-                        <input type="hidden" name="transaction_id" id="transaction_id" value='. $aTransaction['transaction_id'] .'>
-                        <button type="submit" class="btn blue"><i class="fa fa-thumbs-up"></i> Give Feedback</button>
+                        echo '<a class="btn blue" href="'.site_url('transaction/give_feedback/'.$aTransaction['transaction_id'].'/'.$this->session->userdata('user_id').'/'.$aTransaction['seller_id']).'">
+                        <i class="fa fa-thumbs-up"></i> Give Feedback</a>
                       </form>';
                     }
                     ?>
