@@ -137,17 +137,17 @@ INSERT INTO `admins` (`user_id`) VALUES
 (10),(20),(30),(40),(50),(60),(70),(80),(90),(100);
 
 INSERT INTO `items`(`item_name`, `posted_date`, `agreement`, `status`, `spec`, `owner_id`, `picture`) VALUES 
-("ตุ๊กตาคุณมามิ","1993-4-12","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","in_stock","ตุ๊กตาพลาสติกขนาดสูง 15 ซม.","6","https://dl.dropboxusercontent.com/u/3631217/1.jpg"),
-("Collection ตุ๊กตาน้องงู","1993-4-12","ไม่ขายสินค้าแยกชิ้น และไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","in_stock","ชุดตุ๊กตายาง 3 ตัว ความสูง 3-5 นิ้ว","17","https://dl.dropboxusercontent.com/u/3631217/2.jpg"),
-("ตุ๊กตา Mizaka","1993-7-6","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","bidding_closed","ตุ๊กตาพลาสติกขนาดสูง 15 ซม.","17","https://dl.dropboxusercontent.com/u/3631217/3.jpg"),
-("ตุ๊กตารินจัง","1993-4-12","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","bidding_closed","ตุ๊กตาพลาสติกขนาดสูง 15 ซม.","6","https://dl.dropboxusercontent.com/u/3631217/4.jpg"),
-("ตุ๊กตา  Night fury","1993-4-12","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","in_stock","ตุ๊กตาผ้าขนาดสูง 2 ฟุต","17","https://dl.dropboxusercontent.com/u/3631217/5.jpg"),
-("ตุ๊กตาปิกาจู","1993-4-12","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","in_stock","ตุ๊กตาผ้าขนาดสูง 1 ฟุต","29","https://dl.dropboxusercontent.com/u/3631217/6.jpg"),
-("สเต๊กปลาดุก","1993-4-12","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","in_stock","สเต๊กที่ยังไม่ได้ทำการให้ความร้อนหนัก 250 กรัม","38","https://dl.dropboxusercontent.com/u/3631217/7.jpg"),
-("ดินสอความเข้ม HB","1993-4-12","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","in_stock","ดินสอ HB ความยาว 12 ซม. จำนวน 5 แท่ง/กล่อง","47","https://dl.dropboxusercontent.com/u/3631217/8.jpg"),
-("Motorcycle สีดำเข้ม","1993-4-12","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","in_stock","Motorcycle สีดำ 900cc","96","https://dl.dropboxusercontent.com/u/3631217/9.jpg"),
-("กล่อง Nikon","1999-9-12","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","in_stock","กล่อง Nikon มือสองสภาพการใช้งานใกล้เคียงของใหม่ แต่ไม่สามารถทำ Auto focus ได้","87","https://dl.dropboxusercontent.com/u/3631217/10.jpg"),
-("กล่อง Nikon","2014-4-12","ไม่รับคืนสินค้าหลังทำการส่งมอบเรียบร้อย","bidding","กล่อง Nikon มือสองสภาพการใช้งานใกล้เคียงของใหม่ แต่ไม่สามารถทำ Auto focus ได้","87","https://dl.dropboxusercontent.com/u/3631217/10.jpg");
+("Nami doll","1993-4-12","not return after received","in_stock","high 15 cm.","6","https://dl.dropboxusercontent.com/u/3631217/1.jpg"),
+("Collection snake doll","1993-4-12","not return after received and sell as a set only","in_stock","3 doll in the set high 3-5 inc","17","https://dl.dropboxusercontent.com/u/3631217/2.jpg"),
+("Mizaka doll","1993-7-6","not return after received","bidding_closed","high 15 cm.","17","https://dl.dropboxusercontent.com/u/3631217/3.jpg"),
+("Rin jung doll","1993-4-12","not return after received","bidding_closed","high 15 cm.","6","https://dl.dropboxusercontent.com/u/3631217/4.jpg"),
+("Night fury doll","1993-4-12","not return after received","in_stock","high 2 foot","17","https://dl.dropboxusercontent.com/u/3631217/5.jpg"),
+("Pikaju doll","1993-4-12","not return after received","in_stock","high 1 foot","29","https://dl.dropboxusercontent.com/u/3631217/6.jpg"),
+("steak pladook","1993-4-12","not return after received","in_stock","freeze steak 250 g","38","https://dl.dropboxusercontent.com/u/3631217/7.jpg"),
+("pencil HB","1993-4-12","not return after received","in_stock","HB pencil 12 cm. 5 pencil/box","47","https://dl.dropboxusercontent.com/u/3631217/8.jpg"),
+("Motorcycle BLACK","1993-4-12","not return after received","in_stock","BLACK Motorcycle 900cc","96","https://dl.dropboxusercontent.com/u/3631217/9.jpg"),
+("Nikon box","1999-9-12","not return after received","in_stock","Nikon 2nd hand่ can't Auto focus","87","https://dl.dropboxusercontent.com/u/3631217/10.jpg"),
+("Nikon box","2014-4-12","not return after received","bidding","Nikon 2nd hand่ can't Auto focus","87","https://dl.dropboxusercontent.com/u/3631217/10.jpg");
 
 INSERT INTO `bid_items`(`item_id`, `current_winner_id`, `initial_price`, `current_price`, `current_max_bid`, `end_date`) VALUES 
 (3,15,100,900,1500,"1993-7-6 02:59:00"),
@@ -172,8 +172,8 @@ INSERT INTO `bid`(`item_id`, `buyer_id`, `current_bid`, `max_bid`, `bid_date`) V
 INSERT INTO `transactions`(`buyer_id`, `item_id`, `placement_date`, `quantity`, `transaction_status`) VALUES 
 (15,3,"1993-7-6 01:05:00",1,"wait"),
 (1,2,"1993-7-6 01:05:00",1,"received"),
-(2,7,"1993-7-6 01:05:00",10,"wait"),
-(3,8,"1993-7-6 01:05:00",3,"complete"),
-(4,9,"1993-7-6 01:05:00",1,"wait"),
-(5,10,"1993-7-6 01:05:00",1,"complete"),
+(1,7,"1993-7-6 01:05:00",10,"wait"),
+(1,8,"1993-7-6 01:05:00",3,"complete"),
+(1,9,"1993-7-6 01:05:00",1,"wait"),
+(1,10,"1993-7-6 01:05:00",1,"complete"),
 (14,4,"1993-7-6 01:04:00",1,"received");
