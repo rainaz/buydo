@@ -95,6 +95,41 @@ class User_model extends CI_Model {
     return $this->db->insert_id();
   }
 
+  public function getAllUserIDAndNameAndType(){
+    $query = $this->db->query("SELECT user_id, username FROM users");
+    //only buyer
+    $sql1 = "SELECT user_id, name FROM buyers LEFT JOIN users";
+    $sql2 = "SELECT user_id, name FROM sellers LEFT JOIN users";
+
+    $query1 = $this->db->query($sql1);
+    $qarray1 = $query1->result_array();
+    $query2 = $this->db->query($sql2);
+    $qarray2 = $query2->result_array();
+
+    $resultArray = array();
+    foreach($qarray1 as $row){
+      $narray = array(
+        array(
+          "user_id"=>$row['user_id'],
+          "name"=>$row['name'],
+          "user_type"=>"Buyer"
+        )
+      );
+      $resultArray = array_merge($resultArray, $narray);
+    }
+    foreach($qarray2 as $row){
+      $narray = array(
+        array(
+          "user_id"=>$row['user_id'],
+          "name"=>$row['name'],
+          "user_type"=>"Seller"
+        )
+      );
+      $resultArray = array_merge($resultArray, $narray);
+    }
+    return $resultArray;
+  }
+
   public function getUserIDByEmail($email){
     $query = $this->db->query("SELECT user_id FROM users WHERE email = '".$email."'");
     if($query->num_rows() > 0){
@@ -155,6 +190,8 @@ class User_model extends CI_Model {
     }
     return false;
   }
+
+
 
 
   public function manageProfileByUserID($id,$name,$surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
