@@ -79,7 +79,7 @@ $transaction = $theArrayToPass;
                   </li>
 
                   <li>
-                    <form id="complain_form" method="post" action="">
+                    <form id="complain_form" method="post" action="<?php echo site_url('user/userComplain'); ?>">
                       <input type="hidden" name="transaction_id" id="transaction_id" value=<?php echo $aTransaction['transaction_id'] ?> >
                       <button type="submit" class="btn red"><i class="fa fa-bullhorn"></i> Complain Seller</button>
                     </form>
