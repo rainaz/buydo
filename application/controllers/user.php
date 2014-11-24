@@ -368,7 +368,8 @@ public function viewBidHistory(){
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'required');
 		//if($this->form_validation->run() == FALSE){
-		if($this->input->post("password") != $this->input->post("confirm_password")){
+		if(($this->input->post("password") != $this->input->post("confirm_password")) || $this->input->post("password")=="" || $this->input->post("confirm_password")=="" )
+		{
 			// Warning password not match
 			redirect("/user/changePasswordPageAgain/".$hash);
 		}
