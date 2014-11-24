@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `items` (
 --
 CREATE TABLE IF NOT EXISTS `recover_url`(
 	`user_id` int(11) NOT NULL,
-	`user_email` int(11) NOT NULL,
+	`user_email` varchar(50) NOT NULL,
 	`url` varchar(42) NOT NULL,
 	PRIMARY KEY (`user_id`)
 
