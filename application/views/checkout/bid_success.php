@@ -12,7 +12,7 @@
 			<p><h2>Your max bid is <?php echo $value ?> </h2></p>
 			</div>
 			<div class="padding-top-20">
-				<a href=<?php echo site_url(''); ?>><button type="button" class="btn btn-primary">Done</button></a> 
+				<a href=<?php echo site_url('item/showItem/'.$item_id); ?>><button type="button" class="btn btn-primary">Done</button></a> 
 			</div>
 			<div class="padding-top-40"></div>
 		</div>

@@ -244,9 +244,9 @@ class Transaction extends CI_Controller{
 			$score = $this->input->post('score');
 			$comment = $this->input->post('comment');
 			$this->feedback_model->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
-			if($this->feedback_model->verifyFeedbackHasTwoWays($transid)){
-				$this->transaction_model->setTransactionStatusFromTransactionID($transid, "complete");
-			}
+			//if($this->feedback_model->verifyFeedbackHasTwoWays($transid)){
+			$this->transaction_model->setTransactionStatusFromTransactionID($transid, "complete");
+			//}
 			//echo "comment = $comment\n";
 			//echo "Feedback received\n";
 			//$this->index();
