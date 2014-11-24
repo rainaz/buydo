@@ -112,8 +112,8 @@ class Transaction extends CI_Controller{
 
 
 			$this->load->library("email_library");
-			$this->email_library->sendEmail($buyerEmail,"lui tua", "Please give feedback to your seller");
-			$this->email_library->sendEmail($sellerEmail,"lui tua", "Please give feedback to your buyer");
+			$this->email_library->sendEmail($buyerEmail,"Item delivered!", "Please give feedback to your seller");
+			$this->email_library->sendEmail($sellerEmail,"Item delivered!", "Please give feedback to your buyer");
 			$this->index();	
 		}
 
