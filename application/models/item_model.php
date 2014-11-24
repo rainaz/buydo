@@ -58,6 +58,11 @@ class Item_model extends CI_Model {
 		}
 		return false;
 	}
+
+	public function setItemStatus($itemid, $nstatus){
+		$sql = "UPDATE items SET item_status = "."'".$nstatus."'"." WHERE item_id = "."'".$itemid."'";
+		$query = $this->db->query($sql);		
+	}
 //commit the object in php to a tuple in database
 	public function addItem() {
 		$today = date('Y-m-d');
