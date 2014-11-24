@@ -66,8 +66,8 @@
         }
     </script>
 
-    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
-    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js" type="text/javascript"></script>
     <script src="/buydo/assets/buydo/js/register_validator.js" type="text/javascript"></script>
     <script src="/buydo/assets/buydo/js/login_validator.js" type="text/javascript"></script>
     <script src="/buydo/assets/buydo/js/add_saleitem_validator.js" type="text/javascript"></script>
@@ -76,6 +76,7 @@
     <script src="/buydo/assets/buydo/js/editbid_validator.js" type="text/javascript"></script>
     <script src="/buydo/assets/buydo/js/recovery_password_validator.js" type="text/javascript"></script>
     <script src="/buydo/assets/buydo/js/new_password_form_validator.js" type="text/javascript"></script>
+    <script src="/buydo/assets/buydo/js/manage_profile_form_validator.js" type="text/javascript"></script>
 
 </body>
 <!-- END BODY -->
