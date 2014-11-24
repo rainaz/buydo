@@ -580,7 +580,7 @@ class Item extends CI_Controller {
 				"itemName"=>$this->input->post('itemName'),
 				"price" => $this->input->post('price'),
 				"quantity" => $this->input->post('quantity'),
-				"creditcard" => $this->user_model->getUserByUserID( $this->session->userdata('user_id')->creditcard )
+				"creditcard" => $this->user_model->getUserByUserID( $this->session->userdata('user_id'))->creditcard
 			);
 
 		$this->load->view('header/header');
