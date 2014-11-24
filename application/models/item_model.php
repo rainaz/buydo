@@ -163,8 +163,8 @@ class Item_model extends CI_Model {
 		if ($isBid > 0) {
 
 
-			$query = $this->db->query("SELECT `a`.`item_name`,`b`.`current_winner_id`, `b`.`current_max_bid`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . ";")->first_row();
-
+			$query = $this->db->query("SELECT `a`.`owner_id`, `a`.`item_name`,`b`.`current_winner_id`, `b`.`current_max_bid`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . ";")->first_row();
+			
 			$timeLeft = (new DateTime($query->end_date))->diff(new DateTime());
 			$data = array(
 				"itemID"=>$id,
@@ -182,12 +182,12 @@ class Item_model extends CI_Model {
 				"agreement" => $query->agreement,
 				"nextBid" => $query->current_price + $query->initial_price * 0.05,
 				"picURL" => $query->picture,
-				"end_date" => $query->end_date
+				"end_date" => $query->end_date,
+				"owner" => $query->owner_id
 			);
-			return $data;
 		} else {
 
-			$query = $this->db->query("SELECT `a`.`item_name`, `a`.`agreement`, `a`.`status`,`a`.`spec`, `b`.`price`, `b`.`quantity_in_stock`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id` WHERE `a`.`item_id`=" . $id . ";");
+			$query = $this->db->query("SELECT `a`.`owner_id`, `a`.`item_name`, `a`.`agreement`, `a`.`status`,`a`.`spec`, `b`.`price`, `b`.`quantity_in_stock`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `sale_items` AS `b` ON `a`.`item_id`=`b`.`item_id` WHERE `a`.`item_id`=" . $id . ";");
 			if ($query->num_rows() != 1) {
 				return false;
 			}
@@ -203,9 +203,12 @@ class Item_model extends CI_Model {
 				"spec" => $query->spec,
 				"agreement" => $query->agreement,
 				"picURL" => $query->picture,
+				"owner" => $query->owner_id
 			);
-			return $data;
 		}
+		$query2 = $this->db->query("SELECT `username` FROM `users`  WHERE `user_id`=".$data['owner'].";");
+		$data['owner'] = $query2->first_row()->username;
+		return $data;
 	}
 
 }

@@ -436,7 +436,7 @@ class Item extends CI_Controller {
 			"itemName" => $this->input->post('itemName'),
 			"initial_price" => $this->input->post('initialPrice'),
 			"current_winner_id" => $this->input->post('winnerID'),
-			"current_price" => $this->input->post('currentPrice')		,
+			"current_price" => $this->input->post('currentPrice'),
 			"current_max_bid" => $this->input->post('maxBid'),
 			"end_date" => $this->input->post('endDate')
 			);
@@ -444,17 +444,20 @@ class Item extends CI_Controller {
 		$user_id = $this->session->userdata('user_id');
 		$item_id = $data['item_id'];
 
-		$data['value'] = $data['value'] - $data['value']%($data['initial_price']*0.05);
+		//$data['value'] = $data['value'] - $data['value']%($data['initial_price']*0.05);
 		$nmaxbidprice = $data['value'];
 
 		if(strlen($data['current_max_bid'])==0){
 			$nmaxbidprice = $data['initial_price'];
+
 		//	echo 'maxbidnull';
 		}
 		else{
 			$nmaxbidprice = $data['current_price']+$data['initial_price']*0.05;
+
 		//	echo 'maxbidnotnull';
 		}
+		$data['value'] = $nmaxbidprice;
 		//echo $nmaxbidprice;
 		$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
 		$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);

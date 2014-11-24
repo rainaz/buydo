@@ -55,9 +55,12 @@ class Transaction extends CI_Controller{
 			$itemid = $this->input->post('itemID');
 			$quantity = $this->input->post('quantity');
 			$transactionstatus = "wait";
-			$result = $this->transaction_model->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
-			if(!$result){
-					echo "Transaction created lorlen\n";
+			$new_quantity = $this->saleitem_model->soldOut($itemid, $quantity);
+			if($new_quantity >= 0){
+				$result = $this->transaction_model->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
+				if(!$result){
+						echo "Transaction created lorlen\n";
+				}
 			}
 		
 			
@@ -119,6 +122,8 @@ class Transaction extends CI_Controller{
 	public function showUserFeedback(){		
 		$userid = $this->input->get('user_id');
 		if($userid=="") $userid = $this->session->userdata('user_id');
+		//if($userid=="") $userid = 6;
+
 		//$userid = 6;
 		$feedback = $this->feedback_model->getFeedbackByFeedbackReceiverUserID($userid);
 		//$data['username'] = $this->user_model->getNameByUserID($userid);

@@ -22,7 +22,7 @@
 								<div class="row">
 									<label for="description" class="col-lg-4 control-label"><?php echo $itemName;?></label>
 									<label for="description" class="col-lg-4 control-label">จำนวน x<?php echo $quantity;?></label>
-									<label for="description" class="col-lg-4 control-label">ราคา <?php echo $price." ".$itemID;?> บาท</label>
+									<label for="description" class="col-lg-4 control-label">ราคา <?php echo $price;?> บาท</label>
 
 								</div>
 								<input type="hidden" name="itemID" value="<?php echo $itemID; ?>" />
