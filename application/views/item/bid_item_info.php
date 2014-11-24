@@ -8,8 +8,8 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-6">
 							<div class="product-main-image">
-								<img src="<?php echo "/buydo/upload/img/items/".$picURL ;?>" class="img-responsive"
-								data-BigImgsrc="<?php echo "/buydo/upload/img/items/".$picURL ;?>">
+								<img src="<?php echo $picURL ;?>" class="img-responsive"
+								data-BigImgsrc="<?php echo $picURL ;?>">
 							</div>
 						</div>
 						<div class="col-md-6 col-sm-6">
