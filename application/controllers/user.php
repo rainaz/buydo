@@ -114,6 +114,14 @@ class User extends CI_Controller{
 		//$this->form_validation->set_rules('username', 'User Name', 'trim|required|min_length[4]|xss_clean');
 	  //  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
 		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
+		$dateresult = (new DateTime())->diff(new DateTime($this->input->post('birthdate')))->format("%R")=="+"; // birth in th future
+		if($dateresult){
+						$data['type']="danger";
+			$data['message']="Error! Birthday Error";
+			$this->load->view('header/header');
+	    	$this->load->view('content/simple_message', $data);
+	   		$this->load->view('footer/footer');
+		}
 		  $this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'trim|required|matches[password]');
 		if($this->form_validation->run() == FALSE){
 			$data['type']="danger";
