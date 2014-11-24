@@ -84,9 +84,12 @@ class Complain_model extends CI_Model {
 
 		$query2;
 		if($role=="buyer"){
-			$sql2 = "SELECT seller_id FROM transactions WHERE transaction_id = $transid";
+			$sql2 = "SELECT item_id FROM transactions WHERE transaction_id = $transid";
 			$query2 = $this->db->query($sql2);
-			return $query2->row()->seller_id;
+			$searchItem = $query2->row()->item_id;
+			$sql3 = "SELECT seller_id FROM items WHERE item_id = $searchItem";
+			$query3 = $this->db->query($sql3);
+			return $query3->row()->seller_id;
 		}
 		else if($role=="seller"){
 			$sql2 = "SELECT buyer_id FROM transactions WHERE transaction_id = $transid";
