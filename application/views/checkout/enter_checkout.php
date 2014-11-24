@@ -16,7 +16,7 @@
 									<div class="form-group">
 										<label for="creditcard" class="col-lg-4 control-label">Creditcard <span class="require">*</span></label>
 										<div class="col-lg-8">
-											<input type="number" class="form-control" maxlength=16 id="creditcard" name="creditcard">
+											<input type="number" class="form-control" maxlength=16 id="creditcard" name="creditcard" value=<?php echo $creditcard; ?>>
 										</div>
 									</div>
 								</fieldset>

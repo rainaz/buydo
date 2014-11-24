@@ -43,7 +43,8 @@ class Feedback_model extends CI_Model {
 	}
 
 	function getFeedbackByFeedbackID($id){
-		return $this->db->query("SELECT * FROM feedbacks WHERE feedback_id = ".$id);
+		$query = $this->db->query("SELECT * FROM feedbacks WHERE feedback_id = ".$id);
+		return $query->result();
 	}
 	function getFeedbackByFeedbackGiverUserID($id){
 		$query = $this->db->query("SELECT * FROM feedbacks WHERE feedback_from = ".$id);
@@ -53,6 +54,11 @@ class Feedback_model extends CI_Model {
 	function getFeedbackByFeedbackReceiverUserID($id){
 		$query = $this->db->query("SELECT * FROM feedbacks WHERE feedback_to = ".$id);
 		return $query->result_array();
+	}
+
+	function verifyFeedbackHasTwoWays($transid){
+		$query = $this->db->query("SELECT * FROM feedbacks WHERE transaction_id = $transid");
+		return $query->num_rows()==2;
 	}
 
 }
