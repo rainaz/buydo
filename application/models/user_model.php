@@ -140,6 +140,14 @@ class User_model extends CI_Model {
     return false;    
   }
 
+  public function getPasswordByID($id){
+    $query = $this->db->query("SELECT password FROM users WHERE user_id = $id");
+    if($query->num_rows() > 0){
+      return $query->row()->password;
+    }
+    return false;
+  }
+
 
   public function manageProfileByUserID($id,$name,$surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
 
