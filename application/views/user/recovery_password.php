@@ -10,7 +10,8 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal form-without-legend" role="form" method="post" id="recovery_password_form">
+                  <!--form class="form-horizontal form-without-legend" role="form" method="post" id="recovery_password_form"-->
+				  <?php echo form_open("user/recoverPassword"); ?>
                     <div class="row"><p>Please enter your email below. We will send our confirmation link to your email. </p></div>
 
                     <div class="form-group">
@@ -30,7 +31,8 @@
                         
                       </div>
                     </div>
-                  </form>
+				  <?php echo form_close(); ?>
+				  </form>
                 </div>
               </div>
             </div>

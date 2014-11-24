@@ -42,16 +42,20 @@ class User extends CI_Controller{
 		$result=$this->user_model->login($username,$password);
 		if($result)
 			$this->index();
-		else      
+		else{
 			$data['message']="ERROR: No username or password";
 	        $this->load->view('header/header');
 	        $this->load->view('content/simple_message',$data);
 	        $this->load->view('footer/footer');
+
 	}
 	public function submit_system_complain(){
 		$topic=$this->input->post('topic');
 		$detail=sha1($this->input->post('detail'));
 		$result=$this->complain_model->add_complain();
+
+		}
+
 
 		if($result)
 			$this->index();
@@ -169,6 +173,52 @@ class User extends CI_Controller{
 		$this->session->unset_userdata($newdata );
 		$this->session->sess_destroy();
 		$this->index();
+	}
+	public function askingRecover(){
+        $data['template_type'] = "corperate";
+        $this->load->view('header/header', $data);
+        $this->load->view('user/recovery_password');
+        $this->load->view('footer/footer');
+	}
+	public function recoverPassword(){
+	
+		$this->load->model("user_model");
+		$this->user_model->findUserByEmail($this->input->post('email'));
+		redirect("/");
+	}
+	public function changePasswordPage($hash){
+		$data['template_type'] = "corperate";
+		$data['hash'] = $hash;
+		$data['warning'] = FALSE;
+        $this->load->view('header/header', $data);
+        $this->load->view('user/new_password_form', $data);
+        $this->load->view('footer/footer');
+			
+	}
+	public function changePasswordPageAgain($hash){
+		$data['template_type'] = "corperate";
+		$data['hash'] = $hash;
+		$data['warning'] =TRUE;
+        $this->load->view('header/header', $data);
+        $this->load->view('user/new_password_form', $data);
+        $this->load->view('footer/footer');
+			
+	}
+	public function changePassword($hash){
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'required');
+		//if($this->form_validation->run() == FALSE){
+		if($this->input->post("password") != $this->input->post("confirm_password")){
+			// Warning password not match
+			redirect("/user/changePasswordPageAgain/".$hash);
+		}
+		else{
+			$this->load->model("user_model");
+			$tmp = $this->user_model->changePassword($hash, $this->input->post("password"));
+			redirect("/");
+		}
 	}
 }
 ?>

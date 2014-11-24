@@ -11,9 +11,12 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal form-without-legend" role="form" method="post" id="reset_password_form">
+                  <!--form class="form-horizontal form-without-legend" role="form" method="post" id="reset_password_form"-->
+				  <?php echo form_open("user/changePassword/".$hash); ?>
                     <div class="row"><p> We are resetting password for you. Please enter your new password. </p></div>
-
+					<?php if($warning) : ?>
+                    <div class="row"><p>Password not match. Please try again.</p></div>
+					<?php endif ; ?>
                     <div class="form-group">
                       <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
                       <div class="col-lg-8">
@@ -38,7 +41,7 @@
                         
                       </div>
                     </div>
-                  </form>
+					<?php echo form_close(); ?>
                 </div>
               </div>
             </div>
