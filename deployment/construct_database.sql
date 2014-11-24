@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `item_id` int(11) NOT NULL,
   `placement_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `quantity` int(11) NOT NULL,
-  `transaction_status` int(11) NOT NULL,
+  `transaction_status` text NOT NULL,
   PRIMARY KEY (`transaction_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 

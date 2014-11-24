@@ -107,16 +107,18 @@ class Item extends CI_Controller {
 			
 
 			if($now->diff($then)->format("%R") == "-") {
-				$this->item_model->setItemStatus($item_id,"bidding_closed");
+				 $this->item_model->setItemStatus($item_id,"bidding_closed");
+				
 				$winnerEmail = $this->biditem_model->getBidWinnerEmail($item_id);
 				$loserEmail = $this->biditem_model->getBidLoserEmail($item_id);
 				$this->load->library("email_library");
-				$this->email_library->sendEmail($winnerEmail, "You are the winner [".$interestItem['itemName']."]","Congratulation! You won the ".$interestItem['itemName'].". please confirm your payment at the website");
+				$this->email_library->sendEmail($winnerEmail->email, "You are the winner [".$interestItem['itemName']."]","Congratulation! You won the ".$interestItem['itemName'].". please confirm your payment at the website");
+				 $this->transaction_model->addTransaction($winnerEmail->user_id, $item_id, 1, "notpay");
+				if($loserEmail != FALSE){
+					foreach ($loserEmail as $item) {
+						$this->email_library->sendEmail($item, "You lose [".$interestItem['itemName']."]","You lost the ".$interestItem['itemName'].". Thank you for your participation.");
 				
-				
-				foreach ($loserEmail as $item) {
-					$this->email_library->sendEmail($item, "You lose [".$interestItem['itemName']."]","You lost the ".$interestItem['itemName'].". Thank you for your participation.");
-			
+					}
 				}
 			}
 

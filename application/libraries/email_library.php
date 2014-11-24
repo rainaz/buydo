@@ -8,7 +8,7 @@ class Email_library{
 			'smtp_user' => 'pladookspiral@gmail.com', // change it to yours
 			'smtp_pass' => 'pladookmasta', // change it to yours
 			'mailtype' => 'html',
-			'charset' => 'iso-8859-1',
+			'charset' => 'utf-8',
 			'wordwrap' => TRUE
 		);
 
