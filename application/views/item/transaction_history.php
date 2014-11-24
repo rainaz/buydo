@@ -31,7 +31,16 @@ $transaction = $theArrayToPass;
                       <li>Seller: <?php echo $aTransaction['seller']; ?> </li>
                       <li>Total Price: THB <?php echo $aTransaction['price']; ?> </li>
                       <li>Placement Date: <?php echo $aTransaction['placement_date']; ?></li>
-                      <li>Order Status: <?php echo $aTransaction['status']; ?></li>
+                      <li>
+                        Order Status: 
+                          <?php 
+                            if($aTransaction['status'] == "notpay") echo "Unpaid"; 
+                            if($aTransaction['status'] == "wait") echo "Waiting for delivery";
+                            if($aTransaction['status'] == "received") echo "Received";
+                            if($aTransaction['status'] == "complete") echo "Completed";
+                            if($aTransaction['status'] == "failed") echo "Failed";
+                          ?>
+                      </li>
                     </ul>
                   </div>
 
@@ -40,7 +49,7 @@ $transaction = $theArrayToPass;
                     <ul class="list-inline">
                       <li>
                         <?php
-                        if ( $aTransaction['status'] == 0 ) {
+                        if ( $aTransaction['status'] == "notpay" ) {
                           echo '<form id="pay_form" method="post" action="'. site_url("transaction/pay") .'">';
                           echo '<input type="hidden" name="transaction_id" id="transaction_id" value='.$aTransaction['transaction_id'].' >';
                           echo '<button type="submit" class="btn green"><i class="fa fa-money"></i> Pay </button>';
@@ -51,8 +60,8 @@ $transaction = $theArrayToPass;
 
 
                         <?php 
-                        if ( $aTransaction['status'] == 1 ) {
-                          echo '<form id="notify_delivery_form" method="post" action="'..'">
+                        if ( $aTransaction['status'] == "wait" ) {
+                          echo '<form id="notify_delivery_form" method="post" action="'."".'">
                           <input type="hidden" name="transaction_id" id="transaction_id" value=' .$aTransaction['transaction_id'] .' >
                           <button type="submit" class="btn yellow"><i class="fa fa-bullhorn"></i> Notify Delivery</button>
                         </form>';
@@ -60,8 +69,8 @@ $transaction = $theArrayToPass;
                       ?>
 
                       <?php
-                      if ( $aTransaction['status'] == 2 ) {
-                        echo '<form id="give_feedback_form" method="post" action="'..'">
+                      if ( $aTransaction['status'] == "received" ) {
+                        echo '<form id="give_feedback_form" method="post" action="'."".'">
                         <input type="hidden" name="transaction_id" id="transaction_id" value='. $aTransaction['transaction_id'] .'>
                         <button type="submit" class="btn blue"><i class="fa fa-thumbs-up"></i> Give Feedback</button>
                       </form>';
