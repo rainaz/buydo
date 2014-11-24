@@ -36,6 +36,13 @@ class User extends CI_Controller{
         $this->load->view('user/system_complain');
         $this->load->view('footer/footer');
 	}
+	public function userComplain(){
+
+        $data['template_type'] = "corporate";
+        $this->load->view('header/header', $data);
+        $this->load->view('user/user_complain');
+        $this->load->view('footer/footer');
+	}
 
 	public function myAccount() {
 		$data['template_type'] = "corporate";
@@ -48,6 +55,28 @@ class User extends CI_Controller{
 		$topic=$this->input->post('topic');
 		$detail=($this->input->post('detail'));
 		$result=$this->complain_model->add_complain();
+		if($result) {
+			$data['message']="SUCCESS: your complaint has been processed.";
+	        $data['type']="success";
+	        $this->load->view('header/header');
+	        $this->load->view('content/simple_message',$data);
+	        $this->load->view('footer/footer');
+		}
+		else {
+			$data['message']="ERROR: cannot submit complain";
+	        $this->load->view('header/header');
+	        $this->load->view('content/simple_message',$data);
+	        $this->load->view('footer/footer');
+	    }
+	}
+	public function submit_user_complain(){
+		$transid=$this->input->post('transaction_id');
+		$topic=$this->input->post('topic');
+		$detail=($this->input->post('detail'));
+
+		$accused_id = $this->complain_model->getAccusedID($this->session->userdata('user_id'),$transid);
+
+		$result=$this->complain_model->add_complain_user($accused_id);
 		if($result) {
 			$data['message']="SUCCESS: your complaint has been processed.";
 	        $data['type']="success";

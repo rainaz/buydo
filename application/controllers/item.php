@@ -5,6 +5,7 @@
 class Item extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
+		$this->load->model('user_model');
 		$this->load->model('item_model');
 		$this->load->model('saleitem_model');
 		$this->load->model('biditem_model');
@@ -130,15 +131,23 @@ class Item extends CI_Controller {
 		//send email to loser	id query all bidder except winner id
 		//done
 	
+	public function payTimeOutAll(){
+		$items = $this->transaction_model->getTransactionFromStatus("notpay");
+		var_dump($items);
+		foreach($items as $item){
+			$this->user_model->addPenalty($item->buyer_id);
+			$this->transaction_model->setTransactionStatusFromTransactionID($item->transaction_id, "fail");
+		}
+	}
 
-	public function payTimeOut($item_id){
+/*	public function payTimeOut($item_id){
 
 		$interestItem = $this->item_model->getItemInfo($item_id);
 		$isPay = $this->item_model->verifyWinnerAlreadyPaid($item_id);
 		if(!$isPay){
 			$this->user_model->punishUnpaidBidWinners($interestItem['current_winner_id']);
 		}
-	}
+	}*/
 
 
 	// public function submitSaleItem() {
