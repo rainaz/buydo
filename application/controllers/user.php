@@ -5,15 +5,24 @@ class User extends CI_Controller{
 		parent::__construct();
 		$this->load->model('user_model');
 		$this->load->model('complain_model');
+		$this->load->model('item_model');
 	}
 	public function index(){
         $data['template_type'] = "ecommerce";
         $this->load->view('header/header', $data);
+     //   $this->load->view('view_history.php');
         $this->load->view('page/home');
         $this->load->view('footer/footer');
 	}
 
 	public function login(){
+        $data['template_type'] = "corperate";
+        $this->load->view('header/header', $data);
+        $this->load->view('user/login');
+        $this->load->view('footer/footer');
+	}
+	public function systemComplain()
+	{
         $data['template_type'] = "corperate";
         $this->load->view('header/header', $data);
         $this->load->view('user/login');
@@ -76,6 +85,24 @@ class User extends CI_Controller{
 		}
 	}
 	
+	public function viewBidHistory(){
+		$data['title']= 'bidHistory';
+
+		$data['user_id'] = $this->input->post('user_id');
+
+		$bidHistory = $this->item_model->getItemInfo(1);
+
+		$this->load->view('header_view');
+		$this->load->view('thank_view.php', $bidHistory);
+		$this->load->view('footer_view');
+
+	}
+	public function thank(){
+		$data['title']= 'Thank';
+		$this->load->view('header_view',$data);
+		$this->load->view('thank_view.php', $data);
+		$this->load->view('footer_view',$data);
+	}
 	public function addComplainUser(){
 		$this->load->library('form_validation');
 		// field name, error message, validation rules

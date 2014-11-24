@@ -96,9 +96,11 @@ License: You must have a valid license purchased only from themeforest (the abov
           <div class="col-md-6 col-sm-6 additional-nav">
             <ul class="list-unstyled list-inline pull-right">
               <?php if($is_login==FALSE){ ?>
+
               <li><a href="<?php echo site_url('user/login'); ?>">Log In</a></li>
               <li><a href="<?php echo site_url('user/register'); ?>">Registration</a></li>
               <?php }else{ ?>
+              <li><a href="<?php echo site_url('user/login'); ?>">Complain</a></li>
               <li><a href="<?php echo site_url('user/logout'); ?>">Log Out</a></li>
               <?php } ?>
             </ul>
