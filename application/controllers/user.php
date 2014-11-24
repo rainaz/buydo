@@ -5,12 +5,10 @@ class User extends CI_Controller{
 		parent::__construct();
 		$this->load->model('user_model');
 		$this->load->model('complain_model');
-		$this->load->model('item_model');
 	}
 	public function index(){
         $data['template_type'] = "ecommerce";
         $this->load->view('header/header', $data);
-     //   $this->load->view('view_history.php');
         $this->load->view('page/home');
         $this->load->view('footer/footer');
 	}
@@ -19,13 +17,6 @@ class User extends CI_Controller{
         $data['template_type'] = "corperate";
         $this->load->view('header/header', $data);
         $this->load->view('user/login');
-        $this->load->view('footer/footer');
-	}
-	public function systemComplain()
-	{
-        $data['template_type'] = "corperate";
-        $this->load->view('header/header', $data);
-        $this->load->view('user/system_complain');
         $this->load->view('footer/footer');
 	}
 
@@ -47,25 +38,8 @@ class User extends CI_Controller{
 	        $this->load->view('header/header');
 	        $this->load->view('content/simple_message',$data);
 	        $this->load->view('footer/footer');
-	    }
+		}
 
-	}
-		public function submit_system_complain(){
-		$topic=$this->input->post('topic');
-		$detail=sha1($this->input->post('detail'));
-		$result=$this->complain_model->add_complain();
-
-		
-
-
-		if($result)
-			$this->index();
-		else {
-			$data['message']="ERROR: cannot submit complain";
-	        $this->load->view('header/header');
-	        $this->load->view('content/simple_message',$data);
-	        $this->load->view('footer/footer');
-	    }
 	}
 	//
 
@@ -110,24 +84,6 @@ class User extends CI_Controller{
 		}
 	}
 	
-	public function viewBidHistory(){
-		$data['title']= 'bidHistory';
-
-		$data['user_id'] = $this->input->post('user_id');
-
-		$bidHistory = $this->item_model->getItemInfo(1);
-
-		$this->load->view('header_view');
-		$this->load->view('thank_view.php', $bidHistory);
-		$this->load->view('footer_view');
-
-	}
-	public function thank(){
-		$data['title']= 'Thank';
-		$this->load->view('header_view',$data);
-		$this->load->view('thank_view.php', $data);
-		$this->load->view('footer_view',$data);
-	}
 	public function addComplainUser(){
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
@@ -184,7 +140,12 @@ class User extends CI_Controller{
 	public function recoverPassword(){
 	
 		$this->load->model("user_model");
-		$this->user_model->findUserByEmail($this->input->post('email'));
+		$data = $this->user_model->findUserByEmail($this->input->post('email'));
+		if(!$data)
+			redirect("/");
+		$this->load->library("email_library");
+		
+		$this->email_library->sendEmail("rs715714@gmail.com", "Change password",$data['email'].": Proceed to change password at   http://127.0.0.1/buydo/index.php/user/changePasswordPage/".$data['hash']);
 		redirect("/");
 	}
 	public function changePasswordPage($hash){
