@@ -80,6 +80,11 @@ class Transaction_model extends CI_Model {
 	// 	return false;
 	// }	
 
+	public function getItemFromTransactionID($transaction_id){
+		$query = $this->db->query("SELECT `b`.`item_name`, `b`.`owner_id` FROM `transactions` AS `a` INNER JOIN `items` AS `b` ON  `a`.`item_id`=`b`.`item_id` WHERE `a`.`transaction_id`=$transaction_id");
+		return $query->first_row()->item_name;
+	}
+
 	public function getSellerFromTransactionID($transaction_id){
 		$query = $this->db->query("SELECT `c`.`username` FROM (SELECT `b`.`owner_id` FROM `transactions` AS `a` INNER JOIN `items` AS `b` ON  `a`.`item_id`=`b`.`item_id` WHERE `a`.`transaction_id`=$transaction_id) AS `ab` INNER JOIN `users` AS `c` ON `ab`.`owner_id`=`c`.`user_id`");
 		return $query->first_row()->username;
