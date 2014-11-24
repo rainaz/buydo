@@ -139,6 +139,13 @@ class User_model extends CI_Model {
     }
     return false;
   }
+  public function getEmailByUserID($userID){
+    $query = $this->db->query("SELECT email FROM users WHERE user_id = '".$userID."'");
+    if($query->num_rows() > 0){
+      return $query->row()->email;
+    }
+    return false;
+  }
 
   public function getUserByUserID($id){
     $query = $this->db->query("SELECT $this->attributes FROM users WHERE user_id = '".$id."'");

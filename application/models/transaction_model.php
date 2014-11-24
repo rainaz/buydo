@@ -19,11 +19,12 @@ class Transaction_model extends CI_Model {
 			date('Y-m-d')."', '".
 			$quantity."', '".
 			$transactionstatus."')";
-
+		
 		$sql = "INSERT INTO transactions ($this->attributes) VALUES $insvalue";
 		$query = $this->db->query($sql);
 
 		if($query > 0){
+
 			return true;
 		}
 		return false;
@@ -61,6 +62,14 @@ class Transaction_model extends CI_Model {
 	// 	}
 	// 	return false;
 	// }		
+	public function getTransactionFromStatus($status){
+		$query = $this->db->query("SELECT buyer_id, transaction_id FROM transactions WHERE transaction_status = '".$status."'");
+		
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		return false;
+	}
 
 	public function getBuyerIDFromTransactionID($transid){
 		$query = $this->db->query("SELECT buyer_id FROM transactions WHERE transaction_id = '".$transid."'");
