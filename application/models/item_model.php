@@ -133,7 +133,7 @@ class Item_model extends CI_Model {
 	public function getItemInfo($id) {
 		$isBid = $this->db->query("SELECT * FROM `bid_items` WHERE `bid_items`.`item_id`=" . $id . ";")->num_rows();
 		if ($isBid > 0) {
-			$query = $this->db->query("SELECT `a`.`item_name`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`, `b`.`current_winner_id`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . ";")->first_row();
+			$query = $this->db->query("SELECT `a`.`item_name`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`, `b`.`current_winner_id`, `b`.`current_max_bid`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . ";")->first_row();
 			$timeLeft = (new DateTime($query->end_date))->diff(new DateTime());
 			$data = array(
 				"itemID"=>$id,
@@ -141,10 +141,12 @@ class Item_model extends CI_Model {
 				"itemName" => $query->item_name,
 				"initialPrice" => $query->initial_price,
 				"currentPrice" => $query->current_price,
+				"endDate" => $query->end_date,
 				"timeLeft" => $timeLeft->format("%Y-%m-%d %H:%i:%s"),
 				"isClose" => $timeLeft->format("%R") == "+",
 				"status" => $query->status,
 				"winnerID"=>$query->current_winner_id,
+				"currentMaxBid"=>$query->current_max_bid,
 				"spec" => $query->spec,
 				"agreement" => $query->agreement,
 				"nextBid" => $query->current_price + $query->initial_price * 0.05,
