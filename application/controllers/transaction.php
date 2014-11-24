@@ -120,7 +120,7 @@ class Transaction extends CI_Controller{
 			$this->email_library->sendEmail($sellerEmail,"Item Delivered !!!!", "Please give feedback to '$this->transaction_model->getItemFromTransactionID($transid)' buyer");
 
 			$this->index();	
-		}
+		//}
 
 
 	}
@@ -234,6 +234,9 @@ class Transaction extends CI_Controller{
 			$score = $this->input->post('score');
 			$comment = $this->input->post('comment');
 			$this->feedback_model->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
+			if($this->feedback_model->verifyFeedbackHasTwoWays()){
+				$this->transaction_model->setTransactionStatusFromTransactionID($transid, "complete");
+			}
 			//echo "comment = $comment\n";
 			//echo "Feedback received\n";
 			//$this->index();
