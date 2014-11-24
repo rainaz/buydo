@@ -108,12 +108,12 @@ class Transaction extends CI_Controller{
 			$this->transaction_model->setTransactionStatusFromTransactionID($transid, $transtatus);		
 
 			$buyerEmail = $this->transaction_model->getBuyerEmailFromTransactionID($transid);
-		//	$sellerEmail = $this->transaction_model->getSellerEmail($transid);
+			$sellerEmail = $this->transaction_model->getSellerEmailFromTransactionID($transid);
 
 
 			$this->load->library("email_library");
 			$this->email_library->sendEmail($buyerEmail,"lui tua", "Please give feedback to your seller");
-		//	$this->email_library->sendEmail($sellerEmail, "Please give feedback to your buyer");
+			$this->email_library->sendEmail($sellerEmail,"lui tua", "Please give feedback to your buyer");
 			$this->index();	
 		}
 

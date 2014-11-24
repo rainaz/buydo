@@ -119,14 +119,14 @@ class Transaction_model extends CI_Model {
 		$sql = "SELECT email FROM users INNER JOIN (SELECT * FROM transactions WHERE transaction_id = $transid) AS ntable ON users.user_id = ntable.buyer_id ";
 		$query = $this->db->query($sql);	
 		return $query->row()->email;
-		return false;
+
 	}
 
-	public function geSellerEmailFromTransactionID($transid){
+	public function getSellerEmailFromTransactionID($transid){
 		$sql = "SELECT email FROM users INNER JOIN (SELECT owner_id FROM items INNER JOIN (SELECT * FROM transactions WHERE transaction_id = $transid) AS ntable ON items.item_id = ntable.item_id) AS mtable ON users.user_id = mtable.owner_id ";
-		$query = $this->db->query($sql);	
+		$query = $this->db->query($sql);
+		echo $sql;	
 		return $query->row()->email;
-		return false;
 	}
 
 	public function setTransactionStatusFromTransactionID($transid, $nstatus){
