@@ -362,6 +362,14 @@ public function viewBidHistory(){
         $this->load->view('footer/footer');
 			
 	}
+	public function showAllComplain(){
+
+
+
+		$this->load->view('header/header', $data);
+        $this->load->view('show_all_complain', $data);
+        $this->load->view('footer/footer');
+	}
 	public function changePassword($hash){
 		$this->load->helper('form');
 		$this->load->library('form_validation');

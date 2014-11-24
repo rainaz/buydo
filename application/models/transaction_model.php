@@ -19,11 +19,12 @@ class Transaction_model extends CI_Model {
 			date('Y-m-d')."', '".
 			$quantity."', '".
 			$transactionstatus."')";
-
+		
 		$sql = "INSERT INTO transactions ($this->attributes) VALUES $insvalue";
 		$query = $this->db->query($sql);
 
 		if($query > 0){
+
 			return true;
 		}
 		return false;

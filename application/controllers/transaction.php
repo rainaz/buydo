@@ -62,6 +62,11 @@ class Transaction extends CI_Controller{
 						echo "Transaction created lorlen\n";
 				}
 			}
+			$Email = $this->user_model->getEmailByUserID($this->session->userdata('user_id'));
+			$interestItem = $this->item_model->getItemInfo($itemid);
+	
+			$this->load->library("email_library");
+			$this->email_library->sendEmail($Email,"You purchased a ".$interestItem['itemName'], "You purchased a ".$interestItem['itemName']."Thank you for using buydo.com");
 		
 			
 			$this->load->view('header/header');
