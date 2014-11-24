@@ -18,12 +18,11 @@
             },
             password: {
                 required: false,
-                rangelength: [1, 41]
+                rangelength: [0, 41]
             },
             confirm_password: {
-                required: function(element) {
-                    return ( $("#password").val().Length() == 0 ) || ( $("#password").val() == $("#confirm_password").val() );
-                }
+                required: false,
+                rangelength: [0, 41]
             },
             name: {
                 required: true,
@@ -70,7 +69,6 @@
             },
             confirm_password: {
                 required: "The password above and here are not the same. Please try again."
-                
             },
             name: {
                 required: "Firstname is required",

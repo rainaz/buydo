@@ -171,7 +171,7 @@ class User_model extends CI_Model {
   {
     $this->load->helper('url');
     
-    $actualpassword = getPasswordByID($this->session->userdata('user_id'));
+    $actualpassword = $this->getPasswordByID($this->session->userdata('user_id'));
     $oldpassword = sha1($this->input->post('old_password'));
 
     if($actualpassword != $oldpassword) return false;

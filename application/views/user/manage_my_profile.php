@@ -33,13 +33,13 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="password" class="col-lg-4 control-label">New Password <span class="require">*</span></label>
+                        <label for="password" class="col-lg-4 control-label">New Password </label>
                         <div class="col-lg-8">
                           <input type="password" class="form-control" id="password" name="password">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="confirm_password" class="col-lg-4 control-label">Confirm new password <span class="require">*</span></label>
+                        <label for="confirm_password" class="col-lg-4 control-label">Confirm new password </label>
                         <div class="col-lg-8">
                           <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         </div>
