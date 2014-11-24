@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `buyer_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `placement_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `placement_date` datetime NOT NULL,
   `quantity` int(11) NOT NULL,
   `transaction_status` text NOT NULL,
   PRIMARY KEY (`transaction_id`)

@@ -312,5 +312,17 @@ class User_model extends CI_Model {
   }
 
  }
+	public function addPenalty($user_id){
+		$penalty = $this->db->query("SELECT penalty_count FROM users WHERE user_id=$user_id;")->first_row()->penalty_count;
+		$penalty = ($penalty + 1) % 3;
+		echo $penalty;
+		if($penalty == 0){
+			$this->db->query("UPDATE users SET penalty_count=$penalty, banned_duration=3, start_banned='".(new DateTime())->format("Y-m-d")."' WHERE user_id=$user_id");
+		}else{
+			$this->db->query("UPDATE users SET penalty_count=$penalty WHERE user_id=$user_id");
+		}
+
+	
+	}
 }
 ?>
