@@ -34,7 +34,7 @@
                       <?php echo $user['user_id'] ?>
                     </td>
                     <td class="goods-page-description">
-                      <h3><a href="<?php echo site_url('/transaction/showUserFeedback?userid='.$user['user_id']); ?>"><?php echo $user['name'] ?></a></h3>
+                      <h3><a href="<?php echo site_url('/transaction/showUserFeedback?user_id='.$user['user_id']); ?>"><?php echo $user['username'] ?></a></h3>
 
                     </td>
                     <td class="goods-page-description">
