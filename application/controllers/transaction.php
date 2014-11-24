@@ -55,9 +55,12 @@ class Transaction extends CI_Controller{
 			$itemid = $this->input->post('itemID');
 			$quantity = $this->input->post('quantity');
 			$transactionstatus = "wait";
-			$result = $this->transaction_model->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
-			if(!$result){
-					echo "Transaction created lorlen\n";
+			$new_quantity = $this->saleitem_model->soldOut($itemid, $quantity);
+			if($new_quantity >= 0){
+				$result = $this->transaction_model->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
+				if(!$result){
+						echo "Transaction created lorlen\n";
+				}
 			}
 		
 			
@@ -99,7 +102,7 @@ class Transaction extends CI_Controller{
 			$this->index();
 		}
 		else {
-			echo "Pass here\n";
+		//	echo "Pass here\n";
 			$transid = $this->input->post('transid');
 			$transtatus = "received";
 			$this->transaction_model->setTransactionStatusFromTransactionID($transid, $transtatus);		

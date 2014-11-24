@@ -35,10 +35,10 @@ class User extends CI_Controller{
         $this->load->view('footer/footer');
 	}
 	public function userComplain(){
-
+		$data['transaction_id'] = $this->input->post('transaction_id');
         $data['template_type'] = "corporate";
         $this->load->view('header/header', $data);
-        $this->load->view('user/user_complain');
+        $this->load->view('user/user_complain',$data);
         $this->load->view('footer/footer');
 	}
 
@@ -72,7 +72,7 @@ class User extends CI_Controller{
 		$topic=$this->input->post('topic');
 		$detail=($this->input->post('detail'));
 
-		$accused_id = $this->complain_model->getAccusedID($this->session->userdata('user_id'),$transid);
+		$accused_id = $this->complain_model->getAccusedIDByTransactionID($this->session->userdata('user_id'),$transid);
 
 		$result=$this->complain_model->add_complain_user($accused_id);
 		if($result) {
