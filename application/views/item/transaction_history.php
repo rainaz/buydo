@@ -113,7 +113,7 @@ $transaction = $theArrayToPass;
 
 
     <!-- END PRODUCT LIST -->
-    <!-- BEGIN PAGINATOR -->
+    <!-- BEGIN PAGINATOR 
     <div class="row">
       <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
       <div class="col-md-8 col-sm-8">
@@ -128,7 +128,7 @@ $transaction = $theArrayToPass;
         </ul>
       </div>
     </div>
-    <!-- END PAGINATOR -->
+    ! END PAGINATOR -->
   </div>
   <!-- END CONTENT -->
 </div>
