@@ -25,9 +25,9 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="product-item">
               <div class="pi-img-wrapper">
-                <img src="/buydo/upload/img/items/<?php echo $picture; ?>" class="img-responsive" />
+                <img src="<?php echo $picture; ?>" class="img-responsive" />
                 <div>
-                  <a href="/buydo/upload/img/items/<?php echo $picture ?>" class="btn btn-default fancybox-button">Zoom</a>
+                  <a href="<?php echo $picture ?>" class="btn btn-default fancybox-button">Zoom</a>
                 </div>
               </div>
               <h3><a href="<?php echo site_url('item/showItem/'.$id); ?>"><?php echo $item_name ;?></a></h3>
@@ -48,7 +48,9 @@
         </div>
         <?php endfor ;?>
         <!-- END PRODUCT LIST -->
-        <!-- BEGIN PAGINATOR -->
+
+<?php
+       /*<!-- BEGIN PAGINATOR -->
         <div class="row" style="height: 200px;">
           <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of <?php echo $total; ?> total</div>
           <div class="col-md-8 col-sm-8">
@@ -72,7 +74,9 @@
             </ul>
           </div>
         </div>
-        <!-- END PAGINATOR -->
+        <!-- END PAGINATOR -->*/
+?>
+
       </div>
       <!-- END CONTENT -->
     </div>

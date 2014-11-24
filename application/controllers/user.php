@@ -168,12 +168,22 @@ class User extends CI_Controller{
 	   		$this->load->view('footer/footer');
 		}
 		else{
-			$this->user_model->manageProfile();
+			$result = $this->user_model->manageProfile();
+			if($result){
 			$data['type']="success";
 			$data['message']="Edit profile complete";
 			$this->load->view('header/header');
 	    	$this->load->view('content/simple_message', $data);
 	    	$this->load->view('footer/footer');
+			}
+			else{
+			$data['type']="danger";
+			$data['message']="Error! Please try again later";
+			$this->load->view('header/header');
+	    	$this->load->view('content/simple_message', $data);
+	   		$this->load->view('footer/footer');
+			}
+
 		}
 	}
 

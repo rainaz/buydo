@@ -83,9 +83,13 @@ class Item extends CI_Controller {
 
 	public function announceBidWinner($item_id){
 
-	$interestItem = $this->item_model->getItemInfo($item_id);
-		$this->item_model->changeItemStatus($item_id,"bidding_closed");
 	
+		$interestItem = $this->item_model->getItemInfo($item_id);
+		if($interestItem->isClose == "-"){
+		$this->item_model->changeItemStatus($item_id,"bidding_closed");
+		$now = new DateTime();
+		$then = new DateTime("$end_date");
+		if($now > $then)
 		$winnerEmail = $this->biditem_model->getWinnerEmail($item_id);
 		$loserEmail = $this->biditem_model->getLoserEmail($item_id);
 
@@ -97,6 +101,9 @@ class Item extends CI_Controller {
 			$this->email_library->sendEmail($item, "You lose [".$interestItem['itemName']."]","You lost the ".$interestItem['itemName'].". Thank you for your participation.");
 	
 		}
+	}
+
+	}
 		//send email to winner id query winner email, send win email to him
 		//send email to loser	id query all bidder except winner id
 		//done
@@ -107,7 +114,7 @@ class Item extends CI_Controller {
 		$interestItem = $this->item_model->getItemInfo($item_id);
 		$isPay = $this->item_model->verifyWinnerAlreadyPaid($item_id);
 		if(!$isPay){
-			$this->user_model->penalize($interestItem['current_winner_id']);
+			$this->user_model->punishUnpaidBidWinners($interestItem['current_winner_id']);
 		}
 	}
 

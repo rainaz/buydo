@@ -23,25 +23,31 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form" method="post" action=<?php echo site_url('user/manageprofile'); ?>>
+                  <form class="form-horizontal" role="form" method="post" action=<?php echo site_url('user/manageprofile'); ?> id="manage_profile_form">
                     <fieldset>
                       <legend>Account details</legend>
                       <div class="form-group">
-                        <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
+                        <label for="old_password" class="col-lg-4 control-label">Old password <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="password" class="form-control" id="password">
+                          <input type="password" class="form-control" id="old_password" name="old_password">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="confirm_password" class="col-lg-4 control-label">Confirm password <span class="require">*</span></label>
+                        <label for="password" class="col-lg-4 control-label">New Password <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="password" class="form-control" id="confirm_password">
+                          <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="confirm_password" class="col-lg-4 control-label">Confirm new password <span class="require">*</span></label>
+                        <div class="col-lg-8">
+                          <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="email" class="form-control" id="email" value=<?php echo $email; ?>>
+                          <input type="email" class="form-control" id="email" name="email" value=<?php echo $email; ?>>
                         </div>
                       </div>
                     </fieldset>
