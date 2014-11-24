@@ -39,13 +39,13 @@ class Transaction_model extends CI_Model {
 		return false;
 	}
 
-	public function getTransactionBySellerID($sellerid){
-		$query = $this->db->query("SELECT * FROM transactions WHERE seller_id = "."'".$sellerid."'");
-		if($query->num_rows() > 0) {
-			return $query->result();
-		}
-		return false;
-	}
+	// public function getTransactionBySellerID($sellerid){
+	// 	$query = $this->db->query("SELECT * FROM transactions WHERE seller_id = "."'".$sellerid."'");
+	// 	if($query->num_rows() > 0) {
+	// 		return $query->result();
+	// 	}
+	// 	return false;
+	// }
 
 	public function getTransactionByBuyerIDAndStatus($buyerid, $status){
 		$query = $this->db->query("SELECT * FROM transactions WHERE buyer_id = "."'".$buyerid."' AND status = "."'".$status."'");
@@ -55,13 +55,13 @@ class Transaction_model extends CI_Model {
 		return false;
 	}
 
-	public function getTransactionBySellerIDAndStatus($sellerid, $status){
-		$query = $this->db->query("SELECT * FROM transactions WHERE seller_id = "."'".$sellerid."' AND status = "."'".$status."'");
-		if($query->num_rows() > 0) {
-			return $query->result();
-		}
-		return false;
-	}		
+	// public function getTransactionBySellerIDAndStatus($sellerid, $status){
+	// 	$query = $this->db->query("SELECT * FROM transactions WHERE seller_id = "."'".$sellerid."' AND status = "."'".$status."'");
+	// 	if($query->num_rows() > 0) {
+	// 		return $query->result();
+	// 	}
+	// 	return false;
+	// }		
 
 	public function getBuyerIDFromTransactionID($transid){
 		$query = $this->db->query("SELECT buyer_id FROM transactions WHERE transaction_id = '".$transid."'");
@@ -72,14 +72,22 @@ class Transaction_model extends CI_Model {
 		return false;
 	}
 
-	public function getSellerIDFromTransactionID($transid){
-		$query = $this->db->query("SELECT seller_id FROM transactions WHERE transaction_id = '".$transid."'");
+	// public function getSellerIDFromTransactionID($transid){
+	// 	$query = $this->db->query("SELECT seller_id FROM transactions WHERE transaction_id = '".$transid."'");
 		
-		if($query->num_rows() > 0){
-			return $query->row()->seller_id;
+	// 	if($query->num_rows() > 0){
+	// 		return $query->row()->seller_id;
+	// 	}
+	// 	return false;
+	// }	
+
+	public function getTransactionByBuyerIDAndItemID($buyerid, $itemid){
+		$query = $this->db->query("SELECT * FROM transactions WHERE buyer_id = "."'".$buyerid."' AND item_id = "."'".$itemid."'");
+		if($query->num_rows() > 0) {
+			return $query->result();
 		}
 		return false;
-	}	
+	}		
 
 	public function getItemIDFromTransactionID($transid){
 		$query = $this->db->query("SELECT item_id FROM transactions WHERE transaction_id = '".$transid."'");
@@ -111,7 +119,7 @@ class Transaction_model extends CI_Model {
 
 	public function setTransactionStatusFromTransactionID($transid, $nstatus){
 		$sql = "UPDATE transactions SET transaction_status = "."'".$nstatus."'"." WHERE transaction_id = "."'".$transid."'";
-		echo "$sql\n";
+		//echo "$sql\n";
 		$query = $this->db->query($sql);	
 	}
 

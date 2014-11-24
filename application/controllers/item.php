@@ -8,6 +8,7 @@ class Item extends CI_Controller {
 		$this->load->model('item_model');
 		$this->load->model('saleitem_model');
 		$this->load->model('biditem_model');
+		$this->load->model('transaction_model');
 	}
 	public function index(){
 		$data['title']= 'Home';
@@ -242,6 +243,7 @@ class Item extends CI_Controller {
 	}
 
 
+
 	public function editBidItem() {
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
@@ -395,4 +397,23 @@ class Item extends CI_Controller {
 		$this->load->view('test_view.php', $data);
 		$this->load->view('footer_view');
 	}
+
+	function verifyWinnerAlreadyPaid($itemid){
+		$winnerid = $this->biditem_model->getCurrentWinnerID($itemid);
+		$transaction = $this->transaction_model->getTransactionByBuyerIDAndItemID($winnerid, $itemid);
+		if($transaction){
+			return true;
+		}
+		return false;
+	}
+
+	function punishUnpaidBidWinner($itemid){
+		$this->item_model->setItemStatus($itemid, "fail to pay");
+		$winnerid = $this->biditem_model->getCurrentWinnerID($itemid);
+		$currentPenalty = $this->user_model->getPenaltyCountByUserID($winnerid);
+		$this->user_model->setPenaltyCountByUserID($winnerid, $currentPenalty+1);
+	}
+
+
+
 } ?>

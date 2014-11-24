@@ -14,25 +14,33 @@ class User extends CI_Controller{
 	}
 
 	public function login(){
-        $data['template_type'] = "corperate";
+        $data['template_type'] = "corporate";
         $this->load->view('header/header', $data);
         $this->load->view('user/login');
         $this->load->view('footer/footer');
 	}
 
 	public function register(){
-        $data['template_type'] = "corperate";
+        $data['template_type'] = "corporate";
         $this->load->view('header/header', $data);
         $this->load->view('user/register');
         $this->load->view('footer/footer');
 	}
-		public function systemComplain()
+	public function systemComplain()
 	{
-        $data['template_type'] = "corperate";
+        $data['template_type'] = "corporate";
         $this->load->view('header/header', $data);
         $this->load->view('user/system_complain');
         $this->load->view('footer/footer');
 	}
+
+	public function myAccount() {
+		$data['template_type'] = "corporate";
+        $this->load->view('header/header', $data);
+        $this->load->view('user/my_account');
+        $this->load->view('footer/footer');
+	}
+
 	public function submit_system_complain(){
 		$topic=$this->input->post('topic');
 		$detail=($this->input->post('detail'));
@@ -125,13 +133,33 @@ class User extends CI_Controller{
 		}
 	}
 	
+	public function showManageProfilePage() {
+		$data = $this->user_model->getUserByUserID($this->session->userdata('user_id'));
+
+		$this->load->view('header/header');
+	    $this->load->view('user/manage_my_profile', $data);
+	    $this->load->view('footer/footer');
+	}
+
 	public function manageprofile(){
-		$this->load->library('form_validation');
+/*		$this->load->library('form_validation');
 		// field name, error message, validation rules
 		$this->form_validation->set_rules('user_name', 'User Name');
 		//  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
 		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
 		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
+		if($this->form_validation->run() == FALSE){
+			$this->index();
+		}
+		else{
+			$this->user_model->manageProfile();
+			$this->thank();
+		}
+
+		*/
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('user_name', 'User Name');
+
 		if($this->form_validation->run() == FALSE){
 			$this->index();
 		}
@@ -168,7 +196,7 @@ public function viewBidHistory(){
 		$this->index();
 	}
 	public function askingRecover(){
-        $data['template_type'] = "corperate";
+        $data['template_type'] = "corporate";
         $this->load->view('header/header', $data);
         $this->load->view('user/recovery_password');
         $this->load->view('footer/footer');
@@ -185,7 +213,7 @@ public function viewBidHistory(){
 		redirect("/");
 	}
 	public function changePasswordPage($hash){
-		$data['template_type'] = "corperate";
+		$data['template_type'] = "corporate";
 		$data['hash'] = $hash;
 		$data['warning'] = FALSE;
         $this->load->view('header/header', $data);
@@ -194,7 +222,7 @@ public function viewBidHistory(){
 			
 	}
 	public function changePasswordPageAgain($hash){
-		$data['template_type'] = "corperate";
+		$data['template_type'] = "corporate";
 		$data['hash'] = $hash;
 		$data['warning'] =TRUE;
         $this->load->view('header/header', $data);
