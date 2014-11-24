@@ -84,6 +84,12 @@ class BidItem_model extends CI_Model {
 		$sql = "SELECT initial_price FROM bid_items WHERE item_id = '$item_id'";
 		$query = $this->db->query($sql);	
 		return $query->first_row()->initial_price;
+	}
+
+	function getEndDate($item_id){
+		$sql = "SELECT end_date FROM bid_items WHERE item_id = '$item_id'";
+		$query = $this->db->query($sql);	
+		return $query->first_row()->end_date;
 	}	
 
 	function test(){

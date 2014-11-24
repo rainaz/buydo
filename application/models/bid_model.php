@@ -58,6 +58,51 @@ class Bid_model extends CI_Model {
 		$query = $this->db->query($sql);
 	}
 
+	//bid history
+
+	function getBidItemIDByUserID($id){
+		$sql = "SELECT DISTINCT item_id FROM bid WHERE buyer_id = $id";
+		$query = $this->db->query($sql);
+		return $query->row_array();
+	}
+
+	function getMyCurrentBid($id, $item_id){
+		$sql = "SELECT MAX(current_bid) FROM bid WHERE buyer_id = $id AND $item_id = $item_id";
+		$query = $this->db->query($sql);
+		return $query->row()->current_bid;
+	}
+
+	function getBidHisotryByUserID($userid){
+		$biddingItem = $this->getBidItemIDByUserID($userid);
+		$historyArray = array();
+		foreach($biddingItem as $row){
+			$itemID = $row['item_id'];
+			$itemName = $this->item_model->getItemNameByItemID($id);
+			$currentItemPrice = $this->biditem_model->getCurrentPrice($itemID);			
+			$endDate = $this->biditem_model->getEndDate($itemID);
+			$currentMaxBid = $this->biditem_model->getCurrentMaxBid($itemID);
+			$currentWinnerID = $this->biditem_model->getCurrentWinnerID($itemID);
+			$myCurrentBid = $this->bid_model->getMyCurrentBid($userid, $itemID);
+			$itemStatus = $this->item_model->getItemStatusByItemID($id);
+			$mergeArray = array(
+				array(
+					'item_name' => $itemName,
+					'currentItemPrice' => $currentItemPrice,
+					'end_date' => $endDate,
+					'currentMaxBid' => $currentMaxBid,
+					'currentWinnerID' => $currentWinnerID,
+					'myCurrentBid' => $myCurrentBid,
+					'itemStatus' => $itemStatus
+					)
+				);
+			$historyArray = array_merge($historyArray, $mergeArray);
+		}
+
+		return $historyArray;
+	}
+
+	//calculate bid
+
 	function Bid($item_id, $nmaxbidprice, $user_id){
 		$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
 		$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);
