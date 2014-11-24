@@ -34,7 +34,7 @@
 								<div class="row">
 									<div class="col-lg-8 col-md-offset-7 padding-left-0 padding-top-20">                        
 										<button type="submit" class="btn btn-primary">Confirm</button>
-										<button type="button" class="btn btn-default">Cancel</button>
+										<a href=<?php echo site_url('') ?>><button type="button" class="btn btn-default">Cancel</button></a>
 									</div>
 								</div>
 							</form>
