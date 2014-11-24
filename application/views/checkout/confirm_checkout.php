@@ -11,7 +11,7 @@
 				<h1>Confirm Payment</h1>
 				<div class="content-form-page">
 					<div class="row">
-						<div class="col-md-7 col-sm-7">
+						<div class="col-md-9 col-sm-9">
 							<form class="form-horizontal" role="form" id="form_confirm_credit" method="post" action="<?php echo site_url('transaction/createTransaction'); ?>">
 								<fieldset>
 									<div class="form-group">
@@ -23,6 +23,10 @@
 									<label for="description" class="col-lg-4 control-label"><?php echo $itemName;?></label>
 									<label for="description" class="col-lg-4 control-label">จำนวน x<?php echo $quantity;?></label>
 									<label for="description" class="col-lg-4 control-label">ราคา <?php echo $price;?> บาท</label>
+
+								</div>
+								<div class="row col-md-12 col-sm-12 pull-right">
+									<label for="description" class="col-lg-12 control-label"><strong>รวมทั้งสิ้น <?php echo $price*$quantity;?> บาท</strong></label>
 
 								</div>
 								<input type="hidden" name="itemID" value="<?php echo $itemID; ?>" />
