@@ -439,7 +439,7 @@ class Item extends CI_Controller {
 		$this->load->view('footer/footer');
 	}
 
-	function confirmCheckout1() {
+	function confirmCheckout() {
 	$data = array(
 				"itemID" => $this->input->post('itemID'),
 				"itemName"=>$this->input->post('itemName'),
@@ -450,12 +450,6 @@ class Item extends CI_Controller {
 
 		$this->load->view('header/header');
 		$this->load->view('checkout/confirm_checkout',$data);
-		$this->load->view('footer/footer');
-	}
-
-	function confirmCheckout2() {
-		$this->load->view('header/header');
-		$this->load->view('checkout/buy_complete',$data);
 		$this->load->view('footer/footer');
 	}
 

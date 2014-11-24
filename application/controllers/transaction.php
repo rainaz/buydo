@@ -5,8 +5,8 @@ class Transaction extends CI_Controller{
   		$this->load->model('item_model');
   		$this->load->model('saleitem_model');
   		$this->load->model('biditem_model');
-  		$this->load->model('transaction_model',"transaction");
-  		$this->load->model('feedback_model',"feedback");
+  		$this->load->model('transaction_model');
+  		$this->load->model('feedback_model');
  	}
 
 	
@@ -18,20 +18,29 @@ class Transaction extends CI_Controller{
 	}	
 
 	public function createTransaction(){
+		echo "ItemID is ".$this->input->post('itemID');
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('item_id', 'item_id', 'trim|required|min_length[1]|xss_clean');
+		$this->form_validation->set_rules('itemID', 'itemID', 'trim|required|min_length[1]|xss_clean');
 
 		if($this->form_validation->run()==FALSE){
-			$this->index();
+			$this->load->view('header/header');
+			$this->load->view('content/simple_message');
+			$this->load->view('footer/footer');
 		}
 		else {
 			$buyerid  = $this->session->userdata('user_id');			
 			$itemid = $this->input->post('itemID');
 			$quantity = $this->input->post('quantity');
 			$transactionstatus = "wait";
-			$this->transaction_model->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
-			echo "Transaction created\n";
-			//$this->index();
+			$result = $this->transaction_model->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
+			if(!$result){
+					echo "Transaction created lorlen\n";
+			}
+		
+			
+			$this->load->view('header/header');
+			$this->load->view('checkout/buy_complete');
+			$this->load->view('footer/footer');
 		}
 	}
 
@@ -84,7 +93,7 @@ class Transaction extends CI_Controller{
 			$fbto = $this->input->post('feedback_to');
 			$score = $this->input->post('score');
 			$comment = $this->input->post('comment');
-			$this->feedback->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
+			$this->feedback_model->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
 			//echo "comment = $comment\n";
 			echo "Feedback received\n";
 			$this->index();

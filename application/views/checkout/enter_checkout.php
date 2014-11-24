@@ -11,7 +11,7 @@
 				<div class="content-form-page">
 					<div class="row">
 						<div class="col-md-7 col-sm-7">
-							<form class="form-horizontal" role="form" id="form_confirm_credit" method="post" action="<?php echo site_url('item/confirmCheckout1'); ?>">
+							<form class="form-horizontal" role="form" id="form_confirm_credit" method="post" action="<?php echo site_url('item/confirmCheckout'); ?>">
 								<fieldset>
 									<div class="form-group">
 										<label for="creditcard" class="col-lg-4 control-label">Creditcard <span class="require">*</span></label>

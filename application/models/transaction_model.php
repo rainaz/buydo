@@ -21,7 +21,7 @@ class Transaction_model extends CI_Model {
 			$transactionstatus."')";
 
 		$sql = "INSERT INTO transactions ($this->attributes) VALUES $insvalue";
-
+		echo "$sql\n";
 		$query = $this->db->query($sql);
 
 		if($query > 0){
