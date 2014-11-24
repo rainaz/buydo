@@ -184,6 +184,13 @@ class User_model extends CI_Model {
     return false;
   }  
 
+  public function getUsernameByUserID($id){
+    $query = $this->db->query("SELECT username FROM users WHERE user_id = $id");
+    if($query->num_rows() > 0){
+      return $query->row()->username;
+    }
+    return false;
+  }  
   public function getPenaltyCountByUserID($id){
     $query = $this->db->query("SELECT penalty_count FROM users WHERE user_id = '".$id."'");
     if($query->num_rows() > 0){
