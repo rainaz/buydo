@@ -71,7 +71,7 @@ class Transaction extends CI_Controller{
 		$this->transaction_model->setTransactionStatusFromTransactionID($transaction_id,"wait");
 	}
 
-	}
+	
 	public function listAllTransaction($buyerid){
 		$this->trans->getTransactionByBuyerID($buyerid);
 
