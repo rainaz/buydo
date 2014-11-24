@@ -125,6 +125,21 @@ class User_model extends CI_Model {
     return false;
   }
 
+  public function setPenaltyCountByUserID($id, $count){
+    $sql = "UPDATE users SET penalty_count = "."'".$count."'"."WHERE user_id = "."'".$id."'";
+    $query = $this->db->query($sql);  
+    if($query > 0) return true;
+    return false;
+  }
+
+  public function getPenaltyCountByUserID($id){
+    $query = $this->db->query("SELECT penalty_count FROM users WHERE user_id = '".$id."'");
+    if($query->num_rows() > 0){
+      return $query->row()->penalty_count;
+    }
+    return false;    
+  }
+
 
   public function manageProfileByUserID($id,$name,$surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
 
