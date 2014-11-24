@@ -341,13 +341,16 @@ class User_model extends CI_Model {
      'penalty_count'=>0,
   );
   
-  $this->db->insert('users',$data);
+  $result = $this->db->insert('users',$data);
+  if($result == 0) return false;
   $insertid = $this->db->insert_id();
   if($user_type=='buyer'){
       $this->buyer_model->addBuyer( $insertid);
+      return true;
   }
   else if($user_type=='seller'){
       $this->seller_model->addSeller( $insertid);
+      return true;
   }
 
  }

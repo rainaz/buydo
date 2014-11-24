@@ -124,17 +124,27 @@ class User extends CI_Controller{
 		//	$this->index();
 		}
 		//else{
-			$this->user_model->add_user();
-			$this->load->library('email_library');
-			$destinationAddress = $this->input->post('email');
-			$subject = "Registration confirmation: Buydo :)";
-			$message = "Thank you for registration, ".$this->input->post('name').'. Your username is '.$this->input->post('username').'.';
-			$this->email_library->sendEmail($destinationAddress,$subject,$message);
-			$data['type']="success";
-			$data['message']="Registration success";
-	        $this->load->view('header/header');
-	        $this->load->view('content/simple_message',$data);
-	        $this->load->view('footer/footer');
+			$result = $this->user_model->add_user();
+			if($result==0){
+				$data['type']="danger";
+				$data['message']="Error! something is wrong, username or email is already used.";
+				$this->load->view('header/header');
+	    		$this->load->view('content/simple_message', $data);
+	   			$this->load->view('footer/footer');
+			}
+			else {
+				$this->load->library('email_library');
+				$destinationAddress = $this->input->post('email');
+				$subject = "Registration confirmation: Buydo :)";
+				$message = "Thank you for registration, ".$this->input->post('name').'. Your username is '.$this->input->post('username').'.';
+				$this->email_library->sendEmail($destinationAddress,$subject,$message);
+				$data['type']="success";
+				$data['message']="Registration success";
+	        	$this->load->view('header/header');
+	        	$this->load->view('content/simple_message',$data);
+	        	$this->load->view('footer/footer');	
+			}
+			
 		//}
 	}
 
