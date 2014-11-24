@@ -53,8 +53,11 @@ class Complain_model extends CI_Model {
 		'topic'=>$this->input->post('topic'),
 		'detail'=>$this->input->post('detail'),
 		);
-		  $this->db->insert('complain',$data);
-	}	
+
+		$check = $this->db->insert('complain',$data);
+				 if($check)return true;
+		 else return false;
+		}	
 
 	function __construct(){
 		parent::__construct();
@@ -85,6 +88,7 @@ class Complain_model extends CI_Model {
 		$query2;
 		if($role=="buyer"){
 			$sql2 = "SELECT item_id FROM transactions WHERE transaction_id = $transid";
+			echo $sql2;
 			$query2 = $this->db->query($sql2);
 			$searchItem = $query2->row()->item_id;
 			$sql3 = "SELECT owner_id FROM items WHERE item_id = $searchItem";
