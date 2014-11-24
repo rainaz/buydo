@@ -100,6 +100,22 @@
                     $("#BidVal").val(bidval.toFixed(2));
                 }
             }); 
+            $("#btn0").click(function(){
+                $("#score").val(-2);
+            }); 
+
+            $("#btn1").click(function(){
+                $("#score").val(-1);
+            }); 
+            $("#btn2").click(function(){
+                $("#score").val(0);
+            }); 
+            $("#btn3").click(function(){
+                $("#score").val(1);
+            }); 
+            $("#btn4").click(function(){
+                $("#score").val(2);
+            }); 
             $("#BidVal").prop( "disabled", true );
         });
 

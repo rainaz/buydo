@@ -161,28 +161,6 @@ class Transaction extends CI_Controller{
 
 	}
 
-	 
-
-	public function feedback(){
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('transid', 'transid', 'trim|required|min_length[1]|xss_clean');
-
-		if($this->form_validation->run()==FALSE){
-			$this->index();
-		}
-		else {
-			$transid  = $this->input->post('transid');
-			$fbfrom = $this->input->post('feedback_from');
-			$fbto = $this->input->post('feedback_to');
-			$score = $this->input->post('score');
-			$comment = $this->input->post('comment');
-			$this->feedback_model->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
-			//echo "comment = $comment\n";
-			//echo "Feedback received\n";
-			//$this->index();
-		}
-	}
-
 	public function getBidHistoryByUserID($userid){
 		$this->load->model('bid_model');
 		$biddingItem = $this->bid_model->getBidItemIDByUserID($userid);
@@ -219,6 +197,47 @@ class Transaction extends CI_Controller{
 		$this->index();
 
 		return $historyArray;
+	}
+
+	public function give_feedback($transaction_id, $feedback_from, $feedback_to) {
+		$data['transaction_id'] = $transaction_id;
+		$data['feedback_from'] = $feedback_from;
+		$data['feedback_to'] = $feedback_to;
+		$this->load->view('header/header');
+	    $this->load->view('user/feedback',$data);
+	    $this->load->view('footer/footer');
+	}
+
+
+	public function feedback(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('transid', 'transid', 'trim|required|min_length[1]|xss_clean');
+
+		if($this->form_validation->run()==FALSE){
+			$data['type']="alert";
+			$data['message']="Error.";
+			$this->load->view('header/header');
+	    	$this->load->view('content/simple_message', $data);
+	   		$this->load->view('footer/footer');
+
+		}
+		else {
+			$transid  = $this->input->post('transid');
+			$fbfrom = $this->input->post('feedback_from');
+			$fbto = $this->input->post('feedback_to');
+			$score = $this->input->post('score');
+			$comment = $this->input->post('comment');
+			$this->feedback_model->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
+			//echo "comment = $comment\n";
+			//echo "Feedback received\n";
+			//$this->index();
+			$data['type']="success";
+			$data['message']="Feedback received.";
+			$this->load->view('header/header');
+	    	$this->load->view('content/simple_message', $data);
+	   		$this->load->view('footer/footer');
+
+		}
 	}
 
 	public function complain_seller(){
