@@ -66,7 +66,12 @@ class Transaction extends CI_Controller{
 			$this->load->view('footer/footer');
 		}
 	}
+	public function pay(){
+		$transaction_id  =$this->input->post('transaction_id');
+		$this->transaction_model->setTransactionStatusFromTransactionID($transaction_id,"wait");
+	}
 
+	}
 	public function listAllTransaction($buyerid){
 		$this->trans->getTransactionByBuyerID($buyerid);
 
@@ -98,6 +103,14 @@ class Transaction extends CI_Controller{
 			$transid = $this->input->post('transid');
 			$transtatus = "received";
 			$this->transaction_model->setTransactionStatusFromTransactionID($transid, $transtatus);		
+
+			$buyerEmail = $this->transaction_model->getBuyerEmail($transid);
+			$sellerEmail = $this->transaction_model->getSellerEmail($transid);
+
+
+			$this->load->library("email_library");
+			$this->email_library->sendEmail($buyerEmail, "Please give feedback to your seller");
+			$this->email_library->sendEmail($sellerEmail, "Please give feedback to your buyer");
 			$this->index();	
 		}
 
