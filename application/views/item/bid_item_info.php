@@ -41,9 +41,7 @@
 								<form method="post" id="confirm_Maxbid" action="<?php echo site_url('item/bidMaxBid'); ?>">
 									<div class="col-md-4 col-sm-4">
 										<div class="input-group input-small">
-											<span class="input-group-btn">
-												<button class="btn red" id="decBidVal" type="button">-</button>
-											</span>
+											
 											<input type="hidden" id="itemID" name="itemID" value="<?php echo $itemID;?>" />
 											<input type="hidden" id="itemName" name="itemName" value="<?php echo $itemName ?>" />
 											<input type="hidden" id="winnerID" name="winnerID" value="<?php echo $winnerID ?>" />
@@ -51,10 +49,8 @@
 											<input type="hidden" id="initialPrice" name="initialPrice" value="<?php echo $initialPrice;?>" />
 											<input type="hidden" id="currentPrice" name="currentPrice" value="<?php echo $currentPrice;?>" />
 											<input type="hidden" id="endDate" name="endDate" value="<?php echo $endDate;?>" />
-											<input type="text" class="form-control" id="BidVal" name="val" value="<?php echo number_format($nextBid, 2);?>" width="50%">
-											<span class="input-group-btn">
-												<button class="btn green" id="addBidVal" type="button">+</button>
-											</span>
+											<input type="number" class="form-control" id="val" name="val" value="<?php echo $nextBid;?>" width="50%">
+											
 										</div>
 
 										<p class="help-block">
@@ -78,7 +74,7 @@
 							<input type="hidden" id="initialPrice" name="initialPrice" value="<?php echo $initialPrice;?>" />
 							<input type="hidden" id="currentPrice" name="currentPrice" value="<?php echo $currentPrice;?>" />
 							<input type="hidden" id="endDate" name="endDate" value="<?php echo $endDate;?>" />
-							<input type="hidden" id="BidVal" name="val" value="<?php echo number_format($nextBid, 2);?>">
+							<input type="hidden" id="BidVal" name="val" value="<?php echo $nextBid;?>">
 							<div class="social-icons text-center product-page-cart">
 								<button class="btn btn-primary" type="submit">Place bid: THB<?php echo number_format($nextBid, 2)?></button>
 							</div>

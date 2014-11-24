@@ -24,7 +24,6 @@ class Bid_model extends CI_Model {
 			date('Y-m-d')."')";
 
 		$sql = "INSERT INTO bid ($this->attributes) VALUES ".$insvalue;
-		echo $sql;
 		$query = $this->db->query($sql);
 		if($query > 0){
 			return true;
