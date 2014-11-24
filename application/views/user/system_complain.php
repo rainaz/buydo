@@ -9,21 +9,21 @@
           <!-- BEGIN CONTENT -->
           <div class="col-md-1 col-sm-1"></div>
           <div class="col-md-10 col-sm-10">
-            <h1>Login</h1>
+            <h1>System Complain</h1>
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal form-without-legend" role="form" method="post" id="login_form" action="<?php echo site_url('user/submit_login'); ?>">
+                  <form class="form-horizontal form-without-legend" role="form" method="post" id="login_form" action="<?php echo site_url('user/submit_system_complain'); ?>">
                     <div class="form-group">
-                      <label for="username" class="col-lg-4 control-label">Username <span class="require">*</span></label>
+                      <label for="username" class="col-lg-4 control-label">Topic Name <span class="require">*</span></label>
                       <div class="col-lg-8">
-                        <input type="text" name="username" class="form-control" id="username" name="username">
+                        <input type="text" name="topic" class="form-control" id="topic" name="topic">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
+                      <label for="password" class="col-lg-4 control-label">Detail <span class="require">*</span></label>
                       <div class="col-lg-8">
-                        <input type="password" name="password" class="form-control" id="password" name="password">
+                        <input type="text" name="detail" class="form-control" id="detail" name="detail">
                       </div>
                     </div>
 
@@ -39,14 +39,7 @@
                     </div>
                   </form>
                 </div>
-                <div class="col-md-4 col-sm-4 pull-right">
-                  <div class="form-info">
-                    <h2> <strong>Need an account?</strong> </h2>
-                    <p>Register now to be the <strong>buydoers.</strong></p>
-                    <br>
 
-                    <a href="<?php echo site_url('user/register'); ?>"><button type="button" class="btn btn-primary">Register</button></a>
-                  </div>
                 </div>
               </div>
             </div>

@@ -25,7 +25,7 @@ class User extends CI_Controller{
 	{
         $data['template_type'] = "corperate";
         $this->load->view('header/header', $data);
-        $this->load->view('user/login');
+        $this->load->view('user/system_complain');
         $this->load->view('footer/footer');
 	}
 
@@ -47,7 +47,20 @@ class User extends CI_Controller{
 	        $this->load->view('header/header');
 	        $this->load->view('content/simple_message',$data);
 	        $this->load->view('footer/footer');
+	}
+	public function submit_system_complain(){
+		$topic=$this->input->post('topic');
+		$detail=sha1($this->input->post('detail'));
+		$result=$this->complain_model->add_complain();
 
+		if($result)
+			$this->index();
+		else {
+			$data['message']="ERROR: cannot submit complain";
+	        $this->load->view('header/header');
+	        $this->load->view('content/simple_message',$data);
+	        $this->load->view('footer/footer');
+	    }
 	}
 	//
 

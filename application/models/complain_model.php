@@ -31,13 +31,17 @@ class Complain_model extends CI_Model {
 	}
 	public function add_complain(){
 		 $data=array(
-'user_id' =>$this->session->userdata('user_id'),
-'date'=>$this->input->post('date'),
-'topic'=>$this->input->post('topic'),
-'category'=>$this->input->post('category'),
-'detail'=>$this->input->post('detail'),
+			'user_id' =>$this->session->userdata('user_id'),
+			'date'=>date('Y-m-d'),
+			'topic'=>$this->input->post('topic'),
+			//'category'=>$this->input->post('category'),
+			'detail'=>$this->input->post('detail'),
 		  );
-		  $this->db->insert('complain',$data);
+
+		 $check = $this->db->insert('complain',$data);
+		 if($check)return true;
+		 else return false;
+		  
 	}	
 
 		public function add_complain_user(){
