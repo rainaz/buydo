@@ -61,7 +61,7 @@ $transaction = $theArrayToPass;
 
                         <?php 
                         if ( $aTransaction['status'] == "wait" ) {
-                          echo '<form id="notify_delivery_form" method="post" action="'."".'">
+                          echo '<form id="notify_delivery_form" method="post" action="'.site_url('user/userComplain').'">
                           <input type="hidden" name="transaction_id" id="transaction_id" value=' .$aTransaction['transaction_id'] .' >
                           <button type="submit" class="btn yellow"><i class="fa fa-bullhorn"></i> Notify Delivery</button>
                         </form>';
@@ -70,7 +70,7 @@ $transaction = $theArrayToPass;
 
                       <?php
                       if ( $aTransaction['status'] == "received" ) {
-                        echo '<form id="give_feedback_form" method="post" action="'."".'">
+                        echo '<form id="give_feedback_form" method="post" action="'.site_url('user/userComplain').'">
                         <input type="hidden" name="transaction_id" id="transaction_id" value='. $aTransaction['transaction_id'] .'>
                         <button type="submit" class="btn blue"><i class="fa fa-thumbs-up"></i> Give Feedback</button>
                       </form>';
@@ -79,7 +79,7 @@ $transaction = $theArrayToPass;
                   </li>
 
                   <li>
-                    <form id="complain_form" method="post" action="">
+                    <form id="complain_form" method="post" action="<?php echo site_url('user/userComplain'); ?>">
                       <input type="hidden" name="transaction_id" id="transaction_id" value=<?php echo $aTransaction['transaction_id'] ?> >
                       <button type="submit" class="btn red"><i class="fa fa-bullhorn"></i> Complain Seller</button>
                     </form>
@@ -113,7 +113,7 @@ $transaction = $theArrayToPass;
 
 
     <!-- END PRODUCT LIST -->
-    <!-- BEGIN PAGINATOR -->
+    <!-- BEGIN PAGINATOR 
     <div class="row">
       <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
       <div class="col-md-8 col-sm-8">
@@ -128,7 +128,7 @@ $transaction = $theArrayToPass;
         </ul>
       </div>
     </div>
-    <!-- END PAGINATOR -->
+    ! END PAGINATOR -->
   </div>
   <!-- END CONTENT -->
 </div>

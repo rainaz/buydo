@@ -102,7 +102,7 @@ class Transaction extends CI_Controller{
 			$this->index();
 		}
 		else {
-			echo "Pass here\n";
+		//	echo "Pass here\n";
 			$transid = $this->input->post('transid');
 			$transtatus = "received";
 			$this->transaction_model->setTransactionStatusFromTransactionID($transid, $transtatus);		
@@ -120,7 +120,7 @@ class Transaction extends CI_Controller{
 	}
 
 	public function showUserFeedback(){		
-		$userid = $this->input->post('user_id');
+		$userid = $this->input->get('user_id');
 		if($userid=="") $userid = $this->session->userdata('user_id');
 		//$userid = 6;
 		$feedback = $this->feedback_model->getFeedbackByFeedbackReceiverUserID($userid);
