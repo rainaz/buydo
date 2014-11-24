@@ -1,4 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+/*
+pay($transaction_id)
+	เปลี่ยนtransaction status เป็น notify
+notify($transaction_id)
+	เปลี่ยน transation status เป็น received
+	ส่ง email ให้ buyer&seller เพื่อให้มาทำการให้ feedback
+give_feedback($transaction_id)
+	feedback_form
+	if(ให้ครบ) change status to done
+pay_timeout($transaction_id)
+announce_bid_winner($transaction_id)
+*/
+
 class Transaction extends CI_Controller{
 	public function __construct() {
   		parent::__construct();

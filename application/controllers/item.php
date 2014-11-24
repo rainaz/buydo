@@ -400,8 +400,8 @@ class Item extends CI_Controller {
 			$this->load->view('footer/footer');
 		}
 		else {
-			$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
-						$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
+
+			$this->biditem_model->setCurrentPrice($item_id, max($nmaxbidprice,$currentPrice));
 			$data['message']="your bid is too low, please try again.";
 			$this->load->view('header/header');
 	        $this->load->view('checkout/bid_fail',$data);
