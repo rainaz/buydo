@@ -33,13 +33,19 @@ class Buyer_model extends CI_Model {
 		return $this->db->query("SELECT * FROM buyers");
 	}
 	function getBuyerByUserID($id){
-		return $this->db->query("SELECT * FROM buyers WHERE buyer_id = ".$id);
+		$query = $this->db->query("SELECT * FROM buyers WHERE user_id = ".$id);
+		if($query->num_rows() > 0)
+			return $query->row();
+		else 
+			return false;
 	}
 
 	function verifyBuyerByUserID($id){
-		$query = getBuyerByUserID($id);
-		if($query->num_rows() > 0) return true;
-		else return false;
+		$query = $this->getBuyerByUserID($id);
+		if($query) 
+			return true;
+		else 
+			return false;
 	}
  
 	public function addBuyer($userid){		

@@ -33,12 +33,13 @@ class Seller_model extends CI_Model {
 		return $this->db->query("SELECT * FROM sellers");
 	}
 	function getSellerByUserID($id){
-		return $this->db->query("SELECT * FROM sellers WHERE seller_id = ".$id);
+		$query = $this->db->query("SELECT * FROM sellers WHERE user_id = ".$id);
+		return $query->row();
 	}
 
 	function verifySellerByUserID($id){
-		$query = getSellerByUserID($id);
-		if($query->num_rows() > 0) return true;
+		$query = $this->getSellerByUserID($id);
+		if($query) return true;
 		else return false;
 	}
 	public function addSeller($userid){		

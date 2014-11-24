@@ -363,7 +363,6 @@ class Item extends CI_Controller {
 
 	public function bidMaxBid(){
 		$this->load->library('form_validation');
-
 		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
 
 		$data = array(
@@ -379,12 +378,15 @@ class Item extends CI_Controller {
 
 		$user_id = $this->session->userdata('user_id');
 		$item_id = $data['item_id'];
+		
+		$data['value'] = $data['value'] - $data['value']%($data['initial_price']*0.05);
 		$nmaxbidprice = $data['value'];
-	
+
 		$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
 		$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);
 		$currentPrice = $this->biditem_model->getCurrentPrice($item_id);
 		$initialPrice = $this->biditem_model->getInitialPrice($item_id);
+	//	$myMaxBid = $this->bid->getMyMaxBid($this->session->userdata('user_id'));
 
 		if(strlen($data['current_max_bid'])==0){
 			$this->biditem_model->setCurrentPrice($item_id, $initialPrice);
@@ -395,17 +397,21 @@ class Item extends CI_Controller {
 			$this->biditem_model->setCurrentPrice($item_id, $currentMaxBid + $initialPrice*0.05);
 			$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
 			$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
+			$this->load->view('header/header');
+			$this->load->view('checkout/bid_success', $data);
+			$this->load->view('footer/footer');
 		}
 		else {
 			$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
+						$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
+			$data['message']="your bid is too low, please try again.";
+			$this->load->view('header/header');
+	        $this->load->view('checkout/bid_fail',$data);
+			$this->load->view('footer/footer');
 		//	$nmaxbidprice = $minPrice;
 		}
 
 		$this->bid_model->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id));
-
-		$this->load->view('header_view');
-		$this->load->view('test_view.php', $data);
-		$this->load->view('footer_view');
 	}
 
 	public function bidNextBid(){
@@ -426,15 +432,18 @@ class Item extends CI_Controller {
 		$user_id = $this->session->userdata('user_id');
 		$item_id = $data['item_id'];
 
+		$data['value'] = $data['value'] - $data['value']%($data['initial_price']*0.05);
+		$nmaxbidprice = $data['value'];
+
 		if(strlen($data['current_max_bid'])==0){
 			$nmaxbidprice = $data['initial_price'];
-			echo 'maxbidnull';
+		//	echo 'maxbidnull';
 		}
 		else{
 			$nmaxbidprice = $data['current_price']+$data['initial_price']*0.05;
-			echo 'maxbidnotnull';
+		//	echo 'maxbidnotnull';
 		}
-		echo $nmaxbidprice;
+		//echo $nmaxbidprice;
 		$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
 		$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);
 		$currentPrice = $this->biditem_model->getCurrentPrice($item_id);
@@ -449,21 +458,19 @@ class Item extends CI_Controller {
 			$this->biditem_model->setCurrentPrice($item_id, $currentMaxBid + $initialPrice*0.05);
 			$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
 			$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
+			$this->load->view('header/header');
+			$this->load->view('checkout/bid_success', $data);
+			$this->load->view('footer/footer');
 		}
 		else {
 			$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
+			$data['message']="your bid is too low, please try again.";
+	        $this->load->view('header/header');
+	        $this->load->view('checkout/bid_fail',$data);
+	        $this->load->view('footer/footer');
 		}
 
-		$result= $this->bid_model->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id));
-		if($result){
-			echo 'success';
-		}
-		else {
-			echo 'fail';
-		}
-		$this->load->view('header_view');
-		$this->load->view('test_view.php', $data);
-		$this->load->view('footer_view');
+		$this->bid_model->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id));
 	}
 
 	// public function calculateBid() {
@@ -577,14 +584,6 @@ class Item extends CI_Controller {
 		$this->load->view('header/header');
 		$this->load->view('checkout/confirm_checkout',$data);
 		$this->load->view('footer/footer');
-	}
-
-	function confirmMaxBid() {
-		echo "max";
-	}
-
-	function confirmBid() {
-		echo "n";
 	}
 
 } ?>

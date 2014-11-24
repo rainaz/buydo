@@ -30,9 +30,11 @@
 
               </ul>
             </div>
-                <button type="button" class="btn green"><i class="fa fa-bullhorn"></i> Notify Delivery</button>
+              
+                <button type="button" class="btn green"><i class="fa fa-bullhorn"></i> Notify Delivery</button>             
                 <button type="button" class="btn blue"><i class="fa fa-thumbs-up"></i> Give Feedback</button>
                 <button type="button" class="btn red"><i class="fa fa-bullhorn"></i> Complain Seller</button>
+              
               <!--a href="#" class="icon-btn">
                 <i class="fa fa-money"></i>
                 <div>Pay</div>
