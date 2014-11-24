@@ -163,7 +163,7 @@ class Item_model extends CI_Model {
 		if ($isBid > 0) {
 
 
-			$query = $this->db->query("SELECT `a`.`item_name`,`b`.`current_winner_id`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . ";")->first_row();
+			$query = $this->db->query("SELECT `a`.`item_name`,`b`.`current_winner_id`, `b`.`current_max_bid`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . ";")->first_row();
 
 			$timeLeft = (new DateTime($query->end_date))->diff(new DateTime());
 			$data = array(
