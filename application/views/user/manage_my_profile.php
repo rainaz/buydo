@@ -23,7 +23,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form">
+                  <form class="form-horizontal" role="form" method="post" action=<?php echo site_url('user/manageprofile'); ?>>
                     <fieldset>
                       <legend>Account details</legend>
                       <div class="form-group">
