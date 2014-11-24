@@ -21,12 +21,12 @@
 								</fieldset>
 								<div class="row">
 									<label for="description" class="col-lg-4 control-label"><?php echo $itemName;?></label>
-									<label for="description" class="col-lg-4 control-label">จำนวน x<?php echo $quantity;?></label>
-									<label for="description" class="col-lg-4 control-label">ราคา <?php echo $price;?> บาท</label>
+									<label for="description" class="col-lg-4 control-label">Quantity x<?php echo $quantity;?></label>
+									<label for="description" class="col-lg-4 control-label">Price THB <?php echo $price;?> </label>
 
 								</div>
 								<div class="row col-md-12 col-sm-12 pull-right">
-									<label for="description" class="col-lg-12 control-label"><strong>รวมทั้งสิ้น <?php echo $price*$quantity;?> บาท</strong></label>
+									<label for="description" class="col-lg-12 control-label"><strong>Total THB <?php echo $price*$quantity;?></strong></label>
 
 								</div>
 								<input type="hidden" name="itemID" value="<?php echo $itemID; ?>" />
