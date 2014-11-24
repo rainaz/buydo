@@ -122,6 +122,8 @@ class Transaction extends CI_Controller{
 	public function showUserFeedback(){		
 		$userid = $this->input->get('user_id');
 		if($userid=="") $userid = $this->session->userdata('user_id');
+		if($userid=="") $userid = 6;
+
 		//$userid = 6;
 		$feedback = $this->feedback_model->getFeedbackByFeedbackReceiverUserID($userid);
 		//$data['username'] = $this->user_model->getNameByUserID($userid);
