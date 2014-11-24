@@ -11,7 +11,7 @@
 				<h1>Confirm Payment</h1>
 				<div class="content-form-page">
 					<div class="row">
-						<div class="col-md-7 col-sm-7">
+						<div class="col-md-9 col-sm-9">
 							<form class="form-horizontal" role="form" id="form_confirm_credit" method="post" action="<?php echo site_url('transaction/createTransaction'); ?>">
 								<fieldset>
 									<div class="form-group">
@@ -21,8 +21,12 @@
 								</fieldset>
 								<div class="row">
 									<label for="description" class="col-lg-4 control-label"><?php echo $itemName;?></label>
-									<label for="description" class="col-lg-4 control-label">จำนวน x<?php echo $quantity;?></label>
-									<label for="description" class="col-lg-4 control-label">ราคา <?php echo $price;?> บาท</label>
+									<label for="description" class="col-lg-4 control-label">Quantity x<?php echo $quantity;?></label>
+									<label for="description" class="col-lg-4 control-label">Price THB <?php echo $price;?> </label>
+
+								</div>
+								<div class="row col-md-12 col-sm-12 pull-right">
+									<label for="description" class="col-lg-12 control-label"><strong>Total THB <?php echo $price*$quantity;?></strong></label>
 
 								</div>
 								<input type="hidden" name="itemID" value="<?php echo $itemID; ?>" />
@@ -30,7 +34,7 @@
 								<div class="row">
 									<div class="col-lg-8 col-md-offset-7 padding-left-0 padding-top-20">                        
 										<button type="submit" class="btn btn-primary">Confirm</button>
-										<button type="button" class="btn btn-default">Cancel</button>
+										<a href=<?php echo site_url('') ?>><button type="button" class="btn btn-default">Cancel</button></a>
 									</div>
 								</div>
 							</form>
