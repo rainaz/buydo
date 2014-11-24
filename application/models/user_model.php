@@ -67,6 +67,28 @@ class User_model extends CI_Model {
     return false;
   }
 
+  public function findUserByEmail($email){
+    $sql = "SELECT user_id FROM users WHERE email = "."'".$email."'";   
+    $query = $this->db->query($sql);
+    if($query->num_rows() == 1){
+      	$user_id = $query->first_row()->user_id;
+		$hash = sha1($email.(new DateTime())->format("Y-m-d %s").(string)rand());
+		$isAsked = $this->db->query("DELETE FROM `recover_url` WHERE `user_id`=".$user_id.";");
+		$tmp = $this->db->query("INSERT INTO `recover_url`(`user_id`,`user_email`, `url`) VALUES (".$user_id.", '".$email."', '".$hash."');");
+		return array("hash" => $hash, "email" => $email);
+
+    }
+    return false;
+  }
+  public function changePassword($hash, $newPass){
+	  $user_id = $this->db->query("SELECT `user_id` FROM `recover_url` WHERE `url`='".$hash."';");
+	  if(!$user_id)
+		  return false; // no hash found
+	  $tmp = $this->db->query("UPDATE `users` SET `password`='".sha1($newPass)."' WHERE `user_id`=".$user_id->first_row()->user_id.";");
+	  if($tmp)
+		  $this->db->query("DELETE FROM `recover_url` WHERE `user_id`=".$user_id->first_row()->user_id.";");
+	  return true;
+  }
 
 
   public function getLastRow(){
