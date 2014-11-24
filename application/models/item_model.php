@@ -41,6 +41,16 @@ class Item_model extends CI_Model {
 		return false;
 	}
 
+	public function getStatusByItemID($id){
+		$query = $this->db->query("SELECT status FROM items WHERE item_id = '" . $id . "'");
+		return $query->row()->status;
+	}
+
+	public function getItemNameByItemID($id){
+		$query = $this->db->query("SELECT item_name FROM items WHERE item_id = '" . $id . "'");
+		return $query->row()->item_name;
+	}
+
 	public function getItemByID($id) {
 		$query = $this->db->query("SELECT * FROM items WHERE item_id = '" . $id . "'");
 		if ($query->num_rows() > 0) {

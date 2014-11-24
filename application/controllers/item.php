@@ -274,7 +274,7 @@ class Item extends CI_Controller {
 		$this->load->view('footer/footer', $data);
 	}
 
-/*<<<<<<< HEAD*/
+
 		public function viewBidItemByID() {
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
@@ -284,14 +284,10 @@ class Item extends CI_Controller {
 		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
 		//	$this->index();
 
-			$item_id = $this->input->post('item_id');
-			$itemInfo = $this->item_model->getItemInfo($item_id);
-			$bidItemInfo = $this->biditem_model->getBidItemByItemID($item_id);
-			$data =  array_merge($itemInfo, $bidItemInfo);
-
-			//find itemID
-			//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
-
+		$item_id = $this->input->post('item_id');
+		$itemInfo = $this->item_model->getItemInfo($item_id);
+		$bidItemInfo = $this->biditem_model->getBidItemByItemID($item_id);
+		$data =  array_merge($itemInfo, $bidItemInfo);
 
 		$this->load->view('header_view');
 		$this->load->view('biditem_mock.php', $data);
