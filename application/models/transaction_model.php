@@ -61,6 +61,14 @@ class Transaction_model extends CI_Model {
 	// 	}
 	// 	return false;
 	// }		
+	public function getTransactionFromStatus($status){
+		$query = $this->db->query("SELECT buyer_id, transaction_id FROM transactions WHERE transaction_status = '".$status."'");
+		
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		return false;
+	}
 
 	public function getBuyerIDFromTransactionID($transid){
 		$query = $this->db->query("SELECT buyer_id FROM transactions WHERE transaction_id = '".$transid."'");
