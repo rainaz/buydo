@@ -176,7 +176,7 @@ class Item extends CI_Controller {
 
 				'agreement' => $this->input->post('agreement'),
 
-				'status' => "in_stock",
+				'status' => "bidding",
 				'spec' => $this->input->post('spec'),
 
 				'picture' => $this->input->post('picture'),

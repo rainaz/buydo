@@ -2,9 +2,9 @@
 class Transaction extends CI_Controller{
 	public function __construct() {
   		parent::__construct();
-  		$this->load->model('item_model','item');
-  		$this->load->model('saleitem_model','saleitem');
-  		$this->load->model('biditem_model','biditem');
+  		$this->load->model('item_model');
+  		$this->load->model('saleitem_model');
+  		$this->load->model('biditem_model');
   		$this->load->model('transaction_model',"transaction");
   		$this->load->model('feedback_model',"feedback");
  	}
@@ -89,6 +89,44 @@ class Transaction extends CI_Controller{
 			echo "Feedback received\n";
 			$this->index();
 		}
+	}
+
+	public function getBidHistoryByUserID($userid){
+		$this->load->model('bid_model');
+		$biddingItem = $this->bid_model->getBidItemIDByUserID($userid);
+		//var_dump($biddingItem);
+		$historyArray = array();
+		foreach($biddingItem as $row){
+			//echo "$row";
+			$itemID = intval($row['item_id']);
+			//var_dump($row);
+			$itemName = $this->item_model->getItemNameByItemID($itemID);
+			$currentItemPrice = $this->biditem_model->getCurrentPrice($itemID);			
+			$endDate = $this->biditem_model->getEndDate($itemID);
+			$currentMaxBid = $this->biditem_model->getCurrentMaxBid($itemID);
+			$currentWinnerID = $this->biditem_model->getCurrentWinnerID($itemID);
+			$myCurrentBid = $this->bid_model->getMyCurrentBid($userid, $itemID);
+			$itemStatus = $this->item_model->getItemStatusByItemID($itemID);
+			$mergeArray = array(
+				array(
+					'item_name' => $itemName,
+					'currentItemPrice' => $currentItemPrice,
+					'end_date' => $endDate,
+					'currentMaxBid' => $currentMaxBid,
+					'currentWinnerID' => $currentWinnerID,
+					'myCurrentBid' => $myCurrentBid,
+					'itemStatus' => $itemStatus
+					)
+				);
+			//var_dump($mergeArray);
+			$historyArray = array_merge($historyArray, $mergeArray);
+		}
+
+		//var_dump($historyArray);
+
+		$this->index();
+
+		//return $historyArray;
 	}
 
 	public function complain_seller(){

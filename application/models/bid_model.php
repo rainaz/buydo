@@ -61,15 +61,19 @@ class Bid_model extends CI_Model {
 	//bid history
 
 	function getBidItemIDByUserID($id){
-		$sql = "SELECT DISTINCT item_id FROM bid WHERE buyer_id = $id";
+		$sql = "SELECT DISTINCT item_id FROM bid WHERE buyer_id = $id;";
+		echo $sql;
 		$query = $this->db->query($sql);
-		return $query->row_array();
+		//var_dump($query->row());
+		//echo $query->row();
+		return $query->result_array();
 	}
 
 	function getMyCurrentBid($id, $item_id){
-		$sql = "SELECT MAX(current_bid) FROM bid WHERE buyer_id = $id AND $item_id = $item_id";
-		$query = $this->db->query($sql);
-		return $query->row()->current_bid;
+		$sql = "SELECT MAX(current_bid) FROM bid WHERE buyer_id = $id AND item_id = $item_id";
+		$query = $this->db->query($sql);		
+		$rowArray = $query->row_array();
+		return $rowArray['MAX(current_bid)'];
 	}
 
 	function getBidHisotryByUserID($userid){

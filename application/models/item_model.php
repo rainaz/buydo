@@ -33,7 +33,7 @@ class Item_model extends CI_Model {
 
 		$sql = "INSERT INTO items ($this->attributes) VALUES " . $insvalue;
 		//echo "\n$sql";
-		$query = $this->db->query($sql);
+		//$query = $this->db->query($sql);
 		if ($query > 0) {
 			//echo $query;
 			return $lastrow;
@@ -41,7 +41,7 @@ class Item_model extends CI_Model {
 		return false;
 	}
 
-	public function getStatusByItemID($id){
+	public function getItemStatusByItemID($id){
 		$query = $this->db->query("SELECT status FROM items WHERE item_id = '" . $id . "'");
 		return $query->row()->status;
 	}
