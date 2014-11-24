@@ -116,13 +116,14 @@ class Transaction extends CI_Controller{
 
 			$this->load->library("email_library");
 
-			$this->email_library->sendEmail($buyerEmail,"Item Delivered !!!!", "Please give feedback to '$this->transaction_model->getItemFromTransactionID($transid)' ownner.");
-			$this->email_library->sendEmail($sellerEmail,"Item Delivered !!!!", "Please give feedback to '$this->transaction_model->getItemFromTransactionID($transid)' buyer");
-			$this->index();	
+			$this->email_library->sendEmail($buyerEmail,"Item Delivered !!!!", "Please give feedback to the seller of ".$this->transaction_model->getItemFromTransactionID($transid));
+			$this->email_library->sendEmail($sellerEmail,"Item Delivered !!!!", "Please give feedback to the buyer of ".$this->transaction_model->getItemFromTransactionID($transid));
+		
+		$this->load->view('header/header');
+		$this->load->view('item/notify');
+		$this->load->view('footer/footer');
 		}
 
-
-	}
 
 	public function showUserFeedback(){		
 		$userid = $this->input->get('user_id');
