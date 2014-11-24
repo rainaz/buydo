@@ -37,8 +37,13 @@ class User extends CI_Controller{
 		$topic=$this->input->post('topic');
 		$detail=sha1($this->input->post('detail'));
 		$result=$this->complain_model->add_complain();
-		if($result)
-			$this->index();
+		if($result) {
+			$data['message']="SUCCESS: your complaint has been processed.";
+	        $data['type']="success";
+	        $this->load->view('header/header');
+	        $this->load->view('content/simple_message',$data);
+	        $this->load->view('footer/footer');
+		}
 		else {
 			$data['message']="ERROR: cannot submit complain";
 	        $this->load->view('header/header');

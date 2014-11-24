@@ -126,7 +126,7 @@ class Transaction extends CI_Controller{
 
 		$this->index();
 
-		//return $historyArray;
+		return $historyArray;
 	}
 
 	public function complain_seller(){
