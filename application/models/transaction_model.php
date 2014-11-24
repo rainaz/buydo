@@ -115,12 +115,19 @@ class Transaction_model extends CI_Model {
 		return false;
 	}		
 
+	public function getBuyerEmailFromTransactionID($transid){
+		$query = $this->db->query("SELECT buyer_id FROM transactions WHERE transaction_id = '".$transid."'");	
+		if($query->num_rows() > 0){
+			return $query->row()->transaction_status;
+		}
+		return false;
+	}
+
 
 	public function setTransactionStatusFromTransactionID($transid, $nstatus){
 		$sql = "UPDATE transactions SET transaction_status = "."'".$nstatus."'"." WHERE transaction_id = "."'".$transid."'";
 		$query = $this->db->query($sql);	
 	}
-
 
 }
 ?>
