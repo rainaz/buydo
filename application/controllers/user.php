@@ -86,7 +86,7 @@ class User extends CI_Controller{
 	}
 	public function submit_user_complain(){
 		$this->load->library('form_validation');
-		
+
 		$transid=$this->input->post('transaction_id');
 		$topic=$this->input->post('topic');
 		$detail=($this->input->post('detail'));
@@ -149,10 +149,18 @@ class User extends CI_Controller{
 	public function submit_register(){
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
-		//$this->form_validation->set_rules('username', 'User Name', 'trim|required|min_length[4]|xss_clean');
-	  //  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
-		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
-		$dateresult = (new DateTime())->diff(new DateTime($this->input->post('birthdate')))->format("%R")=="+"; // birth in th future
+
+
+		$this->form_validation->set_rules('username', 'User Name', 'trim|required|min_length[8]|max_length[16]');
+	     $this->form_validation->set_rules('email', 'Your Email', 'trim|required|valid_email');
+	     $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]|max_length[16]');
+	     $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|min_length[8]|max_length[16]|matches[password]');
+	    $this->form_validation->set_rules('name', 'Name', 'trim|required|min_length[3]|max_length[20]');
+	     $this->form_validation->set_rules('surname', 'Surname', 'trim|required|min_length[3]|max_length[30]');	    
+		 $this->form_validation->set_rules('address', 'Address', 'trim|required|min_length[10]|max_length[150]');	
+		 $this->form_validation->set_rules('sent_address', 'Sent Address', 'trim|min_length[10]|max_length[150]');	
+
+		$dateresult = (new DateTime())->diff(new DateTime($this->input->post('birthdate')))->format("%R")=="-"; // birth in th future
 		if($dateresult){
 			$data['type']="danger";
 			$data['message']="Error! Birthday Error";
@@ -161,12 +169,13 @@ class User extends CI_Controller{
 			$this->load->view('footer/footer');
 		}
 		$this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'trim|required|matches[password]');
-		if($this->form_validation->run() == FALSE){
+		if($this->form_validation->run() == FALSE  ){
 			$data['type']="danger";
-			$data['message']="Error! string in password and confirm_password is not the same";
+			$data['message']="Error! input is invalid";
 			$this->load->view('header/header');
 			$this->load->view('content/simple_message', $data);
 			$this->load->view('footer/footer');
+			return;
 		//	$this->index();
 		}
 		//else{
@@ -183,7 +192,7 @@ class User extends CI_Controller{
 			$destinationAddress = $this->input->post('email');
 			$subject = "Registration confirmation: Buydo :)";
 $message = "Thank you for registration, ".$this->input->post('name').'. Your username is '.$this->input->post('username').'.';
-$this->email_library->sendEmail($destinationAddress,$subject,$message);
+//$this->email_library->sendEmail($destinationAddress,$subject,$message);
 $data['type']="success";
 $data['message']="Registration success";
 $this->load->view('header/header');
@@ -247,7 +256,7 @@ public function showAllUser() {
 public function transaction_history( ) {
 		//$data = $this->user_model->getUserByUserID($this->session->userdata('user_id'));
 	$data = $this->transaction_model->getTransactionByBuyerID($this->session->userdata('user_id'));
-	
+
 	$theArrayToPass = array();
 	foreach ( $data as $aTransaction ){
 		$anItem = $this->item_model->getItemByID( $aTransaction['item_id'] );
@@ -310,11 +319,19 @@ public function transaction_history( ) {
 
 		*/
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('user_name', 'User Name');
+
+	     $this->form_validation->set_rules('email', 'Your Email', 'trim|required|valid_email');
+	      $this->form_validation->set_rules('password', 'Password', 'trim|min_length[8]|max_length[16]');
+	      $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|min_length[8]|max_length[16]|matches[password]');
+	     $this->form_validation->set_rules('name', 'Name', 'trim|required|min_length[3]|max_length[20]');
+	      $this->form_validation->set_rules('surname', 'Surname', 'trim|required|min_length[3]|max_length[30]');	    
+		  $this->form_validation->set_rules('address', 'Address', 'trim|required|min_length[10]|max_length[150]');	
+		  $this->form_validation->set_rules('sent_address', 'Sent Address', 'trim|min_length[10]|max_length[150]');	
+
 
 		if($this->form_validation->run() == FALSE){
 			$data['type']="danger";
-			$data['message']="Error! Please try again later";
+			$data['message']="Error! input is invalid";
 			$this->load->view('header/header');
 			$this->load->view('content/simple_message', $data);
 			$this->load->view('footer/footer');
@@ -372,7 +389,7 @@ public function transaction_history( ) {
 		$this->load->view('footer/footer');
 	}
 	public function recoverPassword(){
-		
+
 		$this->load->model("user_model");
 		$data = $this->user_model->findUserByEmail($this->input->post('email'));
 		if(!$data)
@@ -389,7 +406,7 @@ public function transaction_history( ) {
 		$this->load->view('header/header', $data);
 		$this->load->view('user/new_password_form', $data);
 		$this->load->view('footer/footer');
-		
+
 	}
 	public function changePasswordPageAgain($hash){
 		$data['template_type'] = "corporate";
@@ -398,7 +415,7 @@ public function transaction_history( ) {
 		$this->load->view('header/header', $data);
 		$this->load->view('user/new_password_form', $data);
 		$this->load->view('footer/footer');
-		
+
 	}
 	public function changePassword($hash){
 		$this->load->helper('form');
