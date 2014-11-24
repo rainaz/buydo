@@ -66,6 +66,18 @@ class SaleItem_model extends CI_Model {
       $this->db->where('item_id', $this->input->post('item_id'));
       return $this->db->update('sale_items', $data);
   }
+	public function soldOut($sale_item, $quantity){
+		$tmp = $this->db->query("SELECT quantity_in_stock FROM sale_items WHERE item_id=$sale_item");
+		if($tmp == FALSE) 
+			return FALSE;
+		$old_quantity = $tmp->first_row()->quantity_in_stock;
+		$new_quantity = $old_quantity - $quantity;
+		if($new_quantity >= 0)
+			$this->db->query("UPDATE sale_items SET quantity_in_stock=".$new_quantity." WHERE item_id=$sale_item");
+		return $new_quantity;
+
+	}
+
 
 
 }

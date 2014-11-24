@@ -165,10 +165,18 @@ class User extends CI_Controller{
 	}
 	
 	public function showManageProfilePage() {
-		$data = $this->user_model->getUserByUserID($this->session->userdata('user_id'));
+		$data = $this->user_model->getUserByUserID();
 
 		$this->load->view('header/header');
 	    $this->load->view('user/manage_my_profile',$data);
+	    $this->load->view('footer/footer');
+	}
+
+	public function showAllUser() {
+		$data['list'] = $this->user_model->getAllUserIDAndNameAndType($this->session->userdata('user_id'));
+
+		$this->load->view('header/header');
+	    $this->load->view('item/user_list',$data);
 	    $this->load->view('footer/footer');
 	}
 
