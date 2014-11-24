@@ -27,7 +27,7 @@ $transaction = $theArrayToPass;
                   <div class="portlet-title"><h2><?php echo $aTransaction['title']; ?></h2></div>
                   <div class="portlet-body" style="padding-bottom: 15px;">
 
-                    <ul>
+                    <ul class="list-unstyled">
                       <li>Seller: <?php echo $aTransaction['seller']; ?> </li>
                       <li>Total Price: THB <?php echo $aTransaction['price']; ?> </li>
                       <li>Placement Date: <?php echo $aTransaction['placement_date']; ?></li>
