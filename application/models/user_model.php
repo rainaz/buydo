@@ -111,7 +111,7 @@ class User_model extends CI_Model {
       $narray = array(
         array(
           "user_id"=>$row['user_id'],
-          "name"=>$row['username'],
+          "name"=>$row['name'],
           "user_type"=>"Buyer"
         )
       );
@@ -121,7 +121,7 @@ class User_model extends CI_Model {
       $narray = array(
         array(
           "user_id"=>$row['user_id'],
-          "name"=>$row['username'],
+          "name"=>$row['name'],
           "user_type"=>"Seller"
         )
       );
