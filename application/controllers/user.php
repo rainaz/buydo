@@ -47,14 +47,15 @@ class User extends CI_Controller{
 	        $this->load->view('header/header');
 	        $this->load->view('content/simple_message',$data);
 	        $this->load->view('footer/footer');
+	    }
 
 	}
-	public function submit_system_complain(){
+		public function submit_system_complain(){
 		$topic=$this->input->post('topic');
 		$detail=sha1($this->input->post('detail'));
 		$result=$this->complain_model->add_complain();
 
-		}
+		
 
 
 		if($result)
