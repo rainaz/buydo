@@ -44,6 +44,20 @@
     <!-- END LayerSlider -->
 
     <script src="/buydo/assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+
+
+    <script>
+        if(!window.jQuery)
+        {
+           var script = document.createElement('script');
+           script.type = "text/javascript";
+           script.src = "http://code.jquery.com/jquery-1.11.1.min.js";
+           document.getElementsByTagName('head')[0].appendChild(script);
+        }
+
+        
+    </script>
+
     <script type="text/javascript">
         jQuery(document).ready(function() {
             Layout.init();    
@@ -56,16 +70,6 @@
     </script>
     <!-- END PAGE LEVEL JAVASCRIPTS -->
 
-    <script>
-        if(!window.jQuery)
-        {
-           var script = document.createElement('script');
-           script.type = "text/javascript";
-           script.src = "http://code.jquery.com/jquery-1.11.1.min.js";
-           document.getElementsByTagName('head')[0].appendChild(script);
-        }
-    </script>
-
     <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
     <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
     <script src="/buydo/assets/buydo/js/register_validator.js" type="text/javascript"></script>
@@ -76,7 +80,30 @@
     <script src="/buydo/assets/buydo/js/editbid_validator.js" type="text/javascript"></script>
     <script src="/buydo/assets/buydo/js/recovery_password_validator.js" type="text/javascript"></script>
     <script src="/buydo/assets/buydo/js/new_password_form_validator.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            $("#addBidVal").click(function(){
+                var bidval = parseInt($("#BidVal").val());
+                var stepsize = parseInt($("#StepSize").val());
+                stepsize = stepsize/20;
+                bidval = bidval+stepsize;
+                $("#BidVal").val(bidval.toFixed(2));
+            }); 
+            $("#decBidVal").click(function(){
+                var bidval = parseInt($("#BidVal").val());
+                var stepsize = parseInt($("#StepSize").val());
+                var current = parseInt($("#currentPrice").val());
 
+                stepsize = stepsize/20;
+                bidval = bidval-stepsize;
+                if(bidval>=current+stepsize){
+                    $("#BidVal").val(bidval.toFixed(2));
+                }
+            }); 
+            $("#BidVal").prop( "disabled", true );
+        });
+
+    </script>
 </body>
 <!-- END BODY -->
 </html>

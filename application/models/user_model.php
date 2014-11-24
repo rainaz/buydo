@@ -140,6 +140,14 @@ class User_model extends CI_Model {
     return false;    
   }
 
+  public function getPasswordByID($id){
+    $query = $this->db->query("SELECT password FROM users WHERE user_id = $id");
+    if($query->num_rows() > 0){
+      return $query->row()->password;
+    }
+    return false;
+  }
+
 
   public function manageProfileByUserID($id,$name,$surname,$sentAddress,$address,$country,$email,$phoneNo,$creditcard,$password){
 
@@ -163,7 +171,57 @@ class User_model extends CI_Model {
   {
     $this->load->helper('url');
     
- $data=array(
+    $actualpassword = getPasswordByID($this->session->userdata('user_id'));
+    $oldpassword = sha1($this->input->post('old_password'));
+
+    if($actualpassword != $oldpassword) return false;
+    if($this->input->post('password') != $this->input->post('password_confirm')) return false;
+
+    if(strlen($password)==0){
+      $password = $actualpassword;
+    }
+    else $password = sha1($this->input->post('password') );
+
+  if(strlen($this->input->post('creditcard'))<2 && strlen($this->input->post('sent_address'))<2){
+  $data=array(
+    'name'=>$this->input->post('name'),   
+    'surname'=>$this->input->post('surname'),   
+    'email'=>$this->input->post('email'),     
+    'birthday'=>$this->input->post('birthday'),
+    'country'=>$this->input->post('country'),
+    'address'=>$this->input->post('address'),
+    'password'=>$password,
+     'phone_no'=>$this->input->post('phone_no'),
+  );
+  }
+  else if(strlen($this->input->post('creditcard'))<2 && strlen($this->input->post('sent_address'))>2){
+  $data=array(
+    'name'=>$this->input->post('name'),   
+    'surname'=>$this->input->post('surname'),   
+    'email'=>$this->input->post('email'),    
+    'birthday'=>$this->input->post('birthday'),
+    'country'=>$this->input->post('country'),
+    'sent_address'=>$this->input->post('sent_address'),
+    'address'=>$this->input->post('address'),
+    'password'=>$password,
+     'phone_no'=>$this->input->post('phone_no'),
+  );
+  }
+  else if(strlen($this->input->post('creditcard'))>2 && strlen($this->input->post('sent_address'))<2){
+  $data=array(
+    'name'=>$this->input->post('name'),   
+    'surname'=>$this->input->post('surname'),   
+    'email'=>$this->input->post('email'),   
+    'creditcard'=>$this->input->post('creditcard'),   
+    'birthday'=>$this->input->post('birthday'),
+    'country'=>$this->input->post('country'),
+    'address'=>$this->input->post('address'),
+    'password'=>$password,
+     'phone_no'=>$this->input->post('phone_no'),
+  );
+  }
+  else{
+  $data=array(
     'name'=>$this->input->post('name'),   
     'surname'=>$this->input->post('surname'),   
     'email'=>$this->input->post('email'),   
@@ -172,9 +230,15 @@ class User_model extends CI_Model {
     'country'=>$this->input->post('country'),
     'sent_address'=>$this->input->post('sent_address'),
     'address'=>$this->input->post('address'),
-    'password'=>sha1($this->input->post('password')),
+    'password'=>$password,
      'phone_no'=>$this->input->post('phone_no'),
   );
+  }
+
+
+
+
+
       $this->db->where('user_id', $this->session->userdata('user_id'));
       return $this->db->update('users', $data);
   }
