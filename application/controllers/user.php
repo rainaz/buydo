@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class User extends CI_Controller{
-
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('user_model');
 		$this->load->model('complain_model');
+		$this->load->model('item_model');
 	}
 	public function index(){
         $data['template_type'] = "ecommerce";
@@ -25,6 +25,26 @@ class User extends CI_Controller{
         $this->load->view('header/header', $data);
         $this->load->view('user/register');
         $this->load->view('footer/footer');
+	}
+		public function systemComplain()
+	{
+        $data['template_type'] = "corperate";
+        $this->load->view('header/header', $data);
+        $this->load->view('user/system_complain');
+        $this->load->view('footer/footer');
+	}
+	public function submit_system_complain(){
+		$topic=$this->input->post('topic');
+		$detail=sha1($this->input->post('detail'));
+		$result=$this->complain_model->add_complain();
+		if($result)
+			$this->index();
+		else {
+			$data['message']="ERROR: cannot submit complain";
+	        $this->load->view('header/header');
+	        $this->load->view('content/simple_message',$data);
+	        $this->load->view('footer/footer');
+	    }
 	}
 
 	public function submit_login(){
@@ -116,7 +136,18 @@ class User extends CI_Controller{
 		}
 	}
 
+public function viewBidHistory(){
+		$data['title']= 'bidHistory';
 
+		$data['user_id'] = $this->input->post('user_id');
+
+		$bidHistory = $this->item_model->getItemInfo(1);
+
+		$this->load->view('header_view');
+		$this->load->view('thank_view.php', $bidHistory);
+		$this->load->view('footer_view');
+
+	}
 
 
 
