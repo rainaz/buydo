@@ -36,6 +36,9 @@
             </div>
 
             <!-- code for button here -->
+              <div class="pull-right">
+              <ul class="list-inline">
+              <li>
                 <?php
                 if ( $aTransaction['status'] == 0 ) {
                   echo '<form id="pay_form" method="post" action="">';
@@ -64,12 +67,16 @@
                 </form>';
                 }
                 ?>
+                </li>
 
+                <li>
                 <form id="complain_form" method="post" action="">
                 <input type="hidden" name="transaction_id" id="transaction_id" value=<?php echo $aTransaction['transaction_id'] ?> >
                 <button type="submit" class="btn red"><i class="fa fa-bullhorn"></i> Complain Seller</button>
                 </form>
-
+                </li>
+                </ul>
+                </div>
                 
               <!--a href="#" class="icon-btn">
                 <i class="fa fa-money"></i>
