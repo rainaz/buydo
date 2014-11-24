@@ -11,12 +11,12 @@ class Bid_model extends CI_Model {
 	private $_detail;*/ 
 
 	private $table_name;
-	private $attributes = "bid_id, item_id, buyer_id, current_bid, max_bid, bid_date";
+	private $attributes = "item_id, buyer_id, current_bid, max_bid, bid_date";
 
 	public function addBid($itemID, $buyerID, $currentBid, $maxBid){
 		$bidID = $this->db->count_all($this->table_name) + 1;
 
-		$insvalue = "('".$bidID."', '".
+		$insvalue = "('".
 			$itemID."', '".
 			$buyerID."', '".		
 			$currentBid."', '".		

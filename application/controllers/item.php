@@ -8,6 +8,7 @@ class Item extends CI_Controller {
 		$this->load->model('item_model');
 		$this->load->model('saleitem_model');
 		$this->load->model('biditem_model');
+		$this->load->model('bid_model');
 		$this->load->model('transaction_model');
 	}
 	public function index(){
@@ -357,46 +358,90 @@ class Item extends CI_Controller {
 		$this->load->view('biditem_mock.php', $data);
 		$this->load->view('footer_view');
 	}
-	public function calculateBid() {
-		$this->load->library('form_validation');
-		// field name, error message, validation rules
-		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
-		//  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
-		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
-		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
 
-		//	$this->index();
-		//find itemID
-		//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
+	public function bidMaxBid(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
+
 		$data = array(
-				"item_id"=>$this->input->post('item_id'),
-				"value" => $this->input->post('value'),
-				"itemName" => $this->input->post('itemName'),
-				"initial_price" => $this->input->post('initial_price'),
-				"current_winner_id" => $this->input->post('current_winner_id'),
-				"current_price" => $this->input->post('current_price')		,
-				"current_max_bid" => $this->input->post('current_max_bid'),
-				"end_date" => $this->input->post('end_date')
+			"item_id"=>$this->input->post('itemID'),
+			"value" => $this->input->post('val'),
+			"itemName" => $this->input->post('itemName'),
+			"initial_price" => $this->input->post('initialPrice'),
+			"current_winner_id" => $this->input->post('winnerID'),
+			"current_price" => $this->input->post('currentPrice')		,
+			"current_max_bid" => $this->input->post('maxBid'),
+			"end_date" => $this->input->post('endDate')
 			);
 
 		$user_id = $this->session->userdata('user_id');
 		$item_id = $data['item_id'];
-		if($data['value']){
-			$nmaxbidprice = $data['value'];
-			echo $nmaxbidprice;
+		
+		$data['value'] = $data['value'] - $data['value']%($data['initial_price']*0.05);
+		$nmaxbidprice = $data['value'];
+
+		$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
+		$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);
+		$currentPrice = $this->biditem_model->getCurrentPrice($item_id);
+		$initialPrice = $this->biditem_model->getInitialPrice($item_id);
+	//	$myMaxBid = $this->bid->getMyMaxBid($this->session->userdata('user_id'));
+
+		if(strlen($data['current_max_bid'])==0){
+			$this->biditem_model->setCurrentPrice($item_id, $initialPrice);
+			$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
+			$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
 		}
-		else{
-		  if(strlen($data['current_max_bid'])==0){
-		   	$nmaxbidprice = $data['initial_price'];
-	 	   	echo 'maxbidnull';
-		   }
-		   else{
-		   	$nmaxbidprice = $data['current_price']+$data['initial_price']*0.05;
-		   	echo 'maxbidnotnull';
-		   }
-		   echo $nmaxbidprice;
+		else if($nmaxbidprice > $currentMaxBid){
+			$this->biditem_model->setCurrentPrice($item_id, $currentMaxBid + $initialPrice*0.05);
+			$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
+			$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
+			$this->load->view('header/header');
+			$this->load->view('checkout/bid_success', $data);
+			$this->load->view('footer/footer');
+		}
+		else {
+			$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
+						$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
+			$data['message']="your bid is too low, please try again.";
+			$this->load->view('header/header');
+	        $this->load->view('checkout/bid_fail',$data);
+			$this->load->view('footer/footer');
+		//	$nmaxbidprice = $minPrice;
 		}
 
+		$this->bid_model->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id));
+	}
+
+	public function bidNextBid(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
+
+		$data = array(
+			"item_id"=>$this->input->post('itemID'),
+			"value" => $this->input->post('val'),
+			"itemName" => $this->input->post('itemName'),
+			"initial_price" => $this->input->post('initialPrice'),
+			"current_winner_id" => $this->input->post('winnerID'),
+			"current_price" => $this->input->post('currentPrice')		,
+			"current_max_bid" => $this->input->post('maxBid'),
+			"end_date" => $this->input->post('endDate')
+			);
+
+		$user_id = $this->session->userdata('user_id');
+		$item_id = $data['item_id'];
+
+		$data['value'] = $data['value'] - $data['value']%($data['initial_price']*0.05);
+		$nmaxbidprice = $data['value'];
+
+		if(strlen($data['current_max_bid'])==0){
+			$nmaxbidprice = $data['initial_price'];
+		//	echo 'maxbidnull';
+		}
+		else{
+			$nmaxbidprice = $data['current_price']+$data['initial_price']*0.05;
+		//	echo 'maxbidnotnull';
+		}
+		//echo $nmaxbidprice;
 		$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
 		$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);
 		$currentPrice = $this->biditem_model->getCurrentPrice($item_id);
@@ -411,19 +456,90 @@ class Item extends CI_Controller {
 			$this->biditem_model->setCurrentPrice($item_id, $currentMaxBid + $initialPrice*0.05);
 			$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
 			$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
+			$this->load->view('header/header');
+			$this->load->view('checkout/bid_success', $data);
+			$this->load->view('footer/footer');
 		}
 		else {
 			$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
-			$nmaxbidprice = $minPrice;
+			$data['message']="your bid is too low, please try again.";
+	        $this->load->view('header/header');
+	        $this->load->view('checkout/bid_fail',$data);
+	        $this->load->view('footer/footer');
 		}
 
-		$this->bid->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id));
-
-		$this->load->view('header_view');
-		$this->load->view('test_view.php', $data);
-		$this->load->view('footer_view');
+		$this->bid_model->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id));
 	}
 
+	// public function calculateBid() {
+	// 	$this->load->library('form_validation');
+	// 	// field name, error message, validation rules
+	// 	$this->form_validation->set_rules('item_name', 'Item Name', 'trim|required|min_length[4]|xss_clean');
+	// 	//  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
+	// 	//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
+	// 	//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
+
+	// 	//	$this->index();
+	// 	//find itemID
+	// 	//$row = $this->item_model->addSaleItem(maybe we need a paramenter here);
+	// 	$data = array(
+	// 			"item_id"=>$this->input->post('item_id'),
+	// 			"value" => $this->input->post('value'),
+	// 			"itemName" => $this->input->post('itemName'),
+	// 			"initial_price" => $this->input->post('initial_price'),
+	// 			"current_winner_id" => $this->input->post('current_winner_id'),
+	// 			"current_price" => $this->input->post('current_price')		,
+	// 			"current_max_bid" => $this->input->post('current_max_bid'),
+	// 			"end_date" => $this->input->post('end_date')
+	// 		);
+
+	// 	$user_id = $this->session->userdata('user_id');
+	// 	$item_id = $data['item_id'];
+
+	// 	if($data['value']){
+	// 		echo "max mode";
+	// 		$nmaxbidprice = $data['value'];
+	// 		echo $nmaxbidprice;
+	// 	}
+	// 	else{
+	// 		echo "normal mode";
+	// 	  if(strlen($data['current_max_bid'])==0){
+	// 	   	$nmaxbidprice = $data['initial_price'];
+	//  	   	echo 'maxbidnull';
+	// 	   }
+	// 	   else{
+	// 	   	$nmaxbidprice = $data['current_price']+$data['initial_price']*0.05;
+	// 	   	echo 'maxbidnotnull';
+	// 	   }
+	// 	   echo $nmaxbidprice;
+	// 	}
+
+	// 	$currentMaxBid = $this->biditem_model->getCurrentMaxBid($item_id);
+	// 	$currentWinnerID = $this->biditem_model->getCurrentWinnerID($item_id);
+	// 	$currentPrice = $this->biditem_model->getCurrentPrice($item_id);
+	// 	$initialPrice = $this->biditem_model->getInitialPrice($item_id);
+
+	// 	if(strlen($data['current_max_bid'])==0){
+	// 		$this->biditem_model->setCurrentPrice($item_id, $initialPrice);
+	// 		$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
+	// 		$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
+	// 	}
+	// 	else if($nmaxbidprice > $currentMaxBid){
+	// 		$this->biditem_model->setCurrentPrice($item_id, $currentMaxBid + $initialPrice*0.05);
+	// 		$this->biditem_model->setCurrentWinnerID($item_id, $user_id);
+	// 		$this->biditem_model->setCurrentMaxBid($item_id, $nmaxbidprice);
+	// 	}
+	// 	else {
+	// 		$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
+	// 		$nmaxbidprice = $minPrice;
+	// 	}
+
+	// 	$this->bid->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id));
+
+	// 	$this->load->view('header_view');
+	// 	$this->load->view('test_view.php', $data);
+	// 	$this->load->view('footer_view');
+	// }
 	function verifyWinnerAlreadyPaid($itemid){
 		$winnerid = $this->biditem_model->getCurrentWinnerID($itemid);
 		$transaction = $this->transaction_model->getTransactionByBuyerIDAndItemID($winnerid, $itemid);

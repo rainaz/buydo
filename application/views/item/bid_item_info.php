@@ -38,34 +38,47 @@
 							<div class="row">
 								<div class="col-md-2 col-sm-2">
 								</div>
-								<div class="col-md-4 col-sm-4">
-									<div class="input-group input-small">
-										<span class="input-group-btn">
-										<button class="btn red" id="decBidVal" type="button">-</button>
-										</span>
-										<input type="hidden" id="StepSize" value="<?php echo $initialPrice;?>" />
-										<input type="hidden" id="currentPrice" value="<?php echo $currentPrice;?>" />
+								<form method="post" id="confirm_Maxbid" action="<?php echo site_url('item/bidMaxBid'); ?>">
+									<div class="col-md-4 col-sm-4">
+										<div class="input-group input-small">
+											
+											<input type="hidden" id="itemID" name="itemID" value="<?php echo $itemID;?>" />
+											<input type="hidden" id="itemName" name="itemName" value="<?php echo $itemName ?>" />
+											<input type="hidden" id="winnerID" name="winnerID" value="<?php echo $winnerID ?>" />
+											<input type="hidden" id="maxBid" name="maxBid" value="<?php echo $currentMaxBid ?>" />
+											<input type="hidden" id="initialPrice" name="initialPrice" value="<?php echo $initialPrice;?>" />
+											<input type="hidden" id="currentPrice" name="currentPrice" value="<?php echo $currentPrice;?>" />
+											<input type="hidden" id="endDate" name="endDate" value="<?php echo $endDate;?>" />
+											<input type="number" class="form-control" id="val" name="val" value="<?php echo $nextBid;?>" width="50%">
+											
+										</div>
 
-										<input type="text" class="form-control" id="BidVal" value="<?php echo number_format($nextBid, 2);?>" width="50%">
-										<span class="input-group-btn">
-										<button class="btn green" id="addBidVal" type="button">+</button>
-										</span>
+										<p class="help-block">
+											Minimum bid: <strong>THB<?php echo number_format($currentPrice, 2);?></strong>
+										</p>
 									</div>
-									<p class="help-block">
-									Minimum bid: <strong>THB<?php echo number_format($currentPrice, 2);?></strong>
-									</p>
-								</div>
-								<div class="col-md-5 col-sm-5">
-									<button class="btn btn-primary" type="submit">Place bid</button>
-									<!-- button class="btn btn-primary" type="submit">Increase bid</button-->
-								</div>
+									<div class="col-md-5 col-sm-5">
+										<button class="btn btn-primary" type="submit">Place bid</button>
+										<!-- button class="btn btn-primary" type="submit">Increase bid</button-->
+									</div>
+								</form>
 								<div class="col-md-1 col-sm-1">
 								</div>
 							</div>
 						</div>
-						<div class="social-icons text-center product-page-cart">
-							<button class="btn btn-primary" type="submit">Place bid: THB<?php echo number_format($nextBid, 2)?></button>
-						</div>
+						<form method="post" id="confirm_bid" action="<?php echo site_url('item/bidNextBid'); ?>">
+							<input type="hidden" id="itemID" name="itemID" value="<?php echo $itemID;?>" />
+							<input type="hidden" id="itemName" name="itemName" value="<?php echo $itemName ?>" />
+							<input type="hidden" id="winnerID" name="winnerID" value="<?php echo $winnerID ?>" />
+							<input type="hidden" id="maxBid" name="maxBid" value="<?php echo $currentMaxBid ?>" />
+							<input type="hidden" id="initialPrice" name="initialPrice" value="<?php echo $initialPrice;?>" />
+							<input type="hidden" id="currentPrice" name="currentPrice" value="<?php echo $currentPrice;?>" />
+							<input type="hidden" id="endDate" name="endDate" value="<?php echo $endDate;?>" />
+							<input type="hidden" id="BidVal" name="val" value="<?php echo $nextBid;?>">
+							<div class="social-icons text-center product-page-cart">
+								<button class="btn btn-primary" type="submit">Place bid: THB<?php echo number_format($nextBid, 2)?></button>
+							</div>
+						</form>
 					<?php else :?>
 					<?php endif; ?>
 
