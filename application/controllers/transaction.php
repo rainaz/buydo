@@ -1,4 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+/*
+pay($transaction_id)
+	เปลี่ยนtransaction status เป็น notify
+notify($transaction_id)
+	เปลี่ยน transation status เป็น received
+	ส่ง email ให้ buyer&seller เพื่อให้มาทำการให้ feedback
+give_feedback($transaction_id)
+	feedback_form
+	if(ให้ครบ) change status to done
+pay_timeout($transaction_id)
+announce_bid_winner($transaction_id)
+*/
+
 class Transaction extends CI_Controller{
 	public function __construct() {
   		parent::__construct();
@@ -52,7 +66,12 @@ class Transaction extends CI_Controller{
 			$this->load->view('footer/footer');
 		}
 	}
+	public function pay(){
+		$transaction_id  =$this->input->post('transaction_id');
+		$this->transaction_model->setTransactionStatusFromTransactionID($transaction_id,"wait");
+	}
 
+	
 	public function listAllTransaction($buyerid){
 		$this->trans->getTransactionByBuyerID($buyerid);
 
@@ -84,6 +103,14 @@ class Transaction extends CI_Controller{
 			$transid = $this->input->post('transid');
 			$transtatus = "received";
 			$this->transaction_model->setTransactionStatusFromTransactionID($transid, $transtatus);		
+
+			$buyerEmail = $this->transaction_model->getBuyerEmail($transid);
+			$sellerEmail = $this->transaction_model->getSellerEmail($transid);
+
+
+			$this->load->library("email_library");
+			$this->email_library->sendEmail($buyerEmail, "Please give feedback to your seller");
+			$this->email_library->sendEmail($sellerEmail, "Please give feedback to your buyer");
 			$this->index();	
 		}
 
@@ -146,8 +173,8 @@ class Transaction extends CI_Controller{
 			$comment = $this->input->post('comment');
 			$this->feedback_model->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
 			//echo "comment = $comment\n";
-			echo "Feedback received\n";
-			$this->index();
+			//echo "Feedback received\n";
+			//$this->index();
 		}
 	}
 

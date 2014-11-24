@@ -17,11 +17,11 @@
 							<div class="price-availability-block clearfix">
 								<div class="price">
 									<!-- strong><span>Start Bid: THB</span>47.00</strong-->
-									<strong><span>CURRENT BID: THB</span><?php echo number_format($currentPrice,2);?></strong>
+									<strong><span>CURRENT PRICE: THB</span><?php echo number_format($currentPrice,2);?></strong>
 								</div>
 								<div class="availability text-right">
 									For: <strong>Bid</strong><br />
-									Time Left: <strong>$timeLeft
+									Time Left: <strong><?php echo $timeLeft ;?>
 									</strong><br />
 									Seller: <strong>seller</strong>
 								</div>
