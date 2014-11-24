@@ -331,7 +331,7 @@ public function viewBidHistory(){
 			redirect("/");
 		$this->load->library("email_library");
 		
-		$this->email_library->sendEmail("rs715714@gmail.com", "Change password",$data['email'].": Proceed to change password at   http://127.0.0.1/buydo/index.php/user/changePasswordPage/".$data['hash']);
+		$this->email_library->sendEmail($data['email'], "Change password",$data['email'].": Proceed to change password at   http://127.0.0.1/buydo/index.php/user/changePasswordPage/".$data['hash']);
 		redirect("/");
 	}
 	public function changePasswordPage($hash){

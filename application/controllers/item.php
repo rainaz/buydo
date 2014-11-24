@@ -109,9 +109,9 @@ class Item extends CI_Controller {
 
 			
 
-			if($now->diff($then)->format("%R") == "-") {
+			if($now->diff($then)->format("%R") == "+") {
 				 $this->item_model->setItemStatus($item_id,"bidding_closed");
-				
+				echo $item_id."<br/>";
 				$winnerEmail = $this->biditem_model->getBidWinnerEmail($item_id);
 				$loserEmail = $this->biditem_model->getBidLoserEmail($item_id);
 				$this->load->library("email_library");
