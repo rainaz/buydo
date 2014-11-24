@@ -22,7 +22,7 @@
                 <div class="availability text-right">
                   For: <strong>Sales</strong><br />
                   Availability: <strong><?php echo $quantity?> left</strong><br />
-                  Seller: <strong>seller</strong>
+				  Seller: <strong><?php echo $owner; ?></strong>
                 </div>
               </div>
               <div class="product-page-cart">

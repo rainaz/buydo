@@ -9,7 +9,7 @@
           <!-- BEGIN CONTENT -->
           <div class="col-md-1 col-sm-1"></div>
           <div class="col-md-10 col-sm-10">
-            <h1>User Complain <?php echo 'transaction id = '.$transaction_id ; ?></h1>
+            <h1>User Complain <?php echo "user ".$accused ; ?></h1>
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">

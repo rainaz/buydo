@@ -23,7 +23,7 @@
 									For: <strong>Bid</strong><br />
 									Time Left: <strong><?php echo $timeLeft ;?>
 									</strong><br />
-									Seller: <strong>seller</strong>
+										Seller: <strong><?php echo $owner;?></strong>
 								</div>
 							</div>
 							<!--div class="description">
