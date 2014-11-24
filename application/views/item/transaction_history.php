@@ -24,7 +24,7 @@ $transaction = $theArrayToPass;
               <!-- PRODUCT ITEM START -->
               <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="portlet" style="min">
-                  <div class="portlet-title"><h2><?php echo $aTransaction['title']; ?></h2></div>
+                  <div class="portlet-title"><a href="<?php echo site_url('/item/showItem/'.$aTransaction["item_id"]); ?>"><h2><?php echo $aTransaction['title']; ?></h2></a></div>
                   <div class="portlet-body" style="padding-bottom: 15px;">
 
                     <ul class="list-unstyled">

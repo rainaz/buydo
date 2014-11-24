@@ -37,6 +37,7 @@ class User extends CI_Controller{
 	public function userComplain(){
 		$data['transaction_id'] = $this->input->post('transaction_id');
         $data['template_type'] = "corporate";
+		$data['accused'] = $this->transaction_model->getSellerFromTransactionID($data['transaction_id']);
         $this->load->view('header/header', $data);
         $this->load->view('user/user_complain',$data);
         $this->load->view('footer/footer');
@@ -209,7 +210,9 @@ class User extends CI_Controller{
 				'seller' => $seller,
 				'price' => $price,
 				'placement_date' => $placement_date,
-				'status' => $status
+				'status' => $status,
+				'item_id' => $aTransaction['item_id']
+
 				);
 			$arrayElement2 = array($anArrayElement);
 
