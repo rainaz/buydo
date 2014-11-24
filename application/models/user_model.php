@@ -98,8 +98,8 @@ class User_model extends CI_Model {
   public function getAllUserIDAndNameAndType(){
     //$query = $this->db->query("SELECT user_id, username FROM users");
     //only buyer
-    $sql1 = "SELECT users.user_id, name FROM buyers LEFT JOIN users  ON buyers.user_id = users.user_id";
-    $sql2 = "SELECT users.user_id, name FROM sellers LEFT JOIN users  ON sellers.user_id = users.user_id";
+    $sql1 = "SELECT users.user_id, name, username FROM buyers LEFT JOIN users  ON buyers.user_id = users.user_id";
+    $sql2 = "SELECT users.user_id, name, username FROM sellers LEFT JOIN users  ON sellers.user_id = users.user_id";
 
     $query1 = $this->db->query($sql1);
     $qarray1 = $query1->result_array();
@@ -112,6 +112,7 @@ class User_model extends CI_Model {
         array(
           "user_id"=>$row['user_id'],
           "name"=>$row['name'],
+          "username"=>$row['username'],
           "user_type"=>"Buyer"
         )
       );
@@ -122,6 +123,7 @@ class User_model extends CI_Model {
         array(
           "user_id"=>$row['user_id'],
           "name"=>$row['name'],
+          "username"=>$row['username'],
           "user_type"=>"Seller"
         )
       );

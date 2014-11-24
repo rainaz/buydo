@@ -57,7 +57,8 @@ class Feedback_model extends CI_Model {
 	}
 
 	function verifyFeedbackHasTwoWays($transid){
-		$query = $this->db->query("SELECT * FROM feedbacks WHERE transaction_id = $transid");
+		$sql = "SELECT * FROM feedbacks WHERE transaction_id = $transid";
+		$query = $this->db->query($sql);
 		return $query->num_rows()==2;
 	}
 
