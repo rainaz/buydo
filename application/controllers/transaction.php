@@ -31,7 +31,7 @@ class Transaction extends CI_Controller{
 			$transactionstatus = "wait";
 			$this->transaction_model->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
 			echo "Transaction created\n";
-			$this->index();
+			//$this->index();
 		}
 	}
 

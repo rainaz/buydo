@@ -87,31 +87,31 @@ class Item extends CI_Controller {
 
 	public function announceBidWinner($item_id){
 
-	
+
 		$interestItem = $this->item_model->getItemInfo($item_id);
 		if($interestItem->isClose == "-"){
-		$this->item_model->changeItemStatus($item_id,"bidding_closed");
-		$now = new DateTime();
-		$then = new DateTime("$end_date");
-		if($now > $then)
-		$winnerEmail = $this->biditem_model->getWinnerEmail($item_id);
-		$loserEmail = $this->biditem_model->getLoserEmail($item_id);
+			$this->item_model->changeItemStatus($item_id,"bidding_closed");
+			$now = new DateTime();
+			$then = new DateTime("$end_date");
+			if($now > $then)
+				$winnerEmail = $this->biditem_model->getWinnerEmail($item_id);
+			$loserEmail = $this->biditem_model->getLoserEmail($item_id);
 
 
-		$this->load->library("email_library");
-		$this->email_library->sendEmail($winnerEmail, "You are the winner [".$interestItem['itemName']."]","Congratulation! You won the ".$interestItem['itemName'].". please confirm your payment at the website");
-	
-		foreach ($loserEmail as $item) {
-			$this->email_library->sendEmail($item, "You lose [".$interestItem['itemName']."]","You lost the ".$interestItem['itemName'].". Thank you for your participation.");
-	
+			$this->load->library("email_library");
+			$this->email_library->sendEmail($winnerEmail, "You are the winner [".$interestItem['itemName']."]","Congratulation! You won the ".$interestItem['itemName'].". please confirm your payment at the website");
+
+			foreach ($loserEmail as $item) {
+				$this->email_library->sendEmail($item, "You lose [".$interestItem['itemName']."]","You lost the ".$interestItem['itemName'].". Thank you for your participation.");
+
+			}
 		}
-	}
 
 	}
 		//send email to winner id query winner email, send win email to him
 		//send email to loser	id query all bidder except winner id
 		//done
-	}
+	
 
 	public function payTimeOut($item_id){
 
