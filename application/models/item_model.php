@@ -161,9 +161,12 @@ class Item_model extends CI_Model {
 	public function getItemInfo($id) {
 		$isBid = $this->db->query("SELECT * FROM `bid_items` WHERE `bid_items`.`item_id`=" . $id . ";")->num_rows();
 		if ($isBid > 0) {
+
 			$query = $this->db->query("SELECT `a`.`item_name`,`b`.`current_winner_id`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . ";")->first_row();
+
 			$timeLeft = (new DateTime($query->end_date))->diff(new DateTime());
 			$data = array(
+				"itemID"=>$id,
 				"type" => "Auction",
 				"itemName" => $query->item_name,
 				"initialPrice" => $query->initial_price,
@@ -188,6 +191,7 @@ class Item_model extends CI_Model {
 
 			$query = $query->first_row();
 			$data = array(
+				"itemID"=>$id,
 				"type" => "Sales",
 				"itemName" => $query->item_name,
 				"price" => $query->price,

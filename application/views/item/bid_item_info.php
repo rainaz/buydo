@@ -41,11 +41,14 @@
 								<div class="col-md-4 col-sm-4">
 									<div class="input-group input-small">
 										<span class="input-group-btn">
-										<button class="btn red" type="button">-</button>
+										<button class="btn red" id="decBidVal" type="button">-</button>
 										</span>
-										<input type="text" class="form-control" placeholder="<?php echo number_format($nextBid, 2);?>" width="50%">
+										<input type="hidden" id="StepSize" value="<?php echo $initialPrice;?>" />
+										<input type="hidden" id="currentPrice" value="<?php echo $currentPrice;?>" />
+
+										<input type="text" class="form-control" id="BidVal" value="<?php echo number_format($nextBid, 2);?>" width="50%">
 										<span class="input-group-btn">
-										<button class="btn green" type="button">+</button>
+										<button class="btn green" id="addBidVal" type="button">+</button>
 										</span>
 									</div>
 									<p class="help-block">

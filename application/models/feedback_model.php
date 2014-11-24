@@ -44,10 +44,14 @@ class Feedback_model extends CI_Model {
 	function getFeedbackByFeedbackID($id){
 		return $this->db->query("SELECT * FROM feedbacks WHERE feedback_id = ".$id);
 	}
-	function getFeedbackByUserID($id){
-		return $this->db->query("SELECT * FROM feedbacks WHERE feedbackFrom = ".$id." OR feedbackTo = ".$id);
+	function getFeedbackByFeedbackGiverUserID($id){
+		$query = $this->db->query("SELECT * FROM feedbacks WHERE feedback_from = ".$id);
+		return $query->row_array();
 	}
-
+	function getFeedbackByFeedbackReceiverUserID($id){
+		$query = $this->db->query("SELECT * FROM feedbacks WHERE feedback_to = ".$id);
+		return $query->row_array();
+	}
 
 }
 ?>

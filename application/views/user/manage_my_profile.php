@@ -23,7 +23,7 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal" role="form" method="post" action=<?php echo site_url('user/manageprofile'); ?>>
+                  <form class="form-horizontal" role="form" method="post" action=<?php echo site_url('user/manageprofile'); ?> id="manage_profile_form">
                     <fieldset>
                       <legend>Account details</legend>
                       <div class="form-group">
@@ -33,13 +33,13 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="password" class="col-lg-4 control-label">New Password <span class="require">*</span></label>
+                        <label for="password" class="col-lg-4 control-label">New Password </label>
                         <div class="col-lg-8">
                           <input type="password" class="form-control" id="password" name="password">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="confirm_password" class="col-lg-4 control-label">Confirm new password <span class="require">*</span></label>
+                        <label for="confirm_password" class="col-lg-4 control-label">Confirm new password </label>
                         <div class="col-lg-8">
                           <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         </div>
