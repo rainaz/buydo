@@ -72,6 +72,9 @@ class Transaction extends CI_Controller{
 	public function pay(){
 		$transaction_id  =$this->input->post('transaction_id');
 		$this->transaction_model->setTransactionStatusFromTransactionID($transaction_id,"wait");
+		$this->load->view('header/header');
+		$this->load->view('checkout/buy_complete');
+		$this->load->view('footer/footer');
 	}
 
 	
@@ -98,10 +101,10 @@ class Transaction extends CI_Controller{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('transid', 'transid', 'trim|required|min_length[1]|xss_clean');
 		
-		if($this->form_validation->run()==TRUE){
-			$this->index();
-		}
-		else {
+	//	if($this->form_validation->run()==TRUE){
+	//		$this->index();
+		//}
+	//	else {
 		//	echo "Pass here\n";
 			$transid = $this->input->post('transaction_id');
 			$transtatus = "received";
@@ -114,8 +117,11 @@ class Transaction extends CI_Controller{
 			$this->load->library("email_library");
 			$this->email_library->sendEmail($buyerEmail,"lui tua", "Please give feedback to your seller");
 			$this->email_library->sendEmail($sellerEmail,"lui tua", "Please give feedback to your buyer");
-			$this->index();	
-		}
+						
+			$this->load->view('header/header');
+			$this->load->view('checkout/buy_complete');
+			$this->load->view('footer/footer');
+	//	}
 
 	}
 
