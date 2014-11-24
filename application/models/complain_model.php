@@ -105,6 +105,48 @@ class Complain_model extends CI_Model {
 
 	}
 
+	function getAllComplain(){
+		$sql1 = "SELECT * FROM complain WHERE accused = ''";
+		$sql2 = "SELECT * FROM complain WHERE accused != ''";
+		$query1 = $this->db->query($sql1);
+		$query2 = $this->db->query($sql2);
+		$qarray1 = array();
+		$qarray2 = array();
+		if($query1->num_rows() > 0)
+			$qarray1 = $query1->result_array();
+		if($query2->num_rows() > 0)
+			$qarray2 = $query2->result_array();
+
+		$resultArray = array();
+		foreach($qarray1 as $row){
+      		$narray = array(
+        		array(         		
+          		"user_id"=>$row['user_id'],
+          		"accused"=>"system",
+          		"date"=>$row['date'],
+          		"topic"=>$row['topic'],
+          		"detail"=>$row['detail'],
+          		"type"=>"System"
+        		)
+     		);
+      		$resultArray = array_merge($resultArray, $narray);
+		}
+		foreach($qarray2 as $row){
+      		$narray = array(
+        		array(         		
+          		"user_id"=>$row['user_id'],
+          		"accused"=>$row['accused'],
+          		"date"=>$row['date'],
+          		"topic"=>$row['topic'],
+          		"detail"=>$row['detail'],
+          		"type"=>"User"
+        		)
+     		);
+      		$resultArray = array_merge($resultArray, $narray);
+		}
+		return $resultArray;
+	}
+
 	//commit the object in php to a tuple in database
 
 	/*public function commit(){

@@ -54,6 +54,43 @@ class VC extends CI_Controller {
 		}
 	}
 
+	public function showSystemComplain(){
+		$this->load->model('complain_model');
+		$this->load->model('user_model');
+		//$this->load->model('complain_model');
+		//$userid = 6;
+		$complain = $this->complain_model->getAllComplain();
+		//$data['username'] = $this->user_model->getNameByUserID($userid);
+		//var_dump($feedbacks);	
+		//$name_of_user = $this->user_model->getNameByUserID($userid);
+		
+		$data = array();
+		$predata = array();
+		$size = 0;
+		foreach($complain as $row){
+			$narray = array(
+				array(
+					"user_id"=>$row['user_id'],
+          			"complainer"=>$this->user_model->getNameByUserID($row['user_id']),
+          			"accused"=>$row['accused'],
+          			"date"=>$row['date'],
+          			"topic"=>$row['topic'],
+          			"detail"=>$row['detail'],
+          			"type"=>$row['type']
+				)
+			);
+			$predata = array_merge($predata, $narray);
+			$size = $size + 1;
+		}
+		//$data['title'] = "View Feedback";
+		$data = array_merge(array("sendarray"=>$predata), array("size"=>$size));
+
+		// var_dump($data);
+		$this->load->view('header/header',$data);
+   		$this->load->view("item/complain_info.php",$data);
+   		$this->load->view('footer/footer',$data);	
+	}
+
 }
 
 ?>
