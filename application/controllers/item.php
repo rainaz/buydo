@@ -109,9 +109,9 @@ class Item extends CI_Controller {
 
 			
 
-			if($now->diff($then)->format("%R") == "-") {
+			if($now->diff($then)->format("%R") == "+") {
 				 $this->item_model->setItemStatus($item_id,"bidding_closed");
-				
+				echo $item_id."<br/>";
 				$winnerEmail = $this->biditem_model->getBidWinnerEmail($item_id);
 				$loserEmail = $this->biditem_model->getBidLoserEmail($item_id);
 				$this->load->library("email_library");
@@ -260,11 +260,12 @@ class Item extends CI_Controller {
 
 			$row = $this->item_model->addItem_($data['item_name'], $data['agreement'],
 				$data['status'], $data['spec'], $data['owner_id'], $data['picture']);
-			echo "$row\n";
+			//echo "$row\n";
 			$initial_price = $this->input->post('initial_price');
 			$current_price = $this->input->post('initial_price');
 			$current_max_bid = $this->input->post('initial_price');
-			$end_date = $this->input->post('end_date');
+			$end_date = $this->input->post('enddate');
+			echo $end_date;
 			$query = $this->biditem_model->addBidItem($row, $initial_price, $end_date);
 
 			//find itemID
@@ -273,11 +274,11 @@ class Item extends CI_Controller {
 			//$this->thank();
 			if ($query > 0) {
 				//echo "completed\n";
-				$this->index();
+				//$this->index();
 
 			}
 
-			//$this->loadAddBidItemView();
+			$this->loadAddBidItemView();
 		}
 
 	}
@@ -579,7 +580,8 @@ class Item extends CI_Controller {
 				"itemID" => $this->input->post('itemID'),
 				"itemName"=>$this->input->post('itemName'),
 				"price" => $this->input->post('price'),
-				"quantity" => $this->input->post('quantity')
+				"quantity" => $this->input->post('quantity'),
+				"creditcard" => $this->user_model->getUserByUserID( $this->session->userdata('user_id'))->creditcard
 			);
 
 		$this->load->view('header/header');
@@ -588,12 +590,23 @@ class Item extends CI_Controller {
 	}
 
 	function confirmCheckout() {
+
+	$creditcard =  $this->input->post('creditcard');
+	if(strlen($creditcard)!=16){
+			$data['type']="danger";
+			$data['message']="Error. Creditcard must contain 16 digits";
+			$this->load->view('header/header');
+			$this->load->view('content/simple_message', $data);
+			$this->load->view('footer/footer');
+	return;
+	}
+
 	$data = array(
 				"itemID" => $this->input->post('itemID'),
 				"itemName"=>$this->input->post('itemName'),
 				"price" => $this->input->post('price'),
 				"quantity" => $this->input->post('quantity'),
-				"creditcard" => $this->input->post('creditcard')
+				"creditcard" => $creditcard
 			);
 
 		$this->load->view('header/header');

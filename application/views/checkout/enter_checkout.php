@@ -16,7 +16,7 @@
 									<div class="form-group">
 										<label for="creditcard" class="col-lg-4 control-label">Creditcard <span class="require">*</span></label>
 										<div class="col-lg-8">
-											<input type="number" class="form-control" maxlength=16 id="creditcard" name="creditcard">
+											<input type="number" class="form-control" maxlength=16 id="creditcard" name="creditcard" value=<?php echo $creditcard; ?>>
 										</div>
 									</div>
 								</fieldset>
@@ -27,7 +27,7 @@
 								<div class="row">
 									<div class="col-lg-8 col-md-offset-7 padding-left-0 padding-top-20">                        
 										<button type="submit" class="btn btn-primary">Confirm</button>
-										<button type="button" class="btn btn-default">Cancel</button>
+										<a href=<?php echo site_url('') ?>><button type="button" class="btn btn-default">Cancel</button></a>
 									</div>
 								</div>
 							</form>

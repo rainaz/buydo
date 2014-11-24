@@ -72,6 +72,9 @@ class Transaction extends CI_Controller{
 	public function pay(){
 		$transaction_id  =$this->input->post('transaction_id');
 		$this->transaction_model->setTransactionStatusFromTransactionID($transaction_id,"wait");
+		$this->load->view('header/header');
+		$this->load->view('checkout/buy_complete');
+		$this->load->view('footer/footer');
 	}
 
 	
@@ -98,10 +101,10 @@ class Transaction extends CI_Controller{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('transid', 'transid', 'trim|required|min_length[1]|xss_clean');
 		
-		if($this->form_validation->run()==TRUE){
-			$this->index();
-		}
-		else {
+	//	if($this->form_validation->run()==TRUE){
+	//		$this->index();
+		//}
+	//	else {
 		//	echo "Pass here\n";
 			$transid = $this->input->post('transaction_id');
 			$transtatus = "received";
@@ -112,12 +115,20 @@ class Transaction extends CI_Controller{
 
 
 			$this->load->library("email_library");
-			$this->email_library->sendEmail($buyerEmail,"Item Delivered !!!!", "Please give feedback to '$this->transaction_model->getItemFromTransactionID($transid)' ownner.");
-			$this->email_library->sendEmail($sellerEmail,"Item Delivered !!!!", "Please give feedback to '$this->transaction_model->getItemFromTransactionID($transid)' buyer");
-			$this->index();	
+
+			//$this->index();	
+		//}
+
+			$this->email_library->sendEmail($buyerEmail,"Item Delivered !!!!", "Please give feedback to the seller of ".$this->transaction_model->getItemFromTransactionID($transid));
+			$this->email_library->sendEmail($sellerEmail,"Item Delivered !!!!", "Please give feedback to the buyer of ".$this->transaction_model->getItemFromTransactionID($transid));
+		
+		$this->load->view('header/header');
+		$this->load->view('item/notify');
+		$this->load->view('footer/footer');
+
 		}
 
-	}
+
 
 	public function showUserFeedback(){		
 		$userid = $this->input->get('user_id');
@@ -228,6 +239,9 @@ class Transaction extends CI_Controller{
 			$score = $this->input->post('score');
 			$comment = $this->input->post('comment');
 			$this->feedback_model->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
+			if($this->feedback_model->verifyFeedbackHasTwoWays($transid)){
+				$this->transaction_model->setTransactionStatusFromTransactionID($transid, "complete");
+			}
 			//echo "comment = $comment\n";
 			//echo "Feedback received\n";
 			//$this->index();
