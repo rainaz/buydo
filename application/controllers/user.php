@@ -166,7 +166,7 @@ class User extends CI_Controller{
 	}
 	
 	public function showManageProfilePage() {
-		$data = $this->user_model->getUserByUserID();
+		$data = $this->user_model->getUserByUserID($this->session->userdata("user_id"));
 
 		$this->load->view('header/header');
 	    $this->load->view('user/manage_my_profile',$data);
