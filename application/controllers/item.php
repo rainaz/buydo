@@ -77,6 +77,20 @@ class Item extends CI_Controller {
 		$this->load->view('footer/footer', $data);
 
 	}
+	public function announceBidWinner($item_id){
+		$this->item_model->changeItemStatus($item_id,"bidding_closed");
+		$winnerEmail = $this->biditem_model->getWinnerEmail($item_id);
+		$loserEmail = $this->biditem_model->getLoserEmail($item_id);
+
+		$this->load->library("email_library");
+		$this->email_library->sendEmail("rs715714@gmail.com", "Change password",$data['email'].": Proceed to change password at   http://127.0.0.1/buydo/index.php/user/changePasswordPage/".$data['hash']);
+	
+
+		//send email to winner id query winner email, send win email to him
+		//send email to loser	id query all bidder except winner id
+		//done
+	}
+
 
 	// public function submitSaleItem() {
 	// 	$this->load->library('form_validation');
