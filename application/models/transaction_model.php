@@ -21,7 +21,6 @@ class Transaction_model extends CI_Model {
 			$transactionstatus."')";
 
 		$sql = "INSERT INTO transactions ($this->attributes) VALUES $insvalue";
-		echo "$sql\n";
 		$query = $this->db->query($sql);
 
 		if($query > 0){
@@ -119,7 +118,6 @@ class Transaction_model extends CI_Model {
 
 	public function setTransactionStatusFromTransactionID($transid, $nstatus){
 		$sql = "UPDATE transactions SET transaction_status = "."'".$nstatus."'"." WHERE transaction_id = "."'".$transid."'";
-		//echo "$sql\n";
 		$query = $this->db->query($sql);	
 	}
 
