@@ -89,6 +89,8 @@ CREATE TABLE IF NOT EXISTS `buyers` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
 -- --------------------------------------------------------
 
 --
@@ -139,6 +141,19 @@ CREATE TABLE IF NOT EXISTS `items` (
   `picture` varchar(50) NOT NULL,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recover_url`
+--
+CREATE TABLE IF NOT EXISTS `recover_url`(
+	`user_id` int(11) NOT NULL,
+	`user_email` varchar(50) NOT NULL,
+	`url` varchar(42) NOT NULL,
+	PRIMARY KEY (`user_id`)
+
+)ENGINE InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -200,7 +215,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(41) NOT NULL,
   `phone_no` varchar(11) NOT NULL,
   `start_banned` date NOT NULL,
-  `banned_since` date NOT NULL,
   `banned_duration` int(11) NOT NULL,
   `banned_reason` varchar(50) NOT NULL,
   `penalty_count` int(11) NOT NULL,

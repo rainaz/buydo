@@ -29,7 +29,7 @@
 
                     <div class="row">
                       <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-                        <button type="submit" class="btn btn-primary greenButton">Login</button>
+                        <button type="submit" class="btn btn-primary greenButton">Complain</button>
                       </div>
                     </div>
                     <div class="row">

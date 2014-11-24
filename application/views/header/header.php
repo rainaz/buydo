@@ -112,17 +112,19 @@ License: You must have a valid license purchased only from themeforest (the abov
     <!-- END TOP BAR -->
     <!-- BEGIN HEADER -->
     <div class="header">
+                  <form role="form" id="search" method="get" action="<?php echo site_url('item/searchItem'); ?>"> 
       <div class="container">
         <a class="site-logo" href="/buydo/"><img src="/buydo/assets/images/logo.jpg" alt="Buydo"></a>
-            <div class="input-group" style="padding:20px; padding-right:0px;">
-              <input type="text" class="form-control" placeholder="Search...">
+        <div class="input-group" style="padding:20px; padding-right:0px;">
+              <input type="text" class="form-control" placeholder="Search..." name="search_string">
               <span class="input-group-btn">
-                  <a href="#" class="btn btn-icon-only blue">
+                              <a href="javascript:{}" onclick="document.getElementById('search').submit();" class="btn btn-icon-only blue">
                               <i class="fa fa-search"></i>
                               </a>              </span>
             </div>
             <!-- /input-group -->
         <!-- END NAVIGATION -->
+      </form>
       </div>
     </div>
     <!-- Header END -->
