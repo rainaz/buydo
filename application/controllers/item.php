@@ -260,11 +260,12 @@ class Item extends CI_Controller {
 
 			$row = $this->item_model->addItem_($data['item_name'], $data['agreement'],
 				$data['status'], $data['spec'], $data['owner_id'], $data['picture']);
-			echo "$row\n";
+			//echo "$row\n";
 			$initial_price = $this->input->post('initial_price');
 			$current_price = $this->input->post('initial_price');
 			$current_max_bid = $this->input->post('initial_price');
-			$end_date = $this->input->post('end_date');
+			$end_date = $this->input->post('enddate');
+			echo $end_date;
 			$query = $this->biditem_model->addBidItem($row, $initial_price, $end_date);
 
 			//find itemID
@@ -273,11 +274,11 @@ class Item extends CI_Controller {
 			//$this->thank();
 			if ($query > 0) {
 				//echo "completed\n";
-				$this->index();
+				//$this->index();
 
 			}
 
-			//$this->loadAddBidItemView();
+			$this->loadAddBidItemView();
 		}
 
 	}
