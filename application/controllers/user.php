@@ -152,6 +152,7 @@ class User extends CI_Controller{
 		foreach ( $data as $aTransaction ){
 			$anItem = $this->item_model->getItemByID( $aTransaction['item_id'] );
 
+			$transaction_id = $aTransaction['transaction_id'];
 			$image_link = $anItem->picture;
 			$title = $anItem->item_name;
 			$seller = $this->user_model->getUserByUserID( $anItem->owner_id )->username;
@@ -166,6 +167,7 @@ class User extends CI_Controller{
 			$status = $aTransaction['transaction_status'];
 			
 			$anArrayElement = array(
+				'transaction_id' => $transaction_id,
 				'image_link' => $image_link,
 				'title' => $title,
 				'seller' => $seller,
