@@ -45,13 +45,12 @@ class Complain_model extends CI_Model {
 		  
 	}	
 
-		public function add_complain_user(){
+		public function add_complain_user($accusedID){
 		 $data=array(
 		'user_id' =>$this->session->userdata('user_id'),
-		'accused'=>$this->input->post('accused'),
-		'date'=>$this->input->post('date'),
+		'accused'=>$accusedID,
+		'date'=>date('Y-m-d'),
 		'topic'=>$this->input->post('topic'),
-		'category'=>$this->input->post('category'),
 		'detail'=>$this->input->post('detail'),
 		);
 		  $this->db->insert('complain',$data);
