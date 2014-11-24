@@ -61,7 +61,7 @@ $transaction = $theArrayToPass;
 
                         <?php 
                         if ( $aTransaction['status'] == "wait" ) {
-                          echo '<form id="notify_delivery_form" method="post" action="'."".'">
+                          echo '<form id="notify_delivery_form" method="post" action="'.site_url('user/userComplain').'">
                           <input type="hidden" name="transaction_id" id="transaction_id" value=' .$aTransaction['transaction_id'] .' >
                           <button type="submit" class="btn yellow"><i class="fa fa-bullhorn"></i> Notify Delivery</button>
                         </form>';
@@ -70,7 +70,7 @@ $transaction = $theArrayToPass;
 
                       <?php
                       if ( $aTransaction['status'] == "received" ) {
-                        echo '<form id="give_feedback_form" method="post" action="'."".'">
+                        echo '<form id="give_feedback_form" method="post" action="'.site_url('user/userComplain').'">
                         <input type="hidden" name="transaction_id" id="transaction_id" value='. $aTransaction['transaction_id'] .'>
                         <button type="submit" class="btn blue"><i class="fa fa-thumbs-up"></i> Give Feedback</button>
                       </form>';
