@@ -43,7 +43,7 @@ class User extends CI_Controller{
 
 	public function submit_system_complain(){
 		$topic=$this->input->post('topic');
-		$detail=sha1($this->input->post('detail'));
+		$detail=($this->input->post('detail'));
 		$result=$this->complain_model->add_complain();
 		if($result) {
 			$data['message']="SUCCESS: your complaint has been processed.";
@@ -137,7 +137,7 @@ class User extends CI_Controller{
 		$data = $this->user_model->getUserByUserID($this->session->userdata('user_id'));
 
 		$this->load->view('header/header');
-	    $this->load->view('user/manage_my_profile', $data);
+	    $this->load->view('user/manage_my_profile',$data);
 	    $this->load->view('footer/footer');
 	}
 
@@ -161,11 +161,19 @@ class User extends CI_Controller{
 		$this->form_validation->set_rules('user_name', 'User Name');
 
 		if($this->form_validation->run() == FALSE){
-			$this->index();
+			$data['type']="danger";
+			$data['message']="Error! Please try again later";
+			$this->load->view('header/header');
+	    	$this->load->view('content/simple_message', $data);
+	   		$this->load->view('footer/footer');
 		}
 		else{
 			$this->user_model->manageProfile();
-			$this->thank();
+			$data['type']="success";
+			$data['message']="Edit profile complete";
+			$this->load->view('header/header');
+	    	$this->load->view('content/simple_message', $data);
+	    	$this->load->view('footer/footer');
 		}
 	}
 
