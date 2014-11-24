@@ -103,17 +103,17 @@ class Transaction extends CI_Controller{
 		}
 		else {
 		//	echo "Pass here\n";
-			$transid = $this->input->post('transid');
+			$transid = $this->input->post('transaction_id');
 			$transtatus = "received";
 			$this->transaction_model->setTransactionStatusFromTransactionID($transid, $transtatus);		
 
-			$buyerEmail = $this->transaction_model->getBuyerEmail($transid);
-			$sellerEmail = $this->transaction_model->getSellerEmail($transid);
+			$buyerEmail = $this->transaction_model->getBuyerEmailFromTransactionID($transid);
+			$sellerEmail = $this->transaction_model->getSellerEmailFromTransactionID($transid);
 
 
 			$this->load->library("email_library");
-			$this->email_library->sendEmail($buyerEmail, "Please give feedback to your seller");
-			$this->email_library->sendEmail($sellerEmail, "Please give feedback to your buyer");
+			$this->email_library->sendEmail($buyerEmail,"lui tua", "Please give feedback to your seller");
+			$this->email_library->sendEmail($sellerEmail,"lui tua", "Please give feedback to your buyer");
 			$this->index();	
 		}
 

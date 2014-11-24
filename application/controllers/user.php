@@ -210,7 +210,9 @@ class User extends CI_Controller{
 				'seller' => $seller,
 				'price' => $price,
 				'placement_date' => $placement_date,
-				'status' => $status
+				'status' => $status,
+				'item_id' => $aTransaction['item_id']
+
 				);
 			$arrayElement2 = array($anArrayElement);
 

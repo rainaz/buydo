@@ -5,8 +5,8 @@ class Email_library{
 			'protocol' => 'smtp',
 			'smtp_host' => 'ssl://smtp.googlemail.com',
 			'smtp_port' => 465,
-			'smtp_user' => 'noreply.buydo@gmail.com', // change it to yours
-			'smtp_pass' => 'netrakom13', // change it to yours
+			'smtp_user' => 'buydonoreply@gmail.com', // change it to yours
+			'smtp_pass' => 'netrakom', // change it to yours
 			'mailtype' => 'html',
 			'charset' => 'utf-8',
 			'wordwrap' => TRUE
