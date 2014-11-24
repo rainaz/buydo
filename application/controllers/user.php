@@ -35,7 +35,7 @@ class User extends CI_Controller{
 	}
 	public function submit_system_complain(){
 		$topic=$this->input->post('topic');
-		$detail=sha1($this->input->post('detail'));
+		$detail=($this->input->post('detail'));
 		$result=$this->complain_model->add_complain();
 		if($result) {
 			$data['message']="SUCCESS: your complaint has been processed.";
