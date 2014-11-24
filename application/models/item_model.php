@@ -60,7 +60,7 @@ class Item_model extends CI_Model {
 	}
 
 	public function setItemStatus($itemid, $nstatus){
-		$sql = "UPDATE items SET item_status = "."'".$nstatus."'"." WHERE item_id = "."'".$itemid."'";
+		$sql = "UPDATE items SET status = "."'".$nstatus."'"." WHERE item_id = "."'".$itemid."'";
 		$query = $this->db->query($sql);		
 	}
 //commit the object in php to a tuple in database
@@ -129,11 +129,13 @@ class Item_model extends CI_Model {
 
 		return $query;
 	}
-
-	public function getItemInfo($id) {
+	
+	public function getItemInfoNotClosed($id) {
 		$isBid = $this->db->query("SELECT * FROM `bid_items` WHERE `bid_items`.`item_id`=" . $id . ";")->num_rows();
 		if ($isBid > 0) {
-			$query = $this->db->query("SELECT `a`.`item_name`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . ";")->first_row();
+			$query = $this->db->query("SELECT `a`.`item_name`,`b`.`current_winner_id`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . " AND a.status='bidding';")->first_row();
+			if(!$query)
+				return false;
 			$timeLeft = (new DateTime($query->end_date))->diff(new DateTime());
 			$data = array(
 				"type" => "Auction",
@@ -148,6 +150,33 @@ class Item_model extends CI_Model {
 				"agreement" => $query->agreement,
 				"nextBid" => $query->current_price + $query->initial_price * 0.05,
 				"picURL" => $query->picture,
+				"end_date" => $query->end_date
+			);
+			return $data;
+		} 
+		return false;
+	}
+
+
+	public function getItemInfo($id) {
+		$isBid = $this->db->query("SELECT * FROM `bid_items` WHERE `bid_items`.`item_id`=" . $id . ";")->num_rows();
+		if ($isBid > 0) {
+			$query = $this->db->query("SELECT `a`.`item_name`,`b`.`current_winner_id`, `a`.`agreement`, `a`.`status`, `a`.`spec`, `b`.`end_date`, `b`.`initial_price`, `b`.`current_price`, `a`.`picture`  FROM `items` AS `a` INNER JOIN `bid_items` AS `b` ON `a`.`item_id`=`b`.`item_id` AND `a`.`item_id`=" . $id . ";")->first_row();
+			$timeLeft = (new DateTime($query->end_date))->diff(new DateTime());
+			$data = array(
+				"type" => "Auction",
+				"itemName" => $query->item_name,
+				"initialPrice" => $query->initial_price,
+				"currentPrice" => $query->current_price,
+				"timeLeft" => $timeLeft->format("%Y-%m-%d %H:%i:%s"),
+				"isClose" => $timeLeft->format("%R") == "+",
+				"status" => $query->status,
+				"winnerID"=>$query->current_winner_id,
+				"spec" => $query->spec,
+				"agreement" => $query->agreement,
+				"nextBid" => $query->current_price + $query->initial_price * 0.05,
+				"picURL" => $query->picture,
+				"end_date" => $query->end_date
 			);
 			return $data;
 		} else {
