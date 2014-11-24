@@ -57,6 +57,9 @@ class User extends CI_Controller{
 		if($result) {
 			$data['message']="SUCCESS: your complaint has been processed.";
 	        $data['type']="success";
+	        $email = "buydo.noreply@gmail.com";
+	        $this->load->library('email_library');
+			$this->email_library->sendEmail($email,"There's a system complain",'Topic: '.$topic.'<br />Detail: '.$detail);
 	        $this->load->view('header/header');
 	        $this->load->view('content/simple_message',$data);
 	        $this->load->view('footer/footer');
@@ -75,9 +78,18 @@ class User extends CI_Controller{
 
 		$accused_id = $this->complain_model->getAccusedIDByTransactionID($this->session->userdata('user_id'),$transid);
 
+		$giver = $this->user_model->getUsernameByUserID($this->session->userdata('user_id'));
+		$receiver = $this->user_model->getUsernameByUserID($accused_id);
 		$result=$this->complain_model->add_complain_user($accused_id);
 		if($result) {
 			$data['message']="SUCCESS: your complaint has been processed.";
+
+
+
+			$email = "buydo.noreply@gmail.com";
+	        $this->load->library('email_library');
+			$this->email_library->sendEmail($email,"There's a user complain",'Giver: '.$giver.'<br />Receiver: '.$receiver.'<br />Topic: '.$topic.'<br />Detail: '.$detail);
+
 	        $data['type']="success";
 	        $this->load->view('header/header');
 	        $this->load->view('content/simple_message',$data);
@@ -351,14 +363,6 @@ public function viewBidHistory(){
         $this->load->view('user/new_password_form', $data);
         $this->load->view('footer/footer');
 			
-	}
-	public function showAllComplain(){
-
-
-
-		$this->load->view('header/header', $data);
-        $this->load->view('show_all_complain', $data);
-        $this->load->view('footer/footer');
 	}
 	public function changePassword($hash){
 		$this->load->helper('form');
