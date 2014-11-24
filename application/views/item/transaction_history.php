@@ -61,7 +61,7 @@ $transaction = $theArrayToPass;
 
                         <?php 
                         if ( $aTransaction['status'] == "wait" ) {
-                          echo '<form id="notify_delivery_form" method="post" action="'.site_url('user/userComplain').'">
+                          echo '<form id="notify_delivery_form" method="post" action="'.site_url('transaction/notify_delivery').'">
                           <input type="hidden" name="transaction_id" id="transaction_id" value=' .$aTransaction['transaction_id'] .' >
                           <button type="submit" class="btn yellow"><i class="fa fa-bullhorn"></i> Notify Delivery</button>
                         </form>';
