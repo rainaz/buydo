@@ -62,7 +62,7 @@ class Bid_model extends CI_Model {
 
 	function getBidItemIDByUserID($id){
 		$sql = "SELECT DISTINCT item_id FROM bid WHERE buyer_id = $id;";
-		echo $sql;
+		//echo $sql;
 		$query = $this->db->query($sql);
 		//var_dump($query->row());
 		//echo $query->row();

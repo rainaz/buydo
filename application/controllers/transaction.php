@@ -29,7 +29,7 @@ class Transaction extends CI_Controller{
 			$itemid = $this->input->post('item_id');
 			$quantity = $this->input->post('quantity');
 			$transactionstatus = "wait";
-			$this->transaction->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
+			$this->transaction_model->addTransaction($buyerid, $itemid, $quantity, $transactionstatus);
 			echo "Transaction created\n";
 			$this->index();
 		}
@@ -43,12 +43,12 @@ class Transaction extends CI_Controller{
 	}
 
 	public function listWaitTransaction($buyerid){
-		$query = $this->trans->getTransactionByBuyerIDAndStatus($buyerid, 'wait');
+		$query = $this->transaction_model->getTransactionByBuyerIDAndStatus($buyerid, 'wait');
 		//$data['']
 	}
 
 	public function listReceivedTransaction($buyerid){
-		$query = $this->trans->getTransactionByBuyerIDAndStatus($buyerid, 'received');
+		$query = $this->transaction_model->getTransactionByBuyerIDAndStatus($buyerid, 'received');
 	}
 
 	public function notify_delivery() {
@@ -65,7 +65,7 @@ class Transaction extends CI_Controller{
 			echo "Pass here\n";
 			$transid = $this->input->post('transid');
 			$transtatus = "received";
-			$this->transaction->setTransactionStatusFromTransactionID($transid, $transtatus);		
+			$this->transaction_model->setTransactionStatusFromTransactionID($transid, $transtatus);		
 			$this->index();	
 		}
 
