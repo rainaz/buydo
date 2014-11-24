@@ -2,11 +2,20 @@
 class Transaction extends CI_Controller{
 	public function __construct() {
   		parent::__construct();
+  		$this->load->model('user_model');
   		$this->load->model('item_model');
   		$this->load->model('saleitem_model');
   		$this->load->model('biditem_model');
   		$this->load->model('transaction_model');
   		$this->load->model('feedback_model');
+  		$this->load->model('seller_model');
+  		$this->load->model('buyer_model');
+ 	}
+
+ 	public function loadUserInfoView($data){ 		
+   		$this->load->view('header/header',$data);
+   		$this->load->view("item/user_info.php",$data);
+   		$this->load->view('footer/footer',$data);
  	}
 
 	
@@ -79,6 +88,48 @@ class Transaction extends CI_Controller{
 		}
 
 	}
+
+	public function showUserFeedback(){		
+		$userid = $this->input->post('user_id');
+		if($userid=="") $userid = $this->session->userdata('user_id');
+		//$userid = 5;
+		$feedback = $this->feedback_model->getFeedbackByFeedbackReceiverUserID($userid);
+		//$data['username'] = $this->user_model->getNameByUserID($userid);
+		//var_dump($feedbacks);	
+		$name_of_user = $this->user_model->getNameByUserID($userid);
+		$usertype = "";
+		if($this->buyer_model->verifyBuyerByUserID($userid)){
+			$usertype = "Buyer";
+		}
+		else if($this->seller_model->verifySellerByUserID($userid)){
+			$usertype = "Seller";
+		}
+
+		
+		$data = array();
+		$predata = array();
+		$size = 0;
+		foreach($feedback as $row){
+			$narray = array(
+				array(
+					"score"=>$row['score'],
+					"giver_name"=> $this->user_model->getNameByUserID($row['feedback_from']),
+					"placement_date"=>"",
+					"comment"=>$row['comment']
+				)
+			);
+			$predata = array_merge($predata, $narray);
+			$size = $size + 1;
+		}
+		//$data['title'] = "View Feedback";
+		$data = array_merge(array("sendarray"=>$predata), array("size"=>$size), array("user_type"=>$usertype), array("name_of_user"=>$name_of_user));
+
+		// var_dump($data);
+		$this->loadUserInfoView($data);
+
+	}
+
+	 
 
 	public function feedback(){
 		$this->load->library('form_validation');
