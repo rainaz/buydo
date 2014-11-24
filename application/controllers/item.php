@@ -83,29 +83,44 @@ class Item extends CI_Controller {
 		$this->load->view('footer/footer', $data);
 
 	}
+	public function announceAllBidItemWinner(){
 
+			$data = $this->db->query("SELECT item_id FROM bid_items WHERE 1;");
+			
+			foreach($data->result() as $bidItemID){
+				$this->announceBidWinner($bidItemID->item_id);
+				// echo $bidItemID->item_id."<br/>";
+				
+			}
+	}
 
 
 	public function announceBidWinner($item_id){
+		//echo "$item_id\n";
 
-
-		$interestItem = $this->item_model->getItemInfo($item_id);
-		if($interestItem->isClose == "-"){
-			$this->item_model->changeItemStatus($item_id,"bidding_closed");
+		$interestItem = $this->item_model->getItemInfoNotClosed($item_id);
+		if($interestItem){
+			
 			$now = new DateTime();
-			$then = new DateTime("$end_date");
-			if($now > $then)
-				$winnerEmail = $this->biditem_model->getWinnerEmail($item_id);
-			$loserEmail = $this->biditem_model->getLoserEmail($item_id);
+			$then = new DateTime($interestItem['end_date']);
 
+			
 
-			$this->load->library("email_library");
-			$this->email_library->sendEmail($winnerEmail, "You are the winner [".$interestItem['itemName']."]","Congratulation! You won the ".$interestItem['itemName'].". please confirm your payment at the website");
-
-			foreach ($loserEmail as $item) {
-				$this->email_library->sendEmail($item, "You lose [".$interestItem['itemName']."]","You lost the ".$interestItem['itemName'].". Thank you for your participation.");
-
+			if($now->diff($then)->format("%R") == "-") {
+				$this->item_model->setItemStatus($item_id,"bidding_closed");
+				$winnerEmail = $this->biditem_model->getBidWinnerEmail($item_id);
+				$loserEmail = $this->biditem_model->getBidLoserEmail($item_id);
+				$this->load->library("email_library");
+				$this->email_library->sendEmail($winnerEmail, "You are the winner [".$interestItem['itemName']."]","Congratulation! You won the ".$interestItem['itemName'].". please confirm your payment at the website");
+				
+				
+				foreach ($loserEmail as $item) {
+					$this->email_library->sendEmail($item, "You lose [".$interestItem['itemName']."]","You lost the ".$interestItem['itemName'].". Thank you for your participation.");
+			
+				}
 			}
+
+
 		}
 
 	}

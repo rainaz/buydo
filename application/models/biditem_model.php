@@ -109,21 +109,27 @@ class BidItem_model extends CI_Model {
 	function getBidWinnerEmail($itemid){
 		$winnerid = $this->getCurrentWinnerID($itemid);
 		$sql = "SELECT email FROM users WHERE user_id = $winnerid";		
+		echo "WINNER email ".$sql."<br/>";
 		$query = $this->db->query($sql);
+		// var_dump($query);
 		return $query->row()->email;
 	}
 
 	function getBidLoserEmail($itemid){
 		$sql = "SELECT DISTINCT buyer_id FROM bid WHERE item_id = $itemid";
+		echo "LOSER email ".$sql."<br/>";
 		$query = $this->db->query($sql);
 		$loserlist = array();
 		$winnerid = $this->getCurrentWinnerID($itemid);
-		foreach($query->row() as $row){			
+		foreach($query->result() as $row){
+			var_dump($row);			
 			$loserid = $row->buyer_id;
 			if($loserid != $winnerid){
+				echo "loserid is = $loserid <br/>";
 				$sql2 = "SELECT email FROM users WHERE user_id = $loserid";
+				echo "$sql2 <br/>";
 				$query2 = $this->db->query($sql2);
-				$loserEmail = $query2->row()->email;
+				$loserEmail = array($query2->row()->email);
 				$loserlist = array_merge($loserlist, $loserEmail);
 			}
 
