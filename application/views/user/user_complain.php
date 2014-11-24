@@ -14,13 +14,7 @@
               <div class="row">
                 <div class="col-md-7 col-sm-7">
                   <form class="form-horizontal form-without-legend" role="form" method="post" id="login_form" action="<?php echo site_url('user/submit_user_complain'); ?>">
-                    <div class="form-group">
-                      <label for="password" class="col-lg-4 control-label">Transaction ID: <span class="require">*</span></label>
-                      <div class="col-lg-8">
-                        <input type="text" name="transaction_id" class="form-control" id="transaction_id" name="transaction_id">
-                      </div>
-                    </div>
-
+                    
                     <div class="form-group">
                       <label for="username" class="col-lg-4 control-label">Topic:<span class="require">*</span></label>
                       <div class="col-lg-8">
