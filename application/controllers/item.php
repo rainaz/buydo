@@ -13,14 +13,16 @@ class Item extends CI_Controller {
 		$this->load->model('transaction_model');
 	}
 	public function index(){
-		$data['title']= 'Home';
-		$this->load->view('header_view',$data);
+		$this->searchItem();
 
-		$this->load->view("saleitem_add_view.php", $data);
-		// $this->load->view("bidItem_mock.php", $data);
+		// $data['title']= 'Home';
+		// $this->load->view('header_view',$data);
+
+		// $this->load->view("saleitem_add_view.php", $data);
+		// // $this->load->view("bidItem_mock.php", $data);
 
 
-		$this->load->view('footer_view',$data);
+		// $this->load->view('footer_view',$data);
 	}
 
 	public function verifyIsLoggedIn() {
@@ -312,6 +314,7 @@ class Item extends CI_Controller {
 		$page = 1;
 		$per_page = 1000000000000;
 
+
 		if ($this->input->get('search_string')) {
 
 			$search = $this->input->get('search_string');
@@ -319,7 +322,7 @@ class Item extends CI_Controller {
 
 		if ($this->input->get('page')) {
 
-			$search = $this->input->get('page');
+			$page = $this->input->get('page');
 		}
 
 		
