@@ -1,3 +1,7 @@
+<?php
+  $transaction = $theArrayToPass;
+?>
+
 <div class="main">
   <div class="container">
     <h2>Transaction History</h2>
@@ -6,26 +10,28 @@
       <!-- BEGIN CONTENT -->
       <div class="col-md-12 col-sm-12">
         <!-- BEGIN PRODUCT LIST -->
+        
+
+        <?php foreach( $transaction as $aTransaction ) :?>
+
         <div class="row product-list">
           <!-- PRODUCT ITEM START -->
-          <div class="product-item claerfix">
+          <div class="product-item clearfix">
             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
-              <img src="/buydo/assets/frontend/pages/img/products/model1.jpg" style="max-height: 200px; max-width: 300px;" alt="Berry Lace Dress">
+              <img src=<?php echo $aTransaction['image_link']; ?> style="max-height: 200px; max-width: 300px;" alt="Berry Lace Dress">
             </div>
             <!-- PRODUCT ITEM END -->
             <!-- PRODUCT ITEM START -->
             <div class="col-md-9 col-sm-9 col-xs-12">
               <div class="portlet" style="min">
-              <div class="portlet-title"><h2>ปลาดุกฟู</h2></div>
+              <div class="portlet-title"><h2><?php echo $aTransaction['title']; ?></h2></div>
               <div class="portlet-body" style="padding-bottom: 15px;">
 
               <ul>
-
-                <li>Seller: นัท</li>
-                <li>Total Price: THB51.00</li>
-                <li>Placement Date: 25/12/01</li>
+                <li>Seller: <?php echo $aTransaction['seller']; ?> </li>
+                <li>Total Price: THB <?php echo $aTransaction['price']; ?> </li>
+                <li>Placement Date: <?php echo $aTransaction['placement_date']; ?></li>
                 <li>Order Status: In-transit</li>
-
               </ul>
             </div>
                 <button type="button" class="btn green"><i class="fa fa-bullhorn"></i> Notify Delivery</button>
@@ -52,6 +58,10 @@
           </div>
           <!-- PRODUCT ITEM END -->
         </div>
+
+      <?php endforeach; ?>
+
+
         <!-- END PRODUCT LIST -->
         <!-- BEGIN PAGINATOR -->
         <div class="row">

@@ -5,6 +5,9 @@ class User extends CI_Controller{
 		$this->load->model('user_model');
 		$this->load->model('complain_model');
 		$this->load->model('item_model');
+		$this->load->model('transaction_model');
+		$this->load->model('biditem_model');
+		$this->load->model('saleitem_model');
 	}
 	public function index(){
         $data['template_type'] = "ecommerce";
@@ -138,6 +141,54 @@ class User extends CI_Controller{
 
 		$this->load->view('header/header');
 	    $this->load->view('user/manage_my_profile',$data);
+	    $this->load->view('footer/footer');
+	}
+
+	public function transaction_history( ) {
+		//$data = $this->user_model->getUserByUserID($this->session->userdata('user_id'));
+		$data = $this->transaction_model->getTransactionByBuyerID($this->session->userdata('user_id'));
+		
+		$theArrayToPass = array();
+		foreach ( $data as $aTransaction ){
+			$anItem = $this->item_model->getItemByID( $aTransaction['item_id'] );
+
+			$image_link = $anItem->picture;
+			$title = $anItem->item_name;
+			$seller = $this->user_model->getUserByUserID( $anItem->owner_id )->username;
+			$price = ""; 
+			if ( $this->biditem_model->verifyBidItemByID($anItem->item_id) ) { // is bid item
+				$price = $this->biditem_model->getCurrentPrice($anItem->item_id);
+			} else { // is sale item
+				
+				$price = $this->saleitem_model->getSaleItemByItemID($anItem->item_id)->first_row()->price;
+			}
+			$placement_date = $aTransaction['placement_date'];
+			$status = $aTransaction['transaction_status'];
+			
+			$anArrayElement = array(
+				'image_link' => $image_link,
+				'title' => $title,
+				'seller' => $seller,
+				'price' => $price,
+				'placement_date' => $placement_date,
+				'status' => $status
+				);
+			$arrayElement2 = array($anArrayElement);
+			var_dump($anArrayElement);
+			echo "<br />";
+			$theArrayToPass = array_merge ( $theArrayToPass , $arrayElement2 );
+
+		}
+		var_dump($theArrayToPass);
+		echo "<br />";
+		$data = array ( 'theArrayToPass' => $theArrayToPass );
+		var_dump($data);
+		echo "<br />";
+		$data2 = array(
+			'template_type' =>"corporate"
+		);
+		$this->load->view('header/header', $data2);
+	    $this->load->view('item/transaction_history',$data);
 	    $this->load->view('footer/footer');
 	}
 
