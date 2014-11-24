@@ -99,7 +99,7 @@ class Transaction extends CI_Controller{
 			$this->index();
 		}
 		else {
-			echo "Pass here\n";
+		//	echo "Pass here\n";
 			$transid = $this->input->post('transid');
 			$transtatus = "received";
 			$this->transaction_model->setTransactionStatusFromTransactionID($transid, $transtatus);		

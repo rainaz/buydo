@@ -37,10 +37,10 @@ class User extends CI_Controller{
         $this->load->view('footer/footer');
 	}
 	public function userComplain(){
-
+		$data['transaction_id'] = $this->input->post('transaction_id');
         $data['template_type'] = "corporate";
         $this->load->view('header/header', $data);
-        $this->load->view('user/user_complain');
+        $this->load->view('user/user_complain',$data);
         $this->load->view('footer/footer');
 	}
 

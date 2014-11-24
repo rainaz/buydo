@@ -9,7 +9,7 @@
           <!-- BEGIN CONTENT -->
           <div class="col-md-1 col-sm-1"></div>
           <div class="col-md-10 col-sm-10">
-            <h1>User Complain</h1>
+            <h1>User Complain <?php echo 'transaction id = '.$transaction_id ; ?></h1>
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
@@ -25,6 +25,8 @@
                       <label for="password" class="col-lg-4 control-label">Detail: <span class="require">*</span></label>
                       <div class="col-lg-8">
                         <input type="text" name="detail" class="form-control" id="detail" name="detail">
+      
+                          <input type="hidden" id="transaction_id" name="transaction_id" value="<?php echo $transaction_id;?>" />
                       </div>
                     </div>
 
