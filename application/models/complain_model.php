@@ -72,6 +72,35 @@ class Complain_model extends CI_Model {
 		return $this->db->query("INSERT INTO `buydo`.`complain` (`complaint_id` ,`user_id` ,`accused` ,`date` ,`topic` ,`category` ,`detail`)VALUES (NULL , '".$user_id."', '".$accused."',CURRENT_TIMESTAMP , '".$topic."', '".$category."', '".$detail."')");
 	}
 
+	function getAccusedIDByTransactionID($userid, $transid){
+		//have transaction, 
+		$role = "seller";
+		//check buyer or seller
+		$sql = "SELECT * FROM buyers WHERE user_id = $userid";
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0){
+			$role = "buyer";
+		}
+
+		$query2;
+		if($role=="buyer"){
+			$sql2 = "SELECT item_id FROM transactions WHERE transaction_id = $transid";
+			$query2 = $this->db->query($sql2);
+			$searchItem = $query2->row()->item_id;
+			$sql3 = "SELECT owner_id FROM items WHERE item_id = $searchItem";
+			$query3 = $this->db->query($sql3);
+			return $query3->row()->owner_id;
+		}
+		else if($role=="seller"){
+			$sql2 = "SELECT buyer_id FROM transactions WHERE transaction_id = $transid";
+			$query2 = $this->db->query($sql2);
+			return $query2->row()->buyer_id;
+		}
+
+		return false;	
+
+	}
+
 	//commit the object in php to a tuple in database
 
 	/*public function commit(){
