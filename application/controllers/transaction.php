@@ -173,8 +173,8 @@ class Transaction extends CI_Controller{
 			$comment = $this->input->post('comment');
 			$this->feedback_model->addFeedback($transid, $fbfrom, $fbto, $score, $comment);
 			//echo "comment = $comment\n";
-			echo "Feedback received\n";
-			$this->index();
+			//echo "Feedback received\n";
+			//$this->index();
 		}
 	}
 
