@@ -34,7 +34,7 @@ class Transaction_model extends CI_Model {
 	public function getTransactionByBuyerID($buyerid){
 		$query = $this->db->query("SELECT * FROM transactions WHERE buyer_id = "."'".$buyerid."'");
 		if($query->num_rows() > 0){
-			return $query->result();
+			return $query->result_array();
 		}
 		return false;
 	}

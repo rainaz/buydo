@@ -414,7 +414,7 @@ class Item extends CI_Controller {
 		}
 		else {
 			$this->biditem_model->setCurrentPrice($item_id, $nmaxbidprice);
-			$nmaxbidprice = $minPrice;
+			$nmaxbidpri->minPrice;
 		}
 
 		$this->bid->addBid($item_id, $user_id, $nmaxbidprice, $this->biditem_model->getCurrentMaxBid($item_id));
