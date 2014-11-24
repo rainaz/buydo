@@ -590,12 +590,23 @@ class Item extends CI_Controller {
 	}
 
 	function confirmCheckout() {
+
+	$creditcard =  $this->input->post('creditcard');
+	if(strlen($creditcard)!=16){
+			$data['type']="danger";
+			$data['message']="Error. Creditcard must contain 16 digits";
+			$this->load->view('header/header');
+			$this->load->view('content/simple_message', $data);
+			$this->load->view('footer/footer');
+	return;
+	}
+
 	$data = array(
 				"itemID" => $this->input->post('itemID'),
 				"itemName"=>$this->input->post('itemName'),
 				"price" => $this->input->post('price'),
 				"quantity" => $this->input->post('quantity'),
-				"creditcard" => $this->input->post('creditcard')
+				"creditcard" => $creditcard
 			);
 
 		$this->load->view('header/header');

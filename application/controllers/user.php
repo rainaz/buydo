@@ -109,15 +109,20 @@ class User extends CI_Controller{
 	//
 
 	public function submit_register(){
-		//$this->load->library('form_validation');
+		$this->load->library('form_validation');
 		// field name, error message, validation rules
 		//$this->form_validation->set_rules('username', 'User Name', 'trim|required|min_length[4]|xss_clean');
-		//  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
+	  //  $this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
 		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
-		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
-		//if($this->form_validation->run() == FALSE){
+		  $this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'trim|required|matches[password]');
+		if($this->form_validation->run() == FALSE){
+			$data['type']="danger";
+			$data['message']="Error! string in password and confirm_password is not the same";
+			$this->load->view('header/header');
+	    	$this->load->view('content/simple_message', $data);
+	   		$this->load->view('footer/footer');
 		//	$this->index();
-		//}
+		}
 		//else{
 			$this->user_model->add_user();
 			$this->load->library('email_library');
@@ -141,7 +146,8 @@ class User extends CI_Controller{
 		//  $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
 		//  $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
 		if($this->form_validation->run() == FALSE){
-			$this->index();
+			//$this->index();
+
 		}
 		else{
 			$this->complain_model->add_complain();
