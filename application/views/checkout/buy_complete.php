@@ -12,7 +12,7 @@
 			<p><h2>You can check your transaction in your email. </h2></p>
 			</div>
 			<div class="padding-top-20">
-				<a href="../page/home.php"><button type="button" class="btn btn-primary">Done</button></a> 
+				<a href=<?php echo site_url('item/submitSaleItem'); ?>><button type="button" class="btn btn-primary">Done</button></a> 
 			</div>
 			<div class="padding-top-40"></div>
 		</div>
