@@ -38,7 +38,7 @@ class Seller_model extends CI_Model {
 	}
 
 	function verifySellerByUserID($id){
-		$query = getSellerByUserID($id);
+		$query = $this->getSellerByUserID($id);
 		if($query) return true;
 		else return false;
 	}
