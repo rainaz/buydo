@@ -1,5 +1,5 @@
    <?php 
-   	  $email = "noz@slashX.ant";
+ /*  	  $email = "noz@slashX.ant";
       $firstname = "Noz";
       $surname = "Experta";
       $birthdate = "2010-03-21";
@@ -8,6 +8,7 @@
       $country = "THA";
       $creditcard = "";
       $phone_number = "0123456789";
+      */
    ?>
 
     <div class="main">
@@ -49,37 +50,37 @@
                       <div class="form-group">
                         <label for="firstname" class="col-lg-4 control-label">Firstname <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="firstname" value=<?php echo $firstname;?>>
+                          <input type="text" class="form-control" id="name" name="name" value=<?php echo $name;?>>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="surname" class="col-lg-4 control-label">Surname <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="surname" value=<?php echo $surname;?>>
+                          <input type="text" class="form-control" id="surname" name="surname" value=<?php echo $surname;?>>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="barthdate" class="col-lg-4 control-label">Birthdate <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="date" class="form-control" id="birthdate" value=<?php echo $birthdate; ?>>
+                          <input type="date" class="form-control" id="birthday" name="birthday" value=<?php echo $birthday; ?>>
                         </div>
                       </div>
                        <div class="form-group">
                         <label for="address" class="col-lg-4 control-label"> Address <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="address" value="<?php echo $address;?>">
+                          <input type="text" class="form-control" id="address" name="address" value="<?php echo $address;?>">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="sent_address" class="col-lg-4 control-label">Billing address </label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="sent_address" value="<?php echo $sent_address;?>">
+                          <input type="text" class="form-control" id="sent_address" name="sent_address" value="<?php echo $sent_address;?>">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="country" class="col-lg-4 control-label">Country <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <select class="form-control input-sm" id="country">
+                          <select class="form-control input-sm" id="country" name="country">
                           		<option <?php if ($country == "THA" ) echo "selected"; ?> value="THA">Thailand</option>
 								<option <?php if ($country == "AFG" ) echo "selected"; ?> value="AFG">Afghanistan</option>
 								<option <?php if ($country == "ALA" ) echo "selected"; ?> value="ALA">Åland Islands</option>
@@ -336,19 +337,19 @@
                       <div class="form-group">
                         <label for="creditcard" class="col-lg-4 control-label">Credit card </label>
                         <div class="col-lg-8">
-                          <input type="text" maxlength="16" class="form-control" id="creditcard" value=<?php echo $creditcard; ?>>
+                          <input type="text" maxlength="16" class="form-control" id="creditcard" name"creditcard" value=<?php echo $creditcard; ?>>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="phone_number" class="col-lg-4 control-label">Phone number <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="number" class="form-control" id="phone_number" value=<?php echo $phone_number; ?>>
+                          <input type="number" class="form-control" id="phone_no" name="phone_no" value=<?php echo $phone_no; ?>>
                         </div>
                       </div>
                     </fieldset>
                     <div class="row">
                       <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                        <button type="submit" class="btn btn-primary">Create an account</button>
+                        <button type="submit" class="btn btn-primary">Confirm</button>
                         <button type="button" class="btn btn-default">Cancel</button>
                       </div>
                     </div>
